@@ -1,0 +1,43 @@
+LIBRARY IEEE;
+USE IEEE.STD_LOGIC_1164.ALL;
+USE IEEE.NUMERIC_STD.ALL;
+USE IEEE.STD_LOGIC_ARITH.ALL;
+USE IEEE.STD_LOGIC_UNSIGNED.ALL;
+
+ENTITY BCD_Counter IS
+	PORT (Clk, Direction, Init, Enable : IN STD_LOGIC;
+		  Q_Out : OUT STD_LOGIC_VECTOR(3 DOWNTO 0));
+END ENTITY BCD_Counter;
+
+-- Direction 1 is down, 0 is up
+ARCHITECTURE arc OF BCD_Counter IS
+	SIGNAL v_Q : STD_LOGIC_VECTOR(3 DOWNTO 0);
+BEGIN
+	PROCESS (Clk)
+	BEGIN
+		IF RISING_EDGE(Clk) THEN
+			IF (Init = '1') THEN
+				IF (Direction = '0') THEN
+					v_Q <= "0000";
+				ELSIF (Direction = '1') THEN
+					v_Q <= "1001";
+				END IF;
+			ELSIF (Enable = '1') THEN
+				IF (Direction = '0') THEN
+					IF (v_Q = "1001") THEN
+						v_Q <= "0000";
+					ELSE
+						v_Q <= v_Q + 1;
+					END IF;
+				ELSIF (Direction = '1') THEN
+					IF (v_Q = "0000") THEN
+						v_Q <= "1001";
+					ELSE
+						v_Q <= v_Q - 1;
+					END IF;
+				END IF;
+			END IF;
+			Q_Out <= v_Q;
+		END IF;
+	END PROCESS;
+END ARCHITECTURE arc;

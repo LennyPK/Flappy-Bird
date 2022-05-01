@@ -3,12 +3,12 @@ library IEEE;
 use IEEE.std_logic_1164.all;
 use IEEE.numeric_std.all;
 
-entity BCD_Counter is 
+entity BCD_Counter_Min is 
   port (Clk, Direction, Init, Enable : in std_logic;
         Q_Out : out std_logic_vector(3 downto 0));
-end entity BCD_Counter;
+end entity BCD_Counter_Min;
 
-architecture behaviour of BCD_Counter is
+architecture behaviour of BCD_Counter_Min is
   signal Q_Out1 : std_logic_vector(3 downto 0);
 begin
   

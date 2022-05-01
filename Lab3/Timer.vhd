@@ -5,8 +5,8 @@ USE IEEE.STD_LOGIC_ARITH.ALL;
 USE IEEE.STD_LOGIC_UNSIGNED.ALL;
 
 ENTITY Timer IS
-	PORT (Clock		: IN STD_LOGIC;
-		  Data_In			: IN STD_LOGIC_VECTOR(9 DOWNTO 0);
+	PORT (Clock		        : IN STD_LOGIC;
+		  Switch			: IN STD_LOGIC_VECTOR(9 DOWNTO 0);
 		  LED_out			: OUT STD_LOGIC_VECTOR(7 DOWNTO 0));
 END ENTITY Timer;
 
@@ -23,22 +23,58 @@ ARCHITECTURE arc OF Timer IS
 	END COMPONENT BCD_Counter;
 	
 BEGIN
-	DUO: BCD_Counter PORT MAP (Clk => Clock, Direction => C_Direction, Init => C_Reset, Enable => Start, Q_Out => C_Q_Ones);
+	DUO: BCD_Counter PORT MAP (Clk => Clock, Direction => C_Direction, Init => C_Reset, Enable => Switch(0), Q_Out => C_Q_Ones);
 	
-	Start <= '1';
 	C_Reset <= '0';
 	C_Direction <= '0';
-	tmp <= 	"10000000" WHEN C_Q_Ones = "0001" ELSE 	--1
-			"01000000" WHEN C_Q_Ones = "0010" ELSE 	--2
-			"00100000" WHEN C_Q_Ones = "0011" ELSE 	--3
-			"00010000" WHEN C_Q_Ones = "0100" ELSE	--4
-			"00001000" WHEN C_Q_Ones = "0101" ELSE 	--5 
-			"00000100" WHEN C_Q_Ones = "0110" ELSE 	--6
-			"00000010" WHEN C_Q_Ones = "0111" ELSE 	--7
-			"00000001" WHEN C_Q_Ones = "1000" ELSE	--8
-			"10000001" WHEN C_Q_Ones = "1001" ELSE 	--9
-			"10000010" WHEN C_Q_Ones = "0000" ELSE 	--0
-			"11111111";
-
-	LED_out <= tmp WHEN (Data_In(0) = '0') ELSE "11111111";
+    -- PROCESS (Clock)
+    -- BEGIN
+    --     IF RISING_EDGE(Clock) THEN
+    --         IF (Switch(0) = '1') THEN
+    --             CASE C_Q_Ones IS
+    --                 WHEN "0001" => tmp <= "10011111"; --1
+    --                 WHEN "0010" => tmp <= "00100101"; --2
+    --                 WHEN "0011" => tmp <= "00001101"; --3
+    --                 WHEN "0100" => tmp <= "10011001"; --4
+    --                 WHEN "0101" => tmp <= "01001001"; --5
+    --                 WHEN "0110" => tmp <= "01000001"; --6
+    --                 WHEN "0111" => tmp <= "00011111"; --7
+    --                 WHEN "1000" => tmp <= "00000001"; --8
+    --                 WHEN "1001" => tmp <= "00001001"; --9
+    --                 WHEN "0000" => tmp <= "00000011"; --0
+    --                 WHEN OTHERS => tmp <= "11111111";
+    --             END CASE;
+    --         ELSIF (Switch(0) = '0') THEN
+    --             tmp <= "11111111";
+    --         END IF;
+    --     END IF;
+    --     LED_out <= tmp;
+    -- END PROCESS;
+    PROCESS (Switch)
+    BEGIN
+        IF (Switch = "0000000001") THEN
+            tmp <= "00000011";
+        ELSIF (Switch = "0000000010") THEN
+            tmp <= "10011111";
+        ELSIF (Switch = "0000000100") THEN
+            tmp <= "00100101";
+        ELSIF (Switch = "0000001000") THEN
+            tmp <= "00001101";
+        ELSIF (Switch = "0000010000") THEN
+            tmp <= "10011001";
+        ELSIF (Switch = "0000100000") THEN
+            tmp <= "01001001";
+        ELSIF (Switch = "0001000000") THEN
+            tmp <= "01000001";
+        ELSIF (Switch = "0010000000") THEN
+            tmp <= "00011111";
+        ELSIF (Switch = "0100000000") THEN
+            tmp <= "00000001";
+        ELSIF (Switch = "1000000000") THEN
+            tmp <= "00001001";
+        -- ELSE
+        --     tmp <= "11111111";
+        END IF;
+        LED_out <= tmp;
+    END PROCESS;
 END ARCHITECTURE arc;

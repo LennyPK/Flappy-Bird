@@ -153,7 +153,7 @@ R13
 !s100 5<6[[Gd^o;Q_;fT1Xb1Sm1
 !i10b 1
 Etest_timer
-Z28 w1651437745
+Z28 w1651500828
 R2
 R3
 R4
@@ -167,7 +167,7 @@ VHJaH;j5aJ<hT]]f_M<EfZ0
 R8
 32
 !i10b 1
-Z31 !s108 1651438206.462000
+Z31 !s108 1651500837.611000
 Z32 !s90 -reportprogress|300|-work|work|C:/Users/Samuel Mason/Documents/GitHub/PILK/Lab3/testbench_Timer.vhd|
 Z33 !s107 C:/Users/Samuel Mason/Documents/GitHub/PILK/Lab3/testbench_Timer.vhd|
 R12
@@ -179,8 +179,8 @@ R4
 Z34 DEx4 work 10 test_timer 0 22 HJaH;j5aJ<hT]]f_M<EfZ0
 l26
 L10
-Z35 V?6fOSX0FN86hP68dBBB<b2
-Z36 !s100 Ak;jO6]maaJFGojl8alci1
+V>2;hKK;;<`35LK?Xdc4Nk3
+!s100 _;S1I<`M:m0iW<Y<VmQ7V1
 R8
 32
 !i10b 1
@@ -190,23 +190,23 @@ R33
 R12
 R13
 Etimer
-Z37 w1651437896
+Z35 w1651500397
 R14
 R15
 R2
 R3
 R4
 R5
-Z38 8C:/Users/Samuel Mason/Documents/GitHub/PILK/Lab3/Timer.vhd
-Z39 FC:/Users/Samuel Mason/Documents/GitHub/PILK/Lab3/Timer.vhd
+Z36 8C:/Users/Samuel Mason/Documents/GitHub/PILK/Lab3/Timer.vhd
+Z37 FC:/Users/Samuel Mason/Documents/GitHub/PILK/Lab3/Timer.vhd
 l0
 L7
 V:EGfjgF^k]ih^oUNPWRE40
 R8
 32
-Z40 !s108 1651438205.261000
-Z41 !s90 -reportprogress|300|-work|work|C:/Users/Samuel Mason/Documents/GitHub/PILK/Lab3/Timer.vhd|
-Z42 !s107 C:/Users/Samuel Mason/Documents/GitHub/PILK/Lab3/Timer.vhd|
+Z38 !s108 1651500407.589000
+Z39 !s90 -reportprogress|300|-work|work|C:/Users/Samuel Mason/Documents/GitHub/PILK/Lab3/Timer.vhd|
+Z40 !s107 C:/Users/Samuel Mason/Documents/GitHub/PILK/Lab3/Timer.vhd|
 R12
 R13
 !s100 3j1[Yj0ioL=zY[]5haI^=2
@@ -218,15 +218,15 @@ R2
 R3
 R4
 DEx4 work 5 timer 0 22 :EGfjgF^k]ih^oUNPWRE40
-l32
+l33
 L16
-VK`;PHU@]`G7kR0>mBo4971
-!s100 P2T`JhZ]KCJ<nJ`=kCI@41
+V^neC6[f]:kTF_8DCHYXIa2
 R8
 32
+R38
+R39
 R40
-R41
-R42
 R12
 R13
+!s100 74W?1`La=al16fVf0l`A<1
 !i10b 1

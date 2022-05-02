@@ -28,16 +28,17 @@ signal Direction, Init : std_logic;
 signal Ones_seconds, Tens_seconds, Minutes : std_logic_vector(3 downto 0);
 signal Clock2, Clock3 : std_logic;
 signal Seg0, Seg1, Seg2 : std_logic_vector(7 downto 0);
+signal Enable : std_logic;
 		
 begin
   BCD1: BCD_Counter 
-    port map (Clk => Clock, Direction => Direction, Init => Init, Enable => Start, Q_Out => Ones_seconds);
+    port map (Clk => Clock, Direction => Direction, Init => Init, Enable => Enable, Q_Out => Ones_seconds);
       
   BCD2: BCD_Counter_Min
-    port map (Clk => Clock2, Direction => Direction, Init => Init, Enable => Start, Q_Out => Tens_seconds);
+    port map (Clk => Clock2, Direction => Direction, Init => Init, Enable => Enable, Q_Out => Tens_seconds);
       
   BCD3: BCD_Counter
-    port map (Clk => Clock3, Direction => Direction, Init => Init, Enable => Start, Q_Out => Minutes);
+    port map (Clk => Clock3, Direction => Direction, Init => Init, Enable => Enable, Q_Out => Minutes);
       
   Clock2 <= '1' when Ones_seconds = "0000"
                 else '0';
@@ -47,15 +48,24 @@ begin
   
 	Direction <= '0';
 	Init <= '1';
+	Enable <= '0';
 	
-    process (Clock)
+    process (Clock, Start)
     begin
-        if RISING_EDGE(Clock) then
-           if (Start = '1') then
+      if FALLING_EDGE(Start) then
              
-             if ((Minutes = Data_in(9 downto 8)) and (Tens_seconds = Data_in(7 downto 4)) and (Ones_seconds = Data_in(3 downto 0))) then
-               Time_out <= '1';
-             end if;
+        if Enable = '1' then
+          Enable <= '0';
+        else
+          Enable <= '1';
+        end if;
+        
+      end if;
+      if RISING_EDGE(Clock) then
+        if Enable = '1' then
+              if ((Minutes = Data_in(9 downto 8)) and (Tens_seconds = Data_in(7 downto 4)) and (Ones_seconds = Data_in(3 downto 0))) then
+                Time_out <= '1';
+              end if;
              
                 case Minutes is
                     when "0000" => Seg0 <= "00000011"; --0
@@ -89,12 +99,12 @@ begin
                     when others => Seg2 <= "11111111";
                 end case;
                 
-            --else
-                --Seg0 <= "11111111";
-                --Seg1 <= "11111111";
-                --Seg2 <= "11111111";
-            --end if;
-        end if;
+            else
+                Seg0 <= "11111111";
+                Seg1 <= "11111111";
+                Seg2 <= "11111111";
+            end if;
+          end if;
     end process;
     
     -- Comment out these lines for running on board.

@@ -29,7 +29,7 @@ begin
 	-- Initialization process (code that executes only once). 
 	init: process
 	begin 
-	  t_Start <= '0', '1' after 50 ns;
+	  t_Start <= '1', '0' after 2000 ms, '1' after 3000 ms;
 	  t_Data_in <= "1001001001";
 		wait;
 		
@@ -38,9 +38,9 @@ begin
 	-- clock generation 
 	clk_gen: process 
 	begin 
-		wait for 5 ns; 
+		wait for 500 ms; 
 		t_Clock <= '1'; 
-		wait for 5 ns; 
+		wait for 500 ms; 
 		t_Clock <= '0';
 	end process clk_gen;
 end architecture my_test;

@@ -4,22 +4,22 @@ K3
 cModel Technology
 Z0 dC:\Users\Samuel Mason\Documents\GitHub\PILK\Lab3
 Ebcd_counter
-Z1 w1651438192
+Z1 w1651461015
 Z2 DPx4 ieee 11 numeric_std 0 22 O3PF8EB`?j9=z7KT`fn941
 Z3 DPx3 std 6 textio 0 22 5>J:;AW>W0[[dW0I6EN1Q0
 Z4 DPx4 ieee 14 std_logic_1164 0 22 5=aWaoGZSMWIcH0i^f`XF1
-Z5 dC:\Users\Samuel Mason\Documents\GitHub\PILK\Lab3
-Z6 8C:/Users/Samuel Mason/Documents/GitHub/PILK/Lab3/BCD_Counter.vhd
-Z7 FC:/Users/Samuel Mason/Documents/GitHub/PILK/Lab3/BCD_Counter.vhd
+Z5 dD:\Documents\GitHub\PILK\Lab3
+Z6 8D:\Documents\GitHub\PILK\Lab3\BCD_Counter.vhd
+Z7 FD:\Documents\GitHub\PILK\Lab3\BCD_Counter.vhd
 l0
 L6
-VCLDQNWD9_kU0I[E3PW5UW3
+V7MYcZ=ihiJ_ADQoB;7Jb83
 Z8 OV;C;10.1d;51
 32
-Z9 !s108 1651438200.868000
-Z10 !s90 -reportprogress|300|-work|work|C:/Users/Samuel Mason/Documents/GitHub/PILK/Lab3/BCD_Counter.vhd|
-Z11 !s107 C:/Users/Samuel Mason/Documents/GitHub/PILK/Lab3/BCD_Counter.vhd|
-Z12 o-work work -O0
+Z9 !s108 1651569680.635000
+Z10 !s90 -reportprogress|300|-work|work|-2002|-explicit|D:\Documents\GitHub\PILK\Lab3\BCD_Counter.vhd|
+Z11 !s107 D:\Documents\GitHub\PILK\Lab3\BCD_Counter.vhd|
+Z12 o-work work -2002 -explicit -O0
 Z13 tExplicit 1
 !s100 nIUf1YJg_zWA2Igc]08;g0
 !i10b 1
@@ -27,10 +27,10 @@ Abehaviour
 R2
 R3
 R4
-DEx4 work 11 bcd_counter 0 22 CLDQNWD9_kU0I[E3PW5UW3
+DEx4 work 11 bcd_counter 0 22 7MYcZ=ihiJ_ADQoB;7Jb83
 l13
 L11
-Vj0bhY[E@^=zQAPZ49Z;6i0
+Vg[?KBR3:FYhZY`>K^kCiK0
 R8
 32
 R9
@@ -52,31 +52,34 @@ L13
 VViWm@=dOnLWRQ:d3UOfO60
 R8
 32
-R10
-R11
-R12
+Z16 o-work work -O0
 R13
 w1651433828
+Z17 dC:\Users\Samuel Mason\Documents\GitHub\PILK\Lab3
+FC:/Users/Samuel Mason/Documents/GitHub/PILK/Lab3/BCD_Counter.vhd
+8C:/Users/Samuel Mason/Documents/GitHub/PILK/Lab3/BCD_Counter.vhd
+!s90 -reportprogress|300|-work|work|C:/Users/Samuel Mason/Documents/GitHub/PILK/Lab3/BCD_Counter.vhd|
+!s107 C:/Users/Samuel Mason/Documents/GitHub/PILK/Lab3/BCD_Counter.vhd|
 !s108 1651437579.291000
 !s100 PYi4W:UIg?mXjk2fK;ac]0
 !i10b 1
 Ebcd_counter_min
-Z16 w1651438102
+Z18 w1651438102
 R2
 R3
 R4
-R5
-Z17 8C:/Users/Samuel Mason/Documents/GitHub/PILK/Lab3/BCD_Counter_Min.vhd
-Z18 FC:/Users/Samuel Mason/Documents/GitHub/PILK/Lab3/BCD_Counter_Min.vhd
+R17
+Z19 8C:/Users/Samuel Mason/Documents/GitHub/PILK/Lab3/BCD_Counter_Min.vhd
+Z20 FC:/Users/Samuel Mason/Documents/GitHub/PILK/Lab3/BCD_Counter_Min.vhd
 l0
 L6
 Vk@00ajj6nBWo<:QRMK<S[1
 R8
 32
-Z19 !s108 1651438202.371000
-Z20 !s90 -reportprogress|300|-work|work|C:/Users/Samuel Mason/Documents/GitHub/PILK/Lab3/BCD_Counter_Min.vhd|
-Z21 !s107 C:/Users/Samuel Mason/Documents/GitHub/PILK/Lab3/BCD_Counter_Min.vhd|
-R12
+Z21 !s108 1651438202.371000
+Z22 !s90 -reportprogress|300|-work|work|C:/Users/Samuel Mason/Documents/GitHub/PILK/Lab3/BCD_Counter_Min.vhd|
+Z23 !s107 C:/Users/Samuel Mason/Documents/GitHub/PILK/Lab3/BCD_Counter_Min.vhd|
+R16
 R13
 !s100 O^[9Oic1h:7clAVzl]?CV2
 !i10b 1
@@ -90,10 +93,10 @@ L11
 VZFHS4[[zGfbad_46W@4?D3
 R8
 32
-R19
-R20
 R21
-R12
+R22
+R23
+R16
 R13
 !s100 f2z9iBMKmAeo;:M_0WK511
 !i10b 1
@@ -109,30 +112,30 @@ L13
 Vljh>joJd[b7i_<0e=X8bX3
 R8
 32
-R20
-R12
+R22
+R16
 R13
 w1651437953
-R21
+R23
 !s108 1651437959.372000
 !s100 <ZZSo[_giSSho1B:WZS8E3
 !i10b 1
 Etest_bcd_counter
-Z22 w1651432760
+Z24 w1651432760
 R3
 R4
-R5
-Z23 8C:/Users/Samuel Mason/Documents/GitHub/PILK/Lab3/test_305lab2_q2b.vhd
-Z24 FC:/Users/Samuel Mason/Documents/GitHub/PILK/Lab3/test_305lab2_q2b.vhd
+R17
+Z25 8C:/Users/Samuel Mason/Documents/GitHub/PILK/Lab3/test_305lab2_q2b.vhd
+Z26 FC:/Users/Samuel Mason/Documents/GitHub/PILK/Lab3/test_305lab2_q2b.vhd
 l0
 L5
 V_Ba]TfQXUXVkkM5F]REjh2
 R8
 32
-Z25 !s108 1651432766.049000
-Z26 !s90 -reportprogress|300|-work|work|C:/Users/Samuel Mason/Documents/GitHub/PILK/Lab3/test_305lab2_q2b.vhd|
-Z27 !s107 C:/Users/Samuel Mason/Documents/GitHub/PILK/Lab3/test_305lab2_q2b.vhd|
-R12
+Z27 !s108 1651432766.049000
+Z28 !s90 -reportprogress|300|-work|work|C:/Users/Samuel Mason/Documents/GitHub/PILK/Lab3/test_305lab2_q2b.vhd|
+Z29 !s107 C:/Users/Samuel Mason/Documents/GitHub/PILK/Lab3/test_305lab2_q2b.vhd|
+R16
 R13
 !s100 GZ3]d6B5HDKd3=n=FDmiD0
 !i10b 1
@@ -145,68 +148,68 @@ L8
 VSc=m^0j_l6c>01akBdTT:1
 R8
 32
-R25
-R26
 R27
-R12
+R28
+R29
+R16
 R13
 !s100 5<6[[Gd^o;Q_;fT1Xb1Sm1
 !i10b 1
 Etest_timer
-Z28 w1651500828
+Z30 w1651569543
 R2
 R3
 R4
 R5
-Z29 8C:/Users/Samuel Mason/Documents/GitHub/PILK/Lab3/testbench_Timer.vhd
-Z30 FC:/Users/Samuel Mason/Documents/GitHub/PILK/Lab3/testbench_Timer.vhd
+Z31 8D:\Documents\GitHub\PILK\Lab3\testbench_Timer.vhd
+Z32 FD:\Documents\GitHub\PILK\Lab3\testbench_Timer.vhd
 l0
 L7
-VHJaH;j5aJ<hT]]f_M<EfZ0
+VX1eHh6O>Ml]Z8<zQ73_0e2
 !s100 X>Q7eYe9GkG7?FaemOJ[c0
 R8
 32
 !i10b 1
-Z31 !s108 1651500837.611000
-Z32 !s90 -reportprogress|300|-work|work|C:/Users/Samuel Mason/Documents/GitHub/PILK/Lab3/testbench_Timer.vhd|
-Z33 !s107 C:/Users/Samuel Mason/Documents/GitHub/PILK/Lab3/testbench_Timer.vhd|
+Z33 !s108 1651569680.861000
+Z34 !s90 -reportprogress|300|-work|work|-2002|-explicit|D:\Documents\GitHub\PILK\Lab3\testbench_Timer.vhd|
+Z35 !s107 D:\Documents\GitHub\PILK\Lab3\testbench_Timer.vhd|
 R12
 R13
 Amy_test
 R2
 R3
 R4
-Z34 DEx4 work 10 test_timer 0 22 HJaH;j5aJ<hT]]f_M<EfZ0
+DEx4 work 10 test_timer 0 22 X1eHh6O>Ml]Z8<zQ73_0e2
 l26
 L10
-V>2;hKK;;<`35LK?Xdc4Nk3
-!s100 _;S1I<`M:m0iW<Y<VmQ7V1
+VWi0f;[k0QHPd4bTBo0RWZ3
+Z36 !s100 _;S1I<`M:m0iW<Y<VmQ7V1
 R8
 32
 !i10b 1
-R31
-R32
 R33
+R34
+R35
 R12
 R13
 Etimer
-Z35 w1651500397
+R30
 R14
 R15
 R2
 R3
 R4
 R5
-Z36 8C:/Users/Samuel Mason/Documents/GitHub/PILK/Lab3/Timer.vhd
-Z37 FC:/Users/Samuel Mason/Documents/GitHub/PILK/Lab3/Timer.vhd
+Z37 8D:\Documents\GitHub\PILK\Lab3\Timer.vhd
+Z38 FD:\Documents\GitHub\PILK\Lab3\Timer.vhd
 l0
 L7
-V:EGfjgF^k]ih^oUNPWRE40
+V9[a3XmAF8zElDCFX218Zd1
 R8
 32
-Z38 !s108 1651500407.589000
-Z39 !s90 -reportprogress|300|-work|work|C:/Users/Samuel Mason/Documents/GitHub/PILK/Lab3/Timer.vhd|
-Z40 !s107 C:/Users/Samuel Mason/Documents/GitHub/PILK/Lab3/Timer.vhd|
+Z39 !s108 1651569680.751000
+Z40 !s90 -reportprogress|300|-work|work|-2002|-explicit|D:\Documents\GitHub\PILK\Lab3\Timer.vhd|
+Z41 !s107 D:\Documents\GitHub\PILK\Lab3\Timer.vhd|
 R12
 R13
 !s100 3j1[Yj0ioL=zY[]5haI^=2
@@ -217,16 +220,16 @@ R15
 R2
 R3
 R4
-DEx4 work 5 timer 0 22 :EGfjgF^k]ih^oUNPWRE40
+DEx4 work 5 timer 0 22 9[a3XmAF8zElDCFX218Zd1
 l33
 L16
-V^neC6[f]:kTF_8DCHYXIa2
+Vh3FzafT0fB[?<;@I6?jW01
+!s100 74W?1`La=al16fVf0l`A<1
 R8
 32
-R38
 R39
 R40
+R41
 R12
 R13
-!s100 74W?1`La=al16fVf0l`A<1
 !i10b 1

@@ -2,4 +2,148 @@
 TimeQuest Timing Analyzer Summary
 ------------------------------------------------------------
 
+Type  : Slow 1200mV 85C Model Setup 'Clock'
+Slack : -2.032
+TNS   : -21.311
+
+Type  : Slow 1200mV 85C Model Setup 'BCD_Counter_Min:BCD2|Q_Out1[0]'
+Slack : -0.596
+TNS   : -2.169
+
+Type  : Slow 1200mV 85C Model Setup 'BCD_Counter:BCD1|Q_Out1[0]'
+Slack : -0.555
+TNS   : -1.692
+
+Type  : Slow 1200mV 85C Model Setup 'Start'
+Slack : 0.317
+TNS   : 0.000
+
+Type  : Slow 1200mV 85C Model Hold 'BCD_Counter:BCD1|Q_Out1[0]'
+Slack : -0.382
+TNS   : -1.168
+
+Type  : Slow 1200mV 85C Model Hold 'BCD_Counter_Min:BCD2|Q_Out1[0]'
+Slack : -0.157
+TNS   : -0.555
+
+Type  : Slow 1200mV 85C Model Hold 'Clock'
+Slack : -0.094
+TNS   : -0.102
+
+Type  : Slow 1200mV 85C Model Hold 'Start'
+Slack : 0.384
+TNS   : 0.000
+
+Type  : Slow 1200mV 85C Model Minimum Pulse Width 'Clock'
+Slack : -3.000
+TNS   : -28.000
+
+Type  : Slow 1200mV 85C Model Minimum Pulse Width 'Start'
+Slack : -3.000
+TNS   : -4.000
+
+Type  : Slow 1200mV 85C Model Minimum Pulse Width 'BCD_Counter:BCD1|Q_Out1[0]'
+Slack : -1.000
+TNS   : -4.000
+
+Type  : Slow 1200mV 85C Model Minimum Pulse Width 'BCD_Counter_Min:BCD2|Q_Out1[0]'
+Slack : -1.000
+TNS   : -4.000
+
+Type  : Slow 1200mV 0C Model Setup 'Clock'
+Slack : -1.693
+TNS   : -17.230
+
+Type  : Slow 1200mV 0C Model Setup 'BCD_Counter_Min:BCD2|Q_Out1[0]'
+Slack : -0.422
+TNS   : -1.505
+
+Type  : Slow 1200mV 0C Model Setup 'BCD_Counter:BCD1|Q_Out1[0]'
+Slack : -0.413
+TNS   : -1.236
+
+Type  : Slow 1200mV 0C Model Setup 'Start'
+Slack : 0.398
+TNS   : 0.000
+
+Type  : Slow 1200mV 0C Model Hold 'BCD_Counter:BCD1|Q_Out1[0]'
+Slack : -0.386
+TNS   : -1.182
+
+Type  : Slow 1200mV 0C Model Hold 'Clock'
+Slack : -0.130
+TNS   : -0.267
+
+Type  : Slow 1200mV 0C Model Hold 'BCD_Counter_Min:BCD2|Q_Out1[0]'
+Slack : -0.036
+TNS   : -0.105
+
+Type  : Slow 1200mV 0C Model Hold 'Start'
+Slack : 0.341
+TNS   : 0.000
+
+Type  : Slow 1200mV 0C Model Minimum Pulse Width 'Clock'
+Slack : -3.000
+TNS   : -28.000
+
+Type  : Slow 1200mV 0C Model Minimum Pulse Width 'Start'
+Slack : -3.000
+TNS   : -4.000
+
+Type  : Slow 1200mV 0C Model Minimum Pulse Width 'BCD_Counter:BCD1|Q_Out1[0]'
+Slack : -1.000
+TNS   : -4.000
+
+Type  : Slow 1200mV 0C Model Minimum Pulse Width 'BCD_Counter_Min:BCD2|Q_Out1[0]'
+Slack : -1.000
+TNS   : -4.000
+
+Type  : Fast 1200mV 0C Model Setup 'Clock'
+Slack : -0.909
+TNS   : -10.541
+
+Type  : Fast 1200mV 0C Model Setup 'BCD_Counter:BCD1|Q_Out1[0]'
+Slack : -0.051
+TNS   : -0.135
+
+Type  : Fast 1200mV 0C Model Setup 'BCD_Counter_Min:BCD2|Q_Out1[0]'
+Slack : 0.109
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Setup 'Start'
+Slack : 0.624
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Hold 'BCD_Counter:BCD1|Q_Out1[0]'
+Slack : -0.187
+TNS   : -0.432
+
+Type  : Fast 1200mV 0C Model Hold 'Clock'
+Slack : -0.125
+TNS   : -0.541
+
+Type  : Fast 1200mV 0C Model Hold 'BCD_Counter_Min:BCD2|Q_Out1[0]'
+Slack : 0.098
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Hold 'Start'
+Slack : 0.206
+TNS   : 0.000
+
+Type  : Fast 1200mV 0C Model Minimum Pulse Width 'Clock'
+Slack : -3.000
+TNS   : -29.418
+
+Type  : Fast 1200mV 0C Model Minimum Pulse Width 'Start'
+Slack : -3.000
+TNS   : -4.115
+
+Type  : Fast 1200mV 0C Model Minimum Pulse Width 'BCD_Counter:BCD1|Q_Out1[0]'
+Slack : -1.000
+TNS   : -4.000
+
+Type  : Fast 1200mV 0C Model Minimum Pulse Width 'BCD_Counter_Min:BCD2|Q_Out1[0]'
+Slack : -1.000
+TNS   : -4.000
+
 ------------------------------------------------------------

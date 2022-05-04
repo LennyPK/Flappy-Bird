@@ -1,5 +1,5 @@
 Analysis & Synthesis report for Timer
-Sun May 01 15:16:08 2022
+Wed May 04 19:32:44 2022
 Quartus II 64-Bit Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edition
 
 
@@ -13,12 +13,14 @@ Quartus II 64-Bit Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edit
   5. Analysis & Synthesis Source Files Read
   6. Analysis & Synthesis Resource Usage Summary
   7. Analysis & Synthesis Resource Utilization by Entity
-  8. User-Specified and Inferred Latches
+  8. Registers Removed During Synthesis
   9. General Register Statistics
  10. Multiplexer Restructuring Statistics (Restructuring Performed)
- 11. Port Connectivity Checks: "BCD_Counter:DUO"
- 12. Elapsed Time Per Partition
- 13. Analysis & Synthesis Messages
+ 11. Port Connectivity Checks: "BCD_Counter:BCD3"
+ 12. Port Connectivity Checks: "BCD_Counter_Min:BCD2"
+ 13. Port Connectivity Checks: "BCD_Counter:BCD1"
+ 14. Elapsed Time Per Partition
+ 15. Analysis & Synthesis Messages
 
 
 
@@ -44,16 +46,16 @@ applicable agreement for further details.
 +--------------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                         ;
 +------------------------------------+-------------------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Sun May 01 15:16:08 2022           ;
+; Analysis & Synthesis Status        ; Successful - Wed May 04 19:32:44 2022           ;
 ; Quartus II 64-Bit Version          ; 13.0.1 Build 232 06/12/2013 SP 1 SJ Web Edition ;
 ; Revision Name                      ; Timer                                           ;
 ; Top-level Entity Name              ; Timer                                           ;
 ; Family                             ; Cyclone III                                     ;
-; Total logic elements               ; 41                                              ;
-;     Total combinational functions  ; 41                                              ;
-;     Dedicated logic registers      ; 0                                               ;
-; Total registers                    ; 0                                               ;
-; Total pins                         ; 19                                              ;
+; Total logic elements               ; 47                                              ;
+;     Total combinational functions  ; 45                                              ;
+;     Dedicated logic registers      ; 34                                              ;
+; Total registers                    ; 34                                              ;
+; Total pins                         ; 41                                              ;
 ; Total virtual pins                 ; 0                                               ;
 ; Total memory bits                  ; 0                                               ;
 ; Embedded Multiplier 9-bit elements ; 0                                               ;
@@ -163,14 +165,15 @@ Parallel compilation was disabled, but you have multiple processors available. E
 +----------------------------+--------+
 
 
-+--------------------------------------------------------------------------------------------------------------------------------+
-; Analysis & Synthesis Source Files Read                                                                                         ;
-+----------------------------------+-----------------+-----------------+-----------------------------------------------+---------+
-; File Name with User-Entered Path ; Used in Netlist ; File Type       ; File Name with Absolute Path                  ; Library ;
-+----------------------------------+-----------------+-----------------+-----------------------------------------------+---------+
-; Timer.vhd                        ; yes             ; User VHDL File  ; D:/Documents/GitHub/PILK/Lab3/Timer.vhd       ;         ;
-; BCD_Counter.vhd                  ; yes             ; User VHDL File  ; D:/Documents/GitHub/PILK/Lab3/BCD_Counter.vhd ;         ;
-+----------------------------------+-----------------+-----------------+-----------------------------------------------+---------+
++------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Source Files Read                                                                                                   ;
++----------------------------------+-----------------+-----------------------+---------------------------------------------------+---------+
+; File Name with User-Entered Path ; Used in Netlist ; File Type             ; File Name with Absolute Path                      ; Library ;
++----------------------------------+-----------------+-----------------------+---------------------------------------------------+---------+
+; Timer.vhd                        ; yes             ; User VHDL File        ; D:/Documents/GitHub/PILK/Lab3/Timer.vhd           ;         ;
+; BCD_Counter.vhd                  ; yes             ; User VHDL File        ; D:/Documents/GitHub/PILK/Lab3/BCD_Counter.vhd     ;         ;
+; bcd_counter_min.vhd              ; yes             ; Auto-Found VHDL File  ; D:/Documents/GitHub/PILK/Lab3/bcd_counter_min.vhd ;         ;
++----------------------------------+-----------------+-----------------------+---------------------------------------------------+---------+
 
 
 +------------------------------------------------------+
@@ -178,56 +181,55 @@ Parallel compilation was disabled, but you have multiple processors available. E
 +---------------------------------------------+--------+
 ; Resource                                    ; Usage  ;
 +---------------------------------------------+--------+
-; Estimated Total logic elements              ; 41     ;
+; Estimated Total logic elements              ; 47     ;
 ;                                             ;        ;
-; Total combinational functions               ; 41     ;
+; Total combinational functions               ; 45     ;
 ; Logic element usage by number of LUT inputs ;        ;
-;     -- 4 input functions                    ; 25     ;
-;     -- 3 input functions                    ; 16     ;
-;     -- <=2 input functions                  ; 0      ;
+;     -- 4 input functions                    ; 26     ;
+;     -- 3 input functions                    ; 12     ;
+;     -- <=2 input functions                  ; 7      ;
 ;                                             ;        ;
 ; Logic elements by mode                      ;        ;
-;     -- normal mode                          ; 41     ;
+;     -- normal mode                          ; 45     ;
 ;     -- arithmetic mode                      ; 0      ;
 ;                                             ;        ;
-; Total registers                             ; 0      ;
-;     -- Dedicated logic registers            ; 0      ;
+; Total registers                             ; 34     ;
+;     -- Dedicated logic registers            ; 34     ;
 ;     -- I/O registers                        ; 0      ;
 ;                                             ;        ;
-; I/O pins                                    ; 19     ;
+; I/O pins                                    ; 41     ;
 ; Embedded Multiplier 9-bit elements          ; 0      ;
-; Maximum fan-out node                        ; comb~9 ;
-; Maximum fan-out                             ; 9      ;
-; Total fan-out                               ; 174    ;
-; Average fan-out                             ; 2.20   ;
+; Maximum fan-out node                        ; Enable ;
+; Maximum fan-out                             ; 32     ;
+; Total fan-out                               ; 304    ;
+; Average fan-out                             ; 1.89   ;
 +---------------------------------------------+--------+
 
 
-+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Analysis & Synthesis Resource Utilization by Entity                                                                                                                         ;
-+----------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+---------------------+--------------+
-; Compilation Hierarchy Node ; LC Combinationals ; LC Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name ; Library Name ;
-+----------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+---------------------+--------------+
-; |Timer                     ; 41 (41)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 19   ; 0            ; |Timer              ; work         ;
-+----------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+---------------------+--------------+
++-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Resource Utilization by Entity                                                                                                                                 ;
++----------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+-----------------------------+--------------+
+; Compilation Hierarchy Node ; LC Combinationals ; LC Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name         ; Library Name ;
++----------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+-----------------------------+--------------+
+; |Timer                     ; 45 (24)           ; 34 (22)      ; 0           ; 0            ; 0       ; 0         ; 41   ; 0            ; |Timer                      ; work         ;
+;    |BCD_Counter:BCD1|      ; 7 (7)             ; 4 (4)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Timer|BCD_Counter:BCD1     ; work         ;
+;    |BCD_Counter:BCD3|      ; 7 (7)             ; 4 (4)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Timer|BCD_Counter:BCD3     ; work         ;
+;    |BCD_Counter_Min:BCD2|  ; 7 (7)             ; 4 (4)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Timer|BCD_Counter_Min:BCD2 ; work         ;
++----------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+-----------------------------+--------------+
 Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
 
 
-+---------------------------------------------------------------------------------------------------+
-; User-Specified and Inferred Latches                                                               ;
-+----------------------------------------------------+---------------------+------------------------+
-; Latch Name                                         ; Latch Enable Signal ; Free of Timing Hazards ;
-+----------------------------------------------------+---------------------+------------------------+
-; tmp[1]                                             ; GND                 ; yes                    ;
-; tmp[2]                                             ; GND                 ; yes                    ;
-; tmp[3]                                             ; GND                 ; yes                    ;
-; tmp[4]                                             ; GND                 ; yes                    ;
-; tmp[5]                                             ; GND                 ; yes                    ;
-; tmp[6]                                             ; GND                 ; yes                    ;
-; tmp[7]                                             ; GND                 ; yes                    ;
-; Number of user-specified and inferred latches = 7  ;                     ;                        ;
-+----------------------------------------------------+---------------------+------------------------+
-Note: All latches listed above may not be present at the end of synthesis due to various synthesis optimizations.
++--------------------------------------------------------------------------------+
+; Registers Removed During Synthesis                                             ;
++---------------------------------------+----------------------------------------+
+; Register name                         ; Reason for Removal                     ;
++---------------------------------------+----------------------------------------+
+; Seg1[0]                               ; Stuck at VCC due to stuck port data_in ;
+; Seg2[0]                               ; Stuck at VCC due to stuck port data_in ;
+; Seg0[0]                               ; Stuck at VCC due to stuck port data_in ;
+; Time_out~reg0                         ; Stuck at VCC due to stuck port data_in ;
+; Total Number of Removed Registers = 4 ;                                        ;
++---------------------------------------+----------------------------------------+
 
 
 +------------------------------------------------------+
@@ -235,9 +237,9 @@ Note: All latches listed above may not be present at the end of synthesis due to
 +----------------------------------------------+-------+
 ; Statistic                                    ; Value ;
 +----------------------------------------------+-------+
-; Total registers                              ; 0     ;
+; Total registers                              ; 34    ;
 ; Number of registers using Synchronous Clear  ; 0     ;
-; Number of registers using Synchronous Load   ; 0     ;
+; Number of registers using Synchronous Load   ; 17    ;
 ; Number of registers using Asynchronous Clear ; 0     ;
 ; Number of registers using Asynchronous Load  ; 0     ;
 ; Number of registers using Clock Enable       ; 0     ;
@@ -245,24 +247,45 @@ Note: All latches listed above may not be present at the end of synthesis due to
 +----------------------------------------------+-------+
 
 
-+------------------------------------------------------------------------------------------------------------------------------------------+
-; Multiplexer Restructuring Statistics (Restructuring Performed)                                                                           ;
-+--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------+
-; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output ;
-+--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------+
-; 5:1                ; 3 bits    ; 9 LEs         ; 6 LEs                ; 3 LEs                  ; No         ; |Timer|tmp[1]              ;
-+--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------+
++-----------------------------------------------------------------------------------------------------------------------------------------------------+
+; Multiplexer Restructuring Statistics (Restructuring Performed)                                                                                      ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+---------------------------------------+
+; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output            ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+---------------------------------------+
+; 3:1                ; 4 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; Yes        ; |Timer|BCD_Counter_Min:BCD2|Q_Out1[0] ;
+; 3:1                ; 4 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; Yes        ; |Timer|BCD_Counter:BCD3|Q_Out1[3]     ;
+; 3:1                ; 4 bits    ; 8 LEs         ; 4 LEs                ; 4 LEs                  ; Yes        ; |Timer|BCD_Counter:BCD1|Q_Out1[3]     ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+---------------------------------------+
 
 
-+---------------------------------------------------------------------------------------------------------------------+
-; Port Connectivity Checks: "BCD_Counter:DUO"                                                                         ;
-+-----------+--------+----------+-------------------------------------------------------------------------------------+
-; Port      ; Type   ; Severity ; Details                                                                             ;
-+-----------+--------+----------+-------------------------------------------------------------------------------------+
-; direction ; Input  ; Info     ; Stuck at GND                                                                        ;
-; init      ; Input  ; Info     ; Stuck at GND                                                                        ;
-; q_out     ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
-+-----------+--------+----------+-------------------------------------------------------------------------------------+
++----------------------------------------------+
+; Port Connectivity Checks: "BCD_Counter:BCD3" ;
++-----------+-------+----------+---------------+
+; Port      ; Type  ; Severity ; Details       ;
++-----------+-------+----------+---------------+
+; direction ; Input ; Info     ; Stuck at GND  ;
+; init      ; Input ; Info     ; Stuck at VCC  ;
++-----------+-------+----------+---------------+
+
+
++--------------------------------------------------+
+; Port Connectivity Checks: "BCD_Counter_Min:BCD2" ;
++-----------+-------+----------+-------------------+
+; Port      ; Type  ; Severity ; Details           ;
++-----------+-------+----------+-------------------+
+; direction ; Input ; Info     ; Stuck at GND      ;
+; init      ; Input ; Info     ; Stuck at VCC      ;
++-----------+-------+----------+-------------------+
+
+
++----------------------------------------------+
+; Port Connectivity Checks: "BCD_Counter:BCD1" ;
++-----------+-------+----------+---------------+
+; Port      ; Type  ; Severity ; Details       ;
++-----------+-------+----------+---------------+
+; direction ; Input ; Info     ; Stuck at GND  ;
+; init      ; Input ; Info     ; Stuck at VCC  ;
++-----------+-------+----------+---------------+
 
 
 +-------------------------------+
@@ -280,43 +303,50 @@ Note: All latches listed above may not be present at the end of synthesis due to
 Info: *******************************************************************
 Info: Running Quartus II 64-Bit Analysis & Synthesis
     Info: Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edition
-    Info: Processing started: Sun May 01 15:16:05 2022
+    Info: Processing started: Wed May 04 19:32:42 2022
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off Timer -c Timer
 Warning (20028): Parallel compilation is not licensed and has been disabled
 Info (12021): Found 2 design units, including 1 entities, in source file timer.vhd
     Info (12022): Found design unit 1: Timer-arc
     Info (12023): Found entity 1: Timer
 Info (12021): Found 2 design units, including 1 entities, in source file bcd_counter.vhd
-    Info (12022): Found design unit 1: BCD_Counter-arc
+    Info (12022): Found design unit 1: BCD_Counter-behaviour
     Info (12023): Found entity 1: BCD_Counter
+Info (12021): Found 1 design units, including 1 entities, in source file lab3.bdf
+    Info (12023): Found entity 1: Lab3
 Info (12127): Elaborating entity "Timer" for the top level hierarchy
-Warning (10036): Verilog HDL or VHDL warning at Timer.vhd(17): object "C_Q_Ones" assigned a value but never read
-Warning (10492): VHDL Process Statement warning at Timer.vhd(78): signal "tmp" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
-Warning (10631): VHDL Process Statement warning at Timer.vhd(53): inferring latch(es) for signal or variable "tmp", which holds its previous value in one or more paths through the process
-Info (10041): Inferred latch for "tmp[0]" at Timer.vhd(53)
-Info (10041): Inferred latch for "tmp[1]" at Timer.vhd(53)
-Info (10041): Inferred latch for "tmp[2]" at Timer.vhd(53)
-Info (10041): Inferred latch for "tmp[3]" at Timer.vhd(53)
-Info (10041): Inferred latch for "tmp[4]" at Timer.vhd(53)
-Info (10041): Inferred latch for "tmp[5]" at Timer.vhd(53)
-Info (10041): Inferred latch for "tmp[6]" at Timer.vhd(53)
-Info (10041): Inferred latch for "tmp[7]" at Timer.vhd(53)
-Info (12128): Elaborating entity "BCD_Counter" for hierarchy "BCD_Counter:DUO"
+Info (12128): Elaborating entity "BCD_Counter" for hierarchy "BCD_Counter:BCD1"
+Warning (12125): Using design file bcd_counter_min.vhd, which is not specified as a design file for the current project, but contains definitions for 2 design units and 1 entities in project
+    Info (12022): Found design unit 1: BCD_Counter_Min-behaviour
+    Info (12023): Found entity 1: BCD_Counter_Min
+Info (12128): Elaborating entity "BCD_Counter_Min" for hierarchy "BCD_Counter_Min:BCD2"
 Warning (13024): Output pins are stuck at VCC or GND
-    Warning (13410): Pin "LED_out[0]" is stuck at VCC
+    Warning (13410): Pin "Time_out" is stuck at VCC
+    Warning (13410): Pin "OSeg0[0]" is stuck at VCC
+    Warning (13410): Pin "OSeg1[0]" is stuck at VCC
+    Warning (13410): Pin "OSeg2[0]" is stuck at VCC
 Info (286030): Timing-Driven Synthesis is running
 Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
     Info (16011): Adding 0 node(s), including 0 DDIO, 0 PLL, 0 transceiver and 0 LCELL
-Warning (21074): Design contains 1 input pin(s) that do not drive logic
-    Warning (15610): No output dependent on input pin "Clock"
-Info (21057): Implemented 60 device resources after synthesis - the final resource count might be different
-    Info (21058): Implemented 11 input pins
-    Info (21059): Implemented 8 output pins
-    Info (21061): Implemented 41 logic cells
-Info: Quartus II 64-Bit Analysis & Synthesis was successful. 0 errors, 8 warnings
+Warning (21074): Design contains 10 input pin(s) that do not drive logic
+    Warning (15610): No output dependent on input pin "Data_in[0]"
+    Warning (15610): No output dependent on input pin "Data_in[1]"
+    Warning (15610): No output dependent on input pin "Data_in[2]"
+    Warning (15610): No output dependent on input pin "Data_in[3]"
+    Warning (15610): No output dependent on input pin "Data_in[4]"
+    Warning (15610): No output dependent on input pin "Data_in[5]"
+    Warning (15610): No output dependent on input pin "Data_in[6]"
+    Warning (15610): No output dependent on input pin "Data_in[7]"
+    Warning (15610): No output dependent on input pin "Data_in[8]"
+    Warning (15610): No output dependent on input pin "Data_in[9]"
+Info (21057): Implemented 90 device resources after synthesis - the final resource count might be different
+    Info (21058): Implemented 12 input pins
+    Info (21059): Implemented 29 output pins
+    Info (21061): Implemented 49 logic cells
+Info: Quartus II 64-Bit Analysis & Synthesis was successful. 0 errors, 18 warnings
     Info: Peak virtual memory: 4628 megabytes
-    Info: Processing ended: Sun May 01 15:16:08 2022
-    Info: Elapsed time: 00:00:03
+    Info: Processing ended: Wed May 04 19:32:44 2022
+    Info: Elapsed time: 00:00:02
     Info: Total CPU time (on all processors): 00:00:02
 
 

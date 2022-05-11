@@ -9,16 +9,16 @@ Z2 DPx4 ieee 11 numeric_std 0 22 O3PF8EB`?j9=z7KT`fn941
 Z3 DPx3 std 6 textio 0 22 5>J:;AW>W0[[dW0I6EN1Q0
 Z4 DPx4 ieee 14 std_logic_1164 0 22 5=aWaoGZSMWIcH0i^f`XF1
 Z5 dD:\Documents\GitHub\PILK\Lab3
-Z6 8D:\Documents\GitHub\PILK\Lab3\BCD_Counter.vhd
-Z7 FD:\Documents\GitHub\PILK\Lab3\BCD_Counter.vhd
+Z6 8D:/Documents/GitHub/PILK/Lab3/BCD_Counter.vhd
+Z7 FD:/Documents/GitHub/PILK/Lab3/BCD_Counter.vhd
 l0
 L6
 V7MYcZ=ihiJ_ADQoB;7Jb83
 Z8 OV;C;10.1d;51
 32
-Z9 !s108 1651569680.635000
-Z10 !s90 -reportprogress|300|-work|work|-2002|-explicit|D:\Documents\GitHub\PILK\Lab3\BCD_Counter.vhd|
-Z11 !s107 D:\Documents\GitHub\PILK\Lab3\BCD_Counter.vhd|
+Z9 !s108 1651717545.736000
+Z10 !s90 -reportprogress|300|-work|work|-2002|-explicit|D:/Documents/GitHub/PILK/Lab3/BCD_Counter.vhd|
+Z11 !s107 D:/Documents/GitHub/PILK/Lab3/BCD_Counter.vhd|
 Z12 o-work work -2002 -explicit -O0
 Z13 tExplicit 1
 !s100 nIUf1YJg_zWA2Igc]08;g0
@@ -161,8 +161,8 @@ R2
 R3
 R4
 R5
-Z31 8D:\Documents\GitHub\PILK\Lab3\testbench_Timer.vhd
-Z32 FD:\Documents\GitHub\PILK\Lab3\testbench_Timer.vhd
+Z31 8D:/Documents/GitHub/PILK/Lab3/testbench_Timer.vhd
+Z32 FD:/Documents/GitHub/PILK/Lab3/testbench_Timer.vhd
 l0
 L7
 VX1eHh6O>Ml]Z8<zQ73_0e2
@@ -170,20 +170,20 @@ VX1eHh6O>Ml]Z8<zQ73_0e2
 R8
 32
 !i10b 1
-Z33 !s108 1651569680.861000
-Z34 !s90 -reportprogress|300|-work|work|-2002|-explicit|D:\Documents\GitHub\PILK\Lab3\testbench_Timer.vhd|
-Z35 !s107 D:\Documents\GitHub\PILK\Lab3\testbench_Timer.vhd|
+Z33 !s108 1651717546.150000
+Z34 !s90 -reportprogress|300|-work|work|-2002|-explicit|D:/Documents/GitHub/PILK/Lab3/testbench_Timer.vhd|
+Z35 !s107 D:/Documents/GitHub/PILK/Lab3/testbench_Timer.vhd|
 R12
 R13
 Amy_test
 R2
 R3
 R4
-DEx4 work 10 test_timer 0 22 X1eHh6O>Ml]Z8<zQ73_0e2
+Z36 DEx4 work 10 test_timer 0 22 X1eHh6O>Ml]Z8<zQ73_0e2
 l26
 L10
-VWi0f;[k0QHPd4bTBo0RWZ3
-Z36 !s100 _;S1I<`M:m0iW<Y<VmQ7V1
+Z37 VWi0f;[k0QHPd4bTBo0RWZ3
+Z38 !s100 _;S1I<`M:m0iW<Y<VmQ7V1
 R8
 32
 !i10b 1
@@ -200,16 +200,16 @@ R2
 R3
 R4
 R5
-Z37 8D:\Documents\GitHub\PILK\Lab3\Timer.vhd
-Z38 FD:\Documents\GitHub\PILK\Lab3\Timer.vhd
+Z39 8D:/Documents/GitHub/PILK/Lab3/Timer.vhd
+Z40 FD:/Documents/GitHub/PILK/Lab3/Timer.vhd
 l0
 L7
 V9[a3XmAF8zElDCFX218Zd1
 R8
 32
-Z39 !s108 1651569680.751000
-Z40 !s90 -reportprogress|300|-work|work|-2002|-explicit|D:\Documents\GitHub\PILK\Lab3\Timer.vhd|
-Z41 !s107 D:\Documents\GitHub\PILK\Lab3\Timer.vhd|
+Z41 !s108 1651717545.968000
+Z42 !s90 -reportprogress|300|-work|work|-2002|-explicit|D:/Documents/GitHub/PILK/Lab3/Timer.vhd|
+Z43 !s107 D:/Documents/GitHub/PILK/Lab3/Timer.vhd|
 R12
 R13
 !s100 3j1[Yj0ioL=zY[]5haI^=2
@@ -227,9 +227,9 @@ Vh3FzafT0fB[?<;@I6?jW01
 !s100 74W?1`La=al16fVf0l`A<1
 R8
 32
-R39
-R40
 R41
+R42
+R43
 R12
 R13
 !i10b 1

@@ -27,14 +27,17 @@ ball_x_pos <= CONV_STD_LOGIC_VECTOR(590,11);
 
 ball_on <= "1111" when ( ('0' & ball_x_pos <= '0' & pixel_column + size) and ('0' & pixel_column <= '0' & ball_x_pos + size) 	-- x_pos - size <= pixel_column <= x_pos + size
 					and ('0' & ball_y_pos <= pixel_row + size) and ('0' & pixel_row <= ball_y_pos + size) )  else	-- y_pos - size <= pixel_row <= y_pos + size
-			"0111";
+			"0000";
 
 
 -- Colours for pixel data on video signal
 -- Changing the background and ball colour by pushbuttons
-Red <=  not ball_on;
-Green <= not ball_on;
-Blue <=  not ball_on;
+--Red <=  ball_on AND "1001";
+--Green <= ball_on AND "0100";
+--Blue <=  ball_on AND "0000";
+Red <=  (ball_on AND "1001") OR (not ball_on AND "1001");
+Green <= (ball_on AND "0000") OR (not ball_on AND "0100");
+Blue <=  (ball_on AND "0000") OR (not ball_on AND "0000");
 
 
 Move_Ball: process (vert_sync)  	

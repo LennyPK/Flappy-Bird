@@ -53,15 +53,106 @@ flappy_bird <= "1111" when (('0' & pixel_column <= '0' & ball_x_pos + flappy_bir
       "0000";
 
 			
-flappy_bird_colours <= rgb16_to_rgb4() when (pixel_col_int >= 0 and pixel_col_int <= 5 and pixel_row_int = 0) else
-                       rgb16_to_rgb4() when (pixel_col_int >= 6 and pixel_col_int <= 11 and pixel_row = 0) else
-                       rgb16_to_rgb4() when (pixel_col_int >= 0 and pixel_col_int <= 5 and pixel_row_int = 0) else
-                       rgb16_to_rgb4() when (pixel_col_int >= 0 and pixel_col_int <= 5 and pixel_row_int = 0) else
-                       rgb16_to_rgb4() when (pixel_col_int >= 0 and pixel_col_int <= 5 and pixel_row_int = 0) else
-                       rgb16_to_rgb4() when (pixel_col_int >= 0 and pixel_col_int <= 5 and pixel_row_int = 0) else
-                       rgb16_to_rgb4() when (pixel_col_int >= 0 and pixel_col_int <= 5 and pixel_row_int = 0) else
-			
-function rgb16_to_rgb4(red_in : integer, green_in : integer, blue_in : integer) 
+flappy_bird_colours <= -- Row one
+                       rgb16_to_rgb4(0, 0, 0) when (pixel_col_int >= 0 and pixel_col_int <= 5 and pixel_row_int = 0) else
+                       rgb16_to_rgb4(83, 56, 70) when (pixel_col_int >= 6 and pixel_col_int <= 11 and pixel_row_int = 0) else
+                       rgb16_to_rgb4(0, 0, 0) when (pixel_col_int >= 12 and pixel_col_int <= 16 and pixel_row_int = 0) else
+                       -- Row two
+                       rgb16_to_rgb4(0, 0, 0) when (pixel_col_int >= 0 and pixel_col_int <= 3 and pixel_row_int = 1) else
+                       rgb16_to_rgb4(83, 56, 70) when (pixel_col_int >= 4 and pixel_col_int <= 5 and pixel_row_int = 1) else
+                       rgb16_to_rgb4(248, 255, 46) when (pixel_col_int >= 6 and pixel_col_int <= 8 and pixel_row_int = 1) else
+                       rgb16_to_rgb4(83, 56, 70) when (pixel_col_int >= 9 and pixel_col_int <= 9 and pixel_row_int = 1) else
+                       rgb16_to_rgb4(253, 255, 250) when (pixel_col_int >= 10 and pixel_col_int <= 11 and pixel_row_int = 1) else
+                       rgb16_to_rgb4(83, 56, 70) when (pixel_col_int >= 12 and pixel_col_int <= 12 and pixel_row_int = 1) else
+                       rgb16_to_rgb4(0, 0, 0) when (pixel_col_int >= 13 and pixel_col_int <= 16 and pixel_row_int = 1) else
+                       -- Row three
+                       rgb16_to_rgb4(0, 0, 0) when (pixel_col_int >= 0 and pixel_col_int <= 2 and pixel_row_int = 2) else
+                       rgb16_to_rgb4(83, 56, 70) when (pixel_col_int >= 3 and pixel_col_int <= 3 and pixel_row_int = 2) else
+                       rgb16_to_rgb4(248, 255, 46) when (pixel_col_int >= 4 and pixel_col_int <= 5 and pixel_row_int = 2) else
+                       rgb16_to_rgb4(249, 241, 36) when (pixel_col_int >= 6 and pixel_col_int <= 7 and pixel_row_int = 2) else
+                       rgb16_to_rgb4(83, 56, 70) when (pixel_col_int >= 8 and pixel_col_int <= 8 and pixel_row_int = 2) else
+                       rgb16_to_rgb4(253, 255, 250) when (pixel_col_int >= 9 and pixel_col_int <= 12 and pixel_row_int = 2) else
+                       rgb16_to_rgb4(83, 56, 70) when (pixel_col_int >= 13 and pixel_col_int <= 13 and pixel_row_int = 2) else
+                       rgb16_to_rgb4(0, 0, 0) when (pixel_col_int >= 14 and pixel_col_int <= 16 and pixel_row_int = 2) else
+                       -- Row four
+                       rgb16_to_rgb4(0, 0, 0) when (pixel_col_int >= 0 and pixel_col_int <= 0 and pixel_row_int = 0) else
+                       rgb16_to_rgb4(83, 56, 70) when (pixel_col_int >= 1 and pixel_col_int <= 4 and pixel_row_int = 0) else
+                       rgb16_to_rgb4(249, 241, 36) when (pixel_col_int >= 5 and pixel_col_int <= 7 and pixel_row_int = 0) else
+                       rgb16_to_rgb4(83, 56, 70) when (pixel_col_int >= 8 and pixel_col_int <= 8 and pixel_row_int = 0) else
+                       rgb16_to_rgb4(250, 252, 233) when (pixel_col_int >= 9 and pixel_col_int <= 9 and pixel_row_int = 0) else
+                       rgb16_to_rgb4(253, 255, 250) when (pixel_col_int >= 10 and pixel_col_int <= 11 and pixel_row_int = 0) else
+                       rgb16_to_rgb4(83, 56, 70) when (pixel_col_int >= 12 and pixel_col_int <= 12 and pixel_row_int = 0) else
+                       rgb16_to_rgb4(253, 255, 250) when (pixel_col_int >= 13 and pixel_col_int <= 13 and pixel_row_int = 0) else
+                       rgb16_to_rgb4(83, 56, 70) when (pixel_col_int >= 14 and pixel_col_int <= 14 and pixel_row_int = 0) else
+                       rgb16_to_rgb4(0, 0, 0) when (pixel_col_int >= 15 and pixel_col_int <= 16 and pixel_row_int = 0) else
+                       -- Row five
+                       rgb16_to_rgb4(83, 56, 70) when (pixel_col_int >= 0 and pixel_col_int <= 0 and pixel_row_int = 0) else
+                       rgb16_to_rgb4(250, 252, 233) when (pixel_col_int >= 1 and pixel_col_int <= 4 and pixel_row_int = 0) else
+                       rgb16_to_rgb4(83, 56, 70) when (pixel_col_int >= 5 and pixel_col_int <= 5 and pixel_row_int = 0) else
+                       rgb16_to_rgb4(249, 241, 36) when (pixel_col_int >= 6 and pixel_col_int <= 7 and pixel_row_int = 0) else
+                       rgb16_to_rgb4(83, 56, 70) when (pixel_col_int >= 8 and pixel_col_int <= 8 and pixel_row_int = 0) else
+                       rgb16_to_rgb4(250, 252, 233) when (pixel_col_int >= 9 and pixel_col_int <= 9 and pixel_row_int = 0) else
+                       rgb16_to_rgb4(253, 255, 250) when (pixel_col_int >= 10 and pixel_col_int <= 11 and pixel_row_int = 0) else
+                       rgb16_to_rgb4(83, 56, 70) when (pixel_col_int >= 12 and pixel_col_int <= 12 and pixel_row_int = 0) else
+                       rgb16_to_rgb4(253, 255, 250) when (pixel_col_int >= 13 and pixel_col_int <= 13 and pixel_row_int = 0) else
+                       rgb16_to_rgb4(83, 56, 70) when (pixel_col_int >= 14 and pixel_col_int <= 14 and pixel_row_int = 0) else
+                       rgb16_to_rgb4(0, 0, 0) when (pixel_col_int >= 15 and pixel_col_int <= 16 and pixel_row_int = 0) else
+                       -- Row six
+                       rgb16_to_rgb4(83, 56, 70) when (pixel_col_int >= 0 and pixel_col_int <= 0 and pixel_row_int = 0) else
+                       rgb16_to_rgb4(250, 252, 233) when (pixel_col_int >= 1 and pixel_col_int <= 5 and pixel_row_int = 0) else
+                       rgb16_to_rgb4(83, 56, 70) when (pixel_col_int >= 6 and pixel_col_int <= 6 and pixel_row_int = 0) else
+                       rgb16_to_rgb4(249, 241, 36) when (pixel_col_int >= 7 and pixel_col_int <= 8 and pixel_row_int = 0) else
+                       rgb16_to_rgb4(83, 56, 70) when (pixel_col_int >= 9 and pixel_col_int <= 9 and pixel_row_int = 0) else
+                       rgb16_to_rgb4(250, 252, 233) when (pixel_col_int >= 10 and pixel_col_int <= 10 and pixel_row_int = 0) else
+                       rgb16_to_rgb4(253, 255, 250) when (pixel_col_int >= 11 and pixel_col_int <= 13 and pixel_row_int = 0) else
+                       rgb16_to_rgb4(83, 56, 70) when (pixel_col_int >= 14 and pixel_col_int <= 14 and pixel_row_int = 0) else
+                       rgb16_to_rgb4(0, 0, 0) when (pixel_col_int >= 15 and pixel_col_int <= 16 and pixel_row_int = 0) else
+                       -- Row seven
+                       rgb16_to_rgb4(83, 56, 70) when (pixel_col_int >= 0 and pixel_col_int <= 0 and pixel_row_int = 0) else
+                       rgb16_to_rgb4(248, 255, 46) when (pixel_col_int >= 1 and pixel_col_int <= 1 and pixel_row_int = 0) else
+                       rgb16_to_rgb4(250, 252, 233) when (pixel_col_int >= 2 and pixel_col_int <= 4 and pixel_row_int = 0) else
+                       rgb16_to_rgb4(248, 255, 46) when (pixel_col_int >= 5 and pixel_col_int <= 5 and pixel_row_int = 0) else
+                       rgb16_to_rgb4(83, 56, 70) when (pixel_col_int >= 6 and pixel_col_int <= 6 and pixel_row_int = 0) else
+                       rgb16_to_rgb4(249, 241, 36) when (pixel_col_int >= 7 and pixel_col_int <= 9 and pixel_row_int = 0) else
+                       rgb16_to_rgb4(83, 56, 70) when (pixel_col_int >= 10 and pixel_col_int <= 15 and pixel_row_int = 0) else
+                       rgb16_to_rgb4(0, 0, 0) when (pixel_col_int >= 16 and pixel_col_int <= 16 and pixel_row_int = 0) else
+                       -- Row eight
+                       rgb16_to_rgb4(0, 0, 0) when (pixel_col_int >= 0 and pixel_col_int <= 0 and pixel_row_int = 0) else
+                       rgb16_to_rgb4(83, 56, 70) when (pixel_col_int >= 1 and pixel_col_int <= 1 and pixel_row_int = 0) else
+                       rgb16_to_rgb4(248, 255, 46) when (pixel_col_int >= 2 and pixel_col_int <= 4 and pixel_row_int = 0) else
+                       rgb16_to_rgb4(83, 56, 70) when (pixel_col_int >= 5 and pixel_col_int <= 5 and pixel_row_int = 0) else
+                       rgb16_to_rgb4(249, 194, 44) when (pixel_col_int >= 6 and pixel_col_int <= 8 and pixel_row_int = 0) else
+                       rgb16_to_rgb4(83, 56, 70) when (pixel_col_int >= 9 and pixel_col_int <= 9 and pixel_row_int = 0) else
+                       rgb16_to_rgb4(253, 104, 75) when (pixel_col_int >= 10 and pixel_col_int <= 15 and pixel_row_int = 0) else
+                       rgb16_to_rgb4(83, 56, 70) when (pixel_col_int >= 16 and pixel_col_int <= 16 and pixel_row_int = 0) else
+                       -- Row nine
+                       rgb16_to_rgb4(0, 0, 0) when (pixel_col_int >= 0 and pixel_col_int <= 1 and pixel_row_int = 0) else
+                       rgb16_to_rgb4(83, 56, 70) when (pixel_col_int >= 2 and pixel_col_int <= 4 and pixel_row_int = 0) else
+                       rgb16_to_rgb4(249, 194, 44) when (pixel_col_int >= 5 and pixel_col_int <= 7 and pixel_row_int = 0) else
+                       rgb16_to_rgb4(83, 56, 70) when (pixel_col_int >= 8 and pixel_col_int <= 8 and pixel_row_int = 0) else
+                       rgb16_to_rgb4(253, 104, 75) when (pixel_col_int >= 9 and pixel_col_int <= 9 and pixel_row_int = 0) else
+                       rgb16_to_rgb4(83, 56, 70) when (pixel_col_int >= 10 and pixel_col_int <= 15 and pixel_row_int = 0) else
+                       rgb16_to_rgb4(0, 0, 0) when (pixel_col_int >= 16 and pixel_col_int <= 16 and pixel_row_int = 0) else
+                       -- Row ten
+                       rgb16_to_rgb4(0, 0, 0) when (pixel_col_int >= 0 and pixel_col_int <= 1 and pixel_row_int = 0) else
+                       rgb16_to_rgb4(83, 56, 70) when (pixel_col_int >= 2 and pixel_col_int <= 2 and pixel_row_int = 0) else
+                       rgb16_to_rgb4(249, 194, 44) when (pixel_col_int >= 3 and pixel_col_int <= 8 and pixel_row_int = 0) else
+                       rgb16_to_rgb4(83, 56, 70) when (pixel_col_int >= 9 and pixel_col_int <= 9 and pixel_row_int = 0) else
+                       rgb16_to_rgb4(253, 104, 75) when (pixel_col_int >= 10 and pixel_col_int <= 14 and pixel_row_int = 0) else
+                       rgb16_to_rgb4(83, 56, 70) when (pixel_col_int >= 15 and pixel_col_int <= 15 and pixel_row_int = 0) else
+                       rgb16_to_rgb4(0, 0, 0) when (pixel_col_int >= 16 and pixel_col_int <= 16 and pixel_row_int = 0) else
+                       -- Row eleven
+                       rgb16_to_rgb4(0, 0, 0) when (pixel_col_int >= 0 and pixel_col_int <= 2 and pixel_row_int = 0) else
+                       rgb16_to_rgb4(83, 56, 70) when (pixel_col_int >= 3 and pixel_col_int <= 4 and pixel_row_int = 0) else
+                       rgb16_to_rgb4(249, 194, 44) when (pixel_col_int >= 5 and pixel_col_int <= 9 and pixel_row_int = 0) else
+                       rgb16_to_rgb4(83, 56, 70) when (pixel_col_int >= 10 and pixel_col_int <= 14 and pixel_row_int = 0) else
+                       rgb16_to_rgb4(0, 0, 0) when (pixel_col_int >= 15 and pixel_col_int <= 16 and pixel_row_int = 0) else
+                       -- Row twelve
+                       rgb16_to_rgb4(0, 0, 0) when (pixel_col_int >= 0 and pixel_col_int <= 4 and pixel_row_int = 0) else
+                       rgb16_to_rgb4(83, 56, 70) when (pixel_col_int >= 5 and pixel_col_int <= 9 and pixel_row_int = 0) else
+                       rgb16_to_rgb4(0, 0, 0) when (pixel_col_int >= 10 and pixel_col_int <= 16 and pixel_row_int = 0);
+                      			
+function rgb16_to_rgb4(red_in : integer; green_in : integer; blue_in : integer) 
   return rgb_array is
   variable colour_out : rgb_array;
 begin
@@ -90,11 +181,8 @@ begin
     
   green_in = green_in / 16;
   green_in = conv_std_logic_vector(green_in, 4);
-  colour_out(0) <= red_in;
-  
-  
-  
-  
+  colour_out(2) <= green_in;
+
   return colour_out;
 end function;
 

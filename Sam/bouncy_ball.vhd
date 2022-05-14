@@ -20,12 +20,46 @@ SiGNAL ball_x_pos				: std_logic_vector(10 DOWNTO 0);
 SIGNAL ball_y_motion			: std_logic_vector(9 DOWNTO 0);
 
 -- Flappy bird image signals
-type rgb_array is array(0 to 2) of std_logic_vector(3 downto 0)
+type rgb_array is array(0 to 2) of std_logic_vector(3 downto 0);
 signal flappy_bird : std_logic_vector(3 downto 0);
 signal flappy_bird_colours : rgb_array;
 signal flappy_bird_width, flappy_bird_height : std_logic_vector(9 downto 0);
-signal pixel_col_int : integer range(0 to 16);
-signal pixel_row_int : integer range(0 to 11);
+signal pixel_col_int : integer range 0 to 16;
+signal pixel_row_int : integer range 0 to 11;
+signal fb_size : integer range 0 to 7;
+
+function rgb16_to_rgb4(red_in : integer; green_in : integer; blue_in : integer) 
+  return rgb_array is
+  variable colour_out : rgb_array;
+	variable	tmp_red		:	integer;
+	variable tmp_blue		:	integer;
+	variable tmp_green	:	integer;
+begin
+  if red_in >= 15 then
+    tmp_red := red_in - 15;
+  else tmp_red := 0;
+  end if;
+    
+  tmp_red := tmp_red / 16;
+  colour_out(0) := conv_std_logic_vector(tmp_red, 4);
+  
+  if green_in >= 15 then
+    tmp_green := green_in - 15;
+  else tmp_green := 0;
+  end if;
+    
+  tmp_green := tmp_green / 16;
+  colour_out(1) := conv_std_logic_vector(tmp_green, 4);
+  if blue_in >= 15 then
+    tmp_blue := blue_in - 15;
+  else tmp_blue := 0;
+  end if;
+    
+  tmp_blue := tmp_blue / 16;
+  colour_out(2) := conv_std_logic_vector(tmp_blue, 4);
+  
+  return colour_out;
+end function;
 
 BEGIN           
 
@@ -34,13 +68,14 @@ size <= CONV_STD_LOGIC_VECTOR(8,10);
 -- Width and height for the rectangle of the flappy bird
 flappy_bird_width <= conv_std_logic_vector(17, 10);
 flappy_bird_height <= conv_std_logic_vector(12, 10);
+fb_size <= 2;
 
 -- Row and column integer values for the flappy bird
 pixel_col_int <= conv_integer('0' + pixel_column);
 pixel_row_int <= conv_integer('0' + pixel_row);
 
 -- ball_x_pos and ball_y_pos show the (x,y) for the centre of ball
-ball_x_pos <= CONV_STD_LOGIC_VECTOR(0,11);
+ball_x_pos <= CONV_STD_LOGIC_VECTOR(303,11);
 
 ball_on <= "1111" when ( ('0' & pixel_column <= '0' & ball_x_pos + size) 	-- x_pos - size <= pixel_column <= x_pos + size
 					and ('0' & pixel_row <= ball_y_pos + size))  else	-- y_pos - size <= pixel_row <= y_pos + size
@@ -54,147 +89,113 @@ flappy_bird <= "1111" when (('0' & pixel_column <= '0' & ball_x_pos + flappy_bir
 
 			
 flappy_bird_colours <= -- Row one
-                       rgb16_to_rgb4(0, 0, 0) when (pixel_col_int >= 0 and pixel_col_int <= 5 and pixel_row_int = 0) else
-                       rgb16_to_rgb4(83, 56, 70) when (pixel_col_int >= 6 and pixel_col_int <= 11 and pixel_row_int = 0) else
-                       rgb16_to_rgb4(0, 0, 0) when (pixel_col_int >= 12 and pixel_col_int <= 16 and pixel_row_int = 0) else
+                       --rgb16_to_rgb4(0, 0, 0) when (pixel_col_int >= fb_size*0 and pixel_col_int <= fb_size-1+fb_size*5 and (pixel_row_int >= fb_size*0 and pixel_row_int <= -1+fb_size*1)) else
+                       rgb16_to_rgb4(83, 56, 70) when (pixel_col_int >= fb_size*6 and pixel_col_int <= fb_size-1+fb_size*11 and (pixel_row_int >= fb_size*0 and pixel_row_int <= -1+fb_size*1)) else
+                       --rgb16_to_rgb4(0, 0, 0) when (pixel_col_int >= fb_size*12 and pixel_col_int <= fb_size-1+fb_size*16 and (pixel_row_int >= fb_size*0 and pixel_row_int <= -1+fb_size*1)) else
                        -- Row two
-                       rgb16_to_rgb4(0, 0, 0) when (pixel_col_int >= 0 and pixel_col_int <= 3 and pixel_row_int = 1) else
-                       rgb16_to_rgb4(83, 56, 70) when (pixel_col_int >= 4 and pixel_col_int <= 5 and pixel_row_int = 1) else
-                       rgb16_to_rgb4(248, 255, 46) when (pixel_col_int >= 6 and pixel_col_int <= 8 and pixel_row_int = 1) else
-                       rgb16_to_rgb4(83, 56, 70) when (pixel_col_int >= 9 and pixel_col_int <= 9 and pixel_row_int = 1) else
-                       rgb16_to_rgb4(253, 255, 250) when (pixel_col_int >= 10 and pixel_col_int <= 11 and pixel_row_int = 1) else
-                       rgb16_to_rgb4(83, 56, 70) when (pixel_col_int >= 12 and pixel_col_int <= 12 and pixel_row_int = 1) else
-                       rgb16_to_rgb4(0, 0, 0) when (pixel_col_int >= 13 and pixel_col_int <= 16 and pixel_row_int = 1) else
+                       --rgb16_to_rgb4(0, 0, 0) when (pixel_col_int >= fb_size*0 and pixel_col_int <= fb_size-1+fb_size*3 and (pixel_row_int >= fb_size*1 and pixel_row_int <= -1+fb_size*2)) else
+                       rgb16_to_rgb4(83, 56, 70) when (pixel_col_int >= fb_size*4 and pixel_col_int <= fb_size-1+fb_size*5 and (pixel_row_int >= fb_size*1 and pixel_row_int <= -1+fb_size*2)) else
+                       rgb16_to_rgb4(248, 255, 46) when (pixel_col_int >= fb_size*6 and pixel_col_int <= fb_size-1+fb_size*8 and (pixel_row_int >= fb_size*1 and pixel_row_int <= -1+fb_size*2)) else
+                       rgb16_to_rgb4(83, 56, 70) when (pixel_col_int >= fb_size*9 and pixel_col_int <= fb_size-1+fb_size*9 and (pixel_row_int >= fb_size*1 and pixel_row_int <= -1+fb_size*2)) else
+                       rgb16_to_rgb4(253, 255, 250) when (pixel_col_int >= fb_size*10 and pixel_col_int <= fb_size-1+fb_size*11 and (pixel_row_int >= fb_size*1 and pixel_row_int <= -1+fb_size*2)) else
+                       rgb16_to_rgb4(83, 56, 70) when (pixel_col_int >= fb_size*12 and pixel_col_int <= fb_size-1+fb_size*12 and (pixel_row_int >= fb_size*1 and pixel_row_int <= -1+fb_size*2)) else
+                       --rgb16_to_rgb4(0, 0, 0) when (pixel_col_int >= fb_size*13 and pixel_col_int <= fb_size-1+fb_size*16 and (pixel_row_int >= fb_size*1 and pixel_row_int <= -1+fb_size*2)) else
                        -- Row three
-                       rgb16_to_rgb4(0, 0, 0) when (pixel_col_int >= 0 and pixel_col_int <= 2 and pixel_row_int = 2) else
-                       rgb16_to_rgb4(83, 56, 70) when (pixel_col_int >= 3 and pixel_col_int <= 3 and pixel_row_int = 2) else
-                       rgb16_to_rgb4(248, 255, 46) when (pixel_col_int >= 4 and pixel_col_int <= 5 and pixel_row_int = 2) else
-                       rgb16_to_rgb4(249, 241, 36) when (pixel_col_int >= 6 and pixel_col_int <= 7 and pixel_row_int = 2) else
-                       rgb16_to_rgb4(83, 56, 70) when (pixel_col_int >= 8 and pixel_col_int <= 8 and pixel_row_int = 2) else
-                       rgb16_to_rgb4(253, 255, 250) when (pixel_col_int >= 9 and pixel_col_int <= 12 and pixel_row_int = 2) else
-                       rgb16_to_rgb4(83, 56, 70) when (pixel_col_int >= 13 and pixel_col_int <= 13 and pixel_row_int = 2) else
-                       rgb16_to_rgb4(0, 0, 0) when (pixel_col_int >= 14 and pixel_col_int <= 16 and pixel_row_int = 2) else
+                       --rgb16_to_rgb4(0, 0, 0) when (pixel_col_int >= fb_size*0 and pixel_col_int <= fb_size-1+fb_size*2 and (pixel_row_int >= fb_size*2 and pixel_row_int <= -1+fb_size*3)) else
+                       rgb16_to_rgb4(83, 56, 70) when (pixel_col_int >= fb_size*3 and pixel_col_int <= fb_size-1+fb_size*3 and (pixel_row_int >= fb_size*2 and pixel_row_int <= -1+fb_size*3)) else
+                       rgb16_to_rgb4(248, 255, 46) when (pixel_col_int >= fb_size*4 and pixel_col_int <= fb_size-1+fb_size*5 and (pixel_row_int >= fb_size*2 and pixel_row_int <= -1+fb_size*3)) else
+                       rgb16_to_rgb4(249, 241, 36) when (pixel_col_int >= fb_size*6 and pixel_col_int <= fb_size-1+fb_size*7 and (pixel_row_int >= fb_size*2 and pixel_row_int <= -1+fb_size*3)) else
+                       rgb16_to_rgb4(83, 56, 70) when (pixel_col_int >= fb_size*8 and pixel_col_int <= fb_size-1+fb_size*8 and (pixel_row_int >= fb_size*2 and pixel_row_int <= -1+fb_size*3)) else
+                       rgb16_to_rgb4(253, 255, 250) when (pixel_col_int >= fb_size*9 and pixel_col_int <= fb_size-1+fb_size*12 and (pixel_row_int >= fb_size*2 and pixel_row_int <= -1+fb_size*3)) else
+                       rgb16_to_rgb4(83, 56, 70) when (pixel_col_int >= fb_size*13 and pixel_col_int <= fb_size-1+fb_size*13 and (pixel_row_int >= fb_size*2 and pixel_row_int <= -1+fb_size*3)) else
+                       --rgb16_to_rgb4(0, 0, 0) when (pixel_col_int >= fb_size*14 and pixel_col_int <= fb_size-1+fb_size*16 and (pixel_row_int >= fb_size*2 and pixel_row_int <= -1+fb_size*3)) else
                        -- Row four
-                       rgb16_to_rgb4(0, 0, 0) when (pixel_col_int >= 0 and pixel_col_int <= 0 and pixel_row_int = 0) else
-                       rgb16_to_rgb4(83, 56, 70) when (pixel_col_int >= 1 and pixel_col_int <= 4 and pixel_row_int = 0) else
-                       rgb16_to_rgb4(249, 241, 36) when (pixel_col_int >= 5 and pixel_col_int <= 7 and pixel_row_int = 0) else
-                       rgb16_to_rgb4(83, 56, 70) when (pixel_col_int >= 8 and pixel_col_int <= 8 and pixel_row_int = 0) else
-                       rgb16_to_rgb4(250, 252, 233) when (pixel_col_int >= 9 and pixel_col_int <= 9 and pixel_row_int = 0) else
-                       rgb16_to_rgb4(253, 255, 250) when (pixel_col_int >= 10 and pixel_col_int <= 11 and pixel_row_int = 0) else
-                       rgb16_to_rgb4(83, 56, 70) when (pixel_col_int >= 12 and pixel_col_int <= 12 and pixel_row_int = 0) else
-                       rgb16_to_rgb4(253, 255, 250) when (pixel_col_int >= 13 and pixel_col_int <= 13 and pixel_row_int = 0) else
-                       rgb16_to_rgb4(83, 56, 70) when (pixel_col_int >= 14 and pixel_col_int <= 14 and pixel_row_int = 0) else
-                       rgb16_to_rgb4(0, 0, 0) when (pixel_col_int >= 15 and pixel_col_int <= 16 and pixel_row_int = 0) else
+                       --rgb16_to_rgb4(0, 0, 0) when (pixel_col_int >= fb_size*0 and pixel_col_int <= fb_size-1+fb_size*0 and (pixel_row_int >= fb_size*3 and pixel_row_int <= -1+fb_size*4)) else
+                       rgb16_to_rgb4(83, 56, 70) when (pixel_col_int >= fb_size*1 and pixel_col_int <= fb_size-1+fb_size*4 and (pixel_row_int >= fb_size*3 and pixel_row_int <= -1+fb_size*4)) else
+                       rgb16_to_rgb4(249, 241, 36) when (pixel_col_int >= fb_size*5 and pixel_col_int <= fb_size-1+fb_size*7 and (pixel_row_int >= fb_size*3 and pixel_row_int <= -1+fb_size*4)) else
+                       rgb16_to_rgb4(83, 56, 70) when (pixel_col_int >= fb_size*8 and pixel_col_int <= fb_size-1+fb_size*8 and (pixel_row_int >= fb_size*3 and pixel_row_int <= -1+fb_size*4)) else
+                       rgb16_to_rgb4(250, 252, 233) when (pixel_col_int >= fb_size*9 and pixel_col_int <= fb_size-1+fb_size*9 and (pixel_row_int >= fb_size*3 and pixel_row_int <= -1+fb_size*4)) else
+                       rgb16_to_rgb4(253, 255, 250) when (pixel_col_int >= fb_size*10 and pixel_col_int <= fb_size-1+fb_size*11 and (pixel_row_int >= fb_size*3 and pixel_row_int <= -1+fb_size*4)) else
+                       rgb16_to_rgb4(83, 56, 70) when (pixel_col_int >= fb_size*12 and pixel_col_int <= fb_size-1+fb_size*12 and (pixel_row_int >= fb_size*3 and pixel_row_int <= -1+fb_size*4)) else
+                       rgb16_to_rgb4(253, 255, 250) when (pixel_col_int >= fb_size*13 and pixel_col_int <= fb_size-1+fb_size*13 and (pixel_row_int >= fb_size*3 and pixel_row_int <= -1+fb_size*4)) else
+                       rgb16_to_rgb4(83, 56, 70) when (pixel_col_int >= fb_size*14 and pixel_col_int <= fb_size-1+fb_size*14 and (pixel_row_int >= fb_size*3 and pixel_row_int <= -1+fb_size*4)) else
+                       --rgb16_to_rgb4(0, 0, 0) when (pixel_col_int >= fb_size*15 and pixel_col_int <= fb_size-1+fb_size*16 and (pixel_row_int >= fb_size*3 and pixel_row_int <= -1+fb_size*4)) else
                        -- Row five
-                       rgb16_to_rgb4(83, 56, 70) when (pixel_col_int >= 0 and pixel_col_int <= 0 and pixel_row_int = 0) else
-                       rgb16_to_rgb4(250, 252, 233) when (pixel_col_int >= 1 and pixel_col_int <= 4 and pixel_row_int = 0) else
-                       rgb16_to_rgb4(83, 56, 70) when (pixel_col_int >= 5 and pixel_col_int <= 5 and pixel_row_int = 0) else
-                       rgb16_to_rgb4(249, 241, 36) when (pixel_col_int >= 6 and pixel_col_int <= 7 and pixel_row_int = 0) else
-                       rgb16_to_rgb4(83, 56, 70) when (pixel_col_int >= 8 and pixel_col_int <= 8 and pixel_row_int = 0) else
-                       rgb16_to_rgb4(250, 252, 233) when (pixel_col_int >= 9 and pixel_col_int <= 9 and pixel_row_int = 0) else
-                       rgb16_to_rgb4(253, 255, 250) when (pixel_col_int >= 10 and pixel_col_int <= 11 and pixel_row_int = 0) else
-                       rgb16_to_rgb4(83, 56, 70) when (pixel_col_int >= 12 and pixel_col_int <= 12 and pixel_row_int = 0) else
-                       rgb16_to_rgb4(253, 255, 250) when (pixel_col_int >= 13 and pixel_col_int <= 13 and pixel_row_int = 0) else
-                       rgb16_to_rgb4(83, 56, 70) when (pixel_col_int >= 14 and pixel_col_int <= 14 and pixel_row_int = 0) else
-                       rgb16_to_rgb4(0, 0, 0) when (pixel_col_int >= 15 and pixel_col_int <= 16 and pixel_row_int = 0) else
+                       rgb16_to_rgb4(83, 56, 70) when (pixel_col_int >= fb_size*0 and pixel_col_int <= fb_size-1+fb_size*0 and (pixel_row_int >= fb_size*4 and pixel_row_int <= -1+fb_size*5)) else
+                       rgb16_to_rgb4(250, 252, 233) when (pixel_col_int >= fb_size*1 and pixel_col_int <= fb_size-1+fb_size*4 and (pixel_row_int >= fb_size*4 and pixel_row_int <= -1+fb_size*5)) else
+                       rgb16_to_rgb4(83, 56, 70) when (pixel_col_int >= fb_size*5 and pixel_col_int <= fb_size-1+fb_size*5 and (pixel_row_int >= fb_size*4 and pixel_row_int <= -1+fb_size*5)) else
+                       rgb16_to_rgb4(249, 241, 36) when (pixel_col_int >= fb_size*6 and pixel_col_int <= fb_size-1+fb_size*7 and (pixel_row_int >= fb_size*4 and pixel_row_int <= -1+fb_size*5)) else
+                       rgb16_to_rgb4(83, 56, 70) when (pixel_col_int >= fb_size*8 and pixel_col_int <= fb_size-1+fb_size*8 and (pixel_row_int >= fb_size*4 and pixel_row_int <= -1+fb_size*5)) else
+                       rgb16_to_rgb4(250, 252, 233) when (pixel_col_int >= fb_size*9 and pixel_col_int <= fb_size-1+fb_size*9 and (pixel_row_int >= fb_size*4 and pixel_row_int <= -1+fb_size*5)) else
+                       rgb16_to_rgb4(253, 255, 250) when (pixel_col_int >= fb_size*10 and pixel_col_int <= fb_size-1+fb_size*11 and (pixel_row_int >= fb_size*4 and pixel_row_int <= -1+fb_size*5)) else
+                       rgb16_to_rgb4(83, 56, 70) when (pixel_col_int >= fb_size*12 and pixel_col_int <= fb_size-1+fb_size*12 and (pixel_row_int >= fb_size*4 and pixel_row_int <= -1+fb_size*5)) else
+                       rgb16_to_rgb4(253, 255, 250) when (pixel_col_int >= fb_size*13 and pixel_col_int <= fb_size-1+fb_size*13 and (pixel_row_int >= fb_size*4 and pixel_row_int <= -1+fb_size*5)) else
+                       rgb16_to_rgb4(83, 56, 70) when (pixel_col_int >= fb_size*14 and pixel_col_int <= fb_size-1+fb_size*14 and (pixel_row_int >= fb_size*4 and pixel_row_int <= -1+fb_size*5)) else
+                       --rgb16_to_rgb4(0, 0, 0) when (pixel_col_int >= fb_size*15 and pixel_col_int <= fb_size-1+fb_size*16 and (pixel_row_int >= fb_size*4 and pixel_row_int <= -1+fb_size*5)) else
                        -- Row six
-                       rgb16_to_rgb4(83, 56, 70) when (pixel_col_int >= 0 and pixel_col_int <= 0 and pixel_row_int = 0) else
-                       rgb16_to_rgb4(250, 252, 233) when (pixel_col_int >= 1 and pixel_col_int <= 5 and pixel_row_int = 0) else
-                       rgb16_to_rgb4(83, 56, 70) when (pixel_col_int >= 6 and pixel_col_int <= 6 and pixel_row_int = 0) else
-                       rgb16_to_rgb4(249, 241, 36) when (pixel_col_int >= 7 and pixel_col_int <= 8 and pixel_row_int = 0) else
-                       rgb16_to_rgb4(83, 56, 70) when (pixel_col_int >= 9 and pixel_col_int <= 9 and pixel_row_int = 0) else
-                       rgb16_to_rgb4(250, 252, 233) when (pixel_col_int >= 10 and pixel_col_int <= 10 and pixel_row_int = 0) else
-                       rgb16_to_rgb4(253, 255, 250) when (pixel_col_int >= 11 and pixel_col_int <= 13 and pixel_row_int = 0) else
-                       rgb16_to_rgb4(83, 56, 70) when (pixel_col_int >= 14 and pixel_col_int <= 14 and pixel_row_int = 0) else
-                       rgb16_to_rgb4(0, 0, 0) when (pixel_col_int >= 15 and pixel_col_int <= 16 and pixel_row_int = 0) else
+                       rgb16_to_rgb4(83, 56, 70) when (pixel_col_int >= fb_size*0 and pixel_col_int <= fb_size-1+fb_size*0 and (pixel_row_int >= fb_size*5 and pixel_row_int <= -1+fb_size*6)) else
+                       rgb16_to_rgb4(250, 252, 233) when (pixel_col_int >= fb_size*1 and pixel_col_int <= fb_size-1+fb_size*5 and (pixel_row_int >= fb_size*5 and pixel_row_int <= -1+fb_size*6)) else
+                       rgb16_to_rgb4(83, 56, 70) when (pixel_col_int >= fb_size*6 and pixel_col_int <= fb_size-1+fb_size*6 and (pixel_row_int >= fb_size*5 and pixel_row_int <= -1+fb_size*6)) else
+                       rgb16_to_rgb4(249, 241, 36) when (pixel_col_int >= fb_size*7 and pixel_col_int <= fb_size-1+fb_size*8 and (pixel_row_int >= fb_size*5 and pixel_row_int <= -1+fb_size*6)) else
+                       rgb16_to_rgb4(83, 56, 70) when (pixel_col_int >= fb_size*9 and pixel_col_int <= fb_size-1+fb_size*9 and (pixel_row_int >= fb_size*5 and pixel_row_int <= -1+fb_size*6)) else
+                       rgb16_to_rgb4(250, 252, 233) when (pixel_col_int >= fb_size*10 and pixel_col_int <= fb_size-1+fb_size*10 and (pixel_row_int >= fb_size*5 and pixel_row_int <= -1+fb_size*6)) else
+                       rgb16_to_rgb4(253, 255, 250) when (pixel_col_int >= fb_size*11 and pixel_col_int <= fb_size-1+fb_size*13 and (pixel_row_int >= fb_size*5 and pixel_row_int <= -1+fb_size*6)) else
+                       rgb16_to_rgb4(83, 56, 70) when (pixel_col_int >= fb_size*14 and pixel_col_int <= fb_size-1+fb_size*14 and (pixel_row_int >= fb_size*5 and pixel_row_int <= -1+fb_size*6)) else
+                       --rgb16_to_rgb4(0, 0, 0) when (pixel_col_int >= fb_size*15 and pixel_col_int <= fb_size-1+fb_size*16 and (pixel_row_int >= fb_size*5 and pixel_row_int <= -1+fb_size*6)s) else
                        -- Row seven
-                       rgb16_to_rgb4(83, 56, 70) when (pixel_col_int >= 0 and pixel_col_int <= 0 and pixel_row_int = 0) else
-                       rgb16_to_rgb4(248, 255, 46) when (pixel_col_int >= 1 and pixel_col_int <= 1 and pixel_row_int = 0) else
-                       rgb16_to_rgb4(250, 252, 233) when (pixel_col_int >= 2 and pixel_col_int <= 4 and pixel_row_int = 0) else
-                       rgb16_to_rgb4(248, 255, 46) when (pixel_col_int >= 5 and pixel_col_int <= 5 and pixel_row_int = 0) else
-                       rgb16_to_rgb4(83, 56, 70) when (pixel_col_int >= 6 and pixel_col_int <= 6 and pixel_row_int = 0) else
-                       rgb16_to_rgb4(249, 241, 36) when (pixel_col_int >= 7 and pixel_col_int <= 9 and pixel_row_int = 0) else
-                       rgb16_to_rgb4(83, 56, 70) when (pixel_col_int >= 10 and pixel_col_int <= 15 and pixel_row_int = 0) else
-                       rgb16_to_rgb4(0, 0, 0) when (pixel_col_int >= 16 and pixel_col_int <= 16 and pixel_row_int = 0) else
+                       rgb16_to_rgb4(83, 56, 70) when (pixel_col_int >= fb_size*0 and pixel_col_int <= fb_size-1+fb_size*0 and (pixel_row_int >= fb_size*6 and pixel_row_int <= -1+fb_size*7)) else
+                       rgb16_to_rgb4(248, 255, 46) when (pixel_col_int >= fb_size*1 and pixel_col_int <= fb_size-1+fb_size*1 and (pixel_row_int >= fb_size*6 and pixel_row_int <= -1+fb_size*7)) else
+                       rgb16_to_rgb4(250, 252, 233) when (pixel_col_int >= fb_size*2 and pixel_col_int <= fb_size-1+fb_size*4 and (pixel_row_int >= fb_size*6 and pixel_row_int <= -1+fb_size*7)) else
+                       rgb16_to_rgb4(248, 255, 46) when (pixel_col_int >= fb_size*5 and pixel_col_int <= fb_size-1+fb_size*5 and (pixel_row_int >= fb_size*6 and pixel_row_int <= -1+fb_size*7)) else
+                       rgb16_to_rgb4(83, 56, 70) when (pixel_col_int >= fb_size*6 and pixel_col_int <= fb_size-1+fb_size*6 and (pixel_row_int >= fb_size*6 and pixel_row_int <= -1+fb_size*7)) else
+                       rgb16_to_rgb4(249, 241, 36) when (pixel_col_int >= fb_size*7 and pixel_col_int <= fb_size-1+fb_size*9 and (pixel_row_int >= fb_size*6 and pixel_row_int <= -1+fb_size*7)) else
+                       rgb16_to_rgb4(83, 56, 70) when (pixel_col_int >= fb_size*10 and pixel_col_int <= fb_size-1+fb_size*15 and (pixel_row_int >= fb_size*6 and pixel_row_int <= -1+fb_size*7)) else
+                       --rgb16_to_rgb4(0, 0, 0) when (pixel_col_int >= fb_size*16 and pixel_col_int <= fb_size-1+fb_size*16 and (pixel_row_int >= fb_size*6 and pixel_row_int <= -1+fb_size*7)) else
                        -- Row eight
-                       rgb16_to_rgb4(0, 0, 0) when (pixel_col_int >= 0 and pixel_col_int <= 0 and pixel_row_int = 0) else
-                       rgb16_to_rgb4(83, 56, 70) when (pixel_col_int >= 1 and pixel_col_int <= 1 and pixel_row_int = 0) else
-                       rgb16_to_rgb4(248, 255, 46) when (pixel_col_int >= 2 and pixel_col_int <= 4 and pixel_row_int = 0) else
-                       rgb16_to_rgb4(83, 56, 70) when (pixel_col_int >= 5 and pixel_col_int <= 5 and pixel_row_int = 0) else
-                       rgb16_to_rgb4(249, 194, 44) when (pixel_col_int >= 6 and pixel_col_int <= 8 and pixel_row_int = 0) else
-                       rgb16_to_rgb4(83, 56, 70) when (pixel_col_int >= 9 and pixel_col_int <= 9 and pixel_row_int = 0) else
-                       rgb16_to_rgb4(253, 104, 75) when (pixel_col_int >= 10 and pixel_col_int <= 15 and pixel_row_int = 0) else
-                       rgb16_to_rgb4(83, 56, 70) when (pixel_col_int >= 16 and pixel_col_int <= 16 and pixel_row_int = 0) else
+                       --rgb16_to_rgb4(0, 0, 0) when (pixel_col_int >= fb_size*0 and pixel_col_int <= fb_size-1+fb_size*0 and (pixel_row_int >= fb_size*7 and pixel_row_int <= -1+fb_size*8)) else
+                       rgb16_to_rgb4(83, 56, 70) when (pixel_col_int >= fb_size*1 and pixel_col_int <= fb_size-1+fb_size*1 and (pixel_row_int >= fb_size*7 and pixel_row_int <= -1+fb_size*8)) else
+                       rgb16_to_rgb4(248, 255, 46) when (pixel_col_int >= fb_size*2 and pixel_col_int <= fb_size-1+fb_size*4 and (pixel_row_int >= fb_size*7 and pixel_row_int <= -1+fb_size*8)) else
+                       rgb16_to_rgb4(83, 56, 70) when (pixel_col_int >= fb_size*5 and pixel_col_int <= fb_size-1+fb_size*5 and (pixel_row_int >= fb_size*7 and pixel_row_int <= -1+fb_size*8)) else
+                       rgb16_to_rgb4(249, 194, 44) when (pixel_col_int >= fb_size*6 and pixel_col_int <= fb_size-1+fb_size*8 and (pixel_row_int >= fb_size*7 and pixel_row_int <= -1+fb_size*8)) else
+                       rgb16_to_rgb4(83, 56, 70) when (pixel_col_int >= fb_size*9 and pixel_col_int <= fb_size-1+fb_size*9 and (pixel_row_int >= fb_size*7 and pixel_row_int <= -1+fb_size*8)) else
+                       rgb16_to_rgb4(253, 104, 75) when (pixel_col_int >= fb_size*10 and pixel_col_int <= fb_size-1+fb_size*15 and (pixel_row_int >= fb_size*7 and pixel_row_int <= -1+fb_size*8)) else
+                       rgb16_to_rgb4(83, 56, 70) when (pixel_col_int >= fb_size*16 and pixel_col_int <= fb_size-1+fb_size*16 and (pixel_row_int >= fb_size*7 and pixel_row_int <= -1+fb_size*8)) else
                        -- Row nine
-                       rgb16_to_rgb4(0, 0, 0) when (pixel_col_int >= 0 and pixel_col_int <= 1 and pixel_row_int = 0) else
-                       rgb16_to_rgb4(83, 56, 70) when (pixel_col_int >= 2 and pixel_col_int <= 4 and pixel_row_int = 0) else
-                       rgb16_to_rgb4(249, 194, 44) when (pixel_col_int >= 5 and pixel_col_int <= 7 and pixel_row_int = 0) else
-                       rgb16_to_rgb4(83, 56, 70) when (pixel_col_int >= 8 and pixel_col_int <= 8 and pixel_row_int = 0) else
-                       rgb16_to_rgb4(253, 104, 75) when (pixel_col_int >= 9 and pixel_col_int <= 9 and pixel_row_int = 0) else
-                       rgb16_to_rgb4(83, 56, 70) when (pixel_col_int >= 10 and pixel_col_int <= 15 and pixel_row_int = 0) else
-                       rgb16_to_rgb4(0, 0, 0) when (pixel_col_int >= 16 and pixel_col_int <= 16 and pixel_row_int = 0) else
+                       --rgb16_to_rgb4(0, 0, 0) when (pixel_col_int >= fb_size*0 and pixel_col_int <= fb_size-1+fb_size*1 and (pixel_row_int >= fb_size*8 and pixel_row_int <= -1+fb_size*9)) else
+                       rgb16_to_rgb4(83, 56, 70) when (pixel_col_int >= fb_size*2 and pixel_col_int <= fb_size-1+fb_size*4 and (pixel_row_int >= fb_size*8 and pixel_row_int <= -1+fb_size*9)) else
+                       rgb16_to_rgb4(249, 194, 44) when (pixel_col_int >= fb_size*5 and pixel_col_int <= fb_size-1+fb_size*7 and (pixel_row_int >= fb_size*8 and pixel_row_int <= -1+fb_size*9)) else
+                       rgb16_to_rgb4(83, 56, 70) when (pixel_col_int >= fb_size*8 and pixel_col_int <= fb_size-1+fb_size*8 and (pixel_row_int >= fb_size*8 and pixel_row_int <= -1+fb_size*9)) else
+                       rgb16_to_rgb4(253, 104, 75) when (pixel_col_int >= fb_size*9 and pixel_col_int <= fb_size-1+fb_size*9 and (pixel_row_int >= fb_size*8 and pixel_row_int <= -1+fb_size*9)) else
+                       rgb16_to_rgb4(83, 56, 70) when (pixel_col_int >= fb_size*10 and pixel_col_int <= fb_size-1+fb_size*15 and (pixel_row_int >= fb_size*8 and pixel_row_int <= -1+fb_size*9)) else
+                       --rgb16_to_rgb4(0, 0, 0) when (pixel_col_int >= fb_size*16 and pixel_col_int <= fb_size-1+fb_size*16 and (pixel_row_int >= fb_size*8 and pixel_row_int <= -1+fb_size*9)) else
                        -- Row ten
-                       rgb16_to_rgb4(0, 0, 0) when (pixel_col_int >= 0 and pixel_col_int <= 1 and pixel_row_int = 0) else
-                       rgb16_to_rgb4(83, 56, 70) when (pixel_col_int >= 2 and pixel_col_int <= 2 and pixel_row_int = 0) else
-                       rgb16_to_rgb4(249, 194, 44) when (pixel_col_int >= 3 and pixel_col_int <= 8 and pixel_row_int = 0) else
-                       rgb16_to_rgb4(83, 56, 70) when (pixel_col_int >= 9 and pixel_col_int <= 9 and pixel_row_int = 0) else
-                       rgb16_to_rgb4(253, 104, 75) when (pixel_col_int >= 10 and pixel_col_int <= 14 and pixel_row_int = 0) else
-                       rgb16_to_rgb4(83, 56, 70) when (pixel_col_int >= 15 and pixel_col_int <= 15 and pixel_row_int = 0) else
-                       rgb16_to_rgb4(0, 0, 0) when (pixel_col_int >= 16 and pixel_col_int <= 16 and pixel_row_int = 0) else
+                       --rgb16_to_rgb4(0, 0, 0) when (pixel_col_int >= fb_size*0 and pixel_col_int <= fb_size-1+fb_size*1 and (pixel_row_int >= fb_size*9 and pixel_row_int <= -1+fb_size*10)) else
+                       rgb16_to_rgb4(83, 56, 70) when (pixel_col_int >= fb_size*2 and pixel_col_int <= fb_size-1+fb_size*2 and (pixel_row_int >= fb_size*9 and pixel_row_int <= -1+fb_size*10)) else
+                       rgb16_to_rgb4(249, 194, 44) when (pixel_col_int >= fb_size*3 and pixel_col_int <= fb_size-1+fb_size*8 and (pixel_row_int >= fb_size*9 and pixel_row_int <= -1+fb_size*10)) else
+                       rgb16_to_rgb4(83, 56, 70) when (pixel_col_int >= fb_size*9 and pixel_col_int <= fb_size-1+fb_size*9 and (pixel_row_int >= fb_size*9 and pixel_row_int <= -1+fb_size*10)) else
+                       rgb16_to_rgb4(253, 104, 75) when (pixel_col_int >= fb_size*10 and pixel_col_int <= fb_size-1+fb_size*14 and (pixel_row_int >= fb_size*9 and pixel_row_int <= -1+fb_size*10)) else
+                       rgb16_to_rgb4(83, 56, 70) when (pixel_col_int >= fb_size*15 and pixel_col_int <= fb_size-1+fb_size*15 and (pixel_row_int >= fb_size*9 and pixel_row_int <= -1+fb_size*10)) else
+                       --rgb16_to_rgb4(0, 0, 0) when (pixel_col_int >= fb_size*16 and pixel_col_int <= fb_size-1+fb_size*16 and (pixel_row_int >= fb_size*9 and pixel_row_int <= -1+fb_size*10)) else
                        -- Row eleven
-                       rgb16_to_rgb4(0, 0, 0) when (pixel_col_int >= 0 and pixel_col_int <= 2 and pixel_row_int = 0) else
-                       rgb16_to_rgb4(83, 56, 70) when (pixel_col_int >= 3 and pixel_col_int <= 4 and pixel_row_int = 0) else
-                       rgb16_to_rgb4(249, 194, 44) when (pixel_col_int >= 5 and pixel_col_int <= 9 and pixel_row_int = 0) else
-                       rgb16_to_rgb4(83, 56, 70) when (pixel_col_int >= 10 and pixel_col_int <= 14 and pixel_row_int = 0) else
-                       rgb16_to_rgb4(0, 0, 0) when (pixel_col_int >= 15 and pixel_col_int <= 16 and pixel_row_int = 0) else
+                       --rgb16_to_rgb4(0, 0, 0) when (pixel_col_int >= fb_size*0 and pixel_col_int <= fb_size-1+fb_size*2 and (pixel_row_int >= fb_size*10 and pixel_row_int <= -1+fb_size*11)) else
+                       rgb16_to_rgb4(83, 56, 70) when (pixel_col_int >= fb_size*3 and pixel_col_int <= fb_size-1+fb_size*4 and (pixel_row_int >= fb_size*10 and pixel_row_int <= -1+fb_size*11)) else
+                       rgb16_to_rgb4(249, 194, 44) when (pixel_col_int >= fb_size*5 and pixel_col_int <= fb_size-1+fb_size*9 and (pixel_row_int >= fb_size*10 and pixel_row_int <= -1+fb_size*11)) else
+                       rgb16_to_rgb4(83, 56, 70) when (pixel_col_int >= fb_size*10 and pixel_col_int <= fb_size-1+fb_size*14 and (pixel_row_int >= fb_size*10 and pixel_row_int <= -1+fb_size*11)) else
+                       --rgb16_to_rgb4(0, 0, 0) when (pixel_col_int >= fb_size*15 and pixel_col_int <= fb_size-1+fb_size*16 and (pixel_row_int >= fb_size*10 and pixel_row_int <= -1+fb_size*11)) else
                        -- Row twelve
-                       rgb16_to_rgb4(0, 0, 0) when (pixel_col_int >= 0 and pixel_col_int <= 4 and pixel_row_int = 0) else
-                       rgb16_to_rgb4(83, 56, 70) when (pixel_col_int >= 5 and pixel_col_int <= 9 and pixel_row_int = 0) else
-                       rgb16_to_rgb4(0, 0, 0) when (pixel_col_int >= 10 and pixel_col_int <= 16 and pixel_row_int = 0);
+                       --rgb16_to_rgb4(0, 0, 0) when (pixel_col_int >= fb_size*0 and pixel_col_int <= fb_size-1+fb_size*4 and (pixel_row_int >= fb_size*11 and pixel_row_int <= -1+fb_size*12)) else
+                       rgb16_to_rgb4(83, 56, 70) when (pixel_col_int >= fb_size*5 and pixel_col_int <= fb_size-1+fb_size*9 and (pixel_row_int >= fb_size*11 and pixel_row_int <= -1+fb_size*12));
+                       --rgb16_to_rgb4(0, 0, 0) when (pixel_col_int >= fb_size*10 and pixel_col_int <= fb_size-1+fb_size*16 and (pixel_row_int >= fb_size*11 and pixel_row_int <= -1+fb_size*12));
                       			
-function rgb16_to_rgb4(red_in : integer; green_in : integer; blue_in : integer) 
-  return rgb_array is
-  variable colour_out : rgb_array;
-begin
-  if red_in >= 15 then
-    red_in = red_in - 15;
-  else red_in = 0;
-  end if;
-    
-  red_in = red_in / 16;
-  red_in = conv_std_logic_vector(red_in, 4);
-  colour_out(0) <= red_in;
-  
-  if blue_in >= 15 then
-    blue_in = blue_in - 15;
-  else blue_in = 0;
-  end if;
-    
-  blue_in = blue_in / 16;
-  blue_in = conv_std_logic_vector(blue_in, 4);
-  colour_out(1) <= blue_in;
-  
-  if green_in >= 15 then
-    green_in = green_in - 15;
-  else green_in = 0;
-  end if;
-    
-  green_in = green_in / 16;
-  green_in = conv_std_logic_vector(green_in, 4);
-  colour_out(2) <= green_in;
-
-  return colour_out;
-end function;
-
 
 -- Colours for pixel data on video signal
 -- Changing the background and ball colour by pushbuttons
 --Red <=  (ball_on AND "1001") OR (not ball_on AND "1001");
 --Green <= (ball_on AND "0000") OR (not ball_on AND "0100");
 --Blue <=  (ball_on AND "0000") OR (not ball_on AND "0000");
-Red <= (flappy_bird) or (not_flappy_bird and "0010");
-Green <= (flappy_bird) or (not_flappy_bird and "1000");
-Blue <= (flappy_bird) or (not_flappy_bird and "0111");
+Red <= (flappy_bird and flappy_bird_colours(0)) or (not flappy_bird and "0010");
+Green <= (flappy_bird and flappy_bird_colours(1)) or (not flappy_bird and "1000");
+Blue <= (flappy_bird and flappy_bird_colours(2)) or (not flappy_bird and "0111");
 
 
 Move_Ball: process (vert_sync)  	

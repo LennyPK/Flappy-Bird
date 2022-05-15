@@ -1,6 +1,6 @@
 library IEEE;
-use std_logic_1164.all;
-use numeric_std.all;
+use IEEE.std_logic_1164.all;
+use IEEE.numeric_std.all;
 
 entity colour_signals is
   port (clk, vert_sync : in std_logic;
@@ -23,7 +23,7 @@ architecture structure of colour_signals is
 
 begin
   
-  GROUND: ground
+  G: ground
     port map (clk => clk, vert_sync => vert_sync, pixel_row => pixel_row, pixel_column => pixel_column, red => red, green => green, blue => blue);
       
   FB: flappy_bird

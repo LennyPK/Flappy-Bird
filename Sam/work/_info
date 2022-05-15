@@ -62,146 +62,183 @@ FC:/Users/Samuel Mason/OneDrive/Documents/GitHub/PILK/Sam/bouncy_ball.vhd
 !s100 SF;kJI@Dfa?@QJMma^7g]0
 !s108 1652507178.234000
 !i10b 1
-Eflappy_bird
-Z15 w1652600814
-Z16 DPx4 work 13 rgb_functions 0 22 ^>K=V@W7f=hoFCI_2>Mni2
+Ecolour_signals
+Z15 w1652601907
 R2
 R3
 R4
-Z17 dC:\Users\Samuel Mason\Documents\GitHub\PILK\Sam
-Z18 8C:/Users/Samuel Mason/Documents/GitHub/PILK/Sam/drawings.vhd
-Z19 FC:/Users/Samuel Mason/Documents/GitHub/PILK/Sam/drawings.vhd
+Z16 dC:\Users\Samuel Mason\Documents\GitHub\PILK\Sam
+Z17 8C:/Users/Samuel Mason/Documents/GitHub/PILK/Sam/structure.vhd
+Z18 FC:/Users/Samuel Mason/Documents/GitHub/PILK/Sam/structure.vhd
+l0
+L5
+VVLDW:aM7cD`a>:a93KeGE3
+!s100 bQTbQRMlza4CcRbi2mMh=1
+R8
+32
+!i10b 1
+Z19 !s108 1652601910.425000
+Z20 !s90 -reportprogress|300|-work|work|C:/Users/Samuel Mason/Documents/GitHub/PILK/Sam/structure.vhd|
+Z21 !s107 C:/Users/Samuel Mason/Documents/GitHub/PILK/Sam/structure.vhd|
+R10
+R11
+Astructure
+R2
+R3
+R4
+DEx4 work 14 colour_signals 0 22 VLDW:aM7cD`a>:a93KeGE3
+l24
+L11
+VF`Rc5CzijMm7Gbz1iBB?H3
+!s100 <ZU3[bX_M<LVVFLdbJecU3
+R8
+32
+!i10b 1
+R19
+R20
+R21
+R10
+R11
+Eflappy_bird
+Z22 w1652600814
+Z23 DPx4 work 13 rgb_functions 0 22 ^>K=V@W7f=hoFCI_2>Mni2
+R2
+R3
+R4
+R16
+Z24 8C:/Users/Samuel Mason/Documents/GitHub/PILK/Sam/drawings.vhd
+Z25 FC:/Users/Samuel Mason/Documents/GitHub/PILK/Sam/drawings.vhd
 l0
 L153
 VS3nY^o9_nfO]Zz`=cOGKY1
-!s100 [mHzR07GUkjV=iXDNKc`h0
 R8
 32
-!i10b 1
-Z20 !s108 1652600817.403000
-Z21 !s90 -reportprogress|300|-work|work|C:/Users/Samuel Mason/Documents/GitHub/PILK/Sam/drawings.vhd|
-Z22 !s107 C:/Users/Samuel Mason/Documents/GitHub/PILK/Sam/drawings.vhd|
+Z26 !s108 1652600817.403000
+Z27 !s90 -reportprogress|300|-work|work|C:/Users/Samuel Mason/Documents/GitHub/PILK/Sam/drawings.vhd|
+Z28 !s107 C:/Users/Samuel Mason/Documents/GitHub/PILK/Sam/drawings.vhd|
 R10
 R11
+!s100 [mHzR07GUkjV=iXDNKc`h0
+!i10b 1
 Abehaviour
-R16
+R23
 R2
 R3
 R4
-Z23 DEx4 work 11 flappy_bird 0 22 S3nY^o9_nfO]Zz`=cOGKY1
+DEx4 work 11 flappy_bird 0 22 S3nY^o9_nfO]Zz`=cOGKY1
 l176
 L160
 V>RC8fO1;66RGGz<VTfG;[0
-!s100 8RGRdQlBCBBWAnBZ1TJY41
 R8
 32
-!i10b 1
-R20
-R21
-R22
+R26
+R27
+R28
 R10
 R11
+!s100 8RGRdQlBCBBWAnBZ1TJY41
+!i10b 1
 Eground
-R15
-R16
+R22
+R23
 R2
 R3
 R4
-R17
-R18
-R19
+R16
+R24
+R25
 l0
 L15
 VZRT_ReOjK?lco9bC`^aTY3
-!s100 @]OX52Q9g8ZORKDN_He8`0
 R8
 32
-!i10b 1
-R20
-R21
-R22
+R26
+R27
+R28
 R10
 R11
+!s100 @]OX52Q9g8ZORKDN_He8`0
+!i10b 1
 Abehaviour
-R16
+R23
 R2
 R3
 R4
-Z24 DEx4 work 6 ground 0 22 ZRT_ReOjK?lco9bC`^aTY3
+DEx4 work 6 ground 0 22 ZRT_ReOjK?lco9bC`^aTY3
 l36
 L22
-Z25 V0V:nOlT8L8c6d5AN`NWio0
-Z26 !s100 i@]nnT?]0@ZSkRS2bTdTj1
+V0V:nOlT8L8c6d5AN`NWio0
 R8
 32
-!i10b 1
-R20
-R21
-R22
+R26
+R27
+R28
 R10
 R11
+!s100 i@]nnT?]0@ZSkRS2bTdTj1
+!i10b 1
 Epipe_one
-R15
-R16
+R22
+R23
 R2
 R3
 R4
-R17
-R18
-R19
+R16
+R24
+R25
 l0
 L98
 VT_:3FUQ3Ql1zXCg8Ie4ak1
-!s100 ;3T^UEan82NJ>>6H8BR_J0
 R8
 32
-!i10b 1
-R20
-R21
-R22
+R26
+R27
+R28
 R10
 R11
+!s100 ;3T^UEan82NJ>>6H8BR_J0
+!i10b 1
 Abehaviour
-R16
+R23
 R2
 R3
 R4
-Z27 DEx4 work 8 pipe_one 0 22 T_:3FUQ3Ql1zXCg8Ie4ak1
+DEx4 work 8 pipe_one 0 22 T_:3FUQ3Ql1zXCg8Ie4ak1
 l122
 L105
 Vlz4`>@KRSC9B7DlUGmCUm1
-!s100 d6mzL;EUz0:]J<E>dX;7E0
 R8
 32
-!i10b 1
-R20
-R21
-R22
+R26
+R27
+R28
 R10
 R11
+!s100 d6mzL;EUz0:]J<E>dX;7E0
+!i10b 1
 Prgb_functions
 R2
 R3
 R4
-Z28 w1652590738
-R17
-Z29 8C:/Users/Samuel Mason/Documents/GitHub/PILK/Sam/rgb_functions.vhd
-Z30 FC:/Users/Samuel Mason/Documents/GitHub/PILK/Sam/rgb_functions.vhd
+Z29 w1652590738
+R16
+Z30 8C:/Users/Samuel Mason/Documents/GitHub/PILK/Sam/rgb_functions.vhd
+Z31 FC:/Users/Samuel Mason/Documents/GitHub/PILK/Sam/rgb_functions.vhd
 l0
 L5
 V^>K=V@W7f=hoFCI_2>Mni2
 R8
 32
 b1
-Z31 !s108 1652591231.216000
-Z32 !s90 -reportprogress|300|-work|work|C:/Users/Samuel Mason/Documents/GitHub/PILK/Sam/rgb_functions.vhd|
-Z33 !s107 C:/Users/Samuel Mason/Documents/GitHub/PILK/Sam/rgb_functions.vhd|
+Z32 !s108 1652591231.216000
+Z33 !s90 -reportprogress|300|-work|work|C:/Users/Samuel Mason/Documents/GitHub/PILK/Sam/rgb_functions.vhd|
+Z34 !s107 C:/Users/Samuel Mason/Documents/GitHub/PILK/Sam/rgb_functions.vhd|
 R10
 R11
 !s100 jm15U@4TLkSoALB1EB?4<3
 !i10b 1
 Bbody
-R16
+R23
 R2
 R3
 R4
@@ -210,9 +247,9 @@ L15
 V^[T0XMoLYkn__B2QH6jGD1
 R8
 32
-R31
 R32
 R33
+R34
 R10
 R11
 nbody

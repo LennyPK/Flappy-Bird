@@ -1,6 +1,13 @@
 <?xml version="1.0" ?>
 <LOG_ROOT>
 	<PROJECT NAME="Test">
+		<CBX_INST_ENTRY INSTANCE_NAME="|Test|colour_signals:inst2|flappy_bird:FB|lpm_divide:Mod3" CBX_FILE_NAME="lpm_divide_3bm.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|Test|colour_signals:inst2|flappy_bird:FB|lpm_divide:Mod5" CBX_FILE_NAME="lpm_divide_voo.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|Test|colour_signals:inst2|ground:G|lpm_divide:Mod1" CBX_FILE_NAME="lpm_divide_3bm.tdf"/>
 		<CBX_INST_ENTRY INSTANCE_NAME="|Test|altpll0:inst|altpll:altpll_component" CBX_FILE_NAME="altpll0_altpll.v"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|Test|colour_signals:inst2|flappy_bird:FB|lpm_divide:Mod0" CBX_FILE_NAME="lpm_divide_3bm.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|Test|colour_signals:inst2|flappy_bird:FB|lpm_divide:Mod2" CBX_FILE_NAME="lpm_divide_1po.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|Test|colour_signals:inst2|flappy_bird:FB|lpm_divide:Mod4" CBX_FILE_NAME="lpm_divide_3bm.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|Test|colour_signals:inst2|ground:G|lpm_divide:Mod0" CBX_FILE_NAME="lpm_divide_soo.tdf"/>
 	</PROJECT>
 </LOG_ROOT>

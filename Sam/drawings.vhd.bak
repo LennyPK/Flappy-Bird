@@ -22,7 +22,7 @@ end entity ground;
 architecture behaviour of ground is
   
 -- Ground image signals.
-signal ground_on : std_logic_vector(3 downto 0);
+signal ground_on : std_logic;
 signal ground_colours : rgb_array;
 signal ground_width : std_logic_vector(10 downto 0);
 signal ground_height : std_logic_vector(9 downto 0);
@@ -48,9 +48,9 @@ pixel_row_int <= (to_integer(unsigned(pixel_row))) mod (g_size*20);
 ground_y_pos <= std_logic_vector(to_unsigned(459, 10));
 			
 -- Enable ground drawing only within allowed regions.
-ground_on <= "1111" when ((unsigned(pixel_row) <= unsigned(ground_y_pos) + unsigned(ground_height))
-          and (unsigned(pixel_row) >= unsigned(ground_y_pos))) else
-          "0000";
+ground_on <= '1' when ((unsigned(pixel_row) <= unsigned(ground_y_pos) + unsigned(ground_height))
+          and (unsigned(pixel_row) >= unsigned(ground_y_pos))) 
+          else '0';
           
 ground_colours <= -- Row one
                   rgbint_to_rgb4(83, 56, 70) when (pixel_col_int >= g_size*0 and pixel_col_int <= g_size-1+g_size*6 and (pixel_row_int >= g_size*0 and pixel_row_int <= -1+g_size*1)) else
@@ -75,12 +75,12 @@ ground_colours <= -- Row one
                   rgbint_to_rgb4(222, 216, 149) when (pixel_col_int >= g_size*0 and pixel_col_int <= g_size-1+g_size*6 and (pixel_row_int >= g_size*7 and pixel_row_int <= -1+g_size*20));
 
 -- Set output colour channel values for the current pixel.
-colour_info(0) <= ground_colours(0) when ground_on = "1111" else
-                  "----";
-colour_info(1) <= ground_colours(1) when ground_on = "1111" else
-                  "----";
-colour_info(2) <= ground_colours(2) when ground_on = "1111" else
-                  "----";
+colour_info(0) <= ground_colours(0) when ground_on = '1' else
+                  "UUUU";
+colour_info(1) <= ground_colours(1) when ground_on = '1' else
+                  "UUUU";
+colour_info(2) <= ground_colours(2) when ground_on = '1' else
+                  "UUUU";
 
 end architecture behaviour;
 
@@ -163,7 +163,7 @@ end entity flappy_bird;
 architecture behaviour of flappy_bird is
 
 -- Flappy bird image signals.
-signal flappy_bird_on : std_logic_vector(3 downto 0);
+signal flappy_bird_on : std_logic;
 signal flappy_bird_colours : rgb_array;
 signal flappy_bird_width : std_logic_vector(10 downto 0);
 signal flappy_bird_height : std_logic_vector(9 downto 0);
@@ -191,7 +191,7 @@ pixel_row_int <= (to_integer(unsigned(pixel_row)) mod (fb_size*12) - to_integer(
 flappy_x_pos <= std_logic_vector(to_unsigned(313, 11));
 			
 -- Enable flappy bird drawing only within allowed regions.
-flappy_bird_on <= "1111" when ((unsigned(pixel_column) <= unsigned(flappy_x_pos) + unsigned(flappy_bird_width))
+flappy_bird_on <= '1' when ((unsigned(pixel_column) <= unsigned(flappy_x_pos) + unsigned(flappy_bird_width))
           and (unsigned(pixel_column) >= unsigned(flappy_x_pos))
           and (unsigned(pixel_row) <= unsigned(flappy_y_pos) + unsigned(flappy_bird_height))
           and (unsigned(pixel_row) >= unsigned(flappy_y_pos))
@@ -216,8 +216,8 @@ flappy_bird_on <= "1111" when ((unsigned(pixel_column) <= unsigned(flappy_x_pos)
           and not (pixel_col_int >= fb_size*0 and pixel_col_int <= fb_size-1+fb_size*2 and (pixel_row_int >= fb_size*10 and pixel_row_int <= -1+fb_size*11))
           and not (pixel_col_int >= fb_size*15 and pixel_col_int <= fb_size-1+fb_size*16 and (pixel_row_int >= fb_size*10 and pixel_row_int <= -1+fb_size*11))
           and not (pixel_col_int >= fb_size*0 and pixel_col_int <= fb_size-1+fb_size*4 and (pixel_row_int >= fb_size*11 and pixel_row_int <= -1+fb_size*12))
-          and not (pixel_col_int >= fb_size*10 and pixel_col_int <= fb_size-1+fb_size*16 and (pixel_row_int >= fb_size*11 and pixel_row_int <= -1+fb_size*12))) else
-          "0000";
+          and not (pixel_col_int >= fb_size*10 and pixel_col_int <= fb_size-1+fb_size*16 and (pixel_row_int >= fb_size*11 and pixel_row_int <= -1+fb_size*12))) 
+          else '0';
       
 -- Setting the specific pixel information for every pixel in the flappy bird.
 flappy_bird_colours <= -- Row one
@@ -320,13 +320,12 @@ flappy_bird_colours <= -- Row one
                        --rgbint_to_rgb4(47, 143, 127) when (pixel_col_int >= fb_size*10 and pixel_col_int <= fb_size-1+fb_size*16 and (pixel_row_int >= fb_size*11 and pixel_row_int <= -1+fb_size*12));
                       			
 -- Set output colour channel values for the current pixel.
-colour_info(0) <= flappy_bird_colours(0) when flappy_bird_on = "1111" else
-                  "----";
-colour_info(0) <= flappy_bird_colours(0) when flappy_bird_on = "1111" else
-                  "----";
-colour_info(0) <= flappy_bird_colours(0) when flappy_bird_on = "1111" else
-                  "----";
--- "0010" "1000" "0111"
+colour_info(0) <= flappy_bird_colours(0) when flappy_bird_on = '1' else
+                  "XXXX";
+colour_info(1) <= flappy_bird_colours(1) when flappy_bird_on = '1' else
+                  "XXXX";
+colour_info(2) <= flappy_bird_colours(2) when flappy_bird_on = '1' else
+                  "XXXX";
 
 move_bird: process (vert_sync)
 begin

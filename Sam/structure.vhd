@@ -37,15 +37,18 @@ begin
       
   image_overlay: process (clk)
   begin
-    if g_array(0) /= "----" then
+    if g_array(0) /= "UUUU" then
       tmp_red <= g_array(0);
       tmp_green <= g_array(1);
       tmp_blue <= g_array(2);
-    end if;
-    if fb_array(0) /= "----" then
+    elsif fb_array(0) /= "UUUU" then
       tmp_red <= fb_array(0);
       tmp_green <= fb_array(1);
       tmp_blue <= fb_array(2);
+    else
+      tmp_red <= "0000";
+      tmp_green <= "0000";
+      tmp_blue <= "0000";
     end if;      
   end process image_overlay;
 

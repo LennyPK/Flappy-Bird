@@ -1,4 +1,31 @@
 ------------------------------------------------------------
+-- Background main colour.
+------------------------------------------------------------
+-- Default libraries.
+library IEEE;
+use IEEE.std_logic_1164.all;
+use IEEE.numeric_std.all;
+
+-- Custom libraries.
+library work;
+use work.rgb_functions.all;
+
+-- Background main entity.
+entity background_m is
+  port (colour_info : out rgb_array);
+end entity background_m;
+
+-- Background main architecture.
+architecture behaviour of background_m is
+begin
+  colour_info <= rgbint_to_rgb4(112, 197, 206);
+end architecture behaviour;
+
+------------------------------------------------------------
+-- Background pattern.
+------------------------------------------------------------
+
+------------------------------------------------------------
 -- Ground object.
 ------------------------------------------------------------
 -- TO REDUCE MEMORY USAGE: all of the signals that are common for components can be defined as custom types in rgb_functions later on.
@@ -13,8 +40,7 @@ use work.rgb_functions.all;
 
 -- Ground object entity.
 entity ground is
-  port (clk, vert_sync : in std_logic;
-        pixel_row, pixel_column : in std_logic_vector(9 downto 0);
+  port (pixel_row, pixel_column : in std_logic_vector(9 downto 0);
         colour_info : out rgb_array);
 end entity ground;
 
@@ -45,7 +71,7 @@ pixel_col_int <= (to_integer(unsigned(pixel_column))) mod (g_size*7);
 pixel_row_int <= (to_integer(unsigned(pixel_row))) mod (g_size*20);
 
 -- y position for the ground.
-ground_y_pos <= std_logic_vector(to_unsigned(459, 10));
+ground_y_pos <= std_logic_vector(to_unsigned(460, 10));
 			
 -- Enable ground drawing only within allowed regions.
 ground_on <= '1' when ((unsigned(pixel_row) <= unsigned(ground_y_pos) + unsigned(ground_height))
@@ -99,7 +125,7 @@ use work.rgb_functions.all;
 
 -- Pipe object entity.
 entity pipe_one is
-  port (clk, vert_sync : in std_logic;
+  port (--clk, vert_sync : in std_logic;
         pixel_row, pixel_column : in std_logic_vector(9 downto 0);
         colour_info : out rgb_array);
 end entity pipe_one;
@@ -154,7 +180,7 @@ use work.rgb_functions.all;
 
 -- Flappy bird object entity.
 entity flappy_bird is
-  port (clk, vert_sync : in std_logic;
+  port (vert_sync : in std_logic;
         pixel_row, pixel_column : in std_logic_vector(9 downto 0);
         colour_info : out rgb_array);
 end entity flappy_bird;

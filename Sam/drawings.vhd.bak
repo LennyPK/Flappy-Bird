@@ -321,11 +321,11 @@ flappy_bird_colours <= -- Row one
                       			
 -- Set output colour channel values for the current pixel.
 colour_info(0) <= flappy_bird_colours(0) when flappy_bird_on = '1' else
-                  "XXXX";
+                  "0000";
 colour_info(1) <= flappy_bird_colours(1) when flappy_bird_on = '1' else
-                  "XXXX";
+                  "0000";
 colour_info(2) <= flappy_bird_colours(2) when flappy_bird_on = '1' else
-                  "XXXX";
+                  "0000";
 
 move_bird: process (vert_sync)
 begin

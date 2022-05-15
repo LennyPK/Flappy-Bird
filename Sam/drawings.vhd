@@ -76,11 +76,11 @@ ground_colours <= -- Row one
 
 -- Set output colour channel values for the current pixel.
 colour_info(0) <= ground_colours(0) when ground_on = '1' else
-                  "UUUU";
+                  "0000";
 colour_info(1) <= ground_colours(1) when ground_on = '1' else
-                  "UUUU";
+                  "0000";
 colour_info(2) <= ground_colours(2) when ground_on = '1' else
-                  "UUUU";
+                  "0000";
 
 end architecture behaviour;
 
@@ -321,11 +321,11 @@ flappy_bird_colours <= -- Row one
                       			
 -- Set output colour channel values for the current pixel.
 colour_info(0) <= flappy_bird_colours(0) when flappy_bird_on = '1' else
-                  "UUUU";
+                  "0000";
 colour_info(1) <= flappy_bird_colours(1) when flappy_bird_on = '1' else
-                  "UUUU";
+                  "0000";
 colour_info(2) <= flappy_bird_colours(2) when flappy_bird_on = '1' else
-                  "UUUU";
+                  "0000";
 
 move_bird: process (vert_sync)
 begin

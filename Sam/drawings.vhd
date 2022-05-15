@@ -1,4 +1,89 @@
 ------------------------------------------------------------
+-- Ground object.
+------------------------------------------------------------
+-- TO REDUCE MEMORY USAGE: all of the signals that are common for components can be defined as custom types in rgb_functions later on.
+-- Default libraries.
+library IEEE;
+use IEEE.std_logic_1164.all;
+use IEEE.numeric_std.all;
+
+-- Custom libraries.
+library work;
+use work.rgb_functions.all;
+
+-- Ground object entity.
+entity ground is
+  port (clk, vert_sync : in std_logic;
+        pixel_row, pixel_column : in std_logic_vector(9 downto 0);
+        red, green, blue : out std_logic_vector(3 downto 0));
+end entity ground;
+
+-- Ground architecture.
+architecture behaviour of ground is
+  
+-- Ground image signals.
+signal ground_on : std_logic_vector(3 downto 0);
+signal ground_colours : rgb_array;
+signal ground_width : std_logic_vector(10 downto 0);
+signal ground_height : std_logic_vector(9 downto 0);
+signal g_size : integer range 0 to 7;
+
+signal ground_y_pos : std_logic_vector(9 downto 0);
+
+signal pixel_col_int : integer range 0 to 639;
+signal pixel_row_int : integer range 0 to 139;
+
+begin
+  
+-- Width and height for the ground.
+g_size <= 1;
+ground_width <= std_logic_vector(to_unsigned(639, 11));
+ground_height <= std_logic_vector(to_unsigned(g_size*20 - 1, 10));
+
+-- Row and column integer values for the ground.
+pixel_col_int <= (to_integer(unsigned(pixel_column))) mod (g_size*7);
+pixel_row_int <= (to_integer(unsigned(pixel_row)) - 459);
+
+-- y position for the ground.
+ground_y_pos <= std_logic_vector(to_unsigned(459, 10));
+			
+-- Enable ground drawing only within allowed regions.
+ground_on <= "1111" when ((unsigned(pixel_row) <= unsigned(ground_y_pos) + unsigned(ground_height))
+          and (unsigned(pixel_row) >= unsigned(ground_y_pos))) else
+          "0000";
+          
+ground_colours <= -- Row one
+                  rgbint_to_rgb4(83, 56, 70) when (pixel_col_int >= g_size*0 and pixel_col_int <= g_size-1+g_size*6 and (pixel_row_int >= g_size*0 and pixel_row_int <= -1+g_size*1)) else
+                  -- Row two
+                  rgbint_to_rgb4(228, 253, 139) when (pixel_col_int >= g_size*0 and pixel_col_int <= g_size-1+g_size*6 and (pixel_row_int >= g_size*1 and pixel_row_int <= -1+g_size*2)) else
+                  -- Row three
+                  rgbint_to_rgb4(156, 230, 89) when (pixel_col_int >= g_size*0 and pixel_col_int <= g_size-1+g_size*1 and (pixel_row_int >= g_size*2 and pixel_row_int <= -1+g_size*3)) else
+                  rgbint_to_rgb4(115, 191, 46) when (pixel_col_int >= g_size*2 and pixel_col_int <= g_size-1+g_size*5 and (pixel_row_int >= g_size*2 and pixel_row_int <= -1+g_size*3)) else
+                  rgbint_to_rgb4(156, 230, 89) when (pixel_col_int >= g_size*6 and pixel_col_int <= g_size-1+g_size*6 and (pixel_row_int >= g_size*2 and pixel_row_int <= -1+g_size*3)) else
+                  -- Row four
+                  rgbint_to_rgb4(156, 230, 89) when (pixel_col_int >= g_size*0 and pixel_col_int <= g_size-1+g_size*0 and (pixel_row_int >= g_size*3 and pixel_row_int <= -1+g_size*4)) else
+                  rgbint_to_rgb4(115, 191, 46) when (pixel_col_int >= g_size*1 and pixel_col_int <= g_size-1+g_size*4 and (pixel_row_int >= g_size*3 and pixel_row_int <= -1+g_size*4)) else
+                  rgbint_to_rgb4(156, 230, 89) when (pixel_col_int >= g_size*5 and pixel_col_int <= g_size-1+g_size*6 and (pixel_row_int >= g_size*3 and pixel_row_int <= -1+g_size*4)) else
+                  -- Row five
+                  rgbint_to_rgb4(115, 191, 46) when (pixel_col_int >= g_size*0 and pixel_col_int <= g_size-1+g_size*3 and (pixel_row_int >= g_size*4 and pixel_row_int <= -1+g_size*5)) else
+                  rgbint_to_rgb4(156, 230, 89) when (pixel_col_int >= g_size*4 and pixel_col_int <= g_size-1+g_size*6 and (pixel_row_int >= g_size*4 and pixel_row_int <= -1+g_size*5)) else
+                  -- Row six
+                  rgbint_to_rgb4(85, 128, 34) when (pixel_col_int >= g_size*0 and pixel_col_int <= g_size-1+g_size*6 and (pixel_row_int >= g_size*5 and pixel_row_int <= -1+g_size*6)) else
+                  -- Row seven
+                  rgbint_to_rgb4(215, 168, 76) when (pixel_col_int >= g_size*0 and pixel_col_int <= g_size-1+g_size*6 and (pixel_row_int >= g_size*6 and pixel_row_int <= -1+g_size*7)) else
+                  -- Rows eight to twenty
+                  rgbint_to_rgb4(222, 216, 149) when (pixel_col_int >= g_size*0 and pixel_col_int <= g_size-1+g_size*6 and (pixel_row_int >= g_size*8 and pixel_row_int <= -1+g_size*20));
+
+-- Set output colour channel values for the current pixel.
+Red <= (ground_on and ground_colours(0));
+Green <= (ground_on and ground_colours(1));
+Blue <= (ground_on and ground_colours(2));
+
+end architecture behaviour;
+
+------------------------------------------------------------
+-- Pipe one object.
+------------------------------------------------------------
 
 -- Default libraries.
 library IEEE;
@@ -6,31 +91,29 @@ use IEEE.std_logic_1164.all;
 use IEEE.numeric_std.all;
 
 -- Custom libraries.
---library work;
---use work.rgb_functions.all;
+library work;
+use work.rgb_functions.all;
 
--- Pipe object.
+-- Pipe object entity.
 entity pipe_one is
   port (clk, vert_sync : in std_logic;
         pixel_row, pixel_column : in std_logic_vector(9 downto 0);
         red, green, blue : out std_logic_vector(3 downto 0));
 end entity pipe_one;
 
--- Pip architecture.
+-- Pipe architecture.
 architecture behaviour of pipe_one is 
 
 -- Pipe image signals.
-  -- Custom type to store the converted rgb values in std_logic_vector format.
-  type rgb_array is array(0 to 2) of std_logic_vector(3 downto 0);
 signal pipe_on : std_logic_vector(3 downto 0);
 signal pipe_colours : rgb_array;
-signal pipe_width : std_Logic_vector(10 downto 0);
+signal pipe_width : std_logic_vector(10 downto 0);
 signal pipe_height : std_logic_vector(9 downto 0);
 signal p_size : integer range 0 to 7;
 
 signal pipe_x_pos : std_logic_vector(10 downto 0);
 signal pipe_y_pos : std_logic_vector(9 downto 0);
-signal pipe_x_motion : std_logic_vector(9 downto 0);
+signal pipe_x_motion : std_logic_vector(10 downto 0);
 
 signal pixel_col_int : integer range 0 to 50;
 signal pixel_row_int : integer range 0 to 50;
@@ -39,7 +122,9 @@ signal pixel_row_int : integer range 0 to 50;
 begin
   
 -- Width and height for the rectangle of pipe one.
-
+p_size <= 2;
+pipe_width <= std_logic_vector(to_unsigned(p_size*17 - 1, 11));
+pipe_height <= std_logic_vector(to_unsigned(p_size*17 - 1, 10));
 
 -- Rules for drawing the pipe are as follows:
 -- The central region needs to have a random height, and consists of the ends of both pipes.
@@ -52,6 +137,8 @@ begin
 end architecture behaviour;
 
 ------------------------------------------------------------
+-- Flappy bird object.
+------------------------------------------------------------
 
 -- Default libraries.
 library IEEE;
@@ -59,10 +146,10 @@ use IEEE.std_logic_1164.all;
 use IEEE.numeric_std.all;
 
 -- Custom libraries.
---library work;
---use work.rgb_functions.all;
+library work;
+use work.rgb_functions.all;
 
--- Flappy bird object.
+-- Flappy bird object entity.
 entity flappy_bird is
   port (clk, vert_sync : in std_logic;
         pixel_row, pixel_column : in std_logic_vector(9 downto 0);
@@ -73,8 +160,6 @@ end entity flappy_bird;
 architecture behaviour of flappy_bird is
 
 -- Flappy bird image signals.
-  -- Custom type to store the converted rgb values in std_logic_vector format.
-  type rgb_array is array(0 to 2) of std_logic_vector(3 downto 0);
 signal flappy_bird_on : std_logic_vector(3 downto 0);
 signal flappy_bird_colours : rgb_array;
 signal flappy_bird_width : std_logic_vector(10 downto 0);
@@ -87,45 +172,6 @@ signal flappy_y_motion : std_logic_vector(9 downto 0);
 
 signal pixel_col_int : integer range 0 to 118;
 signal pixel_row_int : integer range 0 to 83;
-
-function rgbint_to_rgb4(red_in : integer; green_in : integer; blue_in : integer) 
-  return rgb_array is
-  
-  -- Variables to store calculated values.
-  variable colour_out : rgb_array;
-	variable	tmp_red	:	integer;
-	variable tmp_blue	:	integer;
-	variable tmp_green	:	integer;
-begin
-  
-  -- Red channel.
-  if red_in >= 15 then
-    tmp_red := red_in - 15;
-  else tmp_red := 0;
-  end if;
-    
-  tmp_red := tmp_red / 16;
-  colour_out(0) := "0000";--std_logic_vector(to_unsigned(tmp_red, 4));
-  
-  -- Green channel.
-  if green_in >= 15 then
-    tmp_green := green_in - 15;
-  else tmp_green := 0;
-  end if;
-    
-  tmp_green := tmp_green / 16;
-  colour_out(1) := "0000";--std_logic_vector(to_unsigned(tmp_green, 4));
-  
-  -- Blue channel.
-  if blue_in >= 15 then
-    tmp_blue := blue_in - 15;
-  else tmp_blue := 0;
-  end if;
-    
-  tmp_blue := tmp_blue / 16;
-  colour_out(2) := "0000";--std_logic_vector(to_unsigned(tmp_blue, 4));
-  
-  return colour_out;
 
 begin           
 
@@ -140,7 +186,6 @@ pixel_row_int <= (to_integer(unsigned(pixel_row)) mod (fb_size*12) - to_integer(
 
 -- x and y position for flappy bird.
 flappy_x_pos <= std_logic_vector(to_unsigned(313, 11));
---flappy_y_pos <= conv_std_logic_vector(215, 10);
 			
 -- Enable flappy bird drawing only within allowed regions.
 flappy_bird_on <= "1111" when ((unsigned(pixel_column) <= unsigned(flappy_x_pos) + unsigned(flappy_bird_width))
@@ -169,7 +214,7 @@ flappy_bird_on <= "1111" when ((unsigned(pixel_column) <= unsigned(flappy_x_pos)
           and not (pixel_col_int >= fb_size*15 and pixel_col_int <= fb_size-1+fb_size*16 and (pixel_row_int >= fb_size*10 and pixel_row_int <= -1+fb_size*11))
           and not (pixel_col_int >= fb_size*0 and pixel_col_int <= fb_size-1+fb_size*4 and (pixel_row_int >= fb_size*11 and pixel_row_int <= -1+fb_size*12))
           and not (pixel_col_int >= fb_size*10 and pixel_col_int <= fb_size-1+fb_size*16 and (pixel_row_int >= fb_size*11 and pixel_row_int <= -1+fb_size*12))) else
-      "0000";
+          "0000";
       
 -- Setting the specific pixel information for every pixel in the flappy bird.
 flappy_bird_colours <= -- Row one
@@ -268,11 +313,11 @@ flappy_bird_colours <= -- Row one
                        --rgbint_to_rgb4(47, 143, 127) when (pixel_col_int >= fb_size*15 and pixel_col_int <= fb_size-1+fb_size*16 and (pixel_row_int >= fb_size*10 and pixel_row_int <= -1+fb_size*11)) else
                        -- Row twelve
                        --rgbint_to_rgb4(47, 143, 127) when (pixel_col_int >= fb_size*0 and pixel_col_int <= fb_size-1+fb_size*4 and (pixel_row_int >= fb_size*11 and pixel_row_int <= -1+fb_size*12)) else
-                       rgbint_to_rgb4(83, 56, 70) when (pixel_col_int >= fb_size*5 and pixel_col_int <= fb_size-1+fb_size*9 and (pixel_row_int >= fb_size*11 and pixel_row_int <= -1+fb_size*12)) else
+                       rgbint_to_rgb4(83, 56, 70) when (pixel_col_int >= fb_size*5 and pixel_col_int <= fb_size-1+fb_size*9 and (pixel_row_int >= fb_size*11 and pixel_row_int <= -1+fb_size*12));
                        --rgbint_to_rgb4(47, 143, 127) when (pixel_col_int >= fb_size*10 and pixel_col_int <= fb_size-1+fb_size*16 and (pixel_row_int >= fb_size*11 and pixel_row_int <= -1+fb_size*12));
                       			
 -- Set output colour channel values for the current pixel.
-Red <= (flappy_bird_on and "1010");-- or (not flappy_bird_on and "0000");
+Red <= (flappy_bird_on and flappy_bird_colours(0));-- or (not flappy_bird_on and "0000");
 Green <= (flappy_bird_on and flappy_bird_colours(1));-- or (not flappy_bird_on and "0000");
 Blue <= (flappy_bird_on and flappy_bird_colours(2));-- or (not flappy_bird_on and "0000");
 -- "0010" "1000" "0111"

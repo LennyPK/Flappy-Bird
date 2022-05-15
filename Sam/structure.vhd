@@ -24,30 +24,27 @@ architecture structure of colour_signals is
           colour_info : out rgb_array);
   end component flappy_bird;
   
-  signal g_arrray : rgb_array;
-  signal fb_array : rgb_array;
-  signal tmp_red, tmp_green, tmp_blue : std_logic_vector(3 downto 0);
+signal g_array : rgb_array;
+signal fb_array : rgb_array;
+signal tmp_red, tmp_green, tmp_blue : std_logic_vector(3 downto 0);
 
 begin
-  
   G: ground
     port map (clk => clk, vert_sync => vert_sync, pixel_row => pixel_row, pixel_column => pixel_column, colour_info => g_array);
       
   FB: flappy_bird
     port map (clk => clk, vert_sync => vert_sync, pixel_row => pixel_row, pixel_column => pixel_column, colour_info => fb_array);
       
-  if g_array(0) /= "----" then
-    tmp_red <= g_array(0);
-    tmp_green <= g_array(1);
-    tmp_blue <= g_array(2);
+  tmp_red <= g_array(0) when fb_array(0) /= "----";    
+  tmp_green <= g_array(1) when fb_array(1) /= "----";
+  tmp_blue <= g_array(2) when fb_array(2) /= "----";
     
-  if fb_array(0) /= "----" then
-    tmp_red <= fb_array(0);
-    tmp_green <= fb_array(1);
-    tmp_blue <= fb_array(2);
-    
+  tmp_red <= fb_array(0) when fb_array(0) /= "----";    
+  tmp_green <= fb_array(1) when fb_array(1) /= "----";
+  tmp_blue <= fb_array(2) when fb_array(2) /= "----";
+
   red <= tmp_red;
   green <= tmp_green;
-  bblue <= tmp_blue;
+  blue <= tmp_blue;
       
 end architecture structure;

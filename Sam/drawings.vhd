@@ -75,7 +75,9 @@ ground_colours <= -- Row one
                   rgbint_to_rgb4(222, 216, 149) when (pixel_col_int >= g_size*0 and pixel_col_int <= g_size-1+g_size*6 and (pixel_row_int >= g_size*7 and pixel_row_int <= -1+g_size*20));
 
 -- Set output colour channel values for the current pixel.
-colour_info <= (ground_on and ground_colours) or (not ground_on and "----");
+colour_info(0) <= (ground_on and ground_colours(0)) or (not ground_on and "----");
+colour_info(1) <= (ground_on and ground_colours(1)) or (not ground_on and "----");
+colour_info(2) <= (ground_on and ground_colours(2)) or (not ground_on and "----");
 
 end architecture behaviour;
 
@@ -315,7 +317,9 @@ flappy_bird_colours <= -- Row one
                        --rgbint_to_rgb4(47, 143, 127) when (pixel_col_int >= fb_size*10 and pixel_col_int <= fb_size-1+fb_size*16 and (pixel_row_int >= fb_size*11 and pixel_row_int <= -1+fb_size*12));
                       			
 -- Set output colour channel values for the current pixel.
-colour_info <= (flappy_bird_on and flappy_bird_colours) or (not flappy_bird_on and "----");
+colour_info(0) <= (flappy_bird_on and flappy_bird_colours(0)) or (not flappy_bird_on and "----");
+colour_info(1) <= (flappy_bird_on and flappy_bird_colours(1)) or (not flappy_bird_on and "----");
+colour_info(2) <= (flappy_bird_on and flappy_bird_colours(2)) or (not flappy_bird_on and "----");
 -- "0010" "1000" "0111"
 
 move_bird: process (vert_sync)

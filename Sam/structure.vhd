@@ -35,13 +35,19 @@ begin
   FB: flappy_bird
     port map (clk => clk, vert_sync => vert_sync, pixel_row => pixel_row, pixel_column => pixel_column, colour_info => fb_array);
       
-  tmp_red <= g_array(0) when fb_array(0) /= "----";    
-  tmp_green <= g_array(1) when fb_array(1) /= "----";
-  tmp_blue <= g_array(2) when fb_array(2) /= "----";
-    
-  tmp_red <= fb_array(0) when fb_array(0) /= "----";    
-  tmp_green <= fb_array(1) when fb_array(1) /= "----";
-  tmp_blue <= fb_array(2) when fb_array(2) /= "----";
+  image_overlay: process (clk)
+  begin
+    if g_array(0) /= "----" then
+      tmp_red <= g_array(0);
+      tmp_green <= g_array(1);
+      tmp_blue <= g_array(2);
+    end if;
+    if fb_array(0) /= "----" then
+      tmp_red <= fb_array(0);
+      tmp_green <= fb_array(1);
+      tmp_blue <= fb_array(2);
+    end if;      
+  end process image_overlay;
 
   red <= tmp_red;
   green <= tmp_green;

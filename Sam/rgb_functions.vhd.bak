@@ -1,0 +1,55 @@
+library IEEE;
+use IEEE.std_logic_1164.all;
+use IEEE.numeric_std.all;
+
+package rgb_functions is
+    
+  function rgbint_to_rgb4(red_in : integer; green_in : integer; blue_in : integer)
+  return rgb_array;
+  
+end package rgb_functions;
+
+package body rgb_functions is
+  
+  -- Function to convert integer rgb values to 4 bit standard logic vectors.
+function rgbint_to_rgb4(red_in : integer; green_in : integer; blue_in : integer) 
+  return rgb_array is
+  
+  -- Variables to store calculated values.
+  variable colour_out : rgb_array;
+	variable	tmp_red	:	integer;
+	variable tmp_blue	:	integer;
+	variable tmp_green	:	integer;
+begin
+  
+  -- Red channel.
+  if red_in >= 15 then
+    tmp_red := red_in - 15;
+  else tmp_red := 0;
+  end if;
+    
+  tmp_red := tmp_red / 16;
+  colour_out(0) := std_logic_vector(to_unsigned(tmp_red, 4));
+  
+  -- Green channel.
+  if green_in >= 15 then
+    tmp_green := green_in - 15;
+  else tmp_green := 0;
+  end if;
+    
+  tmp_green := tmp_green / 16;
+  colour_out(1) := std_logic_vector(to_unsigned(tmp_green, 4));
+  
+  -- Blue channel.
+  if blue_in >= 15 then
+    tmp_blue := blue_in - 15;
+  else tmp_blue := 0;
+  end if;
+    
+  tmp_blue := tmp_blue / 16;
+  colour_out(2) := std_logic_vector(to_unsigned(tmp_blue, 4));
+  
+  return colour_out;
+end function;
+
+end package body rgb_functions;

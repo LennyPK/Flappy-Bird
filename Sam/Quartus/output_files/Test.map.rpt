@@ -1,5 +1,5 @@
 Analysis & Synthesis report for Test
-Mon May 16 00:33:34 2022
+Mon May 16 01:37:03 2022
 Quartus II 64-Bit Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edition
 
 
@@ -14,21 +14,23 @@ Quartus II 64-Bit Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edit
   6. Analysis & Synthesis Resource Usage Summary
   7. Analysis & Synthesis Resource Utilization by Entity
   8. Analysis & Synthesis IP Cores Summary
-  9. User-Specified and Inferred Latches
- 10. Registers Removed During Synthesis
- 11. General Register Statistics
- 12. Multiplexer Restructuring Statistics (Restructuring Performed)
- 13. Parameter Settings for User Entity Instance: altpll0:inst|altpll:altpll_component
- 14. Parameter Settings for Inferred Entity Instance: colour_signals:inst2|flappy_bird:FB|lpm_divide:Mod5
- 15. Parameter Settings for Inferred Entity Instance: colour_signals:inst2|flappy_bird:FB|lpm_divide:Mod2
- 16. Parameter Settings for Inferred Entity Instance: colour_signals:inst2|flappy_bird:FB|lpm_divide:Mod4
- 17. Parameter Settings for Inferred Entity Instance: colour_signals:inst2|flappy_bird:FB|lpm_divide:Mod3
- 18. Parameter Settings for Inferred Entity Instance: colour_signals:inst2|ground:G|lpm_divide:Mod0
- 19. Parameter Settings for Inferred Entity Instance: colour_signals:inst2|ground:G|lpm_divide:Mod1
- 20. Parameter Settings for Inferred Entity Instance: colour_signals:inst2|flappy_bird:FB|lpm_divide:Mod0
- 21. altpll Parameter Settings by Entity Instance
- 22. Elapsed Time Per Partition
- 23. Analysis & Synthesis Messages
+  9. State Machine - |Test|MOUSE:inst4|mouse_state
+ 10. User-Specified and Inferred Latches
+ 11. Registers Removed During Synthesis
+ 12. General Register Statistics
+ 13. Inverted Register Statistics
+ 14. Multiplexer Restructuring Statistics (Restructuring Performed)
+ 15. Parameter Settings for User Entity Instance: altpll0:inst|altpll:altpll_component
+ 16. Parameter Settings for Inferred Entity Instance: colour_signals:inst2|flappy_bird:FB|lpm_divide:Mod5
+ 17. Parameter Settings for Inferred Entity Instance: colour_signals:inst2|flappy_bird:FB|lpm_divide:Mod2
+ 18. Parameter Settings for Inferred Entity Instance: colour_signals:inst2|flappy_bird:FB|lpm_divide:Mod4
+ 19. Parameter Settings for Inferred Entity Instance: colour_signals:inst2|flappy_bird:FB|lpm_divide:Mod3
+ 20. Parameter Settings for Inferred Entity Instance: colour_signals:inst2|ground:G|lpm_divide:Mod0
+ 21. Parameter Settings for Inferred Entity Instance: colour_signals:inst2|ground:G|lpm_divide:Mod1
+ 22. Parameter Settings for Inferred Entity Instance: colour_signals:inst2|flappy_bird:FB|lpm_divide:Mod0
+ 23. altpll Parameter Settings by Entity Instance
+ 24. Elapsed Time Per Partition
+ 25. Analysis & Synthesis Messages
 
 
 
@@ -54,16 +56,16 @@ applicable agreement for further details.
 +--------------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                         ;
 +------------------------------------+-------------------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Mon May 16 00:33:34 2022           ;
+; Analysis & Synthesis Status        ; Successful - Mon May 16 01:37:03 2022           ;
 ; Quartus II 64-Bit Version          ; 13.0.1 Build 232 06/12/2013 SP 1 SJ Web Edition ;
 ; Revision Name                      ; Test                                            ;
 ; Top-level Entity Name              ; Test                                            ;
 ; Family                             ; Cyclone III                                     ;
-; Total logic elements               ; 1,497                                           ;
-;     Total combinational functions  ; 1,476                                           ;
-;     Dedicated logic registers      ; 67                                              ;
-; Total registers                    ; 67                                              ;
-; Total pins                         ; 15                                              ;
+; Total logic elements               ; 1,570                                           ;
+;     Total combinational functions  ; 1,521                                           ;
+;     Dedicated logic registers      ; 132                                             ;
+; Total registers                    ; 132                                             ;
+; Total pins                         ; 68                                              ;
 ; Total virtual pins                 ; 0                                               ;
 ; Total memory bits                  ; 0                                               ;
 ; Embedded Multiplier 9-bit elements ; 0                                               ;
@@ -169,45 +171,46 @@ Parallel compilation was disabled, but you have multiple processors available. E
 +----------------------------+--------+
 
 
-+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Analysis & Synthesis Source Files Read                                                                                                                                    ;
-+----------------------------------+-----------------+------------------------------------+-----------------------------------------------------------------------+---------+
-; File Name with User-Entered Path ; Used in Netlist ; File Type                          ; File Name with Absolute Path                                          ; Library ;
-+----------------------------------+-----------------+------------------------------------+-----------------------------------------------------------------------+---------+
-; ../vga_sync.vhd                  ; yes             ; User VHDL File                     ; D:/Documents/GitHub/PILK/Sam/vga_sync.vhd                             ;         ;
-; ../structure.vhd                 ; yes             ; User VHDL File                     ; D:/Documents/GitHub/PILK/Sam/structure.vhd                            ;         ;
-; ../rgb_functions.vhd             ; yes             ; User VHDL File                     ; D:/Documents/GitHub/PILK/Sam/rgb_functions.vhd                        ;         ;
-; ../drawings.vhd                  ; yes             ; User VHDL File                     ; D:/Documents/GitHub/PILK/Sam/drawings.vhd                             ;         ;
-; altpll0.vhd                      ; yes             ; User Wizard-Generated File         ; D:/Documents/GitHub/PILK/Sam/Quartus/altpll0.vhd                      ;         ;
-; Test.bdf                         ; yes             ; User Block Diagram/Schematic File  ; D:/Documents/GitHub/PILK/Sam/Quartus/Test.bdf                         ;         ;
-; altpll.tdf                       ; yes             ; Megafunction                       ; c:/altera/13.0sp1/quartus/libraries/megafunctions/altpll.tdf          ;         ;
-; aglobal130.inc                   ; yes             ; Megafunction                       ; c:/altera/13.0sp1/quartus/libraries/megafunctions/aglobal130.inc      ;         ;
-; stratix_pll.inc                  ; yes             ; Megafunction                       ; c:/altera/13.0sp1/quartus/libraries/megafunctions/stratix_pll.inc     ;         ;
-; stratixii_pll.inc                ; yes             ; Megafunction                       ; c:/altera/13.0sp1/quartus/libraries/megafunctions/stratixii_pll.inc   ;         ;
-; cycloneii_pll.inc                ; yes             ; Megafunction                       ; c:/altera/13.0sp1/quartus/libraries/megafunctions/cycloneii_pll.inc   ;         ;
-; db/altpll0_altpll.v              ; yes             ; Auto-Generated Megafunction        ; D:/Documents/GitHub/PILK/Sam/Quartus/db/altpll0_altpll.v              ;         ;
-; lpm_divide.tdf                   ; yes             ; Megafunction                       ; c:/altera/13.0sp1/quartus/libraries/megafunctions/lpm_divide.tdf      ;         ;
-; abs_divider.inc                  ; yes             ; Megafunction                       ; c:/altera/13.0sp1/quartus/libraries/megafunctions/abs_divider.inc     ;         ;
-; sign_div_unsign.inc              ; yes             ; Megafunction                       ; c:/altera/13.0sp1/quartus/libraries/megafunctions/sign_div_unsign.inc ;         ;
-; db/lpm_divide_voo.tdf            ; yes             ; Auto-Generated Megafunction        ; D:/Documents/GitHub/PILK/Sam/Quartus/db/lpm_divide_voo.tdf            ;         ;
-; db/abs_divider_0dg.tdf           ; yes             ; Auto-Generated Megafunction        ; D:/Documents/GitHub/PILK/Sam/Quartus/db/abs_divider_0dg.tdf           ;         ;
-; db/alt_u_div_l8f.tdf             ; yes             ; Auto-Generated Megafunction        ; D:/Documents/GitHub/PILK/Sam/Quartus/db/alt_u_div_l8f.tdf             ;         ;
-; db/add_sub_unc.tdf               ; yes             ; Auto-Generated Megafunction        ; D:/Documents/GitHub/PILK/Sam/Quartus/db/add_sub_unc.tdf               ;         ;
-; db/add_sub_vnc.tdf               ; yes             ; Auto-Generated Megafunction        ; D:/Documents/GitHub/PILK/Sam/Quartus/db/add_sub_vnc.tdf               ;         ;
-; db/lpm_abs_7v9.tdf               ; yes             ; Auto-Generated Megafunction        ; D:/Documents/GitHub/PILK/Sam/Quartus/db/lpm_abs_7v9.tdf               ;         ;
-; db/lpm_divide_1po.tdf            ; yes             ; Auto-Generated Megafunction        ; D:/Documents/GitHub/PILK/Sam/Quartus/db/lpm_divide_1po.tdf            ;         ;
-; db/abs_divider_2dg.tdf           ; yes             ; Auto-Generated Megafunction        ; D:/Documents/GitHub/PILK/Sam/Quartus/db/abs_divider_2dg.tdf           ;         ;
-; db/alt_u_div_p8f.tdf             ; yes             ; Auto-Generated Megafunction        ; D:/Documents/GitHub/PILK/Sam/Quartus/db/alt_u_div_p8f.tdf             ;         ;
-; db/lpm_abs_8v9.tdf               ; yes             ; Auto-Generated Megafunction        ; D:/Documents/GitHub/PILK/Sam/Quartus/db/lpm_abs_8v9.tdf               ;         ;
-; db/lpm_divide_3bm.tdf            ; yes             ; Auto-Generated Megafunction        ; D:/Documents/GitHub/PILK/Sam/Quartus/db/lpm_divide_3bm.tdf            ;         ;
-; db/sign_div_unsign_1nh.tdf       ; yes             ; Auto-Generated Megafunction        ; D:/Documents/GitHub/PILK/Sam/Quartus/db/sign_div_unsign_1nh.tdf       ;         ;
-; db/alt_u_div_d8f.tdf             ; yes             ; Auto-Generated Megafunction        ; D:/Documents/GitHub/PILK/Sam/Quartus/db/alt_u_div_d8f.tdf             ;         ;
-; db/lpm_divide_soo.tdf            ; yes             ; Auto-Generated Megafunction        ; D:/Documents/GitHub/PILK/Sam/Quartus/db/lpm_divide_soo.tdf            ;         ;
-; db/abs_divider_tcg.tdf           ; yes             ; Auto-Generated Megafunction        ; D:/Documents/GitHub/PILK/Sam/Quartus/db/abs_divider_tcg.tdf           ;         ;
-; db/alt_u_div_f8f.tdf             ; yes             ; Auto-Generated Megafunction        ; D:/Documents/GitHub/PILK/Sam/Quartus/db/alt_u_div_f8f.tdf             ;         ;
-; db/lpm_abs_5v9.tdf               ; yes             ; Auto-Generated Megafunction        ; D:/Documents/GitHub/PILK/Sam/Quartus/db/lpm_abs_5v9.tdf               ;         ;
-; db/lpm_abs_6v9.tdf               ; yes             ; Auto-Generated Megafunction        ; D:/Documents/GitHub/PILK/Sam/Quartus/db/lpm_abs_6v9.tdf               ;         ;
-+----------------------------------+-----------------+------------------------------------+-----------------------------------------------------------------------+---------+
++---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Source Files Read                                                                                                                                                ;
++----------------------------------------------+-----------------+------------------------------------+-----------------------------------------------------------------------+---------+
+; File Name with User-Entered Path             ; Used in Netlist ; File Type                          ; File Name with Absolute Path                                          ; Library ;
++----------------------------------------------+-----------------+------------------------------------+-----------------------------------------------------------------------+---------+
+; ../../Project/MiniprojectResources/mouse.vhd ; yes             ; User VHDL File                     ; D:/Documents/GitHub/PILK/Project/MiniprojectResources/mouse.vhd       ;         ;
+; ../vga_sync.vhd                              ; yes             ; User VHDL File                     ; D:/Documents/GitHub/PILK/Sam/vga_sync.vhd                             ;         ;
+; ../structure.vhd                             ; yes             ; User VHDL File                     ; D:/Documents/GitHub/PILK/Sam/structure.vhd                            ;         ;
+; ../rgb_functions.vhd                         ; yes             ; User VHDL File                     ; D:/Documents/GitHub/PILK/Sam/rgb_functions.vhd                        ;         ;
+; ../drawings.vhd                              ; yes             ; User VHDL File                     ; D:/Documents/GitHub/PILK/Sam/drawings.vhd                             ;         ;
+; altpll0.vhd                                  ; yes             ; User Wizard-Generated File         ; D:/Documents/GitHub/PILK/Sam/Quartus/altpll0.vhd                      ;         ;
+; Test.bdf                                     ; yes             ; User Block Diagram/Schematic File  ; D:/Documents/GitHub/PILK/Sam/Quartus/Test.bdf                         ;         ;
+; altpll.tdf                                   ; yes             ; Megafunction                       ; c:/altera/13.0sp1/quartus/libraries/megafunctions/altpll.tdf          ;         ;
+; aglobal130.inc                               ; yes             ; Megafunction                       ; c:/altera/13.0sp1/quartus/libraries/megafunctions/aglobal130.inc      ;         ;
+; stratix_pll.inc                              ; yes             ; Megafunction                       ; c:/altera/13.0sp1/quartus/libraries/megafunctions/stratix_pll.inc     ;         ;
+; stratixii_pll.inc                            ; yes             ; Megafunction                       ; c:/altera/13.0sp1/quartus/libraries/megafunctions/stratixii_pll.inc   ;         ;
+; cycloneii_pll.inc                            ; yes             ; Megafunction                       ; c:/altera/13.0sp1/quartus/libraries/megafunctions/cycloneii_pll.inc   ;         ;
+; db/altpll0_altpll.v                          ; yes             ; Auto-Generated Megafunction        ; D:/Documents/GitHub/PILK/Sam/Quartus/db/altpll0_altpll.v              ;         ;
+; lpm_divide.tdf                               ; yes             ; Megafunction                       ; c:/altera/13.0sp1/quartus/libraries/megafunctions/lpm_divide.tdf      ;         ;
+; abs_divider.inc                              ; yes             ; Megafunction                       ; c:/altera/13.0sp1/quartus/libraries/megafunctions/abs_divider.inc     ;         ;
+; sign_div_unsign.inc                          ; yes             ; Megafunction                       ; c:/altera/13.0sp1/quartus/libraries/megafunctions/sign_div_unsign.inc ;         ;
+; db/lpm_divide_voo.tdf                        ; yes             ; Auto-Generated Megafunction        ; D:/Documents/GitHub/PILK/Sam/Quartus/db/lpm_divide_voo.tdf            ;         ;
+; db/abs_divider_0dg.tdf                       ; yes             ; Auto-Generated Megafunction        ; D:/Documents/GitHub/PILK/Sam/Quartus/db/abs_divider_0dg.tdf           ;         ;
+; db/alt_u_div_l8f.tdf                         ; yes             ; Auto-Generated Megafunction        ; D:/Documents/GitHub/PILK/Sam/Quartus/db/alt_u_div_l8f.tdf             ;         ;
+; db/add_sub_unc.tdf                           ; yes             ; Auto-Generated Megafunction        ; D:/Documents/GitHub/PILK/Sam/Quartus/db/add_sub_unc.tdf               ;         ;
+; db/add_sub_vnc.tdf                           ; yes             ; Auto-Generated Megafunction        ; D:/Documents/GitHub/PILK/Sam/Quartus/db/add_sub_vnc.tdf               ;         ;
+; db/lpm_abs_7v9.tdf                           ; yes             ; Auto-Generated Megafunction        ; D:/Documents/GitHub/PILK/Sam/Quartus/db/lpm_abs_7v9.tdf               ;         ;
+; db/lpm_divide_1po.tdf                        ; yes             ; Auto-Generated Megafunction        ; D:/Documents/GitHub/PILK/Sam/Quartus/db/lpm_divide_1po.tdf            ;         ;
+; db/abs_divider_2dg.tdf                       ; yes             ; Auto-Generated Megafunction        ; D:/Documents/GitHub/PILK/Sam/Quartus/db/abs_divider_2dg.tdf           ;         ;
+; db/alt_u_div_p8f.tdf                         ; yes             ; Auto-Generated Megafunction        ; D:/Documents/GitHub/PILK/Sam/Quartus/db/alt_u_div_p8f.tdf             ;         ;
+; db/lpm_abs_8v9.tdf                           ; yes             ; Auto-Generated Megafunction        ; D:/Documents/GitHub/PILK/Sam/Quartus/db/lpm_abs_8v9.tdf               ;         ;
+; db/lpm_divide_3bm.tdf                        ; yes             ; Auto-Generated Megafunction        ; D:/Documents/GitHub/PILK/Sam/Quartus/db/lpm_divide_3bm.tdf            ;         ;
+; db/sign_div_unsign_1nh.tdf                   ; yes             ; Auto-Generated Megafunction        ; D:/Documents/GitHub/PILK/Sam/Quartus/db/sign_div_unsign_1nh.tdf       ;         ;
+; db/alt_u_div_d8f.tdf                         ; yes             ; Auto-Generated Megafunction        ; D:/Documents/GitHub/PILK/Sam/Quartus/db/alt_u_div_d8f.tdf             ;         ;
+; db/lpm_divide_soo.tdf                        ; yes             ; Auto-Generated Megafunction        ; D:/Documents/GitHub/PILK/Sam/Quartus/db/lpm_divide_soo.tdf            ;         ;
+; db/abs_divider_tcg.tdf                       ; yes             ; Auto-Generated Megafunction        ; D:/Documents/GitHub/PILK/Sam/Quartus/db/abs_divider_tcg.tdf           ;         ;
+; db/alt_u_div_f8f.tdf                         ; yes             ; Auto-Generated Megafunction        ; D:/Documents/GitHub/PILK/Sam/Quartus/db/alt_u_div_f8f.tdf             ;         ;
+; db/lpm_abs_5v9.tdf                           ; yes             ; Auto-Generated Megafunction        ; D:/Documents/GitHub/PILK/Sam/Quartus/db/lpm_abs_5v9.tdf               ;         ;
+; db/lpm_abs_6v9.tdf                           ; yes             ; Auto-Generated Megafunction        ; D:/Documents/GitHub/PILK/Sam/Quartus/db/lpm_abs_6v9.tdf               ;         ;
++----------------------------------------------+-----------------+------------------------------------+-----------------------------------------------------------------------+---------+
 
 
 +-----------------------------------------------------------------------------------------------------------------------------------+
@@ -215,31 +218,31 @@ Parallel compilation was disabled, but you have multiple processors available. E
 +---------------------------------------------+-------------------------------------------------------------------------------------+
 ; Resource                                    ; Usage                                                                               ;
 +---------------------------------------------+-------------------------------------------------------------------------------------+
-; Estimated Total logic elements              ; 1,497                                                                               ;
+; Estimated Total logic elements              ; 1,570                                                                               ;
 ;                                             ;                                                                                     ;
-; Total combinational functions               ; 1476                                                                                ;
+; Total combinational functions               ; 1521                                                                                ;
 ; Logic element usage by number of LUT inputs ;                                                                                     ;
-;     -- 4 input functions                    ; 522                                                                                 ;
-;     -- 3 input functions                    ; 416                                                                                 ;
-;     -- <=2 input functions                  ; 538                                                                                 ;
+;     -- 4 input functions                    ; 542                                                                                 ;
+;     -- 3 input functions                    ; 432                                                                                 ;
+;     -- <=2 input functions                  ; 547                                                                                 ;
 ;                                             ;                                                                                     ;
 ; Logic elements by mode                      ;                                                                                     ;
-;     -- normal mode                          ; 1087                                                                                ;
-;     -- arithmetic mode                      ; 389                                                                                 ;
+;     -- normal mode                          ; 1122                                                                                ;
+;     -- arithmetic mode                      ; 399                                                                                 ;
 ;                                             ;                                                                                     ;
-; Total registers                             ; 67                                                                                  ;
-;     -- Dedicated logic registers            ; 67                                                                                  ;
+; Total registers                             ; 132                                                                                 ;
+;     -- Dedicated logic registers            ; 132                                                                                 ;
 ;     -- I/O registers                        ; 0                                                                                   ;
 ;                                             ;                                                                                     ;
-; I/O pins                                    ; 15                                                                                  ;
+; I/O pins                                    ; 68                                                                                  ;
 ; Embedded Multiplier 9-bit elements          ; 0                                                                                   ;
 ; Total PLLs                                  ; 1                                                                                   ;
 ;     -- PLLs                                 ; 1                                                                                   ;
 ;                                             ;                                                                                     ;
 ; Maximum fan-out node                        ; altpll0:inst|altpll:altpll_component|altpll0_altpll:auto_generated|wire_pll1_clk[0] ;
-; Maximum fan-out                             ; 58                                                                                  ;
-; Total fan-out                               ; 4494                                                                                ;
-; Average fan-out                             ; 2.85                                                                                ;
+; Maximum fan-out                             ; 86                                                                                  ;
+; Total fan-out                               ; 4922                                                                                ;
+; Average fan-out                             ; 2.75                                                                                ;
 +---------------------------------------------+-------------------------------------------------------------------------------------+
 
 
@@ -248,13 +251,14 @@ Parallel compilation was disabled, but you have multiple processors available. E
 +----------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+-------------------------------------------------------------------------------------------------------------------------------------------+--------------+
 ; Compilation Hierarchy Node                   ; LC Combinationals ; LC Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name                                                                                                                       ; Library Name ;
 +----------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+-------------------------------------------------------------------------------------------------------------------------------------------+--------------+
-; |Test                                        ; 1476 (0)          ; 67 (0)       ; 0           ; 0            ; 0       ; 0         ; 15   ; 0            ; |Test                                                                                                                                     ; work         ;
-;    |VGA_SYNC:inst1|                          ; 81 (81)           ; 57 (57)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Test|VGA_SYNC:inst1                                                                                                                      ; work         ;
+; |Test                                        ; 1521 (1)          ; 132 (0)      ; 0           ; 0            ; 0       ; 0         ; 68   ; 0            ; |Test                                                                                                                                     ; work         ;
+;    |MOUSE:inst4|                             ; 52 (52)           ; 65 (65)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Test|MOUSE:inst4                                                                                                                         ; work         ;
+;    |VGA_SYNC:inst1|                          ; 82 (82)           ; 57 (57)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Test|VGA_SYNC:inst1                                                                                                                      ; work         ;
 ;    |altpll0:inst|                            ; 0 (0)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Test|altpll0:inst                                                                                                                        ; work         ;
 ;       |altpll:altpll_component|              ; 0 (0)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Test|altpll0:inst|altpll:altpll_component                                                                                                ; work         ;
 ;          |altpll0_altpll:auto_generated|     ; 0 (0)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Test|altpll0:inst|altpll:altpll_component|altpll0_altpll:auto_generated                                                                  ; work         ;
-;    |colour_signals:inst2|                    ; 1395 (7)          ; 10 (0)       ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Test|colour_signals:inst2                                                                                                                ; work         ;
-;       |flappy_bird:FB|                       ; 1017 (288)        ; 10 (10)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Test|colour_signals:inst2|flappy_bird:FB                                                                                                 ; work         ;
+;    |colour_signals:inst2|                    ; 1386 (6)          ; 10 (0)       ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Test|colour_signals:inst2                                                                                                                ; work         ;
+;       |flappy_bird:FB|                       ; 1009 (293)        ; 10 (10)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Test|colour_signals:inst2|flappy_bird:FB                                                                                                 ; work         ;
 ;          |lpm_divide:Mod0|                   ; 109 (0)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Test|colour_signals:inst2|flappy_bird:FB|lpm_divide:Mod0                                                                                 ; work         ;
 ;             |lpm_divide_3bm:auto_generated|  ; 109 (0)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Test|colour_signals:inst2|flappy_bird:FB|lpm_divide:Mod0|lpm_divide_3bm:auto_generated                                                   ; work         ;
 ;                |sign_div_unsign_1nh:divider| ; 109 (0)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Test|colour_signals:inst2|flappy_bird:FB|lpm_divide:Mod0|lpm_divide_3bm:auto_generated|sign_div_unsign_1nh:divider                       ; work         ;
@@ -268,14 +272,14 @@ Parallel compilation was disabled, but you have multiple processors available. E
 ;             |lpm_divide_3bm:auto_generated|  ; 105 (0)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Test|colour_signals:inst2|flappy_bird:FB|lpm_divide:Mod3|lpm_divide_3bm:auto_generated                                                   ; work         ;
 ;                |sign_div_unsign_1nh:divider| ; 105 (0)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Test|colour_signals:inst2|flappy_bird:FB|lpm_divide:Mod3|lpm_divide_3bm:auto_generated|sign_div_unsign_1nh:divider                       ; work         ;
 ;                   |alt_u_div_d8f:divider|    ; 105 (105)         ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Test|colour_signals:inst2|flappy_bird:FB|lpm_divide:Mod3|lpm_divide_3bm:auto_generated|sign_div_unsign_1nh:divider|alt_u_div_d8f:divider ; work         ;
-;          |lpm_divide:Mod4|                   ; 109 (0)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Test|colour_signals:inst2|flappy_bird:FB|lpm_divide:Mod4                                                                                 ; work         ;
-;             |lpm_divide_3bm:auto_generated|  ; 109 (0)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Test|colour_signals:inst2|flappy_bird:FB|lpm_divide:Mod4|lpm_divide_3bm:auto_generated                                                   ; work         ;
-;                |sign_div_unsign_1nh:divider| ; 109 (0)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Test|colour_signals:inst2|flappy_bird:FB|lpm_divide:Mod4|lpm_divide_3bm:auto_generated|sign_div_unsign_1nh:divider                       ; work         ;
-;                   |alt_u_div_d8f:divider|    ; 109 (109)         ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Test|colour_signals:inst2|flappy_bird:FB|lpm_divide:Mod4|lpm_divide_3bm:auto_generated|sign_div_unsign_1nh:divider|alt_u_div_d8f:divider ; work         ;
-;          |lpm_divide:Mod5|                   ; 184 (0)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Test|colour_signals:inst2|flappy_bird:FB|lpm_divide:Mod5                                                                                 ; work         ;
-;             |lpm_divide_voo:auto_generated|  ; 184 (0)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Test|colour_signals:inst2|flappy_bird:FB|lpm_divide:Mod5|lpm_divide_voo:auto_generated                                                   ; work         ;
-;                |abs_divider_0dg:divider|     ; 184 (12)          ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Test|colour_signals:inst2|flappy_bird:FB|lpm_divide:Mod5|lpm_divide_voo:auto_generated|abs_divider_0dg:divider                           ; work         ;
-;                   |alt_u_div_l8f:divider|    ; 159 (159)         ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Test|colour_signals:inst2|flappy_bird:FB|lpm_divide:Mod5|lpm_divide_voo:auto_generated|abs_divider_0dg:divider|alt_u_div_l8f:divider     ; work         ;
+;          |lpm_divide:Mod4|                   ; 99 (0)            ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Test|colour_signals:inst2|flappy_bird:FB|lpm_divide:Mod4                                                                                 ; work         ;
+;             |lpm_divide_3bm:auto_generated|  ; 99 (0)            ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Test|colour_signals:inst2|flappy_bird:FB|lpm_divide:Mod4|lpm_divide_3bm:auto_generated                                                   ; work         ;
+;                |sign_div_unsign_1nh:divider| ; 99 (0)            ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Test|colour_signals:inst2|flappy_bird:FB|lpm_divide:Mod4|lpm_divide_3bm:auto_generated|sign_div_unsign_1nh:divider                       ; work         ;
+;                   |alt_u_div_d8f:divider|    ; 99 (99)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Test|colour_signals:inst2|flappy_bird:FB|lpm_divide:Mod4|lpm_divide_3bm:auto_generated|sign_div_unsign_1nh:divider|alt_u_div_d8f:divider ; work         ;
+;          |lpm_divide:Mod5|                   ; 181 (0)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Test|colour_signals:inst2|flappy_bird:FB|lpm_divide:Mod5                                                                                 ; work         ;
+;             |lpm_divide_voo:auto_generated|  ; 181 (0)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Test|colour_signals:inst2|flappy_bird:FB|lpm_divide:Mod5|lpm_divide_voo:auto_generated                                                   ; work         ;
+;                |abs_divider_0dg:divider|     ; 181 (12)          ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Test|colour_signals:inst2|flappy_bird:FB|lpm_divide:Mod5|lpm_divide_voo:auto_generated|abs_divider_0dg:divider                           ; work         ;
+;                   |alt_u_div_l8f:divider|    ; 156 (156)         ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Test|colour_signals:inst2|flappy_bird:FB|lpm_divide:Mod5|lpm_divide_voo:auto_generated|abs_divider_0dg:divider|alt_u_div_l8f:divider     ; work         ;
 ;                   |lpm_abs_7v9:my_abs_num|   ; 13 (13)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Test|colour_signals:inst2|flappy_bird:FB|lpm_divide:Mod5|lpm_divide_voo:auto_generated|abs_divider_0dg:divider|lpm_abs_7v9:my_abs_num    ; work         ;
 ;       |ground:G|                             ; 371 (99)          ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Test|colour_signals:inst2|ground:G                                                                                                       ; work         ;
 ;          |lpm_divide:Mod0|                   ; 170 (0)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Test|colour_signals:inst2|ground:G|lpm_divide:Mod0                                                                                       ; work         ;
@@ -299,26 +303,41 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +--------+--------------+---------+--------------+--------------+--------------------+--------------------------------------------------+
 
 
+Encoding Type:  One-Hot
++---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; State Machine - |Test|MOUSE:inst4|mouse_state                                                                                                                                                           ;
++-------------------------------+---------------------------+--------------------------+-------------------------------+---------------------------+--------------------------+---------------------------+
+; Name                          ; mouse_state.INPUT_PACKETS ; mouse_state.WAIT_CMD_ACK ; mouse_state.WAIT_OUTPUT_READY ; mouse_state.LOAD_COMMAND2 ; mouse_state.LOAD_COMMAND ; mouse_state.INHIBIT_TRANS ;
++-------------------------------+---------------------------+--------------------------+-------------------------------+---------------------------+--------------------------+---------------------------+
+; mouse_state.INHIBIT_TRANS     ; 0                         ; 0                        ; 0                             ; 0                         ; 0                        ; 0                         ;
+; mouse_state.LOAD_COMMAND      ; 0                         ; 0                        ; 0                             ; 0                         ; 1                        ; 1                         ;
+; mouse_state.LOAD_COMMAND2     ; 0                         ; 0                        ; 0                             ; 1                         ; 0                        ; 1                         ;
+; mouse_state.WAIT_OUTPUT_READY ; 0                         ; 0                        ; 1                             ; 0                         ; 0                        ; 1                         ;
+; mouse_state.WAIT_CMD_ACK      ; 0                         ; 1                        ; 0                             ; 0                         ; 0                        ; 1                         ;
+; mouse_state.INPUT_PACKETS     ; 1                         ; 0                        ; 0                             ; 0                         ; 0                        ; 1                         ;
++-------------------------------+---------------------------+--------------------------+-------------------------------+---------------------------+--------------------------+---------------------------+
+
+
 +--------------------------------------------------------------------------------------------------------------+
 ; User-Specified and Inferred Latches                                                                          ;
 +---------------------------------------------------------------+---------------------+------------------------+
 ; Latch Name                                                    ; Latch Enable Signal ; Free of Timing Hazards ;
 +---------------------------------------------------------------+---------------------+------------------------+
 ; colour_signals:inst2|flappy_bird:FB|flappy_bird_colours[2][3] ; GND                 ; yes                    ;
-; colour_signals:inst2|ground:G|ground_colours[2][0]            ; GND                 ; yes                    ;
 ; colour_signals:inst2|ground:G|ground_colours[2][3]            ; GND                 ; yes                    ;
 ; colour_signals:inst2|ground:G|ground_colours[2][2]            ; GND                 ; yes                    ;
 ; colour_signals:inst2|ground:G|ground_colours[2][1]            ; GND                 ; yes                    ;
-; colour_signals:inst2|flappy_bird:FB|flappy_bird_colours[2][0] ; GND                 ; yes                    ;
-; colour_signals:inst2|flappy_bird:FB|flappy_bird_colours[2][1] ; GND                 ; yes                    ;
+; colour_signals:inst2|ground:G|ground_colours[2][0]            ; GND                 ; yes                    ;
 ; colour_signals:inst2|flappy_bird:FB|flappy_bird_colours[2][2] ; GND                 ; yes                    ;
+; colour_signals:inst2|flappy_bird:FB|flappy_bird_colours[2][1] ; GND                 ; yes                    ;
+; colour_signals:inst2|flappy_bird:FB|flappy_bird_colours[2][0] ; GND                 ; yes                    ;
 ; colour_signals:inst2|flappy_bird:FB|flappy_bird_colours[1][3] ; GND                 ; yes                    ;
-; colour_signals:inst2|ground:G|ground_colours[1][3]            ; GND                 ; yes                    ;
-; colour_signals:inst2|ground:G|ground_colours[1][2]            ; GND                 ; yes                    ;
 ; colour_signals:inst2|ground:G|ground_colours[1][1]            ; GND                 ; yes                    ;
 ; colour_signals:inst2|ground:G|ground_colours[1][0]            ; GND                 ; yes                    ;
-; colour_signals:inst2|flappy_bird:FB|flappy_bird_colours[1][1] ; GND                 ; yes                    ;
+; colour_signals:inst2|ground:G|ground_colours[1][3]            ; GND                 ; yes                    ;
+; colour_signals:inst2|ground:G|ground_colours[1][2]            ; GND                 ; yes                    ;
 ; colour_signals:inst2|flappy_bird:FB|flappy_bird_colours[1][2] ; GND                 ; yes                    ;
+; colour_signals:inst2|flappy_bird:FB|flappy_bird_colours[1][1] ; GND                 ; yes                    ;
 ; colour_signals:inst2|flappy_bird:FB|flappy_bird_colours[1][0] ; GND                 ; yes                    ;
 ; colour_signals:inst2|ground:G|ground_colours[0][3]            ; GND                 ; yes                    ;
 ; colour_signals:inst2|flappy_bird:FB|flappy_bird_colours[0][3] ; GND                 ; yes                    ;
@@ -336,12 +355,17 @@ Note: All latches listed above may not be present at the end of synthesis due to
 +-----------------------------------------------------------+--------------------------------------------------------------------+
 ; Register name                                             ; Reason for Removal                                                 ;
 +-----------------------------------------------------------+--------------------------------------------------------------------+
+; MOUSE:inst4|CHAROUT[4..7]                                 ; Stuck at VCC due to stuck port data_in                             ;
+; MOUSE:inst4|CHAROUT[3]                                    ; Stuck at GND due to stuck port data_in                             ;
+; MOUSE:inst4|CHAROUT[2]                                    ; Stuck at VCC due to stuck port data_in                             ;
+; MOUSE:inst4|CHAROUT[0,1]                                  ; Stuck at GND due to stuck port data_in                             ;
+; MOUSE:inst4|SHIFTOUT[10]                                  ; Stuck at VCC due to stuck port data_in                             ;
 ; colour_signals:inst2|flappy_bird:FB|flappy_y_motion[2..8] ; Merged with colour_signals:inst2|flappy_bird:FB|flappy_y_motion[9] ;
 ; colour_signals:inst2|flappy_bird:FB|flappy_y_motion[0]    ; Stuck at GND due to stuck port data_in                             ;
 ; colour_signals:inst2|flappy_bird:FB|flappy_y_pos[0]       ; Stuck at GND due to stuck port data_in                             ;
 ; colour_signals:inst2|flappy_bird:FB|flappy_y_motion[1]    ; Stuck at VCC due to stuck port data_in                             ;
 ; VGA_SYNC:inst1|pixel_row[9]                               ; Stuck at GND due to stuck port data_in                             ;
-; Total Number of Removed Registers = 11                    ;                                                                    ;
+; Total Number of Removed Registers = 20                    ;                                                                    ;
 +-----------------------------------------------------------+--------------------------------------------------------------------+
 
 
@@ -350,14 +374,29 @@ Note: All latches listed above may not be present at the end of synthesis due to
 +----------------------------------------------+-------+
 ; Statistic                                    ; Value ;
 +----------------------------------------------+-------+
-; Total registers                              ; 67    ;
+; Total registers                              ; 132   ;
 ; Number of registers using Synchronous Clear  ; 0     ;
 ; Number of registers using Synchronous Load   ; 0     ;
-; Number of registers using Asynchronous Clear ; 0     ;
+; Number of registers using Asynchronous Clear ; 16    ;
 ; Number of registers using Asynchronous Load  ; 0     ;
-; Number of registers using Clock Enable       ; 21    ;
+; Number of registers using Clock Enable       ; 66    ;
 ; Number of registers using Preset             ; 0     ;
 +----------------------------------------------+-------+
+
+
++--------------------------------------------------+
+; Inverted Register Statistics                     ;
++----------------------------------------+---------+
+; Inverted Register                      ; Fan out ;
++----------------------------------------+---------+
+; MOUSE:inst4|send_char                  ; 3       ;
+; MOUSE:inst4|SHIFTOUT[3]                ; 1       ;
+; MOUSE:inst4|SHIFTOUT[5]                ; 1       ;
+; MOUSE:inst4|SHIFTOUT[6]                ; 1       ;
+; MOUSE:inst4|SHIFTOUT[7]                ; 1       ;
+; MOUSE:inst4|SHIFTOUT[8]                ; 1       ;
+; Total number of inverted registers = 6 ;         ;
++----------------------------------------+---------+
 
 
 +-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
@@ -365,16 +404,16 @@ Note: All latches listed above may not be present at the end of synthesis due to
 +--------------------+-----------+---------------+----------------------+------------------------+------------+---------------------------------------------------------------------+
 ; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output                                          ;
 +--------------------+-----------+---------------+----------------------+------------------------+------------+---------------------------------------------------------------------+
-; 3:1                ; 10 bits   ; 20 LEs        ; 10 LEs               ; 10 LEs                 ; Yes        ; |Test|VGA_SYNC:inst1|v_count[8]                                     ;
-; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Test|colour_signals:inst2|flappy_bird:FB|flappy_y_motion[9]        ;
+; 3:1                ; 10 bits   ; 20 LEs        ; 10 LEs               ; 10 LEs                 ; Yes        ; |Test|VGA_SYNC:inst1|v_count[9]                                     ;
+; 3:1                ; 2 bits    ; 4 LEs         ; 2 LEs                ; 2 LEs                  ; Yes        ; |Test|colour_signals:inst2|flappy_bird:FB|flappy_y_motion[1]        ;
 ; 3:1                ; 4 bits    ; 8 LEs         ; 8 LEs                ; 0 LEs                  ; No         ; |Test|colour_signals:inst2|blue[3]                                  ;
-; 3:1                ; 4 bits    ; 8 LEs         ; 8 LEs                ; 0 LEs                  ; No         ; |Test|colour_signals:inst2|green[2]                                 ;
-; 3:1                ; 3 bits    ; 6 LEs         ; 6 LEs                ; 0 LEs                  ; No         ; |Test|colour_signals:inst2|red[2]                                   ;
-; 10:1               ; 4 bits    ; 24 LEs        ; 24 LEs               ; 0 LEs                  ; No         ; |Test|colour_signals:inst2|ground:G|ground_colours[1][3]            ;
+; 3:1                ; 4 bits    ; 8 LEs         ; 8 LEs                ; 0 LEs                  ; No         ; |Test|colour_signals:inst2|green[1]                                 ;
+; 3:1                ; 3 bits    ; 6 LEs         ; 6 LEs                ; 0 LEs                  ; No         ; |Test|colour_signals:inst2|red[1]                                   ;
+; 10:1               ; 4 bits    ; 24 LEs        ; 24 LEs               ; 0 LEs                  ; No         ; |Test|colour_signals:inst2|ground:G|ground_colours[0][2]            ;
 ; 11:1               ; 3 bits    ; 21 LEs        ; 21 LEs               ; 0 LEs                  ; No         ; |Test|colour_signals:inst2|ground:G|ground_colours[2][0]            ;
-; 12:1               ; 3 bits    ; 24 LEs        ; 21 LEs               ; 3 LEs                  ; No         ; |Test|colour_signals:inst2|ground:G|ground_colours[1][2]            ;
-; 45:1               ; 2 bits    ; 60 LEs        ; 60 LEs               ; 0 LEs                  ; No         ; |Test|colour_signals:inst2|flappy_bird:FB|flappy_bird_colours[1][0] ;
-; 61:1               ; 2 bits    ; 80 LEs        ; 76 LEs               ; 4 LEs                  ; No         ; |Test|colour_signals:inst2|flappy_bird:FB|flappy_bird_colours[1][1] ;
+; 12:1               ; 3 bits    ; 24 LEs        ; 21 LEs               ; 3 LEs                  ; No         ; |Test|colour_signals:inst2|ground:G|ground_colours[2][3]            ;
+; 45:1               ; 2 bits    ; 60 LEs        ; 60 LEs               ; 0 LEs                  ; No         ; |Test|colour_signals:inst2|flappy_bird:FB|flappy_bird_colours[0][3] ;
+; 61:1               ; 2 bits    ; 80 LEs        ; 76 LEs               ; 4 LEs                  ; No         ; |Test|colour_signals:inst2|flappy_bird:FB|flappy_bird_colours[1][2] ;
 +--------------------+-----------+---------------+----------------------+------------------------+------------+---------------------------------------------------------------------+
 
 
@@ -945,9 +984,15 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus II 64-Bit Analysis & Synthesis
     Info: Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edition
-    Info: Processing started: Mon May 16 00:33:25 2022
+    Info: Processing started: Mon May 16 01:36:53 2022
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off Test -c Test
 Warning (20028): Parallel compilation is not licensed and has been disabled
+Info (12021): Found 2 design units, including 1 entities, in source file /documents/github/pilk/project/miniprojectresources/sevenseg.vhd
+    Info (12022): Found design unit 1: BCD2SevenSeg-arc1
+    Info (12023): Found entity 1: BCD2SevenSeg
+Info (12021): Found 2 design units, including 1 entities, in source file /documents/github/pilk/project/miniprojectresources/mouse.vhd
+    Info (12022): Found design unit 1: MOUSE-behavior
+    Info (12023): Found entity 1: MOUSE
 Info (12021): Found 2 design units, including 1 entities, in source file /documents/github/pilk/sam/vga_sync.vhd
     Info (12022): Found design unit 1: VGA_SYNC-a
     Info (12023): Found entity 1: VGA_SYNC
@@ -1064,6 +1109,12 @@ Info (10041): Inferred latch for "flappy_bird_colours[0][0]" at drawings.vhd(249
 Info (10041): Inferred latch for "flappy_bird_colours[0][1]" at drawings.vhd(249)
 Info (10041): Inferred latch for "flappy_bird_colours[0][2]" at drawings.vhd(249)
 Info (10041): Inferred latch for "flappy_bird_colours[0][3]" at drawings.vhd(249)
+Info (12128): Elaborating entity "MOUSE" for hierarchy "MOUSE:inst4"
+Warning (10036): Verilog HDL or VHDL warning at mouse.vhd(25): object "CHARIN" assigned a value but never read
+Warning (10492): VHDL Process Statement warning at mouse.vhd(151): signal "CHAROUT" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at mouse.vhd(155): signal "CHAROUT" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at mouse.vhd(156): signal "CHAROUT" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
+Warning (10492): VHDL Process Statement warning at mouse.vhd(157): signal "CHAROUT" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
 Info (278001): Inferred 7 megafunctions from design logic
     Info (278004): Inferred divider/modulo megafunction ("lpm_divide") from the following logic: "colour_signals:inst2|flappy_bird:FB|Mod5"
     Info (278004): Inferred divider/modulo megafunction ("lpm_divide") from the following logic: "colour_signals:inst2|flappy_bird:FB|Mod2"
@@ -1155,20 +1206,23 @@ Info (12133): Instantiated megafunction "colour_signals:inst2|flappy_bird:FB|lpm
     Info (12134): Parameter "LPM_DREPRESENTATION" = "UNSIGNED"
 Info (13014): Ignored 21 buffer(s)
     Info (13016): Ignored 21 CARRY_SUM buffer(s)
+Info (13000): Registers with preset signals will power-up high
+Info (13003): DEV_CLRn pin will set, and not reset, register with preset signal due to NOT Gate Push-Back
 Info (286030): Timing-Driven Synthesis is running
 Info (17016): Found the following redundant logic cells in design
     Info (17048): Logic cell "colour_signals:inst2|flappy_bird:FB|Add7~20"
 Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
     Info (16011): Adding 1 node(s), including 0 DDIO, 1 PLL, 0 transceiver and 0 LCELL
-Info (21057): Implemented 1516 device resources after synthesis - the final resource count might be different
-    Info (21058): Implemented 1 input pins
-    Info (21059): Implemented 14 output pins
-    Info (21061): Implemented 1500 logic cells
+Info (21057): Implemented 1643 device resources after synthesis - the final resource count might be different
+    Info (21058): Implemented 14 input pins
+    Info (21059): Implemented 52 output pins
+    Info (21060): Implemented 2 bidirectional pins
+    Info (21061): Implemented 1574 logic cells
     Info (21065): Implemented 1 PLLs
-Info: Quartus II 64-Bit Analysis & Synthesis was successful. 0 errors, 2 warnings
-    Info: Peak virtual memory: 4651 megabytes
-    Info: Processing ended: Mon May 16 00:33:34 2022
-    Info: Elapsed time: 00:00:09
+Info: Quartus II 64-Bit Analysis & Synthesis was successful. 0 errors, 7 warnings
+    Info: Peak virtual memory: 4652 megabytes
+    Info: Processing ended: Mon May 16 01:37:03 2022
+    Info: Elapsed time: 00:00:10
     Info: Total CPU time (on all processors): 00:00:09
 
 

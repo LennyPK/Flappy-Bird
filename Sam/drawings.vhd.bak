@@ -15,7 +15,7 @@ use work.rgb_functions.all;
 entity ground is
   port (clk, vert_sync : in std_logic;
         pixel_row, pixel_column : in std_logic_vector(9 downto 0);
-        red, green, blue : out std_logic_vector(3 downto 0));
+        colour_info : out rgb_array);
 end entity ground;
 
 -- Ground architecture.
@@ -42,7 +42,7 @@ ground_height <= std_logic_vector(to_unsigned(g_size*20 - 1, 10));
 
 -- Row and column integer values for the ground.
 pixel_col_int <= (to_integer(unsigned(pixel_column))) mod (g_size*7);
-pixel_row_int <= (to_integer(unsigned(pixel_row)) - 459);
+pixel_row_int <= (to_integer(unsigned(pixel_row))) mod (g_size*20);
 
 -- y position for the ground.
 ground_y_pos <= std_logic_vector(to_unsigned(459, 10));
@@ -72,12 +72,10 @@ ground_colours <= -- Row one
                   -- Row seven
                   rgbint_to_rgb4(215, 168, 76) when (pixel_col_int >= g_size*0 and pixel_col_int <= g_size-1+g_size*6 and (pixel_row_int >= g_size*6 and pixel_row_int <= -1+g_size*7)) else
                   -- Rows eight to twenty
-                  rgbint_to_rgb4(222, 216, 149) when (pixel_col_int >= g_size*0 and pixel_col_int <= g_size-1+g_size*6 and (pixel_row_int >= g_size*8 and pixel_row_int <= -1+g_size*20));
+                  rgbint_to_rgb4(222, 216, 149) when (pixel_col_int >= g_size*0 and pixel_col_int <= g_size-1+g_size*6 and (pixel_row_int >= g_size*7 and pixel_row_int <= -1+g_size*20));
 
 -- Set output colour channel values for the current pixel.
-Red <= (ground_on and ground_colours(0));
-Green <= (ground_on and ground_colours(1));
-Blue <= (ground_on and ground_colours(2));
+colour_info <= (ground_on and ground_colours) or (not flappy_bird_on and "----");
 
 end architecture behaviour;
 
@@ -98,7 +96,7 @@ use work.rgb_functions.all;
 entity pipe_one is
   port (clk, vert_sync : in std_logic;
         pixel_row, pixel_column : in std_logic_vector(9 downto 0);
-        red, green, blue : out std_logic_vector(3 downto 0));
+        colour_info : out rgb_array);
 end entity pipe_one;
 
 -- Pipe architecture.
@@ -123,8 +121,8 @@ begin
   
 -- Width and height for the rectangle of pipe one.
 p_size <= 2;
-pipe_width <= std_logic_vector(to_unsigned(fb_size*17 - 1, 11));
-pipe_height <= std_logic_vector(to_unsigned(fb_size*17 - 1, 10));
+pipe_width <= std_logic_vector(to_unsigned(p_size*17 - 1, 11));
+pipe_height <= std_logic_vector(to_unsigned(p_size*17 - 1, 10));
 
 -- Rules for drawing the pipe are as follows:
 -- The central region needs to have a random height, and consists of the ends of both pipes.
@@ -153,7 +151,7 @@ use work.rgb_functions.all;
 entity flappy_bird is
   port (clk, vert_sync : in std_logic;
         pixel_row, pixel_column : in std_logic_vector(9 downto 0);
-        red, green, blue : out std_logic_vector(3 downto 0));
+        colour_info : out rgb_array);
 end entity flappy_bird;
 
 -- Flappy bird architecture.
@@ -317,9 +315,7 @@ flappy_bird_colours <= -- Row one
                        --rgbint_to_rgb4(47, 143, 127) when (pixel_col_int >= fb_size*10 and pixel_col_int <= fb_size-1+fb_size*16 and (pixel_row_int >= fb_size*11 and pixel_row_int <= -1+fb_size*12));
                       			
 -- Set output colour channel values for the current pixel.
-Red <= (flappy_bird_on and flappy_bird_colours(0));-- or (not flappy_bird_on and "0000");
-Green <= (flappy_bird_on and flappy_bird_colours(1));-- or (not flappy_bird_on and "0000");
-Blue <= (flappy_bird_on and flappy_bird_colours(2));-- or (not flappy_bird_on and "0000");
+colour_info <= (flappy_bird_on and flappy_bird_colours) or (not flappy_bird_on and "----");
 -- "0010" "1000" "0111"
 
 move_bird: process (vert_sync)

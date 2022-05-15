@@ -3,15 +3,21 @@ use IEEE.std_logic_1164.all;
 use IEEE.numeric_std.all;
 
 package rgb_functions is
-    
-  function rgbint_to_rgb4(red_in : integer; green_in : integer; blue_in : integer)
-  return rgb_array;
+  
+-- Custom type to store the converted rgb values in std_logic_vector format.
+type rgb_array is array(0 to 2) of std_logic_vector(3 downto 0);
+  
+function rgbint_to_rgb4(red_in : integer; green_in : integer; blue_in : integer)
+return rgb_array;
+
+function pass(input_array : rgb_array)
+return 
   
 end package rgb_functions;
 
 package body rgb_functions is
   
-  -- Function to convert integer rgb values to 4 bit standard logic vectors.
+-- Function to convert integer rgb values to 4 bit standard logic vectors.
 function rgbint_to_rgb4(red_in : integer; green_in : integer; blue_in : integer) 
   return rgb_array is
   

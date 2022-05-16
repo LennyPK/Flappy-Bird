@@ -4,9 +4,10 @@ use IEEE.numeric_std.all;
 
 library work;
 use work.rgb_functions.all;
+use work.pixel_functions.all;
 
 entity colour_signals is
-  port (clk, vert_sync : in std_logic;
+  port (vert_sync : in std_logic;
         pixel_row, pixel_column : in std_logic_vector(9 downto 0);
         red, green, blue : out std_logic_vector(3 downto 0));
 end entity colour_signals;

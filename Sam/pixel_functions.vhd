@@ -17,7 +17,6 @@ return boolean;
   
 end package pixel_functions;
 
-
 package body pixel_functions is
   
 -- Function to set square pixel regions based on a scaling factor.

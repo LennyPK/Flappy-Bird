@@ -2,6 +2,7 @@
 ------------------------------------------------------------
 -- Background main colour.
 ------------------------------------------------------------
+
 -- Default libraries.
 library IEEE;
 use IEEE.std_logic_1164.all;
@@ -24,11 +25,13 @@ architecture behaviour of background_m is
 constant sky_blue : rgb := (112, 197, 206);
 begin
   colour_info <= rgbint_to_rgb4(sky_blue);
+  
 end architecture behaviour;
 
 ------------------------------------------------------------
 -- Background detailing.
 ------------------------------------------------------------
+
 -- Default libraries.
 library IEEE;
 use IEEE.std_logic_1164.all;
@@ -79,17 +82,16 @@ begin
 b_size <= 3;
 g_size <= 2; -- From ground sizing.
 background_width <= std_logic_vector(to_unsigned(640 - 1, 11));
-background_height <= std_logic_vector(to_unsigned(b_size*46 - 1, 10));
+background_height <= std_logic_vector(to_unsigned(b_size*23 - 1, 10));
 
 -- Row and column integer values for the background details.
 pixel_col_int <= (to_integer(unsigned(pixel_column)) mod (b_size*69) - to_integer(unsigned(background_x_pos)) mod (b_size*69)) mod (b_size*69);
-pixel_row_int <= (to_integer(unsigned(pixel_row)) mod (b_size*46) - to_integer(unsigned(background_y_pos)) mod (b_size*46)) mod (b_size*46);
+pixel_row_int <= (to_integer(unsigned(pixel_row)) mod (b_size*23) - to_integer(unsigned(background_y_pos)) mod (b_size*23)) mod (b_size*23);
 
 -- y position for the background details.
---
-background_x_pos <= std_logic_vector(to_unsigned(50, 11));
+background_x_motion <= std_logic_vector(to_signed(-1, 11));
 background_y_pos <= std_logic_vector(to_unsigned(480 - b_size*46 - g_size*20, 10));
-			---------------
+			
 -- Enable background details drawing only within allowed regions.
 background_on <= '1' when ((unsigned(pixel_row) <= unsigned(background_y_pos) + unsigned(background_height))
           and (unsigned(pixel_row) >= unsigned(background_y_pos))) 
@@ -127,7 +129,6 @@ background_on <= '1' when ((unsigned(pixel_row) <= unsigned(background_y_pos) + 
           and not pixel_region(pixel_col_int, pixel_row_int, 13, 14, 8, 9, b_size)
           else '0';
             
-            --------------------------
 background_colours <= -- Row one
                       rgbint_to_rgb4(cloud_white) when pixel_region(pixel_col_int, pixel_row_int, 54, 59, 0, 1, b_size) else
                       -- Row two
@@ -340,8 +341,105 @@ background_colours <= -- Row one
                       rgbint_to_rgb4(blue) when pixel_region(pixel_col_int, pixel_row_int, 61, 61, 22, 23, b_size) else
                       rgbint_to_rgb4(light_blue) when pixel_region(pixel_col_int, pixel_row_int, 62, 62, 22, 23, b_size) else
                       rgbint_to_rgb4(light_green) when pixel_region(pixel_col_int, pixel_row_int, 63, 67, 22, 23, b_size) else
-                      rgbint_to_rgb4(blue) when pixel_region(pixel_col_int, pixel_row_int, 68, 68, 22, 23, b_size) else
-                      -- Row twenty-four
+                      rgbint_to_rgb4(blue) when pixel_region(pixel_col_int, pixel_row_int, 68, 68, 22, 23, b_size);
+
+-- Set output colour channel values for the current pixel.
+colour_info(0) <= background_colours(0) when background_on = '1' else
+                  "0000";
+colour_info(1) <= background_colours(1) when background_on = '1' else
+                  "0000";
+colour_info(2) <= background_colours(2) when background_on = '1' else
+                  "0000";
+                   
+-- Move the background                     
+move_background: process (vert_sync)
+  variable vsync_count : natural range 0 to 4 := 0;
+begin
+  -- Move the background details once per 5 vsync.
+  if (rising_edge(vert_sync)) then
+    if vsync_count = 4 then
+      vsync_count := 0;
+    else
+      vsync_count := vsync_count + 1;
+    
+    -- Calculate the position of the background details ready for the next frame.
+    background_x_pos <= std_logic_vector(unsigned(background_x_pos) + unsigned(background_x_motion));
+    end if;
+  end if;
+
+end process move_background;
+
+end architecture behaviour;
+
+------------------------------------------------------------
+-- Background detailing part 2 (experimental)
+------------------------------------------------------------
+-- Default libraries.
+library IEEE;
+use IEEE.std_logic_1164.all;
+use IEEE.numeric_std.all;
+
+-- Custom libraries.
+library work;
+use work.rgb_functions.all;
+use work.pixel_functions.all;
+
+-- Background details entity.
+entity background_d2 is
+  port (vert_sync : in std_logic;
+        pixel_row, pixel_column : in std_logic_vector(9 downto 0);
+        colour_info : out rgb_array);
+end entity background_d2;
+
+-- Background details architecture.
+architecture behaviour of background_d2 is
+  
+-- Colour assignments.
+constant cloud_white : rgb := (234, 252, 219);
+constant grey : rgb := (226, 240, 210);
+constant blue : rgb := (157, 216, 219);
+constant light_blue : rgb := (186, 230, 198); 
+constant dark_green : rgb := (115, 200, 136);
+constant green : rgb := (130, 227, 140);
+constant light_green : rgb := (219, 241, 202);
+
+-- Background details image signals.
+signal background_on : std_logic;
+signal background_colours : rgb_array;
+signal background_width : std_logic_vector(10 downto 0);
+signal background_height : std_logic_vector(9 downto 0);
+signal b_size : integer range 0 to 7;
+signal g_size : integer range 0 to 7;
+
+signal background_x_pos : std_logic_vector(10 downto 0);
+signal background_y_pos : std_logic_vector(9 downto 0);
+signal background_x_motion : std_logic_vector(10 downto 0);
+
+signal pixel_col_int : screen_width;
+signal pixel_row_int : screen_height;
+
+begin 
+  
+-- Width and height for the background details.
+b_size <= 3;
+g_size <= 2; -- From ground sizing.
+background_width <= std_logic_vector(to_unsigned(640 - 1, 11));
+background_height <= std_logic_vector(to_unsigned(b_size*23 - 1, 10));
+
+-- Row and column integer values for the background details.
+pixel_col_int <= (to_integer(unsigned(pixel_column)) mod (b_size*69) - to_integer(unsigned(background_x_pos)) mod (b_size*69)) mod (b_size*69);
+pixel_row_int <= (to_integer(unsigned(pixel_row)) mod (b_size*23) - to_integer(unsigned(background_y_pos)) mod (b_size*23)) mod (b_size*23);
+
+-- y position for the background details.
+background_x_motion <= std_logic_vector(to_unsigned(-1, 11));
+background_y_pos <= std_logic_vector(to_unsigned(480 - b_size*23 - g_size*20, 10));
+
+-- Enable background details drawing only within allowed regions.
+background_on <= '1' when ((unsigned(pixel_row) <= unsigned(background_y_pos) + unsigned(background_height))
+          and (unsigned(pixel_row) >= unsigned(background_y_pos))) 
+          else '0';
+
+background_colours <= -- Row twenty-four
                       rgbint_to_rgb4(grey) when pixel_region(pixel_col_int, pixel_row_int, 0, 1, 23, 24, b_size) else
                       rgbint_to_rgb4(cloud_white) when pixel_region(pixel_col_int, pixel_row_int, 2, 2, 23, 24, b_size) else
                       rgbint_to_rgb4(grey) when pixel_region(pixel_col_int, pixel_row_int, 3, 6, 23, 24, b_size) else
@@ -864,21 +962,31 @@ background_colours <= -- Row one
                       rgbint_to_rgb4(green) when pixel_region(pixel_col_int, pixel_row_int, 66, 68, 38, 39, b_size) else
                       -- Rows forty to forty-six
                       rgbint_to_rgb4(green) when pixel_region(pixel_col_int, pixel_row_int, 0, 68, 39, 46, b_size);
+                      
+-- Set output colour channel values for the current pixel.
+colour_info(0) <= background_colours(0) when background_on = '1' else
+                  "0000";
+colour_info(1) <= background_colours(1) when background_on = '1' else
+                  "0000";
+colour_info(2) <= background_colours(2) when background_on = '1' else
+                  "0000";
                    
--- UNFINISHED                      
+-- Move the background                     
 move_background: process (vert_sync)
+  variable vsync_count : natural range 0 to 4 := 0;
 begin
-  -- Move the background details once per vsync.
+  -- Move the background details once per 5 vsync.
   if (rising_edge(vert_sync)) then
-    -- Bounce off the edge of the screen.
-    --if (flappy_y_pos >= std_logic_vector(to_unsigned(479, 10) - unsigned(flappy_bird_height))) then
-      --flappy_y_motion <= std_logic_vector(to_signed(-2, 10));
-    --elsif (flappy_y_pos <= flappy_bird_height) then
-      --flappy_y_motion <= std_logic_vector(to_unsigned(2, 10));
-    --end if;
-    -- Compute the position of the flappy bird for the next frame.
-    --flappy_y_pos <= std_logic_vector(unsigned(flappy_y_pos) + unsigned(flappy_y_motion));
+    if vsync_count = 4 then
+      vsync_count := 0;
+    else
+      vsync_count := vsync_count + 1;
+    
+    -- Calculate the position of the background details ready for the next frame.
+    background_x_pos <= std_logic_vector(unsigned(background_x_pos) + unsigned(background_x_motion));
+    end if;
   end if;
+
 end process move_background;
 
 end architecture behaviour;
@@ -886,6 +994,7 @@ end architecture behaviour;
 ------------------------------------------------------------
 -- Ground object.
 ------------------------------------------------------------
+
 -- Default libraries.
 library IEEE;
 use IEEE.std_logic_1164.all;
@@ -937,12 +1046,12 @@ ground_width <= std_logic_vector(to_unsigned(640 - 1, 11));
 ground_height <= std_logic_vector(to_unsigned(g_size*20 - 1, 10));
 
 -- Row and column integer values for the ground.
-pixel_col_int <= (to_integer(unsigned(pixel_column))) mod (g_size*7);
+pixel_col_int <= (to_integer(unsigned(pixel_column)) mod (g_size*7) - to_integer(unsigned(ground_x_pos)) mod (g_size*7)) mod (g_size*7);
 pixel_row_int <= (to_integer(unsigned(pixel_row)) mod (g_size*20) - to_integer(unsigned(ground_y_pos)) mod (g_size*20)) mod (g_size*20);
 
 -- y position for the ground and setting x motion.
 ground_y_pos <= std_logic_vector(to_unsigned(480 - g_size*20, 10));
-ground_x_motion <= std_logic_vector(to_unsigned(2, 11));
+ground_x_motion <= std_logic_vector(to_signed(-1, 11));
 			
 -- Enable ground drawing only within allowed regions.
 ground_on <= '1' when ((unsigned(pixel_row) <= unsigned(ground_y_pos) + unsigned(ground_height))
@@ -978,7 +1087,8 @@ colour_info(1) <= ground_colours(1) when ground_on = '1' else
                   "0000";
 colour_info(2) <= ground_colours(2) when ground_on = '1' else
                   "0000";
-                  
+        
+-- Ground movement.          
 move_ground: process (vert_sync)
 begin
   -- Update the ground position once per vsync.
@@ -995,6 +1105,7 @@ end architecture behaviour;
 ------------------------------------------------------------
 -- Pipe object.
 ------------------------------------------------------------
+
 -- Default libraries.
 library IEEE;
 use IEEE.std_logic_1164.all;
@@ -1008,7 +1119,7 @@ use work.pixel_functions.all;
 -- Pipe object entity.
 entity pipe is
   port (vert_sync : in std_logic;
-        pipe_no : in integer range 0 to 15;
+        pipe_no : in integer;
         pixel_row, pixel_column : in std_logic_vector(9 downto 0);
         colour_info : out rgb_array);
 end entity pipe;
@@ -1029,6 +1140,7 @@ signal pipe_colours : rgb_array;
 signal pipe_width : std_logic_vector(10 downto 0);
 signal pipe_height : std_logic_vector(9 downto 0);
 signal p_size : integer range 0 to 7;
+signal g_size : integer range 0 to 7;
 
 signal pipe_x_pos : std_logic_vector(10 downto 0);
 signal pipe_y_pos : std_logic_vector(9 downto 0);
@@ -1047,11 +1159,18 @@ begin
   
 -- Width and height for the rectangle of pipe one.
 p_size <= 2;
-r <= 90;
-pipe_width <= std_logic_vector(to_unsigned(p_size*17 - 1, 11));
-pipe_height <= std_logic_vector(to_unsigned(p_size*17 - 1, 10));
+g_size <= 2;
+r <= 90 / p_size;
+pipe_width <= std_logic_vector(to_unsigned(p_size*26 - 1, 11));
+pipe_height <= std_logic_vector(to_unsigned(480 - g_size*20 - 1, 10));
 k <= 40;
 
+-- Row and column integer values for the pipe.
+pixel_col_int <= (to_integer(unsigned(pixel_column)) mod (p_size*26) - to_integer(unsigned(pipe_x_pos)) mod (p_size*26)) mod (p_size*26);
+pixel_row_int <= (to_integer(unsigned(pixel_row)));
+
+pipe_y_pos <= std_logic_vector(to_unsigned(0, 10));
+pipe_x_motion <= std_logic_vector(to_signed(-1, 11));
 -- Rules for drawing the pipe are as follows:
 -- The central region needs to have a random height, and consists of the ends of both pipes.
 -- The ends of both pipes needs to remain at a constant distance from each other provided the difficulty does not change.
@@ -1154,20 +1273,37 @@ pipe_colours <= -- Upper top part of pipe.
                 -- Row thirteen
                 rgbint_to_rgb4(eggplant) when pixel_region(pixel_col_int, pixel_row_int, 0, 25, r + k + 25, r + k + 26, p_size) else
                 -- Lower bottom part of pipe.
-                rgbint_to_rgb4(eggplant) when pixel_region(pixel_col_int, pixel_row_int, 1, 1, r + k + 26, 480, p_size) else
-                rgbint_to_rgb4(light_green) when pixel_region(pixel_col_int, pixel_row_int, 2, 2, r + k + 26, 480, p_size) else
-                rgbint_to_rgb4(yellow_green) when pixel_region(pixel_col_int, pixel_row_int, 3, 3, r + k + 26, 480, p_size) else
-                rgbint_to_rgb4(light_green) when pixel_region(pixel_col_int, pixel_row_int, 4, 6, r + k + 26, 480, p_size) else
-                rgbint_to_rgb4(green) when pixel_region(pixel_col_int, pixel_row_int, 7, 7, r + k + 26, 480, p_size) else
-                rgbint_to_rgb4(light_green) when pixel_region(pixel_col_int, pixel_row_int, 8, 8, r + k + 26, 480, p_size) else
-                rgbint_to_rgb4(green) when pixel_region(pixel_col_int, pixel_row_int, 9, 19, r + k + 26, 480, p_size) else
-                rgbint_to_rgb4(dark_green) when pixel_region(pixel_col_int, pixel_row_int, 20, 20, r + k + 26, 480, p_size) else
-                rgbint_to_rgb4(green) when pixel_region(pixel_col_int, pixel_row_int, 21, 21, r + k + 26, 480, p_size) else
-                rgbint_to_rgb4(dark_green) when pixel_region(pixel_col_int, pixel_row_int, 22, 23, r + k + 26, 480, p_size) else
-                rgbint_to_rgb4(eggplant) when pixel_region(pixel_col_int, pixel_row_int, 24, 24, r + k + 26, 480, p_size);
+                rgbint_to_rgb4(eggplant) when pixel_region(pixel_col_int, pixel_row_int, 1, 1, r + k + 26, 480 / p_size, p_size) else
+                rgbint_to_rgb4(light_green) when pixel_region(pixel_col_int, pixel_row_int, 2, 2, r + k + 26, 480 / p_size, p_size) else
+                rgbint_to_rgb4(yellow_green) when pixel_region(pixel_col_int, pixel_row_int, 3, 3, r + k + 26, 480 / p_size, p_size) else
+                rgbint_to_rgb4(light_green) when pixel_region(pixel_col_int, pixel_row_int, 4, 6, r + k + 26, 480 / p_size, p_size) else
+                rgbint_to_rgb4(green) when pixel_region(pixel_col_int, pixel_row_int, 7, 7, r + k + 26, 480 / p_size, p_size) else
+                rgbint_to_rgb4(light_green) when pixel_region(pixel_col_int, pixel_row_int, 8, 8, r + k + 26, 480 / p_size, p_size) else
+                rgbint_to_rgb4(green) when pixel_region(pixel_col_int, pixel_row_int, 9, 19, r + k + 26, 480 / p_size, p_size) else
+                rgbint_to_rgb4(dark_green) when pixel_region(pixel_col_int, pixel_row_int, 20, 20, r + k + 26, 480 / p_size, p_size) else
+                rgbint_to_rgb4(green) when pixel_region(pixel_col_int, pixel_row_int, 21, 21, r + k + 26, 480 / p_size, p_size) else
+                rgbint_to_rgb4(dark_green) when pixel_region(pixel_col_int, pixel_row_int, 22, 23, r + k + 26, 480 / p_size, p_size) else
+                rgbint_to_rgb4(eggplant) when pixel_region(pixel_col_int, pixel_row_int, 24, 24, r + k + 26, 480 / p_size, p_size);
 
--- PIPE MOVEMENT HERE
+-- Set output colour channel values for the current pixel.
+colour_info(0) <= pipe_colours(0) when pipe_on = '1' else
+                  "0000";
+colour_info(1) <= pipe_colours(1) when pipe_on = '1' else
+                  "0000";
+colour_info(2) <= pipe_colours(2) when pipe_on = '1' else
+                  "0000";
 
+-- Pipe movement.
+move_pipe: process (vert_sync)
+begin
+  -- Update the pipe position once per vsync.
+  if (rising_edge(vert_sync)) then
+    
+    -- Calculate the position of the pipe ready for the next frame.
+    pipe_x_pos <= std_logic_vector(unsigned(pipe_x_pos) + unsigned(pipe_x_motion));
+
+  end if;
+end process move_pipe;
 
 end architecture behaviour;
 
@@ -1316,7 +1452,7 @@ flappy_bird_colours <= -- Row one
                        rgbint_to_rgb4(eggplant) when pixel_region(pixel_col_int, pixel_row_int, 6, 6, 5, 6, fb_size) else
                        rgbint_to_rgb4(dark_yellow) when pixel_region(pixel_col_int, pixel_row_int, 7, 8, 5, 6, fb_size) else
                        rgbint_to_rgb4(eggplant) when pixel_region(pixel_col_int, pixel_row_int, 9, 9, 5, 6, fb_size) else
-                       rgbint_to_rgb4(coconut) when pixel_region(pixel_col_int, pixel_row_int, 10, 10, 5, 6, fb_size) else
+                       rgbint_to_rgb4(grey) when pixel_region(pixel_col_int, pixel_row_int, 10, 10, 5, 6, fb_size) else
                        rgbint_to_rgb4(white) when pixel_region(pixel_col_int, pixel_row_int, 11, 13, 5, 6, fb_size) else
                        rgbint_to_rgb4(eggplant) when pixel_region(pixel_col_int, pixel_row_int, 14, 14, 5, 6, fb_size) else
                        -- Row seven
@@ -1362,6 +1498,7 @@ colour_info(1) <= flappy_bird_colours(1) when flappy_bird_on = '1' else
 colour_info(2) <= flappy_bird_colours(2) when flappy_bird_on = '1' else
                   "0000";
 
+-- Flappy bird movement.
 move_bird: process (vert_sync)
 begin
   -- Update the flappy bird position once per vsync.

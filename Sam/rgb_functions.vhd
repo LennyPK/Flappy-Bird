@@ -7,10 +7,10 @@ package rgb_functions is
 -- Custom type to store the converted rgb values in std_logic_vector format.
 type rgb_array is array(0 to 2) of std_logic_vector(3 downto 0);
 
-subtype rgb_value is integer range 0 to 255;
+subtype rgb_value is natural range 0 to 255;
 type rgb is array(0 to 2) of rgb_value;
   
-function rgbint_to_rgb4(red_in : rgb_value; green_in : rgb_value; blue_in : rgb_value)
+function rgbint_to_rgb4(colour_in : rgb)
 return rgb_array;
                                                   
 end package rgb_functions;
@@ -18,7 +18,7 @@ end package rgb_functions;
 package body rgb_functions is
   
 -- Function to convert integer rgb values to 4 bit standard logic vectors.
-function rgbint_to_rgb4(red_in : integer; green_in : integer; blue_in : integer) 
+function rgbint_to_rgb4(colour_in : rgb) 
   return rgb_array is
   
   -- Variables to store calculated values.
@@ -29,8 +29,8 @@ function rgbint_to_rgb4(red_in : integer; green_in : integer; blue_in : integer)
 begin
   
   -- Red channel.
-  if red_in >= 15 then
-    tmp_red := red_in - 15;
+  if colour_in(0) >= 15 then
+    tmp_red := colour_in(0) - 15;
   else tmp_red := 0;
   end if;
     
@@ -38,8 +38,8 @@ begin
   colour_out(0) := std_logic_vector(to_unsigned(tmp_red, 4));
   
   -- Green channel.
-  if green_in >= 15 then
-    tmp_green := green_in - 15;
+  if colour_in(1) >= 15 then
+    tmp_green := colour_in(1) - 15;
   else tmp_green := 0;
   end if;
     
@@ -47,8 +47,8 @@ begin
   colour_out(1) := std_logic_vector(to_unsigned(tmp_green, 4));
   
   -- Blue channel.
-  if blue_in >= 15 then
-    tmp_blue := blue_in - 15;
+  if colour_in(2) >= 15 then
+    tmp_blue := colour_in(2) - 15;
   else tmp_blue := 0;
   end if;
     

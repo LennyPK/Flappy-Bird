@@ -17,7 +17,8 @@ architecture structure of colour_signals is
   end component background_m; 
 
   component ground is
-    port (pixel_row, pixel_column : in std_logic_vector(9 downto 0);
+    port (vert_sync : in std_logic;
+          pixel_row, pixel_column : in std_logic_vector(9 downto 0);
           colour_info : out rgb_array);
   end component ground;
   
@@ -37,7 +38,7 @@ begin
     port map (colour_info => b_array);
   
   G: ground
-    port map (pixel_row => pixel_row, pixel_column => pixel_column, colour_info => g_array);
+    port map (vert_sync => vert_sync, pixel_row => pixel_row, pixel_column => pixel_column, colour_info => g_array);
       
   FB: flappy_bird
     port map (vert_sync => vert_sync, pixel_row => pixel_row, pixel_column => pixel_column, colour_info => fb_array);

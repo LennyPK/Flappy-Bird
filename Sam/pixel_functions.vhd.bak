@@ -30,7 +30,7 @@ function pixel_region(pixel_col_int : screen_width; pixel_row_int : screen_heigh
   variable draw : boolean := false;
 begin
 
-  if ((pixel_col_int >= size*l_bound and pixel_col_int <= size-1+size*r_bound) and (pixel_row_int >= size*t_bound and pixel_row_int < -1+size*b_bound)) then
+  if ((pixel_col_int >= size*l_bound and pixel_col_int <= size-1+size*r_bound) and (pixel_row_int >= size*t_bound and pixel_row_int <= -1+size*b_bound)) then
     draw := true;
   end if;
   

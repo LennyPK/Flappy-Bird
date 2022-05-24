@@ -82,16 +82,16 @@ begin
 b_size <= 3;
 g_size <= 2; -- From ground sizing.
 background_width <= std_logic_vector(to_unsigned(640 - 1, 11));
-background_height <= std_logic_vector(to_unsigned(b_size*23 - 1, 10));
+background_height <= std_logic_vector(to_unsigned(b_size*46 - 1, 10));
 
 -- Row and column integer values for the background details.
 pixel_col_int <= (to_integer(unsigned(pixel_column)) mod (b_size*69) - to_integer(unsigned(background_x_pos)) mod (b_size*69)) mod (b_size*69);
-pixel_row_int <= (to_integer(unsigned(pixel_row)) mod (b_size*23) - to_integer(unsigned(background_y_pos)) mod (b_size*23)) mod (b_size*23);
+pixel_row_int <= (to_integer(unsigned(pixel_row)) mod (b_size*46) - to_integer(unsigned(background_y_pos)) mod (b_size*46)) mod (b_size*46);
 
 -- y position for the background details.
-background_x_motion <= std_logic_vector(to_signed(-1, 11));
+background_x_motion <= std_logic_vector(to_unsigned(-1, 11));
 background_y_pos <= std_logic_vector(to_unsigned(480 - b_size*46 - g_size*20, 10));
-			
+			---------------
 -- Enable background details drawing only within allowed regions.
 background_on <= '1' when ((unsigned(pixel_row) <= unsigned(background_y_pos) + unsigned(background_height))
           and (unsigned(pixel_row) >= unsigned(background_y_pos))) 
@@ -129,6 +129,7 @@ background_on <= '1' when ((unsigned(pixel_row) <= unsigned(background_y_pos) + 
           and not pixel_region(pixel_col_int, pixel_row_int, 13, 14, 8, 9, b_size)
           else '0';
             
+            --------------------------
 background_colours <= -- Row one
                       rgbint_to_rgb4(cloud_white) when pixel_region(pixel_col_int, pixel_row_int, 54, 59, 0, 1, b_size) else
                       -- Row two
@@ -341,105 +342,8 @@ background_colours <= -- Row one
                       rgbint_to_rgb4(blue) when pixel_region(pixel_col_int, pixel_row_int, 61, 61, 22, 23, b_size) else
                       rgbint_to_rgb4(light_blue) when pixel_region(pixel_col_int, pixel_row_int, 62, 62, 22, 23, b_size) else
                       rgbint_to_rgb4(light_green) when pixel_region(pixel_col_int, pixel_row_int, 63, 67, 22, 23, b_size) else
-                      rgbint_to_rgb4(blue) when pixel_region(pixel_col_int, pixel_row_int, 68, 68, 22, 23, b_size);
-
--- Set output colour channel values for the current pixel.
-colour_info(0) <= background_colours(0) when background_on = '1' else
-                  "0000";
-colour_info(1) <= background_colours(1) when background_on = '1' else
-                  "0000";
-colour_info(2) <= background_colours(2) when background_on = '1' else
-                  "0000";
-                   
--- Move the background                     
-move_background: process (vert_sync)
-  variable vsync_count : natural range 0 to 4 := 0;
-begin
-  -- Move the background details once per 5 vsync.
-  if (rising_edge(vert_sync)) then
-    if vsync_count = 4 then
-      vsync_count := 0;
-    else
-      vsync_count := vsync_count + 1;
-    
-    -- Calculate the position of the background details ready for the next frame.
-    background_x_pos <= std_logic_vector(unsigned(background_x_pos) + unsigned(background_x_motion));
-    end if;
-  end if;
-
-end process move_background;
-
-end architecture behaviour;
-
-------------------------------------------------------------
--- Background detailing part 2 (experimental)
-------------------------------------------------------------
--- Default libraries.
-library IEEE;
-use IEEE.std_logic_1164.all;
-use IEEE.numeric_std.all;
-
--- Custom libraries.
-library work;
-use work.rgb_functions.all;
-use work.pixel_functions.all;
-
--- Background details entity.
-entity background_d2 is
-  port (vert_sync : in std_logic;
-        pixel_row, pixel_column : in std_logic_vector(9 downto 0);
-        colour_info : out rgb_array);
-end entity background_d2;
-
--- Background details architecture.
-architecture behaviour of background_d2 is
-  
--- Colour assignments.
-constant cloud_white : rgb := (234, 252, 219);
-constant grey : rgb := (226, 240, 210);
-constant blue : rgb := (157, 216, 219);
-constant light_blue : rgb := (186, 230, 198); 
-constant dark_green : rgb := (115, 200, 136);
-constant green : rgb := (130, 227, 140);
-constant light_green : rgb := (219, 241, 202);
-
--- Background details image signals.
-signal background_on : std_logic;
-signal background_colours : rgb_array;
-signal background_width : std_logic_vector(10 downto 0);
-signal background_height : std_logic_vector(9 downto 0);
-signal b_size : integer range 0 to 7;
-signal g_size : integer range 0 to 7;
-
-signal background_x_pos : std_logic_vector(10 downto 0);
-signal background_y_pos : std_logic_vector(9 downto 0);
-signal background_x_motion : std_logic_vector(10 downto 0);
-
-signal pixel_col_int : screen_width;
-signal pixel_row_int : screen_height;
-
-begin 
-  
--- Width and height for the background details.
-b_size <= 3;
-g_size <= 2; -- From ground sizing.
-background_width <= std_logic_vector(to_unsigned(640 - 1, 11));
-background_height <= std_logic_vector(to_unsigned(b_size*23 - 1, 10));
-
--- Row and column integer values for the background details.
-pixel_col_int <= (to_integer(unsigned(pixel_column)) mod (b_size*69) - to_integer(unsigned(background_x_pos)) mod (b_size*69)) mod (b_size*69);
-pixel_row_int <= (to_integer(unsigned(pixel_row)) mod (b_size*23) - to_integer(unsigned(background_y_pos)) mod (b_size*23)) mod (b_size*23);
-
--- y position for the background details.
-background_x_motion <= std_logic_vector(to_signed(-1, 11));
-background_y_pos <= std_logic_vector(to_unsigned(480 - b_size*23 - g_size*20, 10));
-
--- Enable background details drawing only within allowed regions.
-background_on <= '1' when ((unsigned(pixel_row) <= unsigned(background_y_pos) + unsigned(background_height))
-          and (unsigned(pixel_row) >= unsigned(background_y_pos))) 
-          else '0';
-
-background_colours <= -- Row twenty-four
+                      rgbint_to_rgb4(blue) when pixel_region(pixel_col_int, pixel_row_int, 68, 68, 22, 23, b_size) else
+                      -- Row twenty-four
                       rgbint_to_rgb4(grey) when pixel_region(pixel_col_int, pixel_row_int, 0, 1, 23, 24, b_size) else
                       rgbint_to_rgb4(cloud_white) when pixel_region(pixel_col_int, pixel_row_int, 2, 2, 23, 24, b_size) else
                       rgbint_to_rgb4(grey) when pixel_region(pixel_col_int, pixel_row_int, 3, 6, 23, 24, b_size) else
@@ -962,7 +866,7 @@ background_colours <= -- Row twenty-four
                       rgbint_to_rgb4(green) when pixel_region(pixel_col_int, pixel_row_int, 66, 68, 38, 39, b_size) else
                       -- Rows forty to forty-six
                       rgbint_to_rgb4(green) when pixel_region(pixel_col_int, pixel_row_int, 0, 68, 39, 46, b_size);
-                      
+
 -- Set output colour channel values for the current pixel.
 colour_info(0) <= background_colours(0) when background_on = '1' else
                   "0000";
@@ -1187,12 +1091,12 @@ pipe_on <= '1' when ((unsigned(pixel_column) <= unsigned(pipe_x_pos) + unsigned(
           -- Banned regions within rectangular area.
           -- Leftmost column
           and not pixel_region(pixel_col_int, pixel_row_int, 0, 0, 0, r, p_size)
-          and not pixel_region(pixel_col_int, pixel_row_int, 0, 0, r + k + 27, 479, p_size)
+          and not pixel_region(pixel_col_int, pixel_row_int, 0, 0, r + k + 26, 480 - g_size*20, p_size)
           -- Rightmost column
           and not pixel_region(pixel_col_int, pixel_row_int, 25, 25, 0, r, p_size)
-          and not pixel_region(pixel_col_int, pixel_row_int, 25, 25, r + k + 27, 479, p_size)
+          and not pixel_region(pixel_col_int, pixel_row_int, 25, 25, r + k + 26, 480 - g_size*20, p_size)
           -- Central area
-          and not pixel_region(pixel_col_int, pixel_row_int, 0, 25, r + 14, r + k + 12, p_size))  
+          and not pixel_region(pixel_col_int, pixel_row_int, 0, 25, r + 13, r + k + 13, p_size))  
           else '0';
   
 pipe_colours <= -- Upper top part of pipe.

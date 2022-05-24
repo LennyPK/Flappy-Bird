@@ -21,12 +21,6 @@ architecture structure of colour_signals is
           pixel_row, pixel_column : in std_logic_vector(9 downto 0);
           colour_info : out rgb_array);
   end component background_d;
-  
-  component background_d2 is
-    port (vert_sync : in std_logic;
-          pixel_row, pixel_column : in std_logic_vector(9 downto 0);
-          colour_info : out rgb_array);
-  end component background_d2;
 
   component ground is
     port (vert_sync : in std_logic;
@@ -48,8 +42,7 @@ architecture structure of colour_signals is
   end component flappy_bird;
   
 signal b_array : rgb_array; 
-signal bd_array : rgb_array;
-signal bd2_array : rgb_array; 
+signal bd_array : rgb_array; 
 signal g_array : rgb_array;
 signal p_array : rgb_array;
 signal fb_array : rgb_array;
@@ -61,14 +54,20 @@ begin
       
   BD: background_d
     port map (vert_sync => vert_sync, pixel_row => pixel_row, pixel_column => pixel_column, colour_info => bd_array);
-      
-  BD2: background_d2
-    port map (vert_sync => vert_sync, pixel_row => pixel_row, pixel_column => pixel_column, colour_info => bd2_array);
   
   G: ground
     port map (vert_sync => vert_sync, pixel_row => pixel_row, pixel_column => pixel_column, colour_info => g_array);
       
-  P: pipe
+  P1: pipe
+    port map (vert_sync => vert_sync, pipe_no => 1, pixel_row => pixel_row, pixel_column => pixel_column, colour_info => p_array);
+      
+  P2: pipe
+    port map (vert_sync => vert_sync, pipe_no => 1, pixel_row => pixel_row, pixel_column => pixel_column, colour_info => p_array);
+      
+  P3: pipe
+    port map (vert_sync => vert_sync, pipe_no => 1, pixel_row => pixel_row, pixel_column => pixel_column, colour_info => p_array);
+      
+  P4: pipe
     port map (vert_sync => vert_sync, pipe_no => 1, pixel_row => pixel_row, pixel_column => pixel_column, colour_info => p_array);
       
   FB: flappy_bird
@@ -79,19 +78,16 @@ begin
              p_array(0) when p_array(0) /= "0000" else
              g_array(0) when g_array(0) /= "0000" else
              bd_array(0) when bd_array(0) /= "0000" else
-             bd2_array(0) when bd2_array(0) /= "0000" else
              b_array(0);
   tmp_green <= fb_array(1) when fb_array(1) /= "0000" else
                p_array(1) when p_array(1) /= "0000" else
                g_array(1) when g_array(1) /= "0000" else
                bd_array(1) when bd_array(1) /= "0000" else
-               bd2_array(1) when bd2_array(1) /= "0000" else
                b_array(1);
   tmp_blue <= fb_array(2) when fb_array(2) /= "0000" else
               p_array(2) when p_array(2) /= "0000" else
               g_array(2) when g_array(2) /= "0000" else
               bd_array(2) when bd_array(2) /= "0000" else
-              bd2_array(2) when bd2_array(2) /= "0000" else
               b_array(2);
 
   red <= tmp_red;

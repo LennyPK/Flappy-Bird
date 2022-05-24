@@ -58,8 +58,17 @@ begin
   G: ground
     port map (vert_sync => vert_sync, pixel_row => pixel_row, pixel_column => pixel_column, colour_info => g_array);
       
-  P: pipe
+  P1: pipe
     port map (vert_sync => vert_sync, pipe_no => 1, pixel_row => pixel_row, pixel_column => pixel_column, colour_info => p_array);
+      
+  P2: pipe
+    port map (vert_sync => vert_sync, pipe_no => 2, pixel_row => pixel_row, pixel_column => pixel_column, colour_info => p_array);
+      
+  P3: pipe
+    port map (vert_sync => vert_sync, pipe_no => 3, pixel_row => pixel_row, pixel_column => pixel_column, colour_info => p_array);
+      
+  P4: pipe
+    port map (vert_sync => vert_sync, pipe_no => 4, pixel_row => pixel_row, pixel_column => pixel_column, colour_info => p_array);
       
   FB: flappy_bird
     port map (vert_sync => vert_sync, pixel_row => pixel_row, pixel_column => pixel_column, colour_info => fb_array);

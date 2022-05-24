@@ -1070,14 +1070,11 @@ pipe_height <= std_logic_vector(to_unsigned(480 - g_size*20 - 1, 10));
 k <= 40;
 
 -- Row and column integer values for the pipe.
-pixel_col_int <= (to_integer(unsigned(pixel_column)) mod (p_size*26) - to_integer(unsigned(pipe_x_pos)) mod (p_size*26)) mod (p_size*26);
+pixel_col_int <= (to_integer(unsigned(pixel_column)) mod (p_size*26) - to_integer(signed(pipe_x_pos)) mod (p_size*26)) mod (p_size*26);
 pixel_row_int <= (to_integer(unsigned(pixel_row)));
 
--- Reset the pipe position once it goes off of the screen.
---if unsigned(pixel_column) + unsigned(pipe_width) < unsigned(pipe_x_pos))
-
 pipe_y_pos <= std_logic_vector(to_unsigned(0, 10));
-pipe_x_motion <= std_logic_vector(to_signed(-1, 11));
+-- pipe_x_motion <= std_logic_vector(to_signed(-1, 11));
 -- Rules for drawing the pipe are as follows:
 -- The central region needs to have a random height, and consists of the ends of both pipes.
 -- The ends of both pipes needs to remain at a constant distance from each other provided the difficulty does not change.
@@ -1085,8 +1082,8 @@ pipe_x_motion <= std_logic_vector(to_signed(-1, 11));
   
   --pixel information goes here.
   
-pipe_on <= '1' when ((unsigned(pixel_column) <= unsigned(pipe_x_pos) + unsigned(pipe_width))
-          and (unsigned(pixel_column) >= signed(pipe_x_pos))
+pipe_on <= '1' when ((signed(pixel_column) <= signed(pipe_x_pos) + signed(pipe_width))
+          and (signed(pixel_column) >= signed(pipe_x_pos))
           and (unsigned(pixel_row) <= unsigned(pipe_y_pos) + unsigned(pipe_height))
           and (unsigned(pixel_row) >= unsigned(pipe_y_pos))
           
@@ -1204,10 +1201,17 @@ move_pipe: process (vert_sync)
 begin
   -- Update the pipe position once per vsync.
   if (rising_edge(vert_sync)) then
+      
+    -- Reset the pipe position once it goes off of the screen.
+    if (std_logic_vector(signed(pipe_x_pos) + signed(pipe_width)) <= std_logic_vector(to_unsigned(0, 11))) then
+      pipe_x_motion <= std_logic_vector(to_unsigned(600, 11));
+    else
+      pipe_x_motion <= std_logic_vector(to_signed(-1, 11));
+    end if;
     
     -- Calculate the position of the pipe ready for the next frame.
-    pipe_x_pos <= std_logic_vector(unsigned(pipe_x_pos) + unsigned(pipe_x_motion));
-
+    pipe_x_pos <= std_logic_vector(signed(pipe_x_pos) + signed(pipe_x_motion));
+  
   end if;
 end process move_pipe;
 

@@ -1261,7 +1261,7 @@ signal fb_size : integer range 0 to 7;
 signal flappy_x_pos : std_logic_vector(10 downto 0);
 signal flappy_y_pos : std_logic_vector(9 downto 0);
 signal flappy_y_motion : std_logic_vector(9 downto 0);
-signal left_flag, right_flag : std_logic;
+signal left_flag, right_flag, holding : std_logic;
 signal frame_counter : integer range 0 to 255 := 0;
 
 signal pixel_col_int : screen_width;
@@ -1418,18 +1418,25 @@ move_bird: process (vert_sync)
 begin
     -- Update the flappy bird position once per vsync.
     if (rising_edge(vert_sync)) then
+	 
+			if (left_mouse = '0') then
+				holding <= '0';
+			end if;
+			
         -- Bounce of the edge of the screen (for now).
-        if (left_flag = '1') then
+        if (left_flag = '1' and holding = '0') then
+				holding <= '1';
             if  (flappy_y_pos > flappy_bird_height) then
-                flappy_y_motion <= std_logic_vector(to_signed(-2, 10));
+                flappy_y_motion <= std_logic_vector(to_signed(-16, 10));
             else
                 flappy_y_motion <= std_logic_vector(to_unsigned(0, 10));
             end if;
         elsif (frame_counter > 10) then
+		  --elsif (left_flag = '0') then
             if (flappy_y_pos >= std_logic_vector(to_unsigned(479, 10) - unsigned(flappy_bird_height))) then
                 flappy_y_motion <= std_logic_vector(to_unsigned(0, 10));
             else
-                flappy_y_motion <= std_logic_vector(to_unsigned(2, 10));
+                flappy_y_motion <= std_logic_vector(to_unsigned(1, 10));
                 frame_counter <= 0;
             end if;
         else

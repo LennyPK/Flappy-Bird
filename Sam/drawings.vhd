@@ -1233,7 +1233,7 @@ use work.pixel_functions.all;
 
 -- Flappy bird object entity.
 entity flappy_bird is
-  port (vert_sync : in std_logic;
+  port (left_mouse, right_mouse, vert_sync : in std_logic;
         pixel_row, pixel_column : in std_logic_vector(9 downto 0);
         colour_info : out rgb_array);
 end entity flappy_bird;
@@ -1261,6 +1261,8 @@ signal fb_size : integer range 0 to 7;
 signal flappy_x_pos : std_logic_vector(10 downto 0);
 signal flappy_y_pos : std_logic_vector(9 downto 0);
 signal flappy_y_motion : std_logic_vector(9 downto 0);
+signal left_flag, right_flag : std_logic;
+signal frame_counter : integer range 0 to 255 := 0;
 
 signal pixel_col_int : screen_width;
 signal pixel_row_int : screen_height;
@@ -1408,20 +1410,34 @@ colour_info(1) <= flappy_bird_colours(1) when flappy_bird_on = '1' else
 colour_info(2) <= flappy_bird_colours(2) when flappy_bird_on = '1' else
                   "0000";
 
--- Flappy bird movement.
+left_flag <= '1' when left_mouse = '1' else '0';
+right_flag <= '1' when right_mouse = '1' else '0';
+
+--Flappy bird movement.
 move_bird: process (vert_sync)
 begin
-  -- Update the flappy bird position once per vsync.
-  if (rising_edge(vert_sync)) then
-    -- Bounce of the edge of the screen (for now).
-    if (flappy_y_pos >= std_logic_vector(to_unsigned(479, 10) - unsigned(flappy_bird_height))) then
-      flappy_y_motion <= std_logic_vector(to_signed(-2, 10));
-    elsif (flappy_y_pos <= flappy_bird_height) then
-      flappy_y_motion <= std_logic_vector(to_unsigned(2, 10));
-    end if;
-    -- Calculate the position of the flappy bird ready for the next frame.
-    flappy_y_pos <= std_logic_vector(unsigned(flappy_y_pos) + unsigned(flappy_y_motion));
-  end if;
+    -- Update the flappy bird position once per vsync.
+    if (rising_edge(vert_sync)) then
+        -- Bounce of the edge of the screen (for now).
+        if (left_flag = '1') then
+            if  (flappy_y_pos > flappy_bird_height) then
+                flappy_y_motion <= std_logic_vector(to_signed(-2, 10));
+            else
+                flappy_y_motion <= std_logic_vector(to_unsigned(0, 10));
+            end if;
+        elsif (frame_counter > 10) then
+            if (flappy_y_pos >= std_logic_vector(to_unsigned(479, 10) - unsigned(flappy_bird_height))) then
+                flappy_y_motion <= std_logic_vector(to_unsigned(0, 10));
+            else
+                flappy_y_motion <= std_logic_vector(to_unsigned(2, 10));
+                frame_counter <= 0;
+            end if;
+        else
+            flappy_y_motion <= std_logic_vector(to_unsigned(0, 10));
+        end if; 
+        flappy_y_pos <= std_logic_vector(unsigned(flappy_y_pos) + unsigned(flappy_y_motion));
+        frame_counter <= frame_counter + 1;
+        end if;
 end process move_bird;
 
 end architecture behaviour;

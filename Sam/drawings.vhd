@@ -1082,7 +1082,7 @@ hard_mode <= 0 when mode = '0' else
 k <= 70 - 15 * hard_mode;
 
 -- Row and column integer values for the pipe.
-pixel_col_int <= (to_integer(unsigned(pixel_column)) mod (p_size*26) - to_integer(pipe_x_pos) mod (p_size*26)) mod (p_size*26) + 260 * (pipe_no - 1);
+pixel_col_int <= (to_integer(unsigned(pixel_column)) mod (p_size*26) - to_integer(pipe_x_pos) mod (p_size*26)) mod (p_size*26);
 pixel_row_int <= (to_integer(unsigned(pixel_row)));
 
 pipe_y_pos <= std_logic_vector(to_unsigned(0, 10));
@@ -1094,8 +1094,8 @@ pipe_y_pos <= std_logic_vector(to_unsigned(0, 10));
   
   --pixel information goes here.
   
-pipe_on <= '1' when (unsigned(pixel_column) <= unsigned(pipe_x_pos + signed(pipe_width))
-          and (unsigned(pixel_column) >= unsigned(pipe_x_pos))
+pipe_on <= '1' when (unsigned(pixel_column) <= unsigned(pipe_x_pos + signed(pipe_width) + 260 * (pipe_no - 1))
+          and (unsigned(pixel_column) >= unsigned(pipe_x_pos) + 260 * (pipe_no - 1))
           and (unsigned(pixel_row) <= unsigned(pipe_y_pos) + pipe_height)
           and (unsigned(pixel_row) >= unsigned(pipe_y_pos))
           
@@ -1230,14 +1230,20 @@ begin
     tmp := rand(4) XOR rand(3) XOR rand(2) XOR rand(0);
     rand <= tmp & rand(6 downto 1);
     
-    count := count + 1;
+    if hard_mode = '0' then
+      count := 0;
+    elsif hard_mode = '1' then
+      count := count + 1;
+    else 
+      count := 0;
+    end if;
 	 
     -- Reset the pipe position once it goes off of the screen.
     if (std_logic_vector(pipe_x_pos + signed(pipe_width)) <= std_logic_vector(to_signed(0, 11))) then
       r <= random;
       pipe_x_motion <= to_signed(639, 11);
     else
-      pipe_x_motion <= to_signed(-1 - hard_mode * (count / 900), 11);
+      pipe_x_motion <= to_signed(-1 - hard_mode * (count / 1800), 11);
      
     end if;
      -- Calculate the position of the pipe ready for the next frame.

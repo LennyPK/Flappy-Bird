@@ -1006,6 +1006,7 @@ use work.pixel_functions.all;
 entity pipe is
   port (vert_sync : in std_logic;
         pipe_no : in integer;
+        mode : in std_logic;
         pixel_row, pixel_column : in std_logic_vector(9 downto 0);
         colour_info : out rgb_array);
 end entity pipe;
@@ -1038,7 +1039,7 @@ signal pixel_row_int : screen_height;
 -- Distance between the lower top part of the pipe and the upper bottom part of the pipe.
 signal k : integer range 0 to 454;
 
-signal rand : integer;----
+signal r : integer;----
 -- RANGE is 7 * dim for each
 
 begin
@@ -1049,7 +1050,9 @@ g_size <= 2;
 --r <= 90 / p_size;
 pipe_width <= to_unsigned(p_size*26 - 1, 11);
 pipe_height <= to_unsigned(480 - g_size*20 - 1, 10);
-k <= 40;
+
+-- '0' is easy mode and '1' is hard mode.
+k <= 40 - mode * 15;
 
 -- Row and column integer values for the pipe.
 pixel_col_int <= (to_integer(unsigned(pixel_column)) mod (p_size*26) - (to_integer(pipe_x_pos) + (pipe_no - 1)*160) mod (p_size*26)) mod (p_size*26);
@@ -1199,7 +1202,7 @@ begin
       r <= random(40, 479 - 40);
       pipe_x_motion <= to_signed(639, 11);
     else
-      pipe_x_motion <= to_signed(-1, 11);
+      pipe_x_motion <= to_signed(-1 - mode, 11);
     end if;
     
     -- Calculate the position of the pipe ready for the next frame.

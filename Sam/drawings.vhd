@@ -1026,6 +1026,7 @@ use work.pixel_functions.all;
 entity pipe is
   port (vert_sync, mode : in std_logic;
         pipe_no : in integer;
+		  seed : in std_logic_vector(6 downto 0);
         pixel_row, pixel_column : in std_logic_vector(9 downto 0);
         colour_info : out rgb_array);
 end entity pipe;
@@ -1054,12 +1055,13 @@ signal pipe_x_motion : signed(10 downto 0);
 
 signal pixel_col_int : screen_width;
 signal pixel_row_int : screen_height;
-signal rand : std_logic_vector(7 downto 0) := "00000001";
+signal rand : std_logic_vector(6 downto 0) := seed;
 
 -- Distance between the lower top part of the pipe and the upper bottom part of the pipe.
 signal k : integer range 0 to 454;
 
-signal hard_mode, r : integer;----
+signal hard_mode : integer;
+signal r : integer := 240;
 -- RANGE is 7 * dim for each
 
 begin
@@ -1090,8 +1092,8 @@ pipe_y_pos <= std_logic_vector(to_unsigned(0, 10));
   
   --pixel information goes here.
   
-pipe_on <= '1' when (unsigned(pixel_column) <= unsigned(pipe_x_pos + signed(pipe_width))
-          and (unsigned(pixel_column) >= unsigned(pipe_x_pos))
+pipe_on <= '1' when (unsigned(pixel_column) <= unsigned(pipe_x_pos + signed(pipe_width) + to_signed(260 * (pipe_no - 1), 11))
+          and (unsigned(pixel_column) >= unsigned(pipe_x_pos) + to_unsigned(260 * (pipe_no - 1), 11))
           and (unsigned(pixel_row) <= unsigned(pipe_y_pos) + pipe_height)
           and (unsigned(pixel_row) >= unsigned(pipe_y_pos))
           
@@ -1209,12 +1211,12 @@ colour_info(2) <= pipe_colours(2) when pipe_on = '1' else
 move_pipe: process (vert_sync)
   variable tmp : std_logic := '0';
   
-  impure function random(max : integer) return integer is
+  impure function random return integer is
     variable output : integer;
   begin
     output := to_integer(unsigned(rand));
     -- output := output mod max;
-    return output + 40;
+    return output + 20;
   end function random;
 begin
 
@@ -1223,10 +1225,11 @@ begin
       
       -- Update the random number.
     tmp := rand(4) XOR rand(3) XOR rand(2) XOR rand(0);
-    rand <= tmp & rand(7 downto 1);
+    rand <= tmp & rand(6 downto 1);
+	 
     -- Reset the pipe position once it goes off of the screen.
     if (std_logic_vector(pipe_x_pos + signed(pipe_width)) <= std_logic_vector(to_signed(0, 11))) then
-      r <= random(300);
+      r <= random;
       pipe_x_motion <= to_signed(639, 11);
     else
       pipe_x_motion <= to_signed(-1 - hard_mode, 11);
@@ -1282,7 +1285,7 @@ signal flappy_bird_height : std_logic_vector(9 downto 0);
 signal fb_size : integer range 0 to 7;
 
 signal flappy_x_pos : std_logic_vector(10 downto 0);
-signal flappy_y_pos : std_logic_vector(9 downto 0);
+signal flappy_y_pos : std_logic_vector(9 downto 0) := "0011110000";
 signal flappy_y_motion : std_logic_vector(9 downto 0);
 signal left_flag, right_flag, holding : std_logic;
 signal frame_counter : integer range 0 to 255 := 0;
@@ -1441,7 +1444,7 @@ right_flag <= '1' when right_mouse = '1' else '0';
 -- bird_velocity is positive means up and nagative means down
 --frame_rate = 0.001
 move_bird : process (vert_sync)
-
+	variable acceleFlag : integer := 0;
     variable bird_velocity : integer := 0;
     variable frame_rate_time : integer := 1;
 begin
@@ -1449,7 +1452,7 @@ begin
     if (rising_edge(vert_sync)) then
 
         -- reset holding flag if let go
-        if (left_mouse = '0') then
+        if (left_flag = '0') then
             holding <= '0';
         end if;
 
@@ -1458,12 +1461,18 @@ begin
             -- set holding flag
             holding <= '1';
             -- set the bird on an upwards velocity
-            bird_velocity := 10;
+            bird_velocity := 7;
 
         else
             -- decelerate the bird
             -- velociy = velocity minus acceleration times framerate
-            bird_velocity := bird_velocity - (1 * frame_rate_time);
+				
+				if (acceleFlag = 1) then
+					bird_velocity := bird_velocity - (1 * frame_rate_time);
+					acceleFlag := 0;
+				else
+					acceleFlag := 1;
+				end if;
         end if;
 
         -- enact the velocity on the birds position

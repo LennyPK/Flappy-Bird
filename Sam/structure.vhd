@@ -33,6 +33,7 @@ architecture structure of colour_signals is
     port (vert_sync : in std_logic;
           mode : in std_logic;
           pipe_no : in integer;
+			 seed : in std_logic_vector(6 downto 0);
           pixel_row, pixel_column : in std_logic_vector(9 downto 0);
           colour_info : out rgb_array);
   end component pipe;
@@ -47,7 +48,7 @@ signal b_array : rgb_array;
 signal bd_array : rgb_array; 
 signal g_array : rgb_array;
 signal p1_array : rgb_array;
---signal p2_array : rgb_array;
+signal p2_array : rgb_array;
 --signal p3_array : rgb_array;
 --signal p4_array : rgb_array;
 signal fb_array : rgb_array;
@@ -64,10 +65,10 @@ begin
     port map (vert_sync => vert_sync, pixel_row => pixel_row, pixel_column => pixel_column, colour_info => g_array);
       
   P1: pipe
-    port map (vert_sync => vert_sync, mode => mode, pipe_no => 1, pixel_row => pixel_row, pixel_column => pixel_column, colour_info => p1_array);
+    port map (vert_sync => vert_sync, mode => mode, pipe_no => 1, seed => "0000001", pixel_row => pixel_row, pixel_column => pixel_column, colour_info => p1_array);
       
-  --P2: pipe
-  --  port map (vert_sync => vert_sync, mode => mode, pipe_no => 2, pixel_row => pixel_row, pixel_column => pixel_column, colour_info => p2_array);
+  P2: pipe
+    port map (vert_sync => vert_sync, mode => mode, pipe_no => 2, seed => "0010010",  pixel_row => pixel_row, pixel_column => pixel_column, colour_info => p2_array);
       
   --P3: pipe
   --  port map (vert_sync => vert_sync, mode => mode, pipe_no => 3, pixel_row => pixel_row, pixel_column => pixel_column, colour_info => p3_array);
@@ -81,7 +82,7 @@ begin
   -- Assign pixels by the order in which they should appear (higher is "closer" to the user).
   tmp_red <= fb_array(0) when fb_array(0) /= "0000" else
              p1_array(0) when p1_array(0) /= "0000" else
-             --p2_array(0) when p2_array(0) /= "0000" else
+             p2_array(0) when p2_array(0) /= "0000" else
              --p3_array(0) when p3_array(0) /= "0000" else
              --p4_array(0) when p4_array(0) /= "0000" else
              g_array(0) when g_array(0) /= "0000" else
@@ -89,7 +90,7 @@ begin
              b_array(0);
   tmp_green <= fb_array(1) when fb_array(1) /= "0000" else
                p1_array(1) when p1_array(1) /= "0000" else
-               --p2_array(1) when p2_array(1) /= "0000" else
+               p2_array(1) when p2_array(1) /= "0000" else
                --p3_array(1) when p3_array(1) /= "0000" else
                --p4_array(1) when p4_array(1) /= "0000" else
                g_array(1) when g_array(1) /= "0000" else
@@ -97,7 +98,7 @@ begin
                b_array(1);
   tmp_blue <= fb_array(2) when fb_array(2) /= "0000" else
               p1_array(2) when p1_array(2) /= "0000" else
-              --p2_array(2) when p2_array(2) /= "0000" else
+              p2_array(2) when p2_array(2) /= "0000" else
               --p3_array(2) when p3_array(2) /= "0000" else
               --p4_array(2) when p4_array(2) /= "0000" else
               g_array(2) when g_array(2) /= "0000" else

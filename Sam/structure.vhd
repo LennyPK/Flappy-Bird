@@ -25,6 +25,7 @@ architecture structure of colour_signals is
 
   component ground is
     port (vert_sync : in std_logic;
+          pipe_x_motion : in integer;
           pixel_row, pixel_column : in std_logic_vector(9 downto 0);
           colour_info : out rgb_array);
   end component ground;
@@ -33,7 +34,8 @@ architecture structure of colour_signals is
     port (vert_sync : in std_logic;
           mode : in std_logic;
           pipe_no : in integer;
-			 seed : in std_logic_vector(6 downto 0);
+			    seed : in std_logic_vector(6 downto 0);
+			    px_motion : out std_logic_vector(10 downto 0);
           pixel_row, pixel_column : in std_logic_vector(9 downto 0);
           colour_info : out rgb_array);
   end component pipe;
@@ -53,6 +55,7 @@ signal p2_array : rgb_array;
 --signal p4_array : rgb_array;
 signal fb_array : rgb_array;
 signal tmp_red, tmp_green, tmp_blue : std_logic_vector(3 downto 0);
+signal px_motion : std_logic_vector(10 downto 0);
 
 begin
   B: background_m
@@ -62,13 +65,13 @@ begin
     port map (vert_sync => vert_sync, pixel_row => pixel_row, pixel_column => pixel_column, colour_info => bd_array);
   
   G: ground
-    port map (vert_sync => vert_sync, pixel_row => pixel_row, pixel_column => pixel_column, colour_info => g_array);
+    port map (vert_sync => vert_sync, pipe_x_motion => to_integer(px_motion) pixel_row => pixel_row, pixel_column => pixel_column, colour_info => g_array);
       
   P1: pipe
-    port map (vert_sync => vert_sync, mode => mode, pipe_no => 1, seed => "0000001", pixel_row => pixel_row, pixel_column => pixel_column, colour_info => p1_array);
+    port map (vert_sync => vert_sync, mode => mode, pipe_no => 1, seed => "0000001", pixel_row => pixel_row, pixel_column => pixel_column, px_motion => px_motion, colour_info => p1_array);
       
   P2: pipe
-    port map (vert_sync => vert_sync, mode => mode, pipe_no => 2, seed => "0010010",  pixel_row => pixel_row, pixel_column => pixel_column, colour_info => p2_array);
+    port map (vert_sync => vert_sync, mode => mode, pipe_no => 2, seed => "0011010", pixel_row => pixel_row, pixel_column => pixel_column, px_motion => px_motion, colour_info => p2_array);
       
   --P3: pipe
   --  port map (vert_sync => vert_sync, mode => mode, pipe_no => 3, pixel_row => pixel_row, pixel_column => pixel_column, colour_info => p3_array);

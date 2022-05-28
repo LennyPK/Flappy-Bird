@@ -71,6 +71,7 @@ signal g_size : integer range 0 to 7;
 
 signal background_x_pos : std_logic_vector(10 downto 0);
 signal background_y_pos : std_logic_vector(9 downto 0);
+signal background_x_motion : std_logic_vector(10 downto 0);
 
 signal pixel_col_int : screen_width;
 signal pixel_row_int : screen_height;
@@ -88,6 +89,7 @@ pixel_col_int <= (to_integer(unsigned(pixel_column)) mod (b_size*69) - to_intege
 pixel_row_int <= (to_integer(unsigned(pixel_row)) mod (b_size*46) - to_integer(unsigned(background_y_pos)) mod (b_size*46)) mod (b_size*46);
 
 -- y position for the background details.
+background_x_motion <= std_logic_vector(to_signed(-1, 11));
 background_y_pos <= std_logic_vector(to_unsigned(480 - b_size*46 - g_size*20, 10));
 			---------------
 -- Enable background details drawing only within allowed regions.
@@ -863,7 +865,8 @@ background_colours <= -- Row one
                       rgbint_to_rgb4(dark_green) when pixel_region(pixel_col_int, pixel_row_int, 65, 65, 38, 39, b_size) else
                       rgbint_to_rgb4(green) when pixel_region(pixel_col_int, pixel_row_int, 66, 68, 38, 39, b_size) else
                       -- Rows forty to forty-six
-                      rgbint_to_rgb4(green) when pixel_region(pixel_col_int, pixel_row_int, 0, 68, 39, 46, b_size);
+                      rgbint_to_rgb4(green) when pixel_region(pixel_col_int, pixel_row_int, 0, 68, 39, 46, b_size) else
+                      rgbint_to_rgb4(cloud_white);
 
 -- Set output colour channel values for the current pixel.
 colour_info(0) <= background_colours(0) when background_on = '1' else
@@ -873,6 +876,24 @@ colour_info(1) <= background_colours(1) when background_on = '1' else
 colour_info(2) <= background_colours(2) when background_on = '1' else
                   "0000";
                    
+-- Move the background                     
+move_background: process (vert_sync)
+  variable vsync_count : natural range 0 to 4 := 0;
+begin
+  -- Move the background details once per 5 vsync.
+  if (rising_edge(vert_sync)) then
+    if vsync_count = 19 then
+      vsync_count := 0;
+    else
+      vsync_count := vsync_count + 1;
+    
+    -- Calculate the position of the background details ready for the next frame.
+    background_x_pos <= std_logic_vector(unsigned(background_x_pos) + unsigned(background_x_motion));
+    end if;
+  end if;
+
+end process move_background;
+
 end architecture behaviour;
                   
 ------------------------------------------------------------
@@ -892,6 +913,7 @@ use work.pixel_functions.all;
 -- Ground object entity.
 entity ground is
   port (vert_sync : in std_logic;
+        pipe_x_motion : in integer;
         pixel_row, pixel_column : in std_logic_vector(9 downto 0);
         colour_info : out rgb_array);
 end entity ground;
@@ -935,7 +957,7 @@ pixel_row_int <= (to_integer(unsigned(pixel_row)) mod (g_size*20) - to_integer(u
 
 -- y position for the ground and setting x motion.
 ground_y_pos <= std_logic_vector(to_unsigned(480 - g_size*20, 10));
-ground_x_motion <= std_logic_vector(to_signed(-1, 11));
+ground_x_motion <= std_logic_vector(to_signed(pipe_x_motion, 11));
 			
 -- Enable ground drawing only within allowed regions.
 ground_on <= '1' when ((unsigned(pixel_row) <= unsigned(ground_y_pos) + unsigned(ground_height))
@@ -962,7 +984,8 @@ ground_colours <= -- Row one
                   -- Row seven
                   rgbint_to_rgb4(orange) when pixel_region(pixel_col_int, pixel_row_int, 0, 6, 6, 7, g_size) else
                   -- Rows eight to twenty
-                  rgbint_to_rgb4(sand) when pixel_region(pixel_col_int, pixel_row_int, 0, 6, 7, 20, g_size);
+                  rgbint_to_rgb4(sand) when pixel_region(pixel_col_int, pixel_row_int, 0, 6, 7, 20, g_size) else
+                  rgbint_to_rgb4(eggplant);
 
 -- Set output colour channel values for the current pixel.
 colour_info(0) <= ground_colours(0) when ground_on = '1' else
@@ -994,8 +1017,6 @@ end architecture behaviour;
 library IEEE;
 use IEEE.std_logic_1164.all;
 use IEEE.numeric_std.all;
-use IEEE.math_real.uniform;
-use IEEE.math_real.round;
 
 -- Custom libraries.
 library work;
@@ -1004,9 +1025,10 @@ use work.pixel_functions.all;
 
 -- Pipe object entity.
 entity pipe is
-  port (vert_sync : in std_logic;
-        mode : in std_logic;
+  port (vert_sync, mode : in std_logic;
         pipe_no : in integer;
+		    seed : in std_logic_vector(6 downto 0);
+		    px_motion : out signed(10 downto 0);
         pixel_row, pixel_column : in std_logic_vector(9 downto 0);
         colour_info : out rgb_array);
 end entity pipe;
@@ -1035,13 +1057,13 @@ signal pipe_x_motion : signed(10 downto 0);
 
 signal pixel_col_int : screen_width;
 signal pixel_row_int : screen_height;
+signal rand : std_logic_vector(6 downto 0) := seed;
 
 -- Distance between the lower top part of the pipe and the upper bottom part of the pipe.
 signal k : integer range 0 to 454;
 
-signal r : integer;----
--- If mode is high then its hard mode
 signal hard_mode : integer;
+signal r : integer := 240;
 -- RANGE is 7 * dim for each
 
 begin
@@ -1055,12 +1077,12 @@ pipe_height <= to_unsigned(480 - g_size*20 - 1, 10);
 
 -- '0' is easy mode and '1' is hard mode.
 hard_mode <= 0 when mode = '0' else
-             1 when mode = '1';
+             1;
              
-k <= 40 - 15 * hard_mode;
+k <= 70 - 15 * hard_mode;
 
 -- Row and column integer values for the pipe.
-pixel_col_int <= (to_integer(unsigned(pixel_column)) mod (p_size*26) - (to_integer(pipe_x_pos) + (pipe_no - 1)*160) mod (p_size*26)) mod (p_size*26);
+pixel_col_int <= (to_integer(unsigned(pixel_column)) mod (p_size*26) - to_integer(pipe_x_pos) mod (p_size*26)) mod (p_size*26) + 260 * (pipe_no - 1);
 pixel_row_int <= (to_integer(unsigned(pixel_row)));
 
 pipe_y_pos <= std_logic_vector(to_unsigned(0, 10));
@@ -1072,9 +1094,9 @@ pipe_y_pos <= std_logic_vector(to_unsigned(0, 10));
   
   --pixel information goes here.
   
-pipe_on <= '1' when ((signed(pixel_column) <= to_signed(to_integer(pipe_x_pos) + (pipe_no - 1)*160, 10) + signed(pipe_width))
-          and (signed(pixel_column) >= to_signed(to_integer(pipe_x_pos) + (pipe_no - 1)*160, 10))
-          and (unsigned(pixel_row) <= unsigned(pipe_y_pos) + unsigned(pipe_height))
+pipe_on <= '1' when (unsigned(pixel_column) <= unsigned(pipe_x_pos + signed(pipe_width))
+          and (unsigned(pixel_column) >= unsigned(pipe_x_pos))
+          and (unsigned(pixel_row) <= unsigned(pipe_y_pos) + pipe_height)
           and (unsigned(pixel_row) >= unsigned(pipe_y_pos))
           
           -- Banned regions within rectangular area.
@@ -1176,7 +1198,8 @@ pipe_colours <= -- Upper top part of pipe.
                 rgbint_to_rgb4(dark_green) when pixel_region(pixel_col_int, pixel_row_int, 20, 20, r + k + 26, 480 / p_size, p_size) else
                 rgbint_to_rgb4(green) when pixel_region(pixel_col_int, pixel_row_int, 21, 21, r + k + 26, 480 / p_size, p_size) else
                 rgbint_to_rgb4(dark_green) when pixel_region(pixel_col_int, pixel_row_int, 22, 23, r + k + 26, 480 / p_size, p_size) else
-                rgbint_to_rgb4(eggplant) when pixel_region(pixel_col_int, pixel_row_int, 24, 24, r + k + 26, 480 / p_size, p_size);
+                rgbint_to_rgb4(eggplant) when pixel_region(pixel_col_int, pixel_row_int, 24, 24, r + k + 26, 480 / p_size, p_size) else
+                rgbint_to_rgb4(eggplant);
 
 -- Set output colour channel values for the current pixel.
 colour_info(0) <= pipe_colours(0) when pipe_on = '1' else
@@ -1188,42 +1211,42 @@ colour_info(2) <= pipe_colours(2) when pipe_on = '1' else
 
 -- Pipe movement.
 move_pipe: process (vert_sync)
-
-  -- Pseudorandom number generator between 0 and max (up to 512).
-  
-  variable rand : std_logic_vector(8 downto 0) := "000000001";
   variable tmp : std_logic := '0';
+  variable count : integer := 0;
   
-  impure function random(max : integer) return integer is
+  impure function random return integer is
     variable output : integer;
   begin
     output := to_integer(unsigned(rand));
-    output := output mod max;
-    return output;
+    -- output := output mod max;
+    return output + 20;
   end function random;
-
 begin
-  
-  -- Update the random number.
-  tmp := rand(7) XOR rand(5) XOR rand(4) XOR rand(2) XOR rand(0);
-  rand := tmp & rand(8 downto 1);
-  
+
   -- Update the pipe position once per vsync.
   if (rising_edge(vert_sync)) then
       
+      -- Update the random number.
+    tmp := rand(4) XOR rand(3) XOR rand(2) XOR rand(0);
+    rand <= tmp & rand(6 downto 1);
+    
+    count = count + 1;
+	 
     -- Reset the pipe position once it goes off of the screen.
     if (std_logic_vector(pipe_x_pos + signed(pipe_width)) <= std_logic_vector(to_signed(0, 11))) then
-      r <= random(439);
+      r <= random;
       pipe_x_motion <= to_signed(639, 11);
     else
-      pipe_x_motion <= to_signed(-1 - hard_mode, 11);
+      pipe_x_motion <= to_signed(-1 - hard_mode * (count / 900), 11);
+     
     end if;
-    
-    -- Calculate the position of the pipe ready for the next frame.
-    pipe_x_pos <= pipe_x_pos + pipe_x_motion;
-  
+     -- Calculate the position of the pipe ready for the next frame.
+      pipe_x_pos <= pipe_x_pos + pipe_x_motion;
   end if;
+
 end process move_pipe;
+
+px_motion <= pipe_x_motion;
 
 end architecture behaviour;
 
@@ -1269,9 +1292,10 @@ signal flappy_bird_height : std_logic_vector(9 downto 0);
 signal fb_size : integer range 0 to 7;
 
 signal flappy_x_pos : std_logic_vector(10 downto 0);
-signal flappy_y_pos : signed(9 downto 0) := to_signed(300, 10);
-signal flappy_y_motion : signed(9 downto 0);
+signal flappy_y_pos : std_logic_vector(9 downto 0) := "0011110000";
+signal flappy_y_motion : std_logic_vector(9 downto 0);
 signal left_flag, right_flag, holding : std_logic;
+signal frame_counter : integer range 0 to 255 := 0;
 
 signal pixel_col_int : screen_width;
 signal pixel_row_int : screen_height;
@@ -1409,7 +1433,8 @@ flappy_bird_colours <= -- Row one
                        rgbint_to_rgb4(saffron) when pixel_region(pixel_col_int, pixel_row_int, 5, 9, 10, 11, fb_size) else
                        rgbint_to_rgb4(eggplant) when pixel_region(pixel_col_int, pixel_row_int, 10, 14, 10, 11, fb_size) else
                        -- Row twelve
-                       rgbint_to_rgb4(eggplant) when pixel_region(pixel_col_int, pixel_row_int, 5, 9, 11, 12, fb_size);
+                       rgbint_to_rgb4(eggplant) when pixel_region(pixel_col_int, pixel_row_int, 5, 9, 11, 12, fb_size) else
+                       rgbint_to_rgb4(eggplant);
                       			
 -- Set output colour channel values for the current pixel.
 colour_info(0) <= flappy_bird_colours(0) when flappy_bird_on = '1' else
@@ -1426,7 +1451,7 @@ right_flag <= '1' when right_mouse = '1' else '0';
 -- bird_velocity is positive means up and nagative means down
 --frame_rate = 0.001
 move_bird : process (vert_sync)
-
+	variable acceleFlag : integer := 0;
     variable bird_velocity : integer := 0;
     variable frame_rate_time : integer := 1;
 begin
@@ -1434,7 +1459,7 @@ begin
     if (rising_edge(vert_sync)) then
 
         -- reset holding flag if let go
-        if (left_mouse = '0') then
+        if (left_flag = '0') then
             holding <= '0';
         end if;
 
@@ -1443,39 +1468,40 @@ begin
             -- set holding flag
             holding <= '1';
             -- set the bird on an upwards velocity
-            bird_velocity := 12;
+            bird_velocity := 7;
 
         else
             -- decelerate the bird
             -- velociy = velocity minus acceleration times framerate
-            bird_velocity := bird_velocity - (1 * frame_rate_time);
+				
+				if (acceleFlag = 1) then
+					bird_velocity := bird_velocity - (1 * frame_rate_time);
+					acceleFlag := 0;
+				else
+					acceleFlag := 1;
+				end if;
         end if;
 
         -- enact the velocity on the birds position
-        flappy_y_pos <= flappy_y_pos - bird_velocity * frame_rate_time;
+        flappy_y_pos <= std_logic_vector(unsigned(flappy_y_pos) - bird_velocity * frame_rate_time);
 
         -- if the bird is above or below the screen, bring it in bounds, and halt all velocity
-        --if (flappy_y_pos > flappy_bird_height) then
-        --    flappy_y_pos <= std_logic_vector(to_signed(0, 10));
-          --        bird_velocity := 0;
-        --end if;
-        if (flappy_y_pos >= to_signed(439, 10) - signed(flappy_bird_height)) then
-          bird_velocity := -bird_velocity;
-          flappy_y_pos <= flappy_y_pos - bird_velocity * frame_rate_time;
+        if (flappy_y_pos >= std_logic_vector(to_unsigned(439, 10) - unsigned(flappy_bird_height))) then
+          bird_velocity := 1;
+          flappy_y_pos <= std_logic_vector(unsigned(flappy_y_pos) - bird_velocity * frame_rate_time);
           --flappy_y_pos <= std_logic_vector(to_unsigned(479, 10));
-        elsif (flappy_y_pos <= to_signed(0, 10)) then
-          bird_velocity := 0;
+        elsif (flappy_y_pos <= std_logic_vector(to_unsigned(0, 10))) then
+          bird_velocity := -bird_velocity;
           flappy_y_pos <= std_logic_vector(unsigned(flappy_y_pos) - bird_velocity * frame_rate_time);
           --flappy_y_pos <= std_logic_vector(to_unsigned(0, 10));
+        -- else 
+        --     bird_velocity := 0;
+        --     flappy_y_pos <= std_logic_vector(unsigned(flappy_y_pos) - bird_velocity * frame_rate_time);
         end if;
-        --    flappy_y_pos <= std_logic_vector(to_unsigned(479, 10) - unsigned(flappy_bird_height));
-            --    bird_velocity := 0;
-        --end if;
 
     end if;
 end process move_bird;
 
 end architecture behaviour;
-
 
 

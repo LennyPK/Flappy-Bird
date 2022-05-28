@@ -89,7 +89,7 @@ pixel_col_int <= (to_integer(unsigned(pixel_column)) mod (b_size*69) - to_intege
 pixel_row_int <= (to_integer(unsigned(pixel_row)) mod (b_size*46) - to_integer(unsigned(background_y_pos)) mod (b_size*46)) mod (b_size*46);
 
 -- y position for the background details.
-background_x_motion <= std_logic_vector(to_unsigned(-1, 11));
+background_x_motion <= std_logic_vector(to_signed(-1, 11));
 background_y_pos <= std_logic_vector(to_unsigned(480 - b_size*46 - g_size*20, 10));
 			---------------
 -- Enable background details drawing only within allowed regions.
@@ -882,7 +882,7 @@ move_background: process (vert_sync)
 begin
   -- Move the background details once per 5 vsync.
   if (rising_edge(vert_sync)) then
-    if vsync_count = 4 then
+    if vsync_count = 19 then
       vsync_count := 0;
     else
       vsync_count := vsync_count + 1;
@@ -913,6 +913,7 @@ use work.pixel_functions.all;
 -- Ground object entity.
 entity ground is
   port (vert_sync : in std_logic;
+        pipe_x_motion : in integer;
         pixel_row, pixel_column : in std_logic_vector(9 downto 0);
         colour_info : out rgb_array);
 end entity ground;
@@ -956,7 +957,7 @@ pixel_row_int <= (to_integer(unsigned(pixel_row)) mod (g_size*20) - to_integer(u
 
 -- y position for the ground and setting x motion.
 ground_y_pos <= std_logic_vector(to_unsigned(480 - g_size*20, 10));
-ground_x_motion <= std_logic_vector(to_signed(-1, 11));
+ground_x_motion <= std_logic_vector(to_signed(pipe_x_motion, 11));
 			
 -- Enable ground drawing only within allowed regions.
 ground_on <= '1' when ((unsigned(pixel_row) <= unsigned(ground_y_pos) + unsigned(ground_height))
@@ -1026,7 +1027,8 @@ use work.pixel_functions.all;
 entity pipe is
   port (vert_sync, mode : in std_logic;
         pipe_no : in integer;
-		  seed : in std_logic_vector(6 downto 0);
+		    seed : in std_logic_vector(6 downto 0);
+		    px_motion : out signed(10 downto 0);
         pixel_row, pixel_column : in std_logic_vector(9 downto 0);
         colour_info : out rgb_array);
 end entity pipe;
@@ -1077,10 +1079,10 @@ pipe_height <= to_unsigned(480 - g_size*20 - 1, 10);
 hard_mode <= 0 when mode = '0' else
              1;
              
-k <= 40 - 15 * hard_mode;
+k <= 70 - 15 * hard_mode;
 
 -- Row and column integer values for the pipe.
-pixel_col_int <= (to_integer(unsigned(pixel_column)) mod (p_size*26) - to_integer(pipe_x_pos) mod (p_size*26)) mod (p_size*26);
+pixel_col_int <= (to_integer(unsigned(pixel_column)) mod (p_size*26) - to_integer(pipe_x_pos) mod (p_size*26)) mod (p_size*26) + 260 * (pipe_no - 1);
 pixel_row_int <= (to_integer(unsigned(pixel_row)));
 
 pipe_y_pos <= std_logic_vector(to_unsigned(0, 10));
@@ -1092,8 +1094,8 @@ pipe_y_pos <= std_logic_vector(to_unsigned(0, 10));
   
   --pixel information goes here.
   
-pipe_on <= '1' when (unsigned(pixel_column) <= unsigned(pipe_x_pos + signed(pipe_width) + to_signed(260 * (pipe_no - 1), 11))
-          and (unsigned(pixel_column) >= unsigned(pipe_x_pos) + to_unsigned(260 * (pipe_no - 1), 11))
+pipe_on <= '1' when (unsigned(pixel_column) <= unsigned(pipe_x_pos + signed(pipe_width))
+          and (unsigned(pixel_column) >= unsigned(pipe_x_pos))
           and (unsigned(pixel_row) <= unsigned(pipe_y_pos) + pipe_height)
           and (unsigned(pixel_row) >= unsigned(pipe_y_pos))
           
@@ -1210,6 +1212,7 @@ colour_info(2) <= pipe_colours(2) when pipe_on = '1' else
 -- Pipe movement.
 move_pipe: process (vert_sync)
   variable tmp : std_logic := '0';
+  variable count : integer := 0;
   
   impure function random return integer is
     variable output : integer;
@@ -1226,13 +1229,15 @@ begin
       -- Update the random number.
     tmp := rand(4) XOR rand(3) XOR rand(2) XOR rand(0);
     rand <= tmp & rand(6 downto 1);
+    
+    count := count + 1;
 	 
     -- Reset the pipe position once it goes off of the screen.
     if (std_logic_vector(pipe_x_pos + signed(pipe_width)) <= std_logic_vector(to_signed(0, 11))) then
       r <= random;
       pipe_x_motion <= to_signed(639, 11);
     else
-      pipe_x_motion <= to_signed(-1 - hard_mode, 11);
+      pipe_x_motion <= to_signed(-1 - hard_mode * (count / 900), 11);
      
     end if;
      -- Calculate the position of the pipe ready for the next frame.
@@ -1240,6 +1245,8 @@ begin
   end if;
 
 end process move_pipe;
+
+px_motion <= pipe_x_motion;
 
 end architecture behaviour;
 

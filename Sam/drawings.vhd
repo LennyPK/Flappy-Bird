@@ -71,7 +71,6 @@ signal g_size : integer range 0 to 7;
 
 signal background_x_pos : std_logic_vector(10 downto 0);
 signal background_y_pos : std_logic_vector(9 downto 0);
-signal background_x_motion : std_logic_vector(10 downto 0);
 
 signal pixel_col_int : screen_width;
 signal pixel_row_int : screen_height;
@@ -89,7 +88,6 @@ pixel_col_int <= (to_integer(unsigned(pixel_column)) mod (b_size*69) - to_intege
 pixel_row_int <= (to_integer(unsigned(pixel_row)) mod (b_size*46) - to_integer(unsigned(background_y_pos)) mod (b_size*46)) mod (b_size*46);
 
 -- y position for the background details.
-background_x_motion <= std_logic_vector(to_unsigned(-1, 11));
 background_y_pos <= std_logic_vector(to_unsigned(480 - b_size*46 - g_size*20, 10));
 			---------------
 -- Enable background details drawing only within allowed regions.
@@ -875,24 +873,6 @@ colour_info(1) <= background_colours(1) when background_on = '1' else
 colour_info(2) <= background_colours(2) when background_on = '1' else
                   "0000";
                    
--- Move the background                     
-move_background: process (vert_sync)
-  variable vsync_count : natural range 0 to 4 := 0;
-begin
-  -- Move the background details once per 5 vsync.
-  if (rising_edge(vert_sync)) then
-    if vsync_count = 4 then
-      vsync_count := 0;
-    else
-      vsync_count := vsync_count + 1;
-    
-    -- Calculate the position of the background details ready for the next frame.
-    background_x_pos <= std_logic_vector(unsigned(background_x_pos) + unsigned(background_x_motion));
-    end if;
-  end if;
-
-end process move_background;
-
 end architecture behaviour;
                   
 ------------------------------------------------------------
@@ -1014,6 +994,8 @@ end architecture behaviour;
 library IEEE;
 use IEEE.std_logic_1164.all;
 use IEEE.numeric_std.all;
+use IEEE.math_real.uniform;
+use IEEE.math_real.round;
 
 -- Custom libraries.
 library work;
@@ -1041,14 +1023,14 @@ constant dark_green : rgb := (85, 128, 34);
 -- Pipe image signals.
 signal pipe_on : std_logic;
 signal pipe_colours : rgb_array;
-signal pipe_width : std_logic_vector(10 downto 0);
-signal pipe_height : std_logic_vector(9 downto 0);
+signal pipe_width : unsigned(10 downto 0);
+signal pipe_height : unsigned(9 downto 0);
 signal p_size : integer range 0 to 7;
 signal g_size : integer range 0 to 7;
 
-signal pipe_x_pos : std_logic_vector(10 downto 0);
+signal pipe_x_pos : signed(10 downto 0);
 signal pipe_y_pos : std_logic_vector(9 downto 0);
-signal pipe_x_motion : std_logic_vector(10 downto 0);
+signal pipe_x_motion : signed(10 downto 0);
 
 signal pixel_col_int : screen_width;
 signal pixel_row_int : screen_height;
@@ -1064,13 +1046,13 @@ begin
 -- Width and height for the rectangle of pipe one.
 p_size <= 2;
 g_size <= 2;
-r <= 90 / p_size;
-pipe_width <= std_logic_vector(to_unsigned(p_size*26 - 1, 11));
-pipe_height <= std_logic_vector(to_unsigned(480 - g_size*20 - 1, 10));
+--r <= 90 / p_size;
+pipe_width <= to_unsigned(p_size*26 - 1, 11);
+pipe_height <= to_unsigned(480 - g_size*20 - 1, 10);
 k <= 40;
 
 -- Row and column integer values for the pipe.
-pixel_col_int <= (to_integer(unsigned(pixel_column)) mod (p_size*26) - to_integer(signed(pipe_x_pos)) mod (p_size*26)) mod (p_size*26);
+pixel_col_int <= (to_integer(unsigned(pixel_column)) mod (p_size*26) - (to_integer(pipe_x_pos) + (pipe_no - 1)*160) mod (p_size*26)) mod (p_size*26);
 pixel_row_int <= (to_integer(unsigned(pixel_row)));
 
 pipe_y_pos <= std_logic_vector(to_unsigned(0, 10));
@@ -1082,8 +1064,8 @@ pipe_y_pos <= std_logic_vector(to_unsigned(0, 10));
   
   --pixel information goes here.
   
-pipe_on <= '1' when ((signed(pixel_column) <= signed(pipe_x_pos) + signed(pipe_width))
-          and (signed(pixel_column) >= signed(pipe_x_pos))
+pipe_on <= '1' when ((signed(pixel_column) <= to_signed(to_integer(pipe_x_pos) + (pipe_no - 1)*160, 10) + signed(pipe_width))
+          and (signed(pixel_column) >= to_signed(to_integer(pipe_x_pos) + (pipe_no - 1)*160, 10))
           and (unsigned(pixel_row) <= unsigned(pipe_y_pos) + unsigned(pipe_height))
           and (unsigned(pixel_row) >= unsigned(pipe_y_pos))
           
@@ -1198,19 +1180,30 @@ colour_info(2) <= pipe_colours(2) when pipe_on = '1' else
 
 -- Pipe movement.
 move_pipe: process (vert_sync)
+
+  variable seed1, seed2 : integer := 545;
+  impure function random(min, max : integer) return integer is
+    variable r : real;
+  begin
+    uniform(seed1, seed2, r);
+    return integer(
+      round(r * real(max - min + 1) + real(min) - 0.5));    
+  end function random;
+
 begin
   -- Update the pipe position once per vsync.
   if (rising_edge(vert_sync)) then
       
     -- Reset the pipe position once it goes off of the screen.
-    if (std_logic_vector(signed(pipe_x_pos) + signed(pipe_width)) <= std_logic_vector(to_unsigned(0, 11))) then
-      pipe_x_motion <= std_logic_vector(to_unsigned(600, 11));
+    if (std_logic_vector(pipe_x_pos + signed(pipe_width)) <= std_logic_vector(to_signed(0, 11))) then
+      r <= random(40, 479 - 40);
+      pipe_x_motion <= to_signed(639, 11);
     else
-      pipe_x_motion <= std_logic_vector(to_signed(-1, 11));
+      pipe_x_motion <= to_signed(-1, 11);
     end if;
     
     -- Calculate the position of the pipe ready for the next frame.
-    pipe_x_pos <= std_logic_vector(signed(pipe_x_pos) + signed(pipe_x_motion));
+    pipe_x_pos <= pipe_x_pos + pipe_x_motion;
   
   end if;
 end process move_pipe;
@@ -1262,7 +1255,6 @@ signal flappy_x_pos : std_logic_vector(10 downto 0);
 signal flappy_y_pos : std_logic_vector(9 downto 0);
 signal flappy_y_motion : std_logic_vector(9 downto 0);
 signal left_flag, right_flag, holding : std_logic;
-signal frame_counter : integer range 0 to 255 := 0;
 
 signal pixel_col_int : screen_width;
 signal pixel_row_int : screen_height;
@@ -1414,37 +1406,56 @@ left_flag <= '1' when left_mouse = '1' else '0';
 right_flag <= '1' when right_mouse = '1' else '0';
 
 --Flappy bird movement.
-move_bird: process (vert_sync)
+-- bird_velocity is positive means up and nagative means down
+--frame_rate = 0.001
+move_bird : process (vert_sync)
+
+    variable bird_velocity : integer := 0;
+    variable frame_rate_time : integer := 1;
 begin
     -- Update the flappy bird position once per vsync.
     if (rising_edge(vert_sync)) then
-	 
-			if (left_mouse = '0') then
-				holding <= '0';
-			end if;
-			
-        -- Bounce of the edge of the screen (for now).
-        if (left_flag = '1' and holding = '0') then
-				holding <= '1';
-            if  (flappy_y_pos > flappy_bird_height) then
-                flappy_y_motion <= std_logic_vector(to_signed(-16, 10));
-            else
-                flappy_y_motion <= std_logic_vector(to_unsigned(0, 10));
-            end if;
-        elsif (frame_counter > 10) then
-		  --elsif (left_flag = '0') then
-            if (flappy_y_pos >= std_logic_vector(to_unsigned(479, 10) - unsigned(flappy_bird_height))) then
-                flappy_y_motion <= std_logic_vector(to_unsigned(0, 10));
-            else
-                flappy_y_motion <= std_logic_vector(to_unsigned(1, 10));
-                frame_counter <= 0;
-            end if;
-        else
-            flappy_y_motion <= std_logic_vector(to_unsigned(0, 10));
-        end if; 
-        flappy_y_pos <= std_logic_vector(unsigned(flappy_y_pos) + unsigned(flappy_y_motion));
-        frame_counter <= frame_counter + 1;
+
+        -- reset holding flag if let go
+        if (left_mouse = '0') then
+            holding <= '0';
         end if;
+
+        -- if clicking and not holding
+        if (left_flag = '1' and holding = '0') then
+            -- set holding flag
+            holding <= '1';
+            -- set the bird on an upwards velocity
+            bird_velocity := 12;
+
+        else
+            -- decelerate the bird
+            -- velociy = velocity minus acceleration times framerate
+            bird_velocity := bird_velocity - (1 * frame_rate_time);
+        end if;
+
+        -- enact the velocity on the birds position
+        flappy_y_pos <= std_logic_vector(unsigned(flappy_y_pos) - bird_velocity * frame_rate_time);
+
+        -- if the bird is above or below the screen, bring it in bounds, and halt all velocity
+        --if (flappy_y_pos > flappy_bird_height) then
+        --    flappy_y_pos <= std_logic_vector(to_signed(0, 10));
+          --        bird_velocity := 0;
+        --end if;
+        if (flappy_y_pos >= std_logic_vector(to_unsigned(479, 10) - unsigned(flappy_bird_height))) then
+          bird_velocity := - bird_velocity;
+          flappy_y_pos <= std_logic_vector(unsigned(flappy_y_pos) - bird_velocity * frame_rate_time);
+          flappy_y_pos <= std_logic_vector(to_unsigned(479, 10));
+        elsif (flappy_y_pos <= std_logic_vector(to_unsigned(0, 10))) then
+          bird_velocity := - bird_velocity;
+          flappy_y_pos <= std_logic_vector(unsigned(flappy_y_pos) - bird_velocity * frame_rate_time);
+          --flappy_y_pos <= std_logic_vector(to_unsigned(0, 10));
+        end if;
+        --    flappy_y_pos <= std_logic_vector(to_unsigned(479, 10) - unsigned(flappy_bird_height));
+            --    bird_velocity := 0;
+        --end if;
+
+    end if;
 end process move_bird;
 
 end architecture behaviour;

@@ -1054,6 +1054,7 @@ signal pipe_x_motion : signed(10 downto 0);
 
 signal pixel_col_int : screen_width;
 signal pixel_row_int : screen_height;
+signal rand : std_logic_vector(7 downto 0) := "00000001";
 
 -- Distance between the lower top part of the pipe and the upper bottom part of the pipe.
 signal k : integer range 0 to 454;
@@ -1207,27 +1208,25 @@ colour_info(2) <= pipe_colours(2) when pipe_on = '1' else
 -- Pipe movement.
 move_pipe: process (vert_sync)
   variable tmp : std_logic := '0';
-  variable rand : std_logic_vector(8 downto 0) := "000000001";
   
   impure function random(max : integer) return integer is
     variable output : integer;
   begin
     output := to_integer(unsigned(rand));
-    output := output mod max;
-    return output;
+    -- output := output mod max;
+    return output + 40;
   end function random;
 begin
-  
-  -- Update the random number.
-  tmp := rand(7) XOR rand(5) XOR rand(4) XOR rand(2) XOR rand(0);
-  rand := tmp & rand(8 downto 1);
-  
+
   -- Update the pipe position once per vsync.
   if (rising_edge(vert_sync)) then
       
+      -- Update the random number.
+    tmp := rand(4) XOR rand(3) XOR rand(2) XOR rand(0);
+    rand <= tmp & rand(7 downto 1);
     -- Reset the pipe position once it goes off of the screen.
     if (std_logic_vector(pipe_x_pos + signed(pipe_width)) <= std_logic_vector(to_signed(0, 11))) then
-      r <= random(439);
+      r <= random(300);
       pipe_x_motion <= to_signed(639, 11);
     else
       pipe_x_motion <= to_signed(-1 - hard_mode, 11);
@@ -1424,7 +1423,8 @@ flappy_bird_colours <= -- Row one
                        rgbint_to_rgb4(saffron) when pixel_region(pixel_col_int, pixel_row_int, 5, 9, 10, 11, fb_size) else
                        rgbint_to_rgb4(eggplant) when pixel_region(pixel_col_int, pixel_row_int, 10, 14, 10, 11, fb_size) else
                        -- Row twelve
-                       rgbint_to_rgb4(eggplant) when pixel_region(pixel_col_int, pixel_row_int, 5, 9, 11, 12, fb_size);
+                       rgbint_to_rgb4(eggplant) when pixel_region(pixel_col_int, pixel_row_int, 5, 9, 11, 12, fb_size) else
+                       rgbint_to_rgb4(eggplant);
                       			
 -- Set output colour channel values for the current pixel.
 colour_info(0) <= flappy_bird_colours(0) when flappy_bird_on = '1' else

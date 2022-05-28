@@ -1,30 +1,46 @@
 <?xml version="1.0" ?>
 <LOG_ROOT>
 	<PROJECT NAME="Test">
-		<CBX_INST_ENTRY INSTANCE_NAME="|Test|colour_signals:inst15|pipe:P1|lpm_mult:Mult6|multcore:mult_core|mpar_add:padder|lpm_add_sub:adder[0]" CBX_FILE_NAME="add_sub_vdh.tdf"/>
 		<CBX_INST_ENTRY INSTANCE_NAME="|Test|colour_signals:inst15|background_d:BD|lpm_divide:Mod5" CBX_FILE_NAME="lpm_divide_voo.tdf"/>
-		<CBX_INST_ENTRY INSTANCE_NAME="|Test|colour_signals:inst15|flappy_bird:FB|lpm_divide:Mod2" CBX_FILE_NAME="lpm_divide_1po.tdf"/>
-		<CBX_INST_ENTRY INSTANCE_NAME="|Test|colour_signals:inst15|ground:G|lpm_divide:Mod0" CBX_FILE_NAME="lpm_divide_soo.tdf"/>
-		<CBX_INST_ENTRY INSTANCE_NAME="|Test|colour_signals:inst15|pipe:P1|lpm_mult:Mult7|multcore:mult_core|mpar_add:padder|lpm_add_sub:adder[0]" CBX_FILE_NAME="add_sub_vdh.tdf"/>
-		<CBX_INST_ENTRY INSTANCE_NAME="|Test|colour_signals:inst15|flappy_bird:FB|lpm_divide:Mod3" CBX_FILE_NAME="lpm_divide_3bm.tdf"/>
-		<CBX_INST_ENTRY INSTANCE_NAME="|Test|colour_signals:inst15|ground:G|lpm_divide:Mod1" CBX_FILE_NAME="lpm_divide_uoo.tdf"/>
 		<CBX_INST_ENTRY INSTANCE_NAME="|Test|colour_signals:inst15|pipe:P1|lpm_divide:Mod0" CBX_FILE_NAME="lpm_divide_3bm.tdf"/>
 		<CBX_INST_ENTRY INSTANCE_NAME="|Test|altpll0:inst|altpll:altpll_component" CBX_FILE_NAME="altpll0_altpll.v"/>
-		<CBX_INST_ENTRY INSTANCE_NAME="|Test|colour_signals:inst15|background_d:BD|lpm_divide:Mod3" CBX_FILE_NAME="lpm_divide_3bm.tdf"/>
-		<CBX_INST_ENTRY INSTANCE_NAME="|Test|colour_signals:inst15|flappy_bird:FB|lpm_divide:Mod0" CBX_FILE_NAME="lpm_divide_3bm.tdf"/>
 		<CBX_INST_ENTRY INSTANCE_NAME="|Test|colour_signals:inst15|flappy_bird:FB|lpm_divide:Mod4" CBX_FILE_NAME="lpm_divide_3bm.tdf"/>
 		<CBX_INST_ENTRY INSTANCE_NAME="|Test|colour_signals:inst15|ground:G|lpm_divide:Mod2" CBX_FILE_NAME="lpm_divide_1po.tdf"/>
 		<CBX_INST_ENTRY INSTANCE_NAME="|Test|colour_signals:inst15|pipe:P1|lpm_divide:Mod1" CBX_FILE_NAME="lpm_divide_too.tdf"/>
-		<CBX_INST_ENTRY INSTANCE_NAME="|Test|colour_signals:inst15|pipe:P1|lpm_mult:Mult5|multcore:mult_core|mpar_add:padder|lpm_add_sub:adder[0]" CBX_FILE_NAME="add_sub_vdh.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|Test|colour_signals:inst15|pipe:P1|lpm_mult:Mult16|multcore:mult_core|mpar_add:padder|mpar_add:sub_par_add|lpm_add_sub:adder[0]" CBX_FILE_NAME="add_sub_afh.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|Test|colour_signals:inst15|pipe:P1|lpm_mult:Mult7|multcore:mult_core|mpar_add:padder|mpar_add:sub_par_add|lpm_add_sub:adder[0]" CBX_FILE_NAME="add_sub_afh.tdf"/>
 		<CBX_INST_ENTRY INSTANCE_NAME="|Test|colour_signals:inst15|background_d:BD|lpm_divide:Mod0" CBX_FILE_NAME="lpm_divide_3bm.tdf"/>
 		<CBX_INST_ENTRY INSTANCE_NAME="|Test|colour_signals:inst15|flappy_bird:FB|lpm_divide:Mod5" CBX_FILE_NAME="lpm_divide_voo.tdf"/>
 		<CBX_INST_ENTRY INSTANCE_NAME="|Test|colour_signals:inst15|ground:G|lpm_divide:Mod3" CBX_FILE_NAME="lpm_divide_3bm.tdf"/>
 		<CBX_INST_ENTRY INSTANCE_NAME="|Test|colour_signals:inst15|pipe:P1|lpm_divide:Mod2" CBX_FILE_NAME="lpm_divide_1po.tdf"/>
 		<CBX_INST_ENTRY INSTANCE_NAME="|Test|colour_signals:inst15|pipe:P1|lpm_mult:Mult11|multcore:mult_core|mpar_add:padder|lpm_add_sub:adder[0]" CBX_FILE_NAME="add_sub_vdh.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|Test|colour_signals:inst15|pipe:P1|lpm_mult:Mult17|multcore:mult_core|mpar_add:padder|mpar_add:sub_par_add|lpm_add_sub:adder[0]" CBX_FILE_NAME="add_sub_afh.tdf"/>
 		<CBX_INST_ENTRY INSTANCE_NAME="|Test|colour_signals:inst15|pipe:P1|lpm_mult:Mult2|multcore:mult_core|mpar_add:padder|lpm_add_sub:adder[0]" CBX_FILE_NAME="add_sub_vdh.tdf"/>
 		<CBX_INST_ENTRY INSTANCE_NAME="|Test|colour_signals:inst15|background_d:BD|lpm_divide:Mod1" CBX_FILE_NAME="lpm_divide_5bm.tdf"/>
 		<CBX_INST_ENTRY INSTANCE_NAME="|Test|colour_signals:inst15|pipe:P1|lpm_mult:Mult12|multcore:mult_core|mpar_add:padder|lpm_add_sub:adder[0]" CBX_FILE_NAME="add_sub_vdh.tdf"/>
 		<CBX_INST_ENTRY INSTANCE_NAME="|Test|colour_signals:inst15|background_d:BD|lpm_divide:Mod2" CBX_FILE_NAME="lpm_divide_1po.tdf"/>
 		<CBX_INST_ENTRY INSTANCE_NAME="|Test|colour_signals:inst15|ground:G|lpm_divide:Mod5" CBX_FILE_NAME="lpm_divide_voo.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|Test|colour_signals:inst15|pipe:P1|lpm_mult:Mult11|multcore:mult_core|mpar_add:padder|mpar_add:sub_par_add|lpm_add_sub:adder[0]" CBX_FILE_NAME="add_sub_afh.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|Test|colour_signals:inst15|pipe:P1|lpm_mult:Mult13|multcore:mult_core|mpar_add:padder|lpm_add_sub:adder[0]" CBX_FILE_NAME="add_sub_vdh.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|Test|colour_signals:inst15|pipe:P1|lpm_mult:Mult2|multcore:mult_core|mpar_add:padder|mpar_add:sub_par_add|lpm_add_sub:adder[0]" CBX_FILE_NAME="add_sub_afh.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|Test|colour_signals:inst15|background_d:BD|lpm_divide:Mod3" CBX_FILE_NAME="lpm_divide_3bm.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|Test|colour_signals:inst15|flappy_bird:FB|lpm_divide:Mod0" CBX_FILE_NAME="lpm_divide_3bm.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|Test|colour_signals:inst15|pipe:P1|lpm_mult:Mult12|multcore:mult_core|mpar_add:padder|mpar_add:sub_par_add|lpm_add_sub:adder[0]" CBX_FILE_NAME="add_sub_afh.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|Test|colour_signals:inst15|pipe:P1|lpm_mult:Mult14|multcore:mult_core|mpar_add:padder|lpm_add_sub:adder[0]" CBX_FILE_NAME="add_sub_vdh.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|Test|colour_signals:inst15|pipe:P1|lpm_mult:Mult5|multcore:mult_core|mpar_add:padder|lpm_add_sub:adder[0]" CBX_FILE_NAME="add_sub_vdh.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|Test|colour_signals:inst15|pipe:P1|lpm_mult:Mult13|multcore:mult_core|mpar_add:padder|mpar_add:sub_par_add|lpm_add_sub:adder[0]" CBX_FILE_NAME="add_sub_afh.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|Test|colour_signals:inst15|pipe:P1|lpm_mult:Mult15|multcore:mult_core|mpar_add:padder|lpm_add_sub:adder[0]" CBX_FILE_NAME="add_sub_vdh.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|Test|colour_signals:inst15|pipe:P1|lpm_mult:Mult6|multcore:mult_core|mpar_add:padder|lpm_add_sub:adder[0]" CBX_FILE_NAME="add_sub_vdh.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|Test|colour_signals:inst15|flappy_bird:FB|lpm_divide:Mod2" CBX_FILE_NAME="lpm_divide_1po.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|Test|colour_signals:inst15|ground:G|lpm_divide:Mod0" CBX_FILE_NAME="lpm_divide_soo.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|Test|colour_signals:inst15|pipe:P1|lpm_mult:Mult14|multcore:mult_core|mpar_add:padder|mpar_add:sub_par_add|lpm_add_sub:adder[0]" CBX_FILE_NAME="add_sub_afh.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|Test|colour_signals:inst15|pipe:P1|lpm_mult:Mult16|multcore:mult_core|mpar_add:padder|lpm_add_sub:adder[0]" CBX_FILE_NAME="add_sub_vdh.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|Test|colour_signals:inst15|pipe:P1|lpm_mult:Mult5|multcore:mult_core|mpar_add:padder|mpar_add:sub_par_add|lpm_add_sub:adder[0]" CBX_FILE_NAME="add_sub_afh.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|Test|colour_signals:inst15|pipe:P1|lpm_mult:Mult7|multcore:mult_core|mpar_add:padder|lpm_add_sub:adder[0]" CBX_FILE_NAME="add_sub_vdh.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|Test|colour_signals:inst15|flappy_bird:FB|lpm_divide:Mod3" CBX_FILE_NAME="lpm_divide_3bm.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|Test|colour_signals:inst15|ground:G|lpm_divide:Mod1" CBX_FILE_NAME="lpm_divide_uoo.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|Test|colour_signals:inst15|pipe:P1|lpm_mult:Mult15|multcore:mult_core|mpar_add:padder|mpar_add:sub_par_add|lpm_add_sub:adder[0]" CBX_FILE_NAME="add_sub_afh.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|Test|colour_signals:inst15|pipe:P1|lpm_mult:Mult17|multcore:mult_core|mpar_add:padder|lpm_add_sub:adder[0]" CBX_FILE_NAME="add_sub_vdh.tdf"/>
+		<CBX_INST_ENTRY INSTANCE_NAME="|Test|colour_signals:inst15|pipe:P1|lpm_mult:Mult6|multcore:mult_core|mpar_add:padder|mpar_add:sub_par_add|lpm_add_sub:adder[0]" CBX_FILE_NAME="add_sub_afh.tdf"/>
 	</PROJECT>
 </LOG_ROOT>

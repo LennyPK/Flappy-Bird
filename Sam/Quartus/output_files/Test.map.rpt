@@ -1,5 +1,5 @@
 Analysis & Synthesis report for Test
-Sun May 29 02:32:18 2022
+Sun May 29 02:55:37 2022
 Quartus II 64-Bit Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edition
 
 
@@ -15,30 +15,30 @@ Quartus II 64-Bit Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edit
   7. Analysis & Synthesis Resource Utilization by Entity
   8. Analysis & Synthesis IP Cores Summary
   9. State Machine - |Test|MOUSE:inst4|mouse_state
- 10. User-Specified and Inferred Latches
- 11. Registers Removed During Synthesis
- 12. General Register Statistics
- 13. Inverted Register Statistics
- 14. Multiplexer Restructuring Statistics (Restructuring Performed)
- 15. Parameter Settings for User Entity Instance: altpll0:inst|altpll:altpll_component
- 16. Parameter Settings for Inferred Entity Instance: colour_signals:inst15|pipe:P1|lpm_divide:Mod2
- 17. Parameter Settings for Inferred Entity Instance: colour_signals:inst15|pipe:P1|lpm_mult:Mult14
- 18. Parameter Settings for Inferred Entity Instance: colour_signals:inst15|pipe:P1|lpm_mult:Mult15
+ 10. Registers Removed During Synthesis
+ 11. General Register Statistics
+ 12. Inverted Register Statistics
+ 13. Multiplexer Restructuring Statistics (Restructuring Performed)
+ 14. Parameter Settings for User Entity Instance: altpll0:inst|altpll:altpll_component
+ 15. Parameter Settings for Inferred Entity Instance: colour_signals:inst15|pipe:P1|lpm_divide:Mod2
+ 16. Parameter Settings for Inferred Entity Instance: colour_signals:inst15|pipe:P1|lpm_mult:Mult14
+ 17. Parameter Settings for Inferred Entity Instance: colour_signals:inst15|pipe:P1|lpm_mult:Mult2
+ 18. Parameter Settings for Inferred Entity Instance: colour_signals:inst15|pipe:P1|lpm_mult:Mult16
  19. Parameter Settings for Inferred Entity Instance: colour_signals:inst15|pipe:P1|lpm_mult:Mult17
- 20. Parameter Settings for Inferred Entity Instance: colour_signals:inst15|pipe:P1|lpm_mult:Mult13
- 21. Parameter Settings for Inferred Entity Instance: colour_signals:inst15|background_d:BD|lpm_divide:Mod3
- 22. Parameter Settings for Inferred Entity Instance: colour_signals:inst15|background_d:BD|lpm_divide:Mod5
- 23. Parameter Settings for Inferred Entity Instance: colour_signals:inst15|ground:G|lpm_divide:Mod3
- 24. Parameter Settings for Inferred Entity Instance: colour_signals:inst15|ground:G|lpm_divide:Mod5
- 25. Parameter Settings for Inferred Entity Instance: colour_signals:inst15|flappy_bird:FB|lpm_divide:Mod5
- 26. Parameter Settings for Inferred Entity Instance: colour_signals:inst15|pipe:P1|lpm_divide:Mod1
- 27. Parameter Settings for Inferred Entity Instance: colour_signals:inst15|pipe:P1|lpm_divide:Mod0
- 28. Parameter Settings for Inferred Entity Instance: colour_signals:inst15|pipe:P1|lpm_mult:Mult2
- 29. Parameter Settings for Inferred Entity Instance: colour_signals:inst15|pipe:P1|lpm_mult:Mult12
- 30. Parameter Settings for Inferred Entity Instance: colour_signals:inst15|pipe:P1|lpm_mult:Mult11
- 31. Parameter Settings for Inferred Entity Instance: colour_signals:inst15|pipe:P1|lpm_mult:Mult7
- 32. Parameter Settings for Inferred Entity Instance: colour_signals:inst15|pipe:P1|lpm_mult:Mult5
- 33. Parameter Settings for Inferred Entity Instance: colour_signals:inst15|pipe:P1|lpm_mult:Mult6
+ 20. Parameter Settings for Inferred Entity Instance: colour_signals:inst15|pipe:P1|lpm_mult:Mult15
+ 21. Parameter Settings for Inferred Entity Instance: colour_signals:inst15|pipe:P1|lpm_mult:Mult11
+ 22. Parameter Settings for Inferred Entity Instance: colour_signals:inst15|pipe:P1|lpm_mult:Mult7
+ 23. Parameter Settings for Inferred Entity Instance: colour_signals:inst15|pipe:P1|lpm_mult:Mult5
+ 24. Parameter Settings for Inferred Entity Instance: colour_signals:inst15|pipe:P1|lpm_mult:Mult6
+ 25. Parameter Settings for Inferred Entity Instance: colour_signals:inst15|pipe:P1|lpm_mult:Mult12
+ 26. Parameter Settings for Inferred Entity Instance: colour_signals:inst15|pipe:P1|lpm_mult:Mult13
+ 27. Parameter Settings for Inferred Entity Instance: colour_signals:inst15|background_d:BD|lpm_divide:Mod3
+ 28. Parameter Settings for Inferred Entity Instance: colour_signals:inst15|background_d:BD|lpm_divide:Mod5
+ 29. Parameter Settings for Inferred Entity Instance: colour_signals:inst15|ground:G|lpm_divide:Mod3
+ 30. Parameter Settings for Inferred Entity Instance: colour_signals:inst15|ground:G|lpm_divide:Mod5
+ 31. Parameter Settings for Inferred Entity Instance: colour_signals:inst15|flappy_bird:FB|lpm_divide:Mod5
+ 32. Parameter Settings for Inferred Entity Instance: colour_signals:inst15|pipe:P1|lpm_divide:Mod1
+ 33. Parameter Settings for Inferred Entity Instance: colour_signals:inst15|pipe:P1|lpm_divide:Mod0
  34. Parameter Settings for Inferred Entity Instance: colour_signals:inst15|background_d:BD|lpm_divide:Mod2
  35. Parameter Settings for Inferred Entity Instance: colour_signals:inst15|ground:G|lpm_divide:Mod2
  36. Parameter Settings for Inferred Entity Instance: colour_signals:inst15|flappy_bird:FB|lpm_divide:Mod2
@@ -79,15 +79,15 @@ applicable agreement for further details.
 +--------------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                         ;
 +------------------------------------+-------------------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Sun May 29 02:32:17 2022           ;
+; Analysis & Synthesis Status        ; Successful - Sun May 29 02:55:37 2022           ;
 ; Quartus II 64-Bit Version          ; 13.0.1 Build 232 06/12/2013 SP 1 SJ Web Edition ;
 ; Revision Name                      ; Test                                            ;
 ; Top-level Entity Name              ; Test                                            ;
 ; Family                             ; Cyclone III                                     ;
-; Total logic elements               ; 6,497                                           ;
-;     Total combinational functions  ; 6,447                                           ;
-;     Dedicated logic registers      ; 182                                             ;
-; Total registers                    ; 182                                             ;
+; Total logic elements               ; 6,762                                           ;
+;     Total combinational functions  ; 6,703                                           ;
+;     Dedicated logic registers      ; 198                                             ;
+; Total registers                    ; 198                                             ;
 ; Total pins                         ; 68                                              ;
 ; Total virtual pins                 ; 0                                               ;
 ; Total memory bits                  ; 0                                               ;
@@ -237,6 +237,12 @@ Parallel compilation was disabled, but you have multiple processors available. E
 ; alt_ded_mult_y.inc               ; yes             ; Megafunction                       ; c:/altera/13.0sp1/quartus/libraries/megafunctions/alt_ded_mult_y.inc      ;         ;
 ; dffpipe.inc                      ; yes             ; Megafunction                       ; c:/altera/13.0sp1/quartus/libraries/megafunctions/dffpipe.inc             ;         ;
 ; mpar_add.tdf                     ; yes             ; Megafunction                       ; c:/altera/13.0sp1/quartus/libraries/megafunctions/mpar_add.tdf            ;         ;
+; lpm_add_sub.tdf                  ; yes             ; Megafunction                       ; c:/altera/13.0sp1/quartus/libraries/megafunctions/lpm_add_sub.tdf         ;         ;
+; addcore.inc                      ; yes             ; Megafunction                       ; c:/altera/13.0sp1/quartus/libraries/megafunctions/addcore.inc             ;         ;
+; look_add.inc                     ; yes             ; Megafunction                       ; c:/altera/13.0sp1/quartus/libraries/megafunctions/look_add.inc            ;         ;
+; alt_stratix_add_sub.inc          ; yes             ; Megafunction                       ; c:/altera/13.0sp1/quartus/libraries/megafunctions/alt_stratix_add_sub.inc ;         ;
+; db/add_sub_vdh.tdf               ; yes             ; Auto-Generated Megafunction        ; D:/Documents/GitHub/PILK/Sam/Quartus/db/add_sub_vdh.tdf                   ;         ;
+; db/add_sub_afh.tdf               ; yes             ; Auto-Generated Megafunction        ; D:/Documents/GitHub/PILK/Sam/Quartus/db/add_sub_afh.tdf                   ;         ;
 ; altshift.tdf                     ; yes             ; Megafunction                       ; c:/altera/13.0sp1/quartus/libraries/megafunctions/altshift.tdf            ;         ;
 ; db/lpm_divide_3bm.tdf            ; yes             ; Auto-Generated Megafunction        ; D:/Documents/GitHub/PILK/Sam/Quartus/db/lpm_divide_3bm.tdf                ;         ;
 ; db/sign_div_unsign_1nh.tdf       ; yes             ; Auto-Generated Megafunction        ; D:/Documents/GitHub/PILK/Sam/Quartus/db/sign_div_unsign_1nh.tdf           ;         ;
@@ -249,11 +255,6 @@ Parallel compilation was disabled, but you have multiple processors available. E
 ; db/abs_divider_ucg.tdf           ; yes             ; Auto-Generated Megafunction        ; D:/Documents/GitHub/PILK/Sam/Quartus/db/abs_divider_ucg.tdf               ;         ;
 ; db/alt_u_div_h8f.tdf             ; yes             ; Auto-Generated Megafunction        ; D:/Documents/GitHub/PILK/Sam/Quartus/db/alt_u_div_h8f.tdf                 ;         ;
 ; db/lpm_abs_6v9.tdf               ; yes             ; Auto-Generated Megafunction        ; D:/Documents/GitHub/PILK/Sam/Quartus/db/lpm_abs_6v9.tdf                   ;         ;
-; lpm_add_sub.tdf                  ; yes             ; Megafunction                       ; c:/altera/13.0sp1/quartus/libraries/megafunctions/lpm_add_sub.tdf         ;         ;
-; addcore.inc                      ; yes             ; Megafunction                       ; c:/altera/13.0sp1/quartus/libraries/megafunctions/addcore.inc             ;         ;
-; look_add.inc                     ; yes             ; Megafunction                       ; c:/altera/13.0sp1/quartus/libraries/megafunctions/look_add.inc            ;         ;
-; alt_stratix_add_sub.inc          ; yes             ; Megafunction                       ; c:/altera/13.0sp1/quartus/libraries/megafunctions/alt_stratix_add_sub.inc ;         ;
-; db/add_sub_vdh.tdf               ; yes             ; Auto-Generated Megafunction        ; D:/Documents/GitHub/PILK/Sam/Quartus/db/add_sub_vdh.tdf                   ;         ;
 ; db/lpm_divide_5bm.tdf            ; yes             ; Auto-Generated Megafunction        ; D:/Documents/GitHub/PILK/Sam/Quartus/db/lpm_divide_5bm.tdf                ;         ;
 ; db/sign_div_unsign_3nh.tdf       ; yes             ; Auto-Generated Megafunction        ; D:/Documents/GitHub/PILK/Sam/Quartus/db/sign_div_unsign_3nh.tdf           ;         ;
 ; db/lpm_divide_uoo.tdf            ; yes             ; Auto-Generated Megafunction        ; D:/Documents/GitHub/PILK/Sam/Quartus/db/lpm_divide_uoo.tdf                ;         ;
@@ -271,20 +272,20 @@ Parallel compilation was disabled, but you have multiple processors available. E
 +---------------------------------------------+-----------------------------------------------+
 ; Resource                                    ; Usage                                         ;
 +---------------------------------------------+-----------------------------------------------+
-; Estimated Total logic elements              ; 6,497                                         ;
+; Estimated Total logic elements              ; 6,762                                         ;
 ;                                             ;                                               ;
-; Total combinational functions               ; 6447                                          ;
+; Total combinational functions               ; 6703                                          ;
 ; Logic element usage by number of LUT inputs ;                                               ;
-;     -- 4 input functions                    ; 3298                                          ;
-;     -- 3 input functions                    ; 1490                                          ;
-;     -- <=2 input functions                  ; 1659                                          ;
+;     -- 4 input functions                    ; 3277                                          ;
+;     -- 3 input functions                    ; 1607                                          ;
+;     -- <=2 input functions                  ; 1819                                          ;
 ;                                             ;                                               ;
 ; Logic elements by mode                      ;                                               ;
-;     -- normal mode                          ; 5181                                          ;
-;     -- arithmetic mode                      ; 1266                                          ;
+;     -- normal mode                          ; 5169                                          ;
+;     -- arithmetic mode                      ; 1534                                          ;
 ;                                             ;                                               ;
-; Total registers                             ; 182                                           ;
-;     -- Dedicated logic registers            ; 182                                           ;
+; Total registers                             ; 198                                           ;
+;     -- Dedicated logic registers            ; 198                                           ;
 ;     -- I/O registers                        ; 0                                             ;
 ;                                             ;                                               ;
 ; I/O pins                                    ; 68                                            ;
@@ -293,9 +294,9 @@ Parallel compilation was disabled, but you have multiple processors available. E
 ;     -- PLLs                                 ; 1                                             ;
 ;                                             ;                                               ;
 ; Maximum fan-out node                        ; colour_signals:inst15|background_d:BD|Add3~18 ;
-; Maximum fan-out                             ; 348                                           ;
-; Total fan-out                               ; 21308                                         ;
-; Average fan-out                             ; 3.15                                          ;
+; Maximum fan-out                             ; 354                                           ;
+; Total fan-out                               ; 21910                                         ;
+; Average fan-out                             ; 3.11                                          ;
 +---------------------------------------------+-----------------------------------------------+
 
 
@@ -304,14 +305,14 @@ Parallel compilation was disabled, but you have multiple processors available. E
 +----------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+---------------------------------------------------------------------------------------------------------------------------------------------+--------------+
 ; Compilation Hierarchy Node                   ; LC Combinationals ; LC Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name                                                                                                                         ; Library Name ;
 +----------------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+---------------------------------------------------------------------------------------------------------------------------------------------+--------------+
-; |Test                                        ; 6447 (2)          ; 182 (0)      ; 0           ; 0            ; 0       ; 0         ; 68   ; 0            ; |Test                                                                                                                                       ; work         ;
+; |Test                                        ; 6703 (2)          ; 198 (0)      ; 0           ; 0            ; 0       ; 0         ; 68   ; 0            ; |Test                                                                                                                                       ; work         ;
 ;    |MOUSE:inst4|                             ; 52 (52)           ; 65 (65)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Test|MOUSE:inst4                                                                                                                           ; work         ;
-;    |VGA_SYNC:inst1|                          ; 75 (75)           ; 57 (57)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Test|VGA_SYNC:inst1                                                                                                                        ; work         ;
+;    |VGA_SYNC:inst1|                          ; 81 (81)           ; 57 (57)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Test|VGA_SYNC:inst1                                                                                                                        ; work         ;
 ;    |altpll0:inst|                            ; 0 (0)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Test|altpll0:inst                                                                                                                          ; work         ;
 ;       |altpll:altpll_component|              ; 0 (0)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Test|altpll0:inst|altpll:altpll_component                                                                                                  ; work         ;
 ;          |altpll0_altpll:auto_generated|     ; 0 (0)             ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Test|altpll0:inst|altpll:altpll_component|altpll0_altpll:auto_generated                                                                    ; work         ;
-;    |colour_signals:inst15|                   ; 6318 (41)         ; 60 (0)       ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Test|colour_signals:inst15                                                                                                                 ; work         ;
-;       |background_d:BD|                      ; 2904 (2322)       ; 14 (14)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Test|colour_signals:inst15|background_d:BD                                                                                                 ; work         ;
+;    |colour_signals:inst15|                   ; 6568 (32)         ; 76 (0)       ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Test|colour_signals:inst15                                                                                                                 ; work         ;
+;       |background_d:BD|                      ; 2899 (2318)       ; 14 (14)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Test|colour_signals:inst15|background_d:BD                                                                                                 ; work         ;
 ;          |lpm_divide:Mod0|                   ; 74 (0)            ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Test|colour_signals:inst15|background_d:BD|lpm_divide:Mod0                                                                                 ; work         ;
 ;             |lpm_divide_3bm:auto_generated|  ; 74 (0)            ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Test|colour_signals:inst15|background_d:BD|lpm_divide:Mod0|lpm_divide_3bm:auto_generated                                                   ; work         ;
 ;                |sign_div_unsign_1nh:divider| ; 74 (0)            ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Test|colour_signals:inst15|background_d:BD|lpm_divide:Mod0|lpm_divide_3bm:auto_generated|sign_div_unsign_1nh:divider                       ; work         ;
@@ -329,12 +330,12 @@ Parallel compilation was disabled, but you have multiple processors available. E
 ;             |lpm_divide_3bm:auto_generated|  ; 47 (0)            ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Test|colour_signals:inst15|background_d:BD|lpm_divide:Mod3|lpm_divide_3bm:auto_generated                                                   ; work         ;
 ;                |sign_div_unsign_1nh:divider| ; 47 (0)            ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Test|colour_signals:inst15|background_d:BD|lpm_divide:Mod3|lpm_divide_3bm:auto_generated|sign_div_unsign_1nh:divider                       ; work         ;
 ;                   |alt_u_div_d8f:divider|    ; 47 (47)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Test|colour_signals:inst15|background_d:BD|lpm_divide:Mod3|lpm_divide_3bm:auto_generated|sign_div_unsign_1nh:divider|alt_u_div_d8f:divider ; work         ;
-;          |lpm_divide:Mod5|                   ; 151 (0)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Test|colour_signals:inst15|background_d:BD|lpm_divide:Mod5                                                                                 ; work         ;
-;             |lpm_divide_voo:auto_generated|  ; 151 (0)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Test|colour_signals:inst15|background_d:BD|lpm_divide:Mod5|lpm_divide_voo:auto_generated                                                   ; work         ;
-;                |abs_divider_0dg:divider|     ; 151 (18)          ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Test|colour_signals:inst15|background_d:BD|lpm_divide:Mod5|lpm_divide_voo:auto_generated|abs_divider_0dg:divider                           ; work         ;
+;          |lpm_divide:Mod5|                   ; 150 (0)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Test|colour_signals:inst15|background_d:BD|lpm_divide:Mod5                                                                                 ; work         ;
+;             |lpm_divide_voo:auto_generated|  ; 150 (0)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Test|colour_signals:inst15|background_d:BD|lpm_divide:Mod5|lpm_divide_voo:auto_generated                                                   ; work         ;
+;                |abs_divider_0dg:divider|     ; 150 (18)          ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Test|colour_signals:inst15|background_d:BD|lpm_divide:Mod5|lpm_divide_voo:auto_generated|abs_divider_0dg:divider                           ; work         ;
 ;                   |alt_u_div_l8f:divider|    ; 120 (120)         ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Test|colour_signals:inst15|background_d:BD|lpm_divide:Mod5|lpm_divide_voo:auto_generated|abs_divider_0dg:divider|alt_u_div_l8f:divider     ; work         ;
-;                   |lpm_abs_7v9:my_abs_num|   ; 13 (13)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Test|colour_signals:inst15|background_d:BD|lpm_divide:Mod5|lpm_divide_voo:auto_generated|abs_divider_0dg:divider|lpm_abs_7v9:my_abs_num    ; work         ;
-;       |flappy_bird:FB|                       ; 1289 (519)        ; 21 (21)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Test|colour_signals:inst15|flappy_bird:FB                                                                                                  ; work         ;
+;                   |lpm_abs_7v9:my_abs_num|   ; 12 (12)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Test|colour_signals:inst15|background_d:BD|lpm_divide:Mod5|lpm_divide_voo:auto_generated|abs_divider_0dg:divider|lpm_abs_7v9:my_abs_num    ; work         ;
+;       |flappy_bird:FB|                       ; 1243 (474)        ; 21 (21)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Test|colour_signals:inst15|flappy_bird:FB                                                                                                  ; work         ;
 ;          |lpm_divide:Mod0|                   ; 109 (0)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Test|colour_signals:inst15|flappy_bird:FB|lpm_divide:Mod0                                                                                  ; work         ;
 ;             |lpm_divide_3bm:auto_generated|  ; 109 (0)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Test|colour_signals:inst15|flappy_bird:FB|lpm_divide:Mod0|lpm_divide_3bm:auto_generated                                                    ; work         ;
 ;                |sign_div_unsign_1nh:divider| ; 109 (0)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Test|colour_signals:inst15|flappy_bird:FB|lpm_divide:Mod0|lpm_divide_3bm:auto_generated|sign_div_unsign_1nh:divider                        ; work         ;
@@ -352,12 +353,12 @@ Parallel compilation was disabled, but you have multiple processors available. E
 ;             |lpm_divide_3bm:auto_generated|  ; 122 (0)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Test|colour_signals:inst15|flappy_bird:FB|lpm_divide:Mod4|lpm_divide_3bm:auto_generated                                                    ; work         ;
 ;                |sign_div_unsign_1nh:divider| ; 122 (0)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Test|colour_signals:inst15|flappy_bird:FB|lpm_divide:Mod4|lpm_divide_3bm:auto_generated|sign_div_unsign_1nh:divider                        ; work         ;
 ;                   |alt_u_div_d8f:divider|    ; 122 (122)         ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Test|colour_signals:inst15|flappy_bird:FB|lpm_divide:Mod4|lpm_divide_3bm:auto_generated|sign_div_unsign_1nh:divider|alt_u_div_d8f:divider  ; work         ;
-;          |lpm_divide:Mod5|                   ; 203 (0)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Test|colour_signals:inst15|flappy_bird:FB|lpm_divide:Mod5                                                                                  ; work         ;
-;             |lpm_divide_voo:auto_generated|  ; 203 (0)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Test|colour_signals:inst15|flappy_bird:FB|lpm_divide:Mod5|lpm_divide_voo:auto_generated                                                    ; work         ;
-;                |abs_divider_0dg:divider|     ; 203 (16)          ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Test|colour_signals:inst15|flappy_bird:FB|lpm_divide:Mod5|lpm_divide_voo:auto_generated|abs_divider_0dg:divider                            ; work         ;
+;          |lpm_divide:Mod5|                   ; 202 (0)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Test|colour_signals:inst15|flappy_bird:FB|lpm_divide:Mod5                                                                                  ; work         ;
+;             |lpm_divide_voo:auto_generated|  ; 202 (0)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Test|colour_signals:inst15|flappy_bird:FB|lpm_divide:Mod5|lpm_divide_voo:auto_generated                                                    ; work         ;
+;                |abs_divider_0dg:divider|     ; 202 (15)          ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Test|colour_signals:inst15|flappy_bird:FB|lpm_divide:Mod5|lpm_divide_voo:auto_generated|abs_divider_0dg:divider                            ; work         ;
 ;                   |alt_u_div_l8f:divider|    ; 176 (176)         ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Test|colour_signals:inst15|flappy_bird:FB|lpm_divide:Mod5|lpm_divide_voo:auto_generated|abs_divider_0dg:divider|alt_u_div_l8f:divider      ; work         ;
 ;                   |lpm_abs_7v9:my_abs_num|   ; 11 (11)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Test|colour_signals:inst15|flappy_bird:FB|lpm_divide:Mod5|lpm_divide_voo:auto_generated|abs_divider_0dg:divider|lpm_abs_7v9:my_abs_num     ; work         ;
-;       |ground:G|                             ; 947 (116)         ; 11 (11)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Test|colour_signals:inst15|ground:G                                                                                                        ; work         ;
+;       |ground:G|                             ; 950 (119)         ; 11 (11)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Test|colour_signals:inst15|ground:G                                                                                                        ; work         ;
 ;          |lpm_divide:Mod0|                   ; 154 (0)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Test|colour_signals:inst15|ground:G|lpm_divide:Mod0                                                                                        ; work         ;
 ;             |lpm_divide_soo:auto_generated|  ; 154 (0)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Test|colour_signals:inst15|ground:G|lpm_divide:Mod0|lpm_divide_soo:auto_generated                                                          ; work         ;
 ;                |abs_divider_tcg:divider|     ; 154 (0)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Test|colour_signals:inst15|ground:G|lpm_divide:Mod0|lpm_divide_soo:auto_generated|abs_divider_tcg:divider                                  ; work         ;
@@ -379,7 +380,7 @@ Parallel compilation was disabled, but you have multiple processors available. E
 ;             |lpm_divide_voo:auto_generated|  ; 133 (0)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Test|colour_signals:inst15|ground:G|lpm_divide:Mod5|lpm_divide_voo:auto_generated                                                          ; work         ;
 ;                |abs_divider_0dg:divider|     ; 133 (0)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Test|colour_signals:inst15|ground:G|lpm_divide:Mod5|lpm_divide_voo:auto_generated|abs_divider_0dg:divider                                  ; work         ;
 ;                   |alt_u_div_l8f:divider|    ; 133 (133)         ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Test|colour_signals:inst15|ground:G|lpm_divide:Mod5|lpm_divide_voo:auto_generated|abs_divider_0dg:divider|alt_u_div_l8f:divider            ; work         ;
-;       |pipe:P1|                              ; 1137 (594)        ; 14 (14)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Test|colour_signals:inst15|pipe:P1                                                                                                         ; work         ;
+;       |pipe:P1|                              ; 1444 (901)        ; 30 (30)      ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Test|colour_signals:inst15|pipe:P1                                                                                                         ; work         ;
 ;          |lpm_divide:Mod0|                   ; 108 (0)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Test|colour_signals:inst15|pipe:P1|lpm_divide:Mod0                                                                                         ; work         ;
 ;             |lpm_divide_3bm:auto_generated|  ; 108 (0)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Test|colour_signals:inst15|pipe:P1|lpm_divide:Mod0|lpm_divide_3bm:auto_generated                                                           ; work         ;
 ;                |sign_div_unsign_1nh:divider| ; 108 (0)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |Test|colour_signals:inst15|pipe:P1|lpm_divide:Mod0|lpm_divide_3bm:auto_generated|sign_div_unsign_1nh:divider                               ; work         ;
@@ -422,26 +423,6 @@ Encoding Type:  One-Hot
 +-------------------------------+---------------------------+--------------------------+-------------------------------+---------------------------+--------------------------+---------------------------+
 
 
-+---------------------------------------------------------------------------------------------------------------+
-; User-Specified and Inferred Latches                                                                           ;
-+----------------------------------------------------------------+---------------------+------------------------+
-; Latch Name                                                     ; Latch Enable Signal ; Free of Timing Hazards ;
-+----------------------------------------------------------------+---------------------+------------------------+
-; colour_signals:inst15|flappy_bird:FB|flappy_bird_colours[2][3] ; GND                 ; yes                    ;
-; colour_signals:inst15|flappy_bird:FB|flappy_bird_colours[2][0] ; GND                 ; yes                    ;
-; colour_signals:inst15|flappy_bird:FB|flappy_bird_colours[2][1] ; GND                 ; yes                    ;
-; colour_signals:inst15|flappy_bird:FB|flappy_bird_colours[2][2] ; GND                 ; yes                    ;
-; colour_signals:inst15|flappy_bird:FB|flappy_bird_colours[1][2] ; GND                 ; yes                    ;
-; colour_signals:inst15|flappy_bird:FB|flappy_bird_colours[1][0] ; GND                 ; yes                    ;
-; colour_signals:inst15|flappy_bird:FB|flappy_bird_colours[1][1] ; GND                 ; yes                    ;
-; colour_signals:inst15|flappy_bird:FB|flappy_bird_colours[1][3] ; GND                 ; yes                    ;
-; colour_signals:inst15|flappy_bird:FB|flappy_bird_colours[0][3] ; GND                 ; yes                    ;
-; colour_signals:inst15|flappy_bird:FB|flappy_bird_colours[0][1] ; GND                 ; yes                    ;
-; Number of user-specified and inferred latches = 10             ;                     ;                        ;
-+----------------------------------------------------------------+---------------------+------------------------+
-Note: All latches listed above may not be present at the end of synthesis due to various synthesis optimizations.
-
-
 +-------------------------------------------------------------------------------------------------------------------+
 ; Registers Removed During Synthesis                                                                                ;
 +-----------------------------------------------------+-------------------------------------------------------------+
@@ -456,16 +437,8 @@ Note: All latches listed above may not be present at the end of synthesis due to
 ; MOUSE:inst4|SHIFTOUT[10]                            ; Stuck at VCC due to stuck port data_in                      ;
 ; colour_signals:inst15|pipe:P1|r[31]                 ; Lost fanout                                                 ;
 ; colour_signals:inst15|pipe:P1|pipe_x_motion[7,8]    ; Merged with colour_signals:inst15|pipe:P1|pipe_x_motion[10] ;
-; colour_signals:inst15|pipe:P1|r[1]                  ; Merged with colour_signals:inst15|pipe:P1|r[2]              ;
-; colour_signals:inst15|pipe:P1|r[2]                  ; Merged with colour_signals:inst15|pipe:P1|r[3]              ;
-; colour_signals:inst15|pipe:P1|r[3]                  ; Merged with colour_signals:inst15|pipe:P1|r[4]              ;
-; colour_signals:inst15|pipe:P1|r[4]                  ; Merged with colour_signals:inst15|pipe:P1|r[5]              ;
-; colour_signals:inst15|pipe:P1|r[5]                  ; Merged with colour_signals:inst15|pipe:P1|r[6]              ;
-; colour_signals:inst15|pipe:P1|r[6]                  ; Merged with colour_signals:inst15|pipe:P1|r[7]              ;
-; colour_signals:inst15|pipe:P1|r[7]                  ; Merged with colour_signals:inst15|pipe:P1|r[8]              ;
-; colour_signals:inst15|pipe:P1|r[8]                  ; Stuck at GND due to stuck port data_in                      ;
 ; VGA_SYNC:inst1|pixel_row[9]                         ; Stuck at GND due to stuck port data_in                      ;
-; Total Number of Removed Registers = 50              ;                                                             ;
+; Total Number of Removed Registers = 42              ;                                                             ;
 +-----------------------------------------------------+-------------------------------------------------------------+
 
 
@@ -474,12 +447,12 @@ Note: All latches listed above may not be present at the end of synthesis due to
 +----------------------------------------------+-------+
 ; Statistic                                    ; Value ;
 +----------------------------------------------+-------+
-; Total registers                              ; 182   ;
+; Total registers                              ; 198   ;
 ; Number of registers using Synchronous Clear  ; 0     ;
 ; Number of registers using Synchronous Load   ; 20    ;
 ; Number of registers using Asynchronous Clear ; 16    ;
 ; Number of registers using Asynchronous Load  ; 0     ;
-; Number of registers using Clock Enable       ; 76    ;
+; Number of registers using Clock Enable       ; 85    ;
 ; Number of registers using Preset             ; 0     ;
 +----------------------------------------------+-------+
 
@@ -489,38 +462,38 @@ Note: All latches listed above may not be present at the end of synthesis due to
 +----------------------------------------+---------+
 ; Inverted Register                      ; Fan out ;
 +----------------------------------------+---------+
-; colour_signals:inst15|pipe:P1|r[0]     ; 10      ;
+; colour_signals:inst15|pipe:P1|r[0]     ; 22      ;
+; colour_signals:inst15|pipe:P1|rand[0]  ; 2       ;
 ; MOUSE:inst4|send_char                  ; 3       ;
 ; MOUSE:inst4|SHIFTOUT[3]                ; 1       ;
 ; MOUSE:inst4|SHIFTOUT[5]                ; 1       ;
 ; MOUSE:inst4|SHIFTOUT[6]                ; 1       ;
 ; MOUSE:inst4|SHIFTOUT[7]                ; 1       ;
 ; MOUSE:inst4|SHIFTOUT[8]                ; 1       ;
-; Total number of inverted registers = 7 ;         ;
+; Total number of inverted registers = 8 ;         ;
 +----------------------------------------+---------+
 
 
-+---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Multiplexer Restructuring Statistics (Restructuring Performed)                                                                                                                        ;
-+--------------------+-----------+---------------+----------------------+------------------------+------------+-------------------------------------------------------------------------+
-; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output                                              ;
-+--------------------+-----------+---------------+----------------------+------------------------+------------+-------------------------------------------------------------------------+
-; 3:1                ; 10 bits   ; 20 LEs        ; 10 LEs               ; 10 LEs                 ; Yes        ; |Test|VGA_SYNC:inst1|v_count[6]                                         ;
-; 3:1                ; 32 bits   ; 64 LEs        ; 64 LEs               ; 0 LEs                  ; Yes        ; |Test|colour_signals:inst15|flappy_bird:FB|\move_bird:bird_velocity[29] ;
-; 3:1                ; 10 bits   ; 20 LEs        ; 20 LEs               ; 0 LEs                  ; Yes        ; |Test|colour_signals:inst15|flappy_bird:FB|flappy_y_pos[4]              ;
-; 4:1                ; 2 bits    ; 4 LEs         ; 4 LEs                ; 0 LEs                  ; No         ; |Test|colour_signals:inst15|blue[0]                                     ;
-; 5:1                ; 4 bits    ; 12 LEs        ; 8 LEs                ; 4 LEs                  ; No         ; |Test|colour_signals:inst15|green[0]                                    ;
-; 5:1                ; 3 bits    ; 9 LEs         ; 6 LEs                ; 3 LEs                  ; No         ; |Test|colour_signals:inst15|red[2]                                      ;
-; 11:1               ; 4 bits    ; 28 LEs        ; 28 LEs               ; 0 LEs                  ; No         ; |Test|colour_signals:inst15|ground:G|colour_info[2][2]                  ;
-; 13:1               ; 5 bits    ; 40 LEs        ; 40 LEs               ; 0 LEs                  ; No         ; |Test|colour_signals:inst15|ground:G|colour_info[2][1]                  ;
-; 45:1               ; 2 bits    ; 60 LEs        ; 60 LEs               ; 0 LEs                  ; No         ; |Test|colour_signals:inst15|flappy_bird:FB|flappy_bird_colours[1][0]    ;
-; 61:1               ; 2 bits    ; 80 LEs        ; 76 LEs               ; 4 LEs                  ; No         ; |Test|colour_signals:inst15|flappy_bird:FB|flappy_bird_colours[1][2]    ;
-; 68:1               ; 2 bits    ; 90 LEs        ; 90 LEs               ; 0 LEs                  ; No         ; |Test|colour_signals:inst15|pipe:P1|colour_info[1][0]                   ;
-; 70:1               ; 2 bits    ; 92 LEs        ; 92 LEs               ; 0 LEs                  ; No         ; |Test|colour_signals:inst15|pipe:P1|colour_info[2][0]                   ;
-; 71:1               ; 2 bits    ; 94 LEs        ; 94 LEs               ; 0 LEs                  ; No         ; |Test|colour_signals:inst15|pipe:P1|colour_info[1][3]                   ;
-; 612:1              ; 4 bits    ; 1632 LEs      ; 1632 LEs             ; 0 LEs                  ; No         ; |Test|colour_signals:inst15|background_d:BD|colour_info[0][0]           ;
-; 701:1              ; 2 bits    ; 934 LEs       ; 934 LEs              ; 0 LEs                  ; No         ; |Test|colour_signals:inst15|background_d:BD|colour_info[2][3]           ;
-+--------------------+-----------+---------------+----------------------+------------------------+------------+-------------------------------------------------------------------------+
++--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Multiplexer Restructuring Statistics (Restructuring Performed)                                                                                                                       ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+------------------------------------------------------------------------+
+; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output                                             ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+------------------------------------------------------------------------+
+; 3:1                ; 10 bits   ; 20 LEs        ; 10 LEs               ; 10 LEs                 ; Yes        ; |Test|VGA_SYNC:inst1|v_count[5]                                        ;
+; 3:1                ; 32 bits   ; 64 LEs        ; 64 LEs               ; 0 LEs                  ; Yes        ; |Test|colour_signals:inst15|flappy_bird:FB|\move_bird:bird_velocity[2] ;
+; 3:1                ; 10 bits   ; 20 LEs        ; 20 LEs               ; 0 LEs                  ; Yes        ; |Test|colour_signals:inst15|flappy_bird:FB|flappy_y_pos[1]             ;
+; 4:1                ; 2 bits    ; 4 LEs         ; 4 LEs                ; 0 LEs                  ; No         ; |Test|colour_signals:inst15|blue[0]                                    ;
+; 4:1                ; 3 bits    ; 6 LEs         ; 6 LEs                ; 0 LEs                  ; No         ; |Test|colour_signals:inst15|tmp_red                                    ;
+; 5:1                ; 4 bits    ; 12 LEs        ; 8 LEs                ; 4 LEs                  ; No         ; |Test|colour_signals:inst15|green[3]                                   ;
+; 11:1               ; 4 bits    ; 28 LEs        ; 28 LEs               ; 0 LEs                  ; No         ; |Test|colour_signals:inst15|ground:G|colour_info[0][3]                 ;
+; 13:1               ; 5 bits    ; 40 LEs        ; 40 LEs               ; 0 LEs                  ; No         ; |Test|colour_signals:inst15|ground:G|colour_info[1][0]                 ;
+; 62:1               ; 2 bits    ; 82 LEs        ; 78 LEs               ; 4 LEs                  ; No         ; |Test|colour_signals:inst15|flappy_bird:FB|colour_info[1][1]           ;
+; 68:1               ; 2 bits    ; 90 LEs        ; 90 LEs               ; 0 LEs                  ; No         ; |Test|colour_signals:inst15|pipe:P1|colour_info[1][2]                  ;
+; 70:1               ; 2 bits    ; 92 LEs        ; 92 LEs               ; 0 LEs                  ; No         ; |Test|colour_signals:inst15|pipe:P1|colour_info[2][2]                  ;
+; 71:1               ; 2 bits    ; 94 LEs        ; 94 LEs               ; 0 LEs                  ; No         ; |Test|colour_signals:inst15|pipe:P1|colour_info[0][1]                  ;
+; 612:1              ; 4 bits    ; 1632 LEs      ; 1632 LEs             ; 0 LEs                  ; No         ; |Test|colour_signals:inst15|background_d:BD|colour_info[1][2]          ;
+; 701:1              ; 2 bits    ; 934 LEs       ; 934 LEs              ; 0 LEs                  ; No         ; |Test|colour_signals:inst15|background_d:BD|colour_info[2][3]          ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+------------------------------------------------------------------------+
 
 
 +-----------------------------------------------------------------------------------+
@@ -930,9 +903,9 @@ Note: In order to hide this table in the UI and the text report file, please set
 ; AUTO_CASCADE_CHAINS                            ; ON          ; AUTO_CASCADE                    ;
 ; IGNORE_CASCADE_BUFFERS                         ; OFF         ; IGNORE_CASCADE                  ;
 ; LPM_WIDTHA                                     ; 2           ; Untyped                         ;
-; LPM_WIDTHB                                     ; 4           ; Untyped                         ;
-; LPM_WIDTHP                                     ; 6           ; Untyped                         ;
-; LPM_WIDTHR                                     ; 6           ; Untyped                         ;
+; LPM_WIDTHB                                     ; 9           ; Untyped                         ;
+; LPM_WIDTHP                                     ; 11          ; Untyped                         ;
+; LPM_WIDTHR                                     ; 11          ; Untyped                         ;
 ; LPM_WIDTHS                                     ; 1           ; Untyped                         ;
 ; LPM_REPRESENTATION                             ; UNSIGNED    ; Untyped                         ;
 ; LPM_PIPELINE                                   ; 0           ; Untyped                         ;
@@ -955,8 +928,43 @@ Note: In order to hide this table in the UI and the text report file, please set
 Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
 
 
++-----------------------------------------------------------------------------------------------+
+; Parameter Settings for Inferred Entity Instance: colour_signals:inst15|pipe:P1|lpm_mult:Mult2 ;
++------------------------------------------------+-------------+--------------------------------+
+; Parameter Name                                 ; Value       ; Type                           ;
++------------------------------------------------+-------------+--------------------------------+
+; AUTO_CARRY_CHAINS                              ; ON          ; AUTO_CARRY                     ;
+; IGNORE_CARRY_BUFFERS                           ; OFF         ; IGNORE_CARRY                   ;
+; AUTO_CASCADE_CHAINS                            ; ON          ; AUTO_CASCADE                   ;
+; IGNORE_CASCADE_BUFFERS                         ; OFF         ; IGNORE_CASCADE                 ;
+; LPM_WIDTHA                                     ; 2           ; Untyped                        ;
+; LPM_WIDTHB                                     ; 9           ; Untyped                        ;
+; LPM_WIDTHP                                     ; 11          ; Untyped                        ;
+; LPM_WIDTHR                                     ; 11          ; Untyped                        ;
+; LPM_WIDTHS                                     ; 1           ; Untyped                        ;
+; LPM_REPRESENTATION                             ; UNSIGNED    ; Untyped                        ;
+; LPM_PIPELINE                                   ; 0           ; Untyped                        ;
+; LATENCY                                        ; 0           ; Untyped                        ;
+; INPUT_A_IS_CONSTANT                            ; YES         ; Untyped                        ;
+; INPUT_B_IS_CONSTANT                            ; NO          ; Untyped                        ;
+; USE_EAB                                        ; OFF         ; Untyped                        ;
+; MAXIMIZE_SPEED                                 ; 5           ; Untyped                        ;
+; DEVICE_FAMILY                                  ; Cyclone III ; Untyped                        ;
+; CARRY_CHAIN                                    ; MANUAL      ; Untyped                        ;
+; APEX20K_TECHNOLOGY_MAPPER                      ; LUT         ; TECH_MAPPER_APEX20K            ;
+; DEDICATED_MULTIPLIER_CIRCUITRY                 ; AUTO        ; Untyped                        ;
+; DEDICATED_MULTIPLIER_MIN_INPUT_WIDTH_FOR_AUTO  ; 0           ; Untyped                        ;
+; DEDICATED_MULTIPLIER_MIN_OUTPUT_WIDTH_FOR_AUTO ; 0           ; Untyped                        ;
+; CBXI_PARAMETER                                 ; NOTHING     ; Untyped                        ;
+; INPUT_A_FIXED_VALUE                            ; Bx          ; Untyped                        ;
+; INPUT_B_FIXED_VALUE                            ; Bx          ; Untyped                        ;
+; USE_AHDL_IMPLEMENTATION                        ; OFF         ; Untyped                        ;
++------------------------------------------------+-------------+--------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
 +------------------------------------------------------------------------------------------------+
-; Parameter Settings for Inferred Entity Instance: colour_signals:inst15|pipe:P1|lpm_mult:Mult15 ;
+; Parameter Settings for Inferred Entity Instance: colour_signals:inst15|pipe:P1|lpm_mult:Mult16 ;
 +------------------------------------------------+-------------+---------------------------------+
 ; Parameter Name                                 ; Value       ; Type                            ;
 +------------------------------------------------+-------------+---------------------------------+
@@ -965,9 +973,9 @@ Note: In order to hide this table in the UI and the text report file, please set
 ; AUTO_CASCADE_CHAINS                            ; ON          ; AUTO_CASCADE                    ;
 ; IGNORE_CASCADE_BUFFERS                         ; OFF         ; IGNORE_CASCADE                  ;
 ; LPM_WIDTHA                                     ; 2           ; Untyped                         ;
-; LPM_WIDTHB                                     ; 4           ; Untyped                         ;
-; LPM_WIDTHP                                     ; 6           ; Untyped                         ;
-; LPM_WIDTHR                                     ; 6           ; Untyped                         ;
+; LPM_WIDTHB                                     ; 9           ; Untyped                         ;
+; LPM_WIDTHP                                     ; 11          ; Untyped                         ;
+; LPM_WIDTHR                                     ; 11          ; Untyped                         ;
 ; LPM_WIDTHS                                     ; 1           ; Untyped                         ;
 ; LPM_REPRESENTATION                             ; UNSIGNED    ; Untyped                         ;
 ; LPM_PIPELINE                                   ; 0           ; Untyped                         ;
@@ -1000,9 +1008,219 @@ Note: In order to hide this table in the UI and the text report file, please set
 ; AUTO_CASCADE_CHAINS                            ; ON          ; AUTO_CASCADE                    ;
 ; IGNORE_CASCADE_BUFFERS                         ; OFF         ; IGNORE_CASCADE                  ;
 ; LPM_WIDTHA                                     ; 2           ; Untyped                         ;
-; LPM_WIDTHB                                     ; 2           ; Untyped                         ;
-; LPM_WIDTHP                                     ; 4           ; Untyped                         ;
-; LPM_WIDTHR                                     ; 4           ; Untyped                         ;
+; LPM_WIDTHB                                     ; 9           ; Untyped                         ;
+; LPM_WIDTHP                                     ; 11          ; Untyped                         ;
+; LPM_WIDTHR                                     ; 11          ; Untyped                         ;
+; LPM_WIDTHS                                     ; 1           ; Untyped                         ;
+; LPM_REPRESENTATION                             ; UNSIGNED    ; Untyped                         ;
+; LPM_PIPELINE                                   ; 0           ; Untyped                         ;
+; LATENCY                                        ; 0           ; Untyped                         ;
+; INPUT_A_IS_CONSTANT                            ; YES         ; Untyped                         ;
+; INPUT_B_IS_CONSTANT                            ; NO          ; Untyped                         ;
+; USE_EAB                                        ; OFF         ; Untyped                         ;
+; MAXIMIZE_SPEED                                 ; 5           ; Untyped                         ;
+; DEVICE_FAMILY                                  ; Cyclone III ; Untyped                         ;
+; CARRY_CHAIN                                    ; MANUAL      ; Untyped                         ;
+; APEX20K_TECHNOLOGY_MAPPER                      ; LUT         ; TECH_MAPPER_APEX20K             ;
+; DEDICATED_MULTIPLIER_CIRCUITRY                 ; AUTO        ; Untyped                         ;
+; DEDICATED_MULTIPLIER_MIN_INPUT_WIDTH_FOR_AUTO  ; 0           ; Untyped                         ;
+; DEDICATED_MULTIPLIER_MIN_OUTPUT_WIDTH_FOR_AUTO ; 0           ; Untyped                         ;
+; CBXI_PARAMETER                                 ; NOTHING     ; Untyped                         ;
+; INPUT_A_FIXED_VALUE                            ; Bx          ; Untyped                         ;
+; INPUT_B_FIXED_VALUE                            ; Bx          ; Untyped                         ;
+; USE_AHDL_IMPLEMENTATION                        ; OFF         ; Untyped                         ;
++------------------------------------------------+-------------+---------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++------------------------------------------------------------------------------------------------+
+; Parameter Settings for Inferred Entity Instance: colour_signals:inst15|pipe:P1|lpm_mult:Mult15 ;
++------------------------------------------------+-------------+---------------------------------+
+; Parameter Name                                 ; Value       ; Type                            ;
++------------------------------------------------+-------------+---------------------------------+
+; AUTO_CARRY_CHAINS                              ; ON          ; AUTO_CARRY                      ;
+; IGNORE_CARRY_BUFFERS                           ; OFF         ; IGNORE_CARRY                    ;
+; AUTO_CASCADE_CHAINS                            ; ON          ; AUTO_CASCADE                    ;
+; IGNORE_CASCADE_BUFFERS                         ; OFF         ; IGNORE_CASCADE                  ;
+; LPM_WIDTHA                                     ; 2           ; Untyped                         ;
+; LPM_WIDTHB                                     ; 9           ; Untyped                         ;
+; LPM_WIDTHP                                     ; 11          ; Untyped                         ;
+; LPM_WIDTHR                                     ; 11          ; Untyped                         ;
+; LPM_WIDTHS                                     ; 1           ; Untyped                         ;
+; LPM_REPRESENTATION                             ; UNSIGNED    ; Untyped                         ;
+; LPM_PIPELINE                                   ; 0           ; Untyped                         ;
+; LATENCY                                        ; 0           ; Untyped                         ;
+; INPUT_A_IS_CONSTANT                            ; YES         ; Untyped                         ;
+; INPUT_B_IS_CONSTANT                            ; NO          ; Untyped                         ;
+; USE_EAB                                        ; OFF         ; Untyped                         ;
+; MAXIMIZE_SPEED                                 ; 5           ; Untyped                         ;
+; DEVICE_FAMILY                                  ; Cyclone III ; Untyped                         ;
+; CARRY_CHAIN                                    ; MANUAL      ; Untyped                         ;
+; APEX20K_TECHNOLOGY_MAPPER                      ; LUT         ; TECH_MAPPER_APEX20K             ;
+; DEDICATED_MULTIPLIER_CIRCUITRY                 ; AUTO        ; Untyped                         ;
+; DEDICATED_MULTIPLIER_MIN_INPUT_WIDTH_FOR_AUTO  ; 0           ; Untyped                         ;
+; DEDICATED_MULTIPLIER_MIN_OUTPUT_WIDTH_FOR_AUTO ; 0           ; Untyped                         ;
+; CBXI_PARAMETER                                 ; NOTHING     ; Untyped                         ;
+; INPUT_A_FIXED_VALUE                            ; Bx          ; Untyped                         ;
+; INPUT_B_FIXED_VALUE                            ; Bx          ; Untyped                         ;
+; USE_AHDL_IMPLEMENTATION                        ; OFF         ; Untyped                         ;
++------------------------------------------------+-------------+---------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++------------------------------------------------------------------------------------------------+
+; Parameter Settings for Inferred Entity Instance: colour_signals:inst15|pipe:P1|lpm_mult:Mult11 ;
++------------------------------------------------+-------------+---------------------------------+
+; Parameter Name                                 ; Value       ; Type                            ;
++------------------------------------------------+-------------+---------------------------------+
+; AUTO_CARRY_CHAINS                              ; ON          ; AUTO_CARRY                      ;
+; IGNORE_CARRY_BUFFERS                           ; OFF         ; IGNORE_CARRY                    ;
+; AUTO_CASCADE_CHAINS                            ; ON          ; AUTO_CASCADE                    ;
+; IGNORE_CASCADE_BUFFERS                         ; OFF         ; IGNORE_CASCADE                  ;
+; LPM_WIDTHA                                     ; 2           ; Untyped                         ;
+; LPM_WIDTHB                                     ; 9           ; Untyped                         ;
+; LPM_WIDTHP                                     ; 11          ; Untyped                         ;
+; LPM_WIDTHR                                     ; 11          ; Untyped                         ;
+; LPM_WIDTHS                                     ; 1           ; Untyped                         ;
+; LPM_REPRESENTATION                             ; UNSIGNED    ; Untyped                         ;
+; LPM_PIPELINE                                   ; 0           ; Untyped                         ;
+; LATENCY                                        ; 0           ; Untyped                         ;
+; INPUT_A_IS_CONSTANT                            ; YES         ; Untyped                         ;
+; INPUT_B_IS_CONSTANT                            ; NO          ; Untyped                         ;
+; USE_EAB                                        ; OFF         ; Untyped                         ;
+; MAXIMIZE_SPEED                                 ; 5           ; Untyped                         ;
+; DEVICE_FAMILY                                  ; Cyclone III ; Untyped                         ;
+; CARRY_CHAIN                                    ; MANUAL      ; Untyped                         ;
+; APEX20K_TECHNOLOGY_MAPPER                      ; LUT         ; TECH_MAPPER_APEX20K             ;
+; DEDICATED_MULTIPLIER_CIRCUITRY                 ; AUTO        ; Untyped                         ;
+; DEDICATED_MULTIPLIER_MIN_INPUT_WIDTH_FOR_AUTO  ; 0           ; Untyped                         ;
+; DEDICATED_MULTIPLIER_MIN_OUTPUT_WIDTH_FOR_AUTO ; 0           ; Untyped                         ;
+; CBXI_PARAMETER                                 ; NOTHING     ; Untyped                         ;
+; INPUT_A_FIXED_VALUE                            ; Bx          ; Untyped                         ;
+; INPUT_B_FIXED_VALUE                            ; Bx          ; Untyped                         ;
+; USE_AHDL_IMPLEMENTATION                        ; OFF         ; Untyped                         ;
++------------------------------------------------+-------------+---------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-----------------------------------------------------------------------------------------------+
+; Parameter Settings for Inferred Entity Instance: colour_signals:inst15|pipe:P1|lpm_mult:Mult7 ;
++------------------------------------------------+-------------+--------------------------------+
+; Parameter Name                                 ; Value       ; Type                           ;
++------------------------------------------------+-------------+--------------------------------+
+; AUTO_CARRY_CHAINS                              ; ON          ; AUTO_CARRY                     ;
+; IGNORE_CARRY_BUFFERS                           ; OFF         ; IGNORE_CARRY                   ;
+; AUTO_CASCADE_CHAINS                            ; ON          ; AUTO_CASCADE                   ;
+; IGNORE_CASCADE_BUFFERS                         ; OFF         ; IGNORE_CASCADE                 ;
+; LPM_WIDTHA                                     ; 2           ; Untyped                        ;
+; LPM_WIDTHB                                     ; 9           ; Untyped                        ;
+; LPM_WIDTHP                                     ; 11          ; Untyped                        ;
+; LPM_WIDTHR                                     ; 11          ; Untyped                        ;
+; LPM_WIDTHS                                     ; 1           ; Untyped                        ;
+; LPM_REPRESENTATION                             ; UNSIGNED    ; Untyped                        ;
+; LPM_PIPELINE                                   ; 0           ; Untyped                        ;
+; LATENCY                                        ; 0           ; Untyped                        ;
+; INPUT_A_IS_CONSTANT                            ; YES         ; Untyped                        ;
+; INPUT_B_IS_CONSTANT                            ; NO          ; Untyped                        ;
+; USE_EAB                                        ; OFF         ; Untyped                        ;
+; MAXIMIZE_SPEED                                 ; 5           ; Untyped                        ;
+; DEVICE_FAMILY                                  ; Cyclone III ; Untyped                        ;
+; CARRY_CHAIN                                    ; MANUAL      ; Untyped                        ;
+; APEX20K_TECHNOLOGY_MAPPER                      ; LUT         ; TECH_MAPPER_APEX20K            ;
+; DEDICATED_MULTIPLIER_CIRCUITRY                 ; AUTO        ; Untyped                        ;
+; DEDICATED_MULTIPLIER_MIN_INPUT_WIDTH_FOR_AUTO  ; 0           ; Untyped                        ;
+; DEDICATED_MULTIPLIER_MIN_OUTPUT_WIDTH_FOR_AUTO ; 0           ; Untyped                        ;
+; CBXI_PARAMETER                                 ; NOTHING     ; Untyped                        ;
+; INPUT_A_FIXED_VALUE                            ; Bx          ; Untyped                        ;
+; INPUT_B_FIXED_VALUE                            ; Bx          ; Untyped                        ;
+; USE_AHDL_IMPLEMENTATION                        ; OFF         ; Untyped                        ;
++------------------------------------------------+-------------+--------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-----------------------------------------------------------------------------------------------+
+; Parameter Settings for Inferred Entity Instance: colour_signals:inst15|pipe:P1|lpm_mult:Mult5 ;
++------------------------------------------------+-------------+--------------------------------+
+; Parameter Name                                 ; Value       ; Type                           ;
++------------------------------------------------+-------------+--------------------------------+
+; AUTO_CARRY_CHAINS                              ; ON          ; AUTO_CARRY                     ;
+; IGNORE_CARRY_BUFFERS                           ; OFF         ; IGNORE_CARRY                   ;
+; AUTO_CASCADE_CHAINS                            ; ON          ; AUTO_CASCADE                   ;
+; IGNORE_CASCADE_BUFFERS                         ; OFF         ; IGNORE_CASCADE                 ;
+; LPM_WIDTHA                                     ; 2           ; Untyped                        ;
+; LPM_WIDTHB                                     ; 9           ; Untyped                        ;
+; LPM_WIDTHP                                     ; 11          ; Untyped                        ;
+; LPM_WIDTHR                                     ; 11          ; Untyped                        ;
+; LPM_WIDTHS                                     ; 1           ; Untyped                        ;
+; LPM_REPRESENTATION                             ; UNSIGNED    ; Untyped                        ;
+; LPM_PIPELINE                                   ; 0           ; Untyped                        ;
+; LATENCY                                        ; 0           ; Untyped                        ;
+; INPUT_A_IS_CONSTANT                            ; YES         ; Untyped                        ;
+; INPUT_B_IS_CONSTANT                            ; NO          ; Untyped                        ;
+; USE_EAB                                        ; OFF         ; Untyped                        ;
+; MAXIMIZE_SPEED                                 ; 5           ; Untyped                        ;
+; DEVICE_FAMILY                                  ; Cyclone III ; Untyped                        ;
+; CARRY_CHAIN                                    ; MANUAL      ; Untyped                        ;
+; APEX20K_TECHNOLOGY_MAPPER                      ; LUT         ; TECH_MAPPER_APEX20K            ;
+; DEDICATED_MULTIPLIER_CIRCUITRY                 ; AUTO        ; Untyped                        ;
+; DEDICATED_MULTIPLIER_MIN_INPUT_WIDTH_FOR_AUTO  ; 0           ; Untyped                        ;
+; DEDICATED_MULTIPLIER_MIN_OUTPUT_WIDTH_FOR_AUTO ; 0           ; Untyped                        ;
+; CBXI_PARAMETER                                 ; NOTHING     ; Untyped                        ;
+; INPUT_A_FIXED_VALUE                            ; Bx          ; Untyped                        ;
+; INPUT_B_FIXED_VALUE                            ; Bx          ; Untyped                        ;
+; USE_AHDL_IMPLEMENTATION                        ; OFF         ; Untyped                        ;
++------------------------------------------------+-------------+--------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-----------------------------------------------------------------------------------------------+
+; Parameter Settings for Inferred Entity Instance: colour_signals:inst15|pipe:P1|lpm_mult:Mult6 ;
++------------------------------------------------+-------------+--------------------------------+
+; Parameter Name                                 ; Value       ; Type                           ;
++------------------------------------------------+-------------+--------------------------------+
+; AUTO_CARRY_CHAINS                              ; ON          ; AUTO_CARRY                     ;
+; IGNORE_CARRY_BUFFERS                           ; OFF         ; IGNORE_CARRY                   ;
+; AUTO_CASCADE_CHAINS                            ; ON          ; AUTO_CASCADE                   ;
+; IGNORE_CASCADE_BUFFERS                         ; OFF         ; IGNORE_CASCADE                 ;
+; LPM_WIDTHA                                     ; 2           ; Untyped                        ;
+; LPM_WIDTHB                                     ; 9           ; Untyped                        ;
+; LPM_WIDTHP                                     ; 11          ; Untyped                        ;
+; LPM_WIDTHR                                     ; 11          ; Untyped                        ;
+; LPM_WIDTHS                                     ; 1           ; Untyped                        ;
+; LPM_REPRESENTATION                             ; UNSIGNED    ; Untyped                        ;
+; LPM_PIPELINE                                   ; 0           ; Untyped                        ;
+; LATENCY                                        ; 0           ; Untyped                        ;
+; INPUT_A_IS_CONSTANT                            ; YES         ; Untyped                        ;
+; INPUT_B_IS_CONSTANT                            ; NO          ; Untyped                        ;
+; USE_EAB                                        ; OFF         ; Untyped                        ;
+; MAXIMIZE_SPEED                                 ; 5           ; Untyped                        ;
+; DEVICE_FAMILY                                  ; Cyclone III ; Untyped                        ;
+; CARRY_CHAIN                                    ; MANUAL      ; Untyped                        ;
+; APEX20K_TECHNOLOGY_MAPPER                      ; LUT         ; TECH_MAPPER_APEX20K            ;
+; DEDICATED_MULTIPLIER_CIRCUITRY                 ; AUTO        ; Untyped                        ;
+; DEDICATED_MULTIPLIER_MIN_INPUT_WIDTH_FOR_AUTO  ; 0           ; Untyped                        ;
+; DEDICATED_MULTIPLIER_MIN_OUTPUT_WIDTH_FOR_AUTO ; 0           ; Untyped                        ;
+; CBXI_PARAMETER                                 ; NOTHING     ; Untyped                        ;
+; INPUT_A_FIXED_VALUE                            ; Bx          ; Untyped                        ;
+; INPUT_B_FIXED_VALUE                            ; Bx          ; Untyped                        ;
+; USE_AHDL_IMPLEMENTATION                        ; OFF         ; Untyped                        ;
++------------------------------------------------+-------------+--------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++------------------------------------------------------------------------------------------------+
+; Parameter Settings for Inferred Entity Instance: colour_signals:inst15|pipe:P1|lpm_mult:Mult12 ;
++------------------------------------------------+-------------+---------------------------------+
+; Parameter Name                                 ; Value       ; Type                            ;
++------------------------------------------------+-------------+---------------------------------+
+; AUTO_CARRY_CHAINS                              ; ON          ; AUTO_CARRY                      ;
+; IGNORE_CARRY_BUFFERS                           ; OFF         ; IGNORE_CARRY                    ;
+; AUTO_CASCADE_CHAINS                            ; ON          ; AUTO_CASCADE                    ;
+; IGNORE_CASCADE_BUFFERS                         ; OFF         ; IGNORE_CASCADE                  ;
+; LPM_WIDTHA                                     ; 2           ; Untyped                         ;
+; LPM_WIDTHB                                     ; 9           ; Untyped                         ;
+; LPM_WIDTHP                                     ; 11          ; Untyped                         ;
+; LPM_WIDTHR                                     ; 11          ; Untyped                         ;
 ; LPM_WIDTHS                                     ; 1           ; Untyped                         ;
 ; LPM_REPRESENTATION                             ; UNSIGNED    ; Untyped                         ;
 ; LPM_PIPELINE                                   ; 0           ; Untyped                         ;
@@ -1035,9 +1253,9 @@ Note: In order to hide this table in the UI and the text report file, please set
 ; AUTO_CASCADE_CHAINS                            ; ON          ; AUTO_CASCADE                    ;
 ; IGNORE_CASCADE_BUFFERS                         ; OFF         ; IGNORE_CASCADE                  ;
 ; LPM_WIDTHA                                     ; 2           ; Untyped                         ;
-; LPM_WIDTHB                                     ; 4           ; Untyped                         ;
-; LPM_WIDTHP                                     ; 6           ; Untyped                         ;
-; LPM_WIDTHR                                     ; 6           ; Untyped                         ;
+; LPM_WIDTHB                                     ; 9           ; Untyped                         ;
+; LPM_WIDTHP                                     ; 11          ; Untyped                         ;
+; LPM_WIDTHR                                     ; 11          ; Untyped                         ;
 ; LPM_WIDTHS                                     ; 1           ; Untyped                         ;
 ; LPM_REPRESENTATION                             ; UNSIGNED    ; Untyped                         ;
 ; LPM_PIPELINE                                   ; 0           ; Untyped                         ;
@@ -1218,216 +1436,6 @@ Note: In order to hide this table in the UI and the text report file, please set
 ; AUTO_CASCADE_CHAINS    ; ON             ; AUTO_CASCADE                                         ;
 ; IGNORE_CASCADE_BUFFERS ; OFF            ; IGNORE_CASCADE                                       ;
 +------------------------+----------------+------------------------------------------------------+
-Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
-
-
-+-----------------------------------------------------------------------------------------------+
-; Parameter Settings for Inferred Entity Instance: colour_signals:inst15|pipe:P1|lpm_mult:Mult2 ;
-+------------------------------------------------+-------------+--------------------------------+
-; Parameter Name                                 ; Value       ; Type                           ;
-+------------------------------------------------+-------------+--------------------------------+
-; AUTO_CARRY_CHAINS                              ; ON          ; AUTO_CARRY                     ;
-; IGNORE_CARRY_BUFFERS                           ; OFF         ; IGNORE_CARRY                   ;
-; AUTO_CASCADE_CHAINS                            ; ON          ; AUTO_CASCADE                   ;
-; IGNORE_CASCADE_BUFFERS                         ; OFF         ; IGNORE_CASCADE                 ;
-; LPM_WIDTHA                                     ; 2           ; Untyped                        ;
-; LPM_WIDTHB                                     ; 7           ; Untyped                        ;
-; LPM_WIDTHP                                     ; 9           ; Untyped                        ;
-; LPM_WIDTHR                                     ; 9           ; Untyped                        ;
-; LPM_WIDTHS                                     ; 1           ; Untyped                        ;
-; LPM_REPRESENTATION                             ; UNSIGNED    ; Untyped                        ;
-; LPM_PIPELINE                                   ; 0           ; Untyped                        ;
-; LATENCY                                        ; 0           ; Untyped                        ;
-; INPUT_A_IS_CONSTANT                            ; YES         ; Untyped                        ;
-; INPUT_B_IS_CONSTANT                            ; NO          ; Untyped                        ;
-; USE_EAB                                        ; OFF         ; Untyped                        ;
-; MAXIMIZE_SPEED                                 ; 5           ; Untyped                        ;
-; DEVICE_FAMILY                                  ; Cyclone III ; Untyped                        ;
-; CARRY_CHAIN                                    ; MANUAL      ; Untyped                        ;
-; APEX20K_TECHNOLOGY_MAPPER                      ; LUT         ; TECH_MAPPER_APEX20K            ;
-; DEDICATED_MULTIPLIER_CIRCUITRY                 ; AUTO        ; Untyped                        ;
-; DEDICATED_MULTIPLIER_MIN_INPUT_WIDTH_FOR_AUTO  ; 0           ; Untyped                        ;
-; DEDICATED_MULTIPLIER_MIN_OUTPUT_WIDTH_FOR_AUTO ; 0           ; Untyped                        ;
-; CBXI_PARAMETER                                 ; NOTHING     ; Untyped                        ;
-; INPUT_A_FIXED_VALUE                            ; Bx          ; Untyped                        ;
-; INPUT_B_FIXED_VALUE                            ; Bx          ; Untyped                        ;
-; USE_AHDL_IMPLEMENTATION                        ; OFF         ; Untyped                        ;
-+------------------------------------------------+-------------+--------------------------------+
-Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
-
-
-+------------------------------------------------------------------------------------------------+
-; Parameter Settings for Inferred Entity Instance: colour_signals:inst15|pipe:P1|lpm_mult:Mult12 ;
-+------------------------------------------------+-------------+---------------------------------+
-; Parameter Name                                 ; Value       ; Type                            ;
-+------------------------------------------------+-------------+---------------------------------+
-; AUTO_CARRY_CHAINS                              ; ON          ; AUTO_CARRY                      ;
-; IGNORE_CARRY_BUFFERS                           ; OFF         ; IGNORE_CARRY                    ;
-; AUTO_CASCADE_CHAINS                            ; ON          ; AUTO_CASCADE                    ;
-; IGNORE_CASCADE_BUFFERS                         ; OFF         ; IGNORE_CASCADE                  ;
-; LPM_WIDTHA                                     ; 2           ; Untyped                         ;
-; LPM_WIDTHB                                     ; 6           ; Untyped                         ;
-; LPM_WIDTHP                                     ; 8           ; Untyped                         ;
-; LPM_WIDTHR                                     ; 8           ; Untyped                         ;
-; LPM_WIDTHS                                     ; 1           ; Untyped                         ;
-; LPM_REPRESENTATION                             ; UNSIGNED    ; Untyped                         ;
-; LPM_PIPELINE                                   ; 0           ; Untyped                         ;
-; LATENCY                                        ; 0           ; Untyped                         ;
-; INPUT_A_IS_CONSTANT                            ; YES         ; Untyped                         ;
-; INPUT_B_IS_CONSTANT                            ; NO          ; Untyped                         ;
-; USE_EAB                                        ; OFF         ; Untyped                         ;
-; MAXIMIZE_SPEED                                 ; 5           ; Untyped                         ;
-; DEVICE_FAMILY                                  ; Cyclone III ; Untyped                         ;
-; CARRY_CHAIN                                    ; MANUAL      ; Untyped                         ;
-; APEX20K_TECHNOLOGY_MAPPER                      ; LUT         ; TECH_MAPPER_APEX20K             ;
-; DEDICATED_MULTIPLIER_CIRCUITRY                 ; AUTO        ; Untyped                         ;
-; DEDICATED_MULTIPLIER_MIN_INPUT_WIDTH_FOR_AUTO  ; 0           ; Untyped                         ;
-; DEDICATED_MULTIPLIER_MIN_OUTPUT_WIDTH_FOR_AUTO ; 0           ; Untyped                         ;
-; CBXI_PARAMETER                                 ; NOTHING     ; Untyped                         ;
-; INPUT_A_FIXED_VALUE                            ; Bx          ; Untyped                         ;
-; INPUT_B_FIXED_VALUE                            ; Bx          ; Untyped                         ;
-; USE_AHDL_IMPLEMENTATION                        ; OFF         ; Untyped                         ;
-+------------------------------------------------+-------------+---------------------------------+
-Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
-
-
-+------------------------------------------------------------------------------------------------+
-; Parameter Settings for Inferred Entity Instance: colour_signals:inst15|pipe:P1|lpm_mult:Mult11 ;
-+------------------------------------------------+-------------+---------------------------------+
-; Parameter Name                                 ; Value       ; Type                            ;
-+------------------------------------------------+-------------+---------------------------------+
-; AUTO_CARRY_CHAINS                              ; ON          ; AUTO_CARRY                      ;
-; IGNORE_CARRY_BUFFERS                           ; OFF         ; IGNORE_CARRY                    ;
-; AUTO_CASCADE_CHAINS                            ; ON          ; AUTO_CASCADE                    ;
-; IGNORE_CASCADE_BUFFERS                         ; OFF         ; IGNORE_CASCADE                  ;
-; LPM_WIDTHA                                     ; 2           ; Untyped                         ;
-; LPM_WIDTHB                                     ; 6           ; Untyped                         ;
-; LPM_WIDTHP                                     ; 8           ; Untyped                         ;
-; LPM_WIDTHR                                     ; 8           ; Untyped                         ;
-; LPM_WIDTHS                                     ; 1           ; Untyped                         ;
-; LPM_REPRESENTATION                             ; UNSIGNED    ; Untyped                         ;
-; LPM_PIPELINE                                   ; 0           ; Untyped                         ;
-; LATENCY                                        ; 0           ; Untyped                         ;
-; INPUT_A_IS_CONSTANT                            ; YES         ; Untyped                         ;
-; INPUT_B_IS_CONSTANT                            ; NO          ; Untyped                         ;
-; USE_EAB                                        ; OFF         ; Untyped                         ;
-; MAXIMIZE_SPEED                                 ; 5           ; Untyped                         ;
-; DEVICE_FAMILY                                  ; Cyclone III ; Untyped                         ;
-; CARRY_CHAIN                                    ; MANUAL      ; Untyped                         ;
-; APEX20K_TECHNOLOGY_MAPPER                      ; LUT         ; TECH_MAPPER_APEX20K             ;
-; DEDICATED_MULTIPLIER_CIRCUITRY                 ; AUTO        ; Untyped                         ;
-; DEDICATED_MULTIPLIER_MIN_INPUT_WIDTH_FOR_AUTO  ; 0           ; Untyped                         ;
-; DEDICATED_MULTIPLIER_MIN_OUTPUT_WIDTH_FOR_AUTO ; 0           ; Untyped                         ;
-; CBXI_PARAMETER                                 ; NOTHING     ; Untyped                         ;
-; INPUT_A_FIXED_VALUE                            ; Bx          ; Untyped                         ;
-; INPUT_B_FIXED_VALUE                            ; Bx          ; Untyped                         ;
-; USE_AHDL_IMPLEMENTATION                        ; OFF         ; Untyped                         ;
-+------------------------------------------------+-------------+---------------------------------+
-Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
-
-
-+-----------------------------------------------------------------------------------------------+
-; Parameter Settings for Inferred Entity Instance: colour_signals:inst15|pipe:P1|lpm_mult:Mult7 ;
-+------------------------------------------------+-------------+--------------------------------+
-; Parameter Name                                 ; Value       ; Type                           ;
-+------------------------------------------------+-------------+--------------------------------+
-; AUTO_CARRY_CHAINS                              ; ON          ; AUTO_CARRY                     ;
-; IGNORE_CARRY_BUFFERS                           ; OFF         ; IGNORE_CARRY                   ;
-; AUTO_CASCADE_CHAINS                            ; ON          ; AUTO_CASCADE                   ;
-; IGNORE_CASCADE_BUFFERS                         ; OFF         ; IGNORE_CASCADE                 ;
-; LPM_WIDTHA                                     ; 2           ; Untyped                        ;
-; LPM_WIDTHB                                     ; 6           ; Untyped                        ;
-; LPM_WIDTHP                                     ; 8           ; Untyped                        ;
-; LPM_WIDTHR                                     ; 8           ; Untyped                        ;
-; LPM_WIDTHS                                     ; 1           ; Untyped                        ;
-; LPM_REPRESENTATION                             ; UNSIGNED    ; Untyped                        ;
-; LPM_PIPELINE                                   ; 0           ; Untyped                        ;
-; LATENCY                                        ; 0           ; Untyped                        ;
-; INPUT_A_IS_CONSTANT                            ; YES         ; Untyped                        ;
-; INPUT_B_IS_CONSTANT                            ; NO          ; Untyped                        ;
-; USE_EAB                                        ; OFF         ; Untyped                        ;
-; MAXIMIZE_SPEED                                 ; 5           ; Untyped                        ;
-; DEVICE_FAMILY                                  ; Cyclone III ; Untyped                        ;
-; CARRY_CHAIN                                    ; MANUAL      ; Untyped                        ;
-; APEX20K_TECHNOLOGY_MAPPER                      ; LUT         ; TECH_MAPPER_APEX20K            ;
-; DEDICATED_MULTIPLIER_CIRCUITRY                 ; AUTO        ; Untyped                        ;
-; DEDICATED_MULTIPLIER_MIN_INPUT_WIDTH_FOR_AUTO  ; 0           ; Untyped                        ;
-; DEDICATED_MULTIPLIER_MIN_OUTPUT_WIDTH_FOR_AUTO ; 0           ; Untyped                        ;
-; CBXI_PARAMETER                                 ; NOTHING     ; Untyped                        ;
-; INPUT_A_FIXED_VALUE                            ; Bx          ; Untyped                        ;
-; INPUT_B_FIXED_VALUE                            ; Bx          ; Untyped                        ;
-; USE_AHDL_IMPLEMENTATION                        ; OFF         ; Untyped                        ;
-+------------------------------------------------+-------------+--------------------------------+
-Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
-
-
-+-----------------------------------------------------------------------------------------------+
-; Parameter Settings for Inferred Entity Instance: colour_signals:inst15|pipe:P1|lpm_mult:Mult5 ;
-+------------------------------------------------+-------------+--------------------------------+
-; Parameter Name                                 ; Value       ; Type                           ;
-+------------------------------------------------+-------------+--------------------------------+
-; AUTO_CARRY_CHAINS                              ; ON          ; AUTO_CARRY                     ;
-; IGNORE_CARRY_BUFFERS                           ; OFF         ; IGNORE_CARRY                   ;
-; AUTO_CASCADE_CHAINS                            ; ON          ; AUTO_CASCADE                   ;
-; IGNORE_CASCADE_BUFFERS                         ; OFF         ; IGNORE_CASCADE                 ;
-; LPM_WIDTHA                                     ; 2           ; Untyped                        ;
-; LPM_WIDTHB                                     ; 7           ; Untyped                        ;
-; LPM_WIDTHP                                     ; 9           ; Untyped                        ;
-; LPM_WIDTHR                                     ; 9           ; Untyped                        ;
-; LPM_WIDTHS                                     ; 1           ; Untyped                        ;
-; LPM_REPRESENTATION                             ; UNSIGNED    ; Untyped                        ;
-; LPM_PIPELINE                                   ; 0           ; Untyped                        ;
-; LATENCY                                        ; 0           ; Untyped                        ;
-; INPUT_A_IS_CONSTANT                            ; YES         ; Untyped                        ;
-; INPUT_B_IS_CONSTANT                            ; NO          ; Untyped                        ;
-; USE_EAB                                        ; OFF         ; Untyped                        ;
-; MAXIMIZE_SPEED                                 ; 5           ; Untyped                        ;
-; DEVICE_FAMILY                                  ; Cyclone III ; Untyped                        ;
-; CARRY_CHAIN                                    ; MANUAL      ; Untyped                        ;
-; APEX20K_TECHNOLOGY_MAPPER                      ; LUT         ; TECH_MAPPER_APEX20K            ;
-; DEDICATED_MULTIPLIER_CIRCUITRY                 ; AUTO        ; Untyped                        ;
-; DEDICATED_MULTIPLIER_MIN_INPUT_WIDTH_FOR_AUTO  ; 0           ; Untyped                        ;
-; DEDICATED_MULTIPLIER_MIN_OUTPUT_WIDTH_FOR_AUTO ; 0           ; Untyped                        ;
-; CBXI_PARAMETER                                 ; NOTHING     ; Untyped                        ;
-; INPUT_A_FIXED_VALUE                            ; Bx          ; Untyped                        ;
-; INPUT_B_FIXED_VALUE                            ; Bx          ; Untyped                        ;
-; USE_AHDL_IMPLEMENTATION                        ; OFF         ; Untyped                        ;
-+------------------------------------------------+-------------+--------------------------------+
-Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
-
-
-+-----------------------------------------------------------------------------------------------+
-; Parameter Settings for Inferred Entity Instance: colour_signals:inst15|pipe:P1|lpm_mult:Mult6 ;
-+------------------------------------------------+-------------+--------------------------------+
-; Parameter Name                                 ; Value       ; Type                           ;
-+------------------------------------------------+-------------+--------------------------------+
-; AUTO_CARRY_CHAINS                              ; ON          ; AUTO_CARRY                     ;
-; IGNORE_CARRY_BUFFERS                           ; OFF         ; IGNORE_CARRY                   ;
-; AUTO_CASCADE_CHAINS                            ; ON          ; AUTO_CASCADE                   ;
-; IGNORE_CASCADE_BUFFERS                         ; OFF         ; IGNORE_CASCADE                 ;
-; LPM_WIDTHA                                     ; 2           ; Untyped                        ;
-; LPM_WIDTHB                                     ; 7           ; Untyped                        ;
-; LPM_WIDTHP                                     ; 9           ; Untyped                        ;
-; LPM_WIDTHR                                     ; 9           ; Untyped                        ;
-; LPM_WIDTHS                                     ; 1           ; Untyped                        ;
-; LPM_REPRESENTATION                             ; UNSIGNED    ; Untyped                        ;
-; LPM_PIPELINE                                   ; 0           ; Untyped                        ;
-; LATENCY                                        ; 0           ; Untyped                        ;
-; INPUT_A_IS_CONSTANT                            ; YES         ; Untyped                        ;
-; INPUT_B_IS_CONSTANT                            ; NO          ; Untyped                        ;
-; USE_EAB                                        ; OFF         ; Untyped                        ;
-; MAXIMIZE_SPEED                                 ; 5           ; Untyped                        ;
-; DEVICE_FAMILY                                  ; Cyclone III ; Untyped                        ;
-; CARRY_CHAIN                                    ; MANUAL      ; Untyped                        ;
-; APEX20K_TECHNOLOGY_MAPPER                      ; LUT         ; TECH_MAPPER_APEX20K            ;
-; DEDICATED_MULTIPLIER_CIRCUITRY                 ; AUTO        ; Untyped                        ;
-; DEDICATED_MULTIPLIER_MIN_INPUT_WIDTH_FOR_AUTO  ; 0           ; Untyped                        ;
-; DEDICATED_MULTIPLIER_MIN_OUTPUT_WIDTH_FOR_AUTO ; 0           ; Untyped                        ;
-; CBXI_PARAMETER                                 ; NOTHING     ; Untyped                        ;
-; INPUT_A_FIXED_VALUE                            ; Bx          ; Untyped                        ;
-; INPUT_B_FIXED_VALUE                            ; Bx          ; Untyped                        ;
-; USE_AHDL_IMPLEMENTATION                        ; OFF         ; Untyped                        ;
-+------------------------------------------------+-------------+--------------------------------+
 Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
 
 
@@ -1683,44 +1691,11 @@ Note: In order to hide this table in the UI and the text report file, please set
 +---------------------------------------+-----------------------------------------------+
 ; Name                                  ; Value                                         ;
 +---------------------------------------+-----------------------------------------------+
-; Number of entity instances            ; 10                                            ;
+; Number of entity instances            ; 11                                            ;
 ; Entity Instance                       ; colour_signals:inst15|pipe:P1|lpm_mult:Mult14 ;
 ;     -- LPM_WIDTHA                     ; 2                                             ;
-;     -- LPM_WIDTHB                     ; 4                                             ;
-;     -- LPM_WIDTHP                     ; 6                                             ;
-;     -- LPM_REPRESENTATION             ; UNSIGNED                                      ;
-;     -- INPUT_A_IS_CONSTANT            ; YES                                           ;
-;     -- INPUT_B_IS_CONSTANT            ; NO                                            ;
-;     -- USE_EAB                        ; OFF                                           ;
-;     -- DEDICATED_MULTIPLIER_CIRCUITRY ; AUTO                                          ;
-;     -- INPUT_A_FIXED_VALUE            ; Bx                                            ;
-;     -- INPUT_B_FIXED_VALUE            ; Bx                                            ;
-; Entity Instance                       ; colour_signals:inst15|pipe:P1|lpm_mult:Mult15 ;
-;     -- LPM_WIDTHA                     ; 2                                             ;
-;     -- LPM_WIDTHB                     ; 4                                             ;
-;     -- LPM_WIDTHP                     ; 6                                             ;
-;     -- LPM_REPRESENTATION             ; UNSIGNED                                      ;
-;     -- INPUT_A_IS_CONSTANT            ; YES                                           ;
-;     -- INPUT_B_IS_CONSTANT            ; NO                                            ;
-;     -- USE_EAB                        ; OFF                                           ;
-;     -- DEDICATED_MULTIPLIER_CIRCUITRY ; AUTO                                          ;
-;     -- INPUT_A_FIXED_VALUE            ; Bx                                            ;
-;     -- INPUT_B_FIXED_VALUE            ; Bx                                            ;
-; Entity Instance                       ; colour_signals:inst15|pipe:P1|lpm_mult:Mult17 ;
-;     -- LPM_WIDTHA                     ; 2                                             ;
-;     -- LPM_WIDTHB                     ; 2                                             ;
-;     -- LPM_WIDTHP                     ; 4                                             ;
-;     -- LPM_REPRESENTATION             ; UNSIGNED                                      ;
-;     -- INPUT_A_IS_CONSTANT            ; YES                                           ;
-;     -- INPUT_B_IS_CONSTANT            ; NO                                            ;
-;     -- USE_EAB                        ; OFF                                           ;
-;     -- DEDICATED_MULTIPLIER_CIRCUITRY ; AUTO                                          ;
-;     -- INPUT_A_FIXED_VALUE            ; Bx                                            ;
-;     -- INPUT_B_FIXED_VALUE            ; Bx                                            ;
-; Entity Instance                       ; colour_signals:inst15|pipe:P1|lpm_mult:Mult13 ;
-;     -- LPM_WIDTHA                     ; 2                                             ;
-;     -- LPM_WIDTHB                     ; 4                                             ;
-;     -- LPM_WIDTHP                     ; 6                                             ;
+;     -- LPM_WIDTHB                     ; 9                                             ;
+;     -- LPM_WIDTHP                     ; 11                                            ;
 ;     -- LPM_REPRESENTATION             ; UNSIGNED                                      ;
 ;     -- INPUT_A_IS_CONSTANT            ; YES                                           ;
 ;     -- INPUT_B_IS_CONSTANT            ; NO                                            ;
@@ -1730,8 +1705,8 @@ Note: In order to hide this table in the UI and the text report file, please set
 ;     -- INPUT_B_FIXED_VALUE            ; Bx                                            ;
 ; Entity Instance                       ; colour_signals:inst15|pipe:P1|lpm_mult:Mult2  ;
 ;     -- LPM_WIDTHA                     ; 2                                             ;
-;     -- LPM_WIDTHB                     ; 7                                             ;
-;     -- LPM_WIDTHP                     ; 9                                             ;
+;     -- LPM_WIDTHB                     ; 9                                             ;
+;     -- LPM_WIDTHP                     ; 11                                            ;
 ;     -- LPM_REPRESENTATION             ; UNSIGNED                                      ;
 ;     -- INPUT_A_IS_CONSTANT            ; YES                                           ;
 ;     -- INPUT_B_IS_CONSTANT            ; NO                                            ;
@@ -1739,10 +1714,32 @@ Note: In order to hide this table in the UI and the text report file, please set
 ;     -- DEDICATED_MULTIPLIER_CIRCUITRY ; AUTO                                          ;
 ;     -- INPUT_A_FIXED_VALUE            ; Bx                                            ;
 ;     -- INPUT_B_FIXED_VALUE            ; Bx                                            ;
-; Entity Instance                       ; colour_signals:inst15|pipe:P1|lpm_mult:Mult12 ;
+; Entity Instance                       ; colour_signals:inst15|pipe:P1|lpm_mult:Mult16 ;
 ;     -- LPM_WIDTHA                     ; 2                                             ;
-;     -- LPM_WIDTHB                     ; 6                                             ;
-;     -- LPM_WIDTHP                     ; 8                                             ;
+;     -- LPM_WIDTHB                     ; 9                                             ;
+;     -- LPM_WIDTHP                     ; 11                                            ;
+;     -- LPM_REPRESENTATION             ; UNSIGNED                                      ;
+;     -- INPUT_A_IS_CONSTANT            ; YES                                           ;
+;     -- INPUT_B_IS_CONSTANT            ; NO                                            ;
+;     -- USE_EAB                        ; OFF                                           ;
+;     -- DEDICATED_MULTIPLIER_CIRCUITRY ; AUTO                                          ;
+;     -- INPUT_A_FIXED_VALUE            ; Bx                                            ;
+;     -- INPUT_B_FIXED_VALUE            ; Bx                                            ;
+; Entity Instance                       ; colour_signals:inst15|pipe:P1|lpm_mult:Mult17 ;
+;     -- LPM_WIDTHA                     ; 2                                             ;
+;     -- LPM_WIDTHB                     ; 9                                             ;
+;     -- LPM_WIDTHP                     ; 11                                            ;
+;     -- LPM_REPRESENTATION             ; UNSIGNED                                      ;
+;     -- INPUT_A_IS_CONSTANT            ; YES                                           ;
+;     -- INPUT_B_IS_CONSTANT            ; NO                                            ;
+;     -- USE_EAB                        ; OFF                                           ;
+;     -- DEDICATED_MULTIPLIER_CIRCUITRY ; AUTO                                          ;
+;     -- INPUT_A_FIXED_VALUE            ; Bx                                            ;
+;     -- INPUT_B_FIXED_VALUE            ; Bx                                            ;
+; Entity Instance                       ; colour_signals:inst15|pipe:P1|lpm_mult:Mult15 ;
+;     -- LPM_WIDTHA                     ; 2                                             ;
+;     -- LPM_WIDTHB                     ; 9                                             ;
+;     -- LPM_WIDTHP                     ; 11                                            ;
 ;     -- LPM_REPRESENTATION             ; UNSIGNED                                      ;
 ;     -- INPUT_A_IS_CONSTANT            ; YES                                           ;
 ;     -- INPUT_B_IS_CONSTANT            ; NO                                            ;
@@ -1752,8 +1749,8 @@ Note: In order to hide this table in the UI and the text report file, please set
 ;     -- INPUT_B_FIXED_VALUE            ; Bx                                            ;
 ; Entity Instance                       ; colour_signals:inst15|pipe:P1|lpm_mult:Mult11 ;
 ;     -- LPM_WIDTHA                     ; 2                                             ;
-;     -- LPM_WIDTHB                     ; 6                                             ;
-;     -- LPM_WIDTHP                     ; 8                                             ;
+;     -- LPM_WIDTHB                     ; 9                                             ;
+;     -- LPM_WIDTHP                     ; 11                                            ;
 ;     -- LPM_REPRESENTATION             ; UNSIGNED                                      ;
 ;     -- INPUT_A_IS_CONSTANT            ; YES                                           ;
 ;     -- INPUT_B_IS_CONSTANT            ; NO                                            ;
@@ -1763,8 +1760,8 @@ Note: In order to hide this table in the UI and the text report file, please set
 ;     -- INPUT_B_FIXED_VALUE            ; Bx                                            ;
 ; Entity Instance                       ; colour_signals:inst15|pipe:P1|lpm_mult:Mult7  ;
 ;     -- LPM_WIDTHA                     ; 2                                             ;
-;     -- LPM_WIDTHB                     ; 6                                             ;
-;     -- LPM_WIDTHP                     ; 8                                             ;
+;     -- LPM_WIDTHB                     ; 9                                             ;
+;     -- LPM_WIDTHP                     ; 11                                            ;
 ;     -- LPM_REPRESENTATION             ; UNSIGNED                                      ;
 ;     -- INPUT_A_IS_CONSTANT            ; YES                                           ;
 ;     -- INPUT_B_IS_CONSTANT            ; NO                                            ;
@@ -1774,8 +1771,8 @@ Note: In order to hide this table in the UI and the text report file, please set
 ;     -- INPUT_B_FIXED_VALUE            ; Bx                                            ;
 ; Entity Instance                       ; colour_signals:inst15|pipe:P1|lpm_mult:Mult5  ;
 ;     -- LPM_WIDTHA                     ; 2                                             ;
-;     -- LPM_WIDTHB                     ; 7                                             ;
-;     -- LPM_WIDTHP                     ; 9                                             ;
+;     -- LPM_WIDTHB                     ; 9                                             ;
+;     -- LPM_WIDTHP                     ; 11                                            ;
 ;     -- LPM_REPRESENTATION             ; UNSIGNED                                      ;
 ;     -- INPUT_A_IS_CONSTANT            ; YES                                           ;
 ;     -- INPUT_B_IS_CONSTANT            ; NO                                            ;
@@ -1785,8 +1782,30 @@ Note: In order to hide this table in the UI and the text report file, please set
 ;     -- INPUT_B_FIXED_VALUE            ; Bx                                            ;
 ; Entity Instance                       ; colour_signals:inst15|pipe:P1|lpm_mult:Mult6  ;
 ;     -- LPM_WIDTHA                     ; 2                                             ;
-;     -- LPM_WIDTHB                     ; 7                                             ;
-;     -- LPM_WIDTHP                     ; 9                                             ;
+;     -- LPM_WIDTHB                     ; 9                                             ;
+;     -- LPM_WIDTHP                     ; 11                                            ;
+;     -- LPM_REPRESENTATION             ; UNSIGNED                                      ;
+;     -- INPUT_A_IS_CONSTANT            ; YES                                           ;
+;     -- INPUT_B_IS_CONSTANT            ; NO                                            ;
+;     -- USE_EAB                        ; OFF                                           ;
+;     -- DEDICATED_MULTIPLIER_CIRCUITRY ; AUTO                                          ;
+;     -- INPUT_A_FIXED_VALUE            ; Bx                                            ;
+;     -- INPUT_B_FIXED_VALUE            ; Bx                                            ;
+; Entity Instance                       ; colour_signals:inst15|pipe:P1|lpm_mult:Mult12 ;
+;     -- LPM_WIDTHA                     ; 2                                             ;
+;     -- LPM_WIDTHB                     ; 9                                             ;
+;     -- LPM_WIDTHP                     ; 11                                            ;
+;     -- LPM_REPRESENTATION             ; UNSIGNED                                      ;
+;     -- INPUT_A_IS_CONSTANT            ; YES                                           ;
+;     -- INPUT_B_IS_CONSTANT            ; NO                                            ;
+;     -- USE_EAB                        ; OFF                                           ;
+;     -- DEDICATED_MULTIPLIER_CIRCUITRY ; AUTO                                          ;
+;     -- INPUT_A_FIXED_VALUE            ; Bx                                            ;
+;     -- INPUT_B_FIXED_VALUE            ; Bx                                            ;
+; Entity Instance                       ; colour_signals:inst15|pipe:P1|lpm_mult:Mult13 ;
+;     -- LPM_WIDTHA                     ; 2                                             ;
+;     -- LPM_WIDTHB                     ; 9                                             ;
+;     -- LPM_WIDTHP                     ; 11                                            ;
 ;     -- LPM_REPRESENTATION             ; UNSIGNED                                      ;
 ;     -- INPUT_A_IS_CONSTANT            ; YES                                           ;
 ;     -- INPUT_B_IS_CONSTANT            ; NO                                            ;
@@ -1812,7 +1831,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 +----------------+--------------+
 ; Partition Name ; Elapsed Time ;
 +----------------+--------------+
-; Top            ; 00:00:43     ;
+; Top            ; 00:00:34     ;
 +----------------+--------------+
 
 
@@ -1822,7 +1841,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus II 64-Bit Analysis & Synthesis
     Info: Version 13.0.1 Build 232 06/12/2013 Service Pack 1 SJ Web Edition
-    Info: Processing started: Sun May 29 02:31:31 2022
+    Info: Processing started: Sun May 29 02:54:58 2022
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off Test -c Test
 Warning (20028): Parallel compilation is not licensed and has been disabled
 Info (12021): Found 2 design units, including 1 entities, in source file /documents/github/pilk/sam/sevenseg.vhd
@@ -1931,31 +1950,26 @@ Info (12128): Elaborating entity "ground" for hierarchy "colour_signals:inst15|g
 Warning (10036): Verilog HDL or VHDL warning at drawings.vhd(935): object "ground_width" assigned a value but never read
 Info (12128): Elaborating entity "pipe" for hierarchy "colour_signals:inst15|pipe:P1"
 Info (12128): Elaborating entity "flappy_bird" for hierarchy "colour_signals:inst15|flappy_bird:FB"
-Warning (10036): Verilog HDL or VHDL warning at drawings.vhd(1288): object "right_flag" assigned a value but never read
+Warning (10036): Verilog HDL or VHDL warning at drawings.vhd(1287): object "right_flag" assigned a value but never read
 Warning (10542): VHDL Variable Declaration warning at drawings.vhd(1446): used initial value expression for variable "frame_rate_time" because variable was never assigned a value
-Info (10041): Inferred latch for "flappy_bird_colours[2][0]" at drawings.vhd(1350)
-Info (10041): Inferred latch for "flappy_bird_colours[2][1]" at drawings.vhd(1350)
-Info (10041): Inferred latch for "flappy_bird_colours[2][2]" at drawings.vhd(1350)
-Info (10041): Inferred latch for "flappy_bird_colours[2][3]" at drawings.vhd(1350)
-Info (10041): Inferred latch for "flappy_bird_colours[1][0]" at drawings.vhd(1350)
-Info (10041): Inferred latch for "flappy_bird_colours[1][1]" at drawings.vhd(1350)
-Info (10041): Inferred latch for "flappy_bird_colours[1][2]" at drawings.vhd(1350)
-Info (10041): Inferred latch for "flappy_bird_colours[1][3]" at drawings.vhd(1350)
-Info (10041): Inferred latch for "flappy_bird_colours[0][0]" at drawings.vhd(1350)
-Info (10041): Inferred latch for "flappy_bird_colours[0][1]" at drawings.vhd(1350)
-Info (10041): Inferred latch for "flappy_bird_colours[0][2]" at drawings.vhd(1350)
-Info (10041): Inferred latch for "flappy_bird_colours[0][3]" at drawings.vhd(1350)
 Info (12128): Elaborating entity "MOUSE" for hierarchy "MOUSE:inst4"
 Warning (10036): Verilog HDL or VHDL warning at mouse.vhd(25): object "CHARIN" assigned a value but never read
 Warning (10492): VHDL Process Statement warning at mouse.vhd(151): signal "CHAROUT" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
 Warning (10492): VHDL Process Statement warning at mouse.vhd(155): signal "CHAROUT" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
 Warning (10492): VHDL Process Statement warning at mouse.vhd(156): signal "CHAROUT" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
 Warning (10492): VHDL Process Statement warning at mouse.vhd(157): signal "CHAROUT" is read inside the Process Statement but isn't in the Process Statement's sensitivity list
-Info (278001): Inferred 28 megafunctions from design logic
+Info (278001): Inferred 29 megafunctions from design logic
     Info (278004): Inferred divider/modulo megafunction ("lpm_divide") from the following logic: "colour_signals:inst15|pipe:P1|Mod2"
     Info (278003): Inferred multiplier megafunction ("lpm_mult") from the following logic: "colour_signals:inst15|pipe:P1|Mult14"
-    Info (278003): Inferred multiplier megafunction ("lpm_mult") from the following logic: "colour_signals:inst15|pipe:P1|Mult15"
+    Info (278003): Inferred multiplier megafunction ("lpm_mult") from the following logic: "colour_signals:inst15|pipe:P1|Mult2"
+    Info (278003): Inferred multiplier megafunction ("lpm_mult") from the following logic: "colour_signals:inst15|pipe:P1|Mult16"
     Info (278003): Inferred multiplier megafunction ("lpm_mult") from the following logic: "colour_signals:inst15|pipe:P1|Mult17"
+    Info (278003): Inferred multiplier megafunction ("lpm_mult") from the following logic: "colour_signals:inst15|pipe:P1|Mult15"
+    Info (278003): Inferred multiplier megafunction ("lpm_mult") from the following logic: "colour_signals:inst15|pipe:P1|Mult11"
+    Info (278003): Inferred multiplier megafunction ("lpm_mult") from the following logic: "colour_signals:inst15|pipe:P1|Mult7"
+    Info (278003): Inferred multiplier megafunction ("lpm_mult") from the following logic: "colour_signals:inst15|pipe:P1|Mult5"
+    Info (278003): Inferred multiplier megafunction ("lpm_mult") from the following logic: "colour_signals:inst15|pipe:P1|Mult6"
+    Info (278003): Inferred multiplier megafunction ("lpm_mult") from the following logic: "colour_signals:inst15|pipe:P1|Mult12"
     Info (278003): Inferred multiplier megafunction ("lpm_mult") from the following logic: "colour_signals:inst15|pipe:P1|Mult13"
     Info (278004): Inferred divider/modulo megafunction ("lpm_divide") from the following logic: "colour_signals:inst15|background_d:BD|Mod3"
     Info (278004): Inferred divider/modulo megafunction ("lpm_divide") from the following logic: "colour_signals:inst15|background_d:BD|Mod5"
@@ -1964,12 +1978,6 @@ Info (278001): Inferred 28 megafunctions from design logic
     Info (278004): Inferred divider/modulo megafunction ("lpm_divide") from the following logic: "colour_signals:inst15|flappy_bird:FB|Mod5"
     Info (278004): Inferred divider/modulo megafunction ("lpm_divide") from the following logic: "colour_signals:inst15|pipe:P1|Mod1"
     Info (278004): Inferred divider/modulo megafunction ("lpm_divide") from the following logic: "colour_signals:inst15|pipe:P1|Mod0"
-    Info (278003): Inferred multiplier megafunction ("lpm_mult") from the following logic: "colour_signals:inst15|pipe:P1|Mult2"
-    Info (278003): Inferred multiplier megafunction ("lpm_mult") from the following logic: "colour_signals:inst15|pipe:P1|Mult12"
-    Info (278003): Inferred multiplier megafunction ("lpm_mult") from the following logic: "colour_signals:inst15|pipe:P1|Mult11"
-    Info (278003): Inferred multiplier megafunction ("lpm_mult") from the following logic: "colour_signals:inst15|pipe:P1|Mult7"
-    Info (278003): Inferred multiplier megafunction ("lpm_mult") from the following logic: "colour_signals:inst15|pipe:P1|Mult5"
-    Info (278003): Inferred multiplier megafunction ("lpm_mult") from the following logic: "colour_signals:inst15|pipe:P1|Mult6"
     Info (278004): Inferred divider/modulo megafunction ("lpm_divide") from the following logic: "colour_signals:inst15|background_d:BD|Mod2"
     Info (278004): Inferred divider/modulo megafunction ("lpm_divide") from the following logic: "colour_signals:inst15|ground:G|Mod2"
     Info (278004): Inferred divider/modulo megafunction ("lpm_divide") from the following logic: "colour_signals:inst15|flappy_bird:FB|Mod2"
@@ -2002,9 +2010,9 @@ Info (12021): Found 1 design units, including 1 entities, in source file db/lpm_
 Info (12130): Elaborated megafunction instantiation "colour_signals:inst15|pipe:P1|lpm_mult:Mult14"
 Info (12133): Instantiated megafunction "colour_signals:inst15|pipe:P1|lpm_mult:Mult14" with the following parameter:
     Info (12134): Parameter "LPM_WIDTHA" = "2"
-    Info (12134): Parameter "LPM_WIDTHB" = "4"
-    Info (12134): Parameter "LPM_WIDTHP" = "6"
-    Info (12134): Parameter "LPM_WIDTHR" = "6"
+    Info (12134): Parameter "LPM_WIDTHB" = "9"
+    Info (12134): Parameter "LPM_WIDTHP" = "11"
+    Info (12134): Parameter "LPM_WIDTHR" = "11"
     Info (12134): Parameter "LPM_WIDTHS" = "1"
     Info (12134): Parameter "LPM_REPRESENTATION" = "UNSIGNED"
     Info (12134): Parameter "INPUT_A_IS_CONSTANT" = "YES"
@@ -2012,37 +2020,42 @@ Info (12133): Instantiated megafunction "colour_signals:inst15|pipe:P1|lpm_mult:
     Info (12134): Parameter "MAXIMIZE_SPEED" = "5"
 Info (12131): Elaborated megafunction instantiation "colour_signals:inst15|pipe:P1|lpm_mult:Mult14|multcore:mult_core", which is child of megafunction instantiation "colour_signals:inst15|pipe:P1|lpm_mult:Mult14"
 Info (12131): Elaborated megafunction instantiation "colour_signals:inst15|pipe:P1|lpm_mult:Mult14|multcore:mult_core|mpar_add:padder", which is child of megafunction instantiation "colour_signals:inst15|pipe:P1|lpm_mult:Mult14"
+Info (12131): Elaborated megafunction instantiation "colour_signals:inst15|pipe:P1|lpm_mult:Mult14|multcore:mult_core|mpar_add:padder|lpm_add_sub:adder[0]", which is child of megafunction instantiation "colour_signals:inst15|pipe:P1|lpm_mult:Mult14"
+Info (12021): Found 1 design units, including 1 entities, in source file db/add_sub_vdh.tdf
+    Info (12023): Found entity 1: add_sub_vdh
+Info (12131): Elaborated megafunction instantiation "colour_signals:inst15|pipe:P1|lpm_mult:Mult14|multcore:mult_core|mpar_add:padder|mpar_add:sub_par_add", which is child of megafunction instantiation "colour_signals:inst15|pipe:P1|lpm_mult:Mult14"
+Info (12131): Elaborated megafunction instantiation "colour_signals:inst15|pipe:P1|lpm_mult:Mult14|multcore:mult_core|mpar_add:padder|mpar_add:sub_par_add|lpm_add_sub:adder[0]", which is child of megafunction instantiation "colour_signals:inst15|pipe:P1|lpm_mult:Mult14"
+Info (12021): Found 1 design units, including 1 entities, in source file db/add_sub_afh.tdf
+    Info (12023): Found entity 1: add_sub_afh
 Info (12131): Elaborated megafunction instantiation "colour_signals:inst15|pipe:P1|lpm_mult:Mult14|altshift:external_latency_ffs", which is child of megafunction instantiation "colour_signals:inst15|pipe:P1|lpm_mult:Mult14"
-Info (12130): Elaborated megafunction instantiation "colour_signals:inst15|pipe:P1|lpm_mult:Mult15"
-Info (12133): Instantiated megafunction "colour_signals:inst15|pipe:P1|lpm_mult:Mult15" with the following parameter:
+Info (12130): Elaborated megafunction instantiation "colour_signals:inst15|pipe:P1|lpm_mult:Mult2"
+Info (12133): Instantiated megafunction "colour_signals:inst15|pipe:P1|lpm_mult:Mult2" with the following parameter:
     Info (12134): Parameter "LPM_WIDTHA" = "2"
-    Info (12134): Parameter "LPM_WIDTHB" = "4"
-    Info (12134): Parameter "LPM_WIDTHP" = "6"
-    Info (12134): Parameter "LPM_WIDTHR" = "6"
+    Info (12134): Parameter "LPM_WIDTHB" = "9"
+    Info (12134): Parameter "LPM_WIDTHP" = "11"
+    Info (12134): Parameter "LPM_WIDTHR" = "11"
     Info (12134): Parameter "LPM_WIDTHS" = "1"
     Info (12134): Parameter "LPM_REPRESENTATION" = "UNSIGNED"
     Info (12134): Parameter "INPUT_A_IS_CONSTANT" = "YES"
     Info (12134): Parameter "INPUT_B_IS_CONSTANT" = "NO"
     Info (12134): Parameter "MAXIMIZE_SPEED" = "5"
-Info (12130): Elaborated megafunction instantiation "colour_signals:inst15|pipe:P1|lpm_mult:Mult17"
-Info (12133): Instantiated megafunction "colour_signals:inst15|pipe:P1|lpm_mult:Mult17" with the following parameter:
+Info (12130): Elaborated megafunction instantiation "colour_signals:inst15|pipe:P1|lpm_mult:Mult16"
+Info (12133): Instantiated megafunction "colour_signals:inst15|pipe:P1|lpm_mult:Mult16" with the following parameter:
     Info (12134): Parameter "LPM_WIDTHA" = "2"
-    Info (12134): Parameter "LPM_WIDTHB" = "2"
-    Info (12134): Parameter "LPM_WIDTHP" = "4"
-    Info (12134): Parameter "LPM_WIDTHR" = "4"
+    Info (12134): Parameter "LPM_WIDTHB" = "9"
+    Info (12134): Parameter "LPM_WIDTHP" = "11"
+    Info (12134): Parameter "LPM_WIDTHR" = "11"
     Info (12134): Parameter "LPM_WIDTHS" = "1"
     Info (12134): Parameter "LPM_REPRESENTATION" = "UNSIGNED"
     Info (12134): Parameter "INPUT_A_IS_CONSTANT" = "YES"
     Info (12134): Parameter "INPUT_B_IS_CONSTANT" = "NO"
     Info (12134): Parameter "MAXIMIZE_SPEED" = "5"
-Info (12131): Elaborated megafunction instantiation "colour_signals:inst15|pipe:P1|lpm_mult:Mult17|multcore:mult_core", which is child of megafunction instantiation "colour_signals:inst15|pipe:P1|lpm_mult:Mult17"
-Info (12131): Elaborated megafunction instantiation "colour_signals:inst15|pipe:P1|lpm_mult:Mult17|altshift:external_latency_ffs", which is child of megafunction instantiation "colour_signals:inst15|pipe:P1|lpm_mult:Mult17"
 Info (12130): Elaborated megafunction instantiation "colour_signals:inst15|pipe:P1|lpm_mult:Mult13"
 Info (12133): Instantiated megafunction "colour_signals:inst15|pipe:P1|lpm_mult:Mult13" with the following parameter:
     Info (12134): Parameter "LPM_WIDTHA" = "2"
-    Info (12134): Parameter "LPM_WIDTHB" = "4"
-    Info (12134): Parameter "LPM_WIDTHP" = "6"
-    Info (12134): Parameter "LPM_WIDTHR" = "6"
+    Info (12134): Parameter "LPM_WIDTHB" = "9"
+    Info (12134): Parameter "LPM_WIDTHP" = "11"
+    Info (12134): Parameter "LPM_WIDTHR" = "11"
     Info (12134): Parameter "LPM_WIDTHS" = "1"
     Info (12134): Parameter "LPM_REPRESENTATION" = "UNSIGNED"
     Info (12134): Parameter "INPUT_A_IS_CONSTANT" = "YES"
@@ -2116,59 +2129,6 @@ Info (12133): Instantiated megafunction "colour_signals:inst15|pipe:P1|lpm_divid
     Info (12134): Parameter "LPM_WIDTHD" = "10"
     Info (12134): Parameter "LPM_NREPRESENTATION" = "UNSIGNED"
     Info (12134): Parameter "LPM_DREPRESENTATION" = "UNSIGNED"
-Info (12130): Elaborated megafunction instantiation "colour_signals:inst15|pipe:P1|lpm_mult:Mult2"
-Info (12133): Instantiated megafunction "colour_signals:inst15|pipe:P1|lpm_mult:Mult2" with the following parameter:
-    Info (12134): Parameter "LPM_WIDTHA" = "2"
-    Info (12134): Parameter "LPM_WIDTHB" = "7"
-    Info (12134): Parameter "LPM_WIDTHP" = "9"
-    Info (12134): Parameter "LPM_WIDTHR" = "9"
-    Info (12134): Parameter "LPM_WIDTHS" = "1"
-    Info (12134): Parameter "LPM_REPRESENTATION" = "UNSIGNED"
-    Info (12134): Parameter "INPUT_A_IS_CONSTANT" = "YES"
-    Info (12134): Parameter "INPUT_B_IS_CONSTANT" = "NO"
-    Info (12134): Parameter "MAXIMIZE_SPEED" = "5"
-Info (12131): Elaborated megafunction instantiation "colour_signals:inst15|pipe:P1|lpm_mult:Mult2|multcore:mult_core", which is child of megafunction instantiation "colour_signals:inst15|pipe:P1|lpm_mult:Mult2"
-Info (12131): Elaborated megafunction instantiation "colour_signals:inst15|pipe:P1|lpm_mult:Mult2|multcore:mult_core|mpar_add:padder", which is child of megafunction instantiation "colour_signals:inst15|pipe:P1|lpm_mult:Mult2"
-Info (12131): Elaborated megafunction instantiation "colour_signals:inst15|pipe:P1|lpm_mult:Mult2|multcore:mult_core|mpar_add:padder|lpm_add_sub:adder[0]", which is child of megafunction instantiation "colour_signals:inst15|pipe:P1|lpm_mult:Mult2"
-Info (12021): Found 1 design units, including 1 entities, in source file db/add_sub_vdh.tdf
-    Info (12023): Found entity 1: add_sub_vdh
-Info (12131): Elaborated megafunction instantiation "colour_signals:inst15|pipe:P1|lpm_mult:Mult2|altshift:external_latency_ffs", which is child of megafunction instantiation "colour_signals:inst15|pipe:P1|lpm_mult:Mult2"
-Info (12130): Elaborated megafunction instantiation "colour_signals:inst15|pipe:P1|lpm_mult:Mult12"
-Info (12133): Instantiated megafunction "colour_signals:inst15|pipe:P1|lpm_mult:Mult12" with the following parameter:
-    Info (12134): Parameter "LPM_WIDTHA" = "2"
-    Info (12134): Parameter "LPM_WIDTHB" = "6"
-    Info (12134): Parameter "LPM_WIDTHP" = "8"
-    Info (12134): Parameter "LPM_WIDTHR" = "8"
-    Info (12134): Parameter "LPM_WIDTHS" = "1"
-    Info (12134): Parameter "LPM_REPRESENTATION" = "UNSIGNED"
-    Info (12134): Parameter "INPUT_A_IS_CONSTANT" = "YES"
-    Info (12134): Parameter "INPUT_B_IS_CONSTANT" = "NO"
-    Info (12134): Parameter "MAXIMIZE_SPEED" = "5"
-Info (12131): Elaborated megafunction instantiation "colour_signals:inst15|pipe:P1|lpm_mult:Mult12|multcore:mult_core", which is child of megafunction instantiation "colour_signals:inst15|pipe:P1|lpm_mult:Mult12"
-Info (12131): Elaborated megafunction instantiation "colour_signals:inst15|pipe:P1|lpm_mult:Mult12|multcore:mult_core|mpar_add:padder", which is child of megafunction instantiation "colour_signals:inst15|pipe:P1|lpm_mult:Mult12"
-Info (12131): Elaborated megafunction instantiation "colour_signals:inst15|pipe:P1|lpm_mult:Mult12|altshift:external_latency_ffs", which is child of megafunction instantiation "colour_signals:inst15|pipe:P1|lpm_mult:Mult12"
-Info (12130): Elaborated megafunction instantiation "colour_signals:inst15|pipe:P1|lpm_mult:Mult11"
-Info (12133): Instantiated megafunction "colour_signals:inst15|pipe:P1|lpm_mult:Mult11" with the following parameter:
-    Info (12134): Parameter "LPM_WIDTHA" = "2"
-    Info (12134): Parameter "LPM_WIDTHB" = "6"
-    Info (12134): Parameter "LPM_WIDTHP" = "8"
-    Info (12134): Parameter "LPM_WIDTHR" = "8"
-    Info (12134): Parameter "LPM_WIDTHS" = "1"
-    Info (12134): Parameter "LPM_REPRESENTATION" = "UNSIGNED"
-    Info (12134): Parameter "INPUT_A_IS_CONSTANT" = "YES"
-    Info (12134): Parameter "INPUT_B_IS_CONSTANT" = "NO"
-    Info (12134): Parameter "MAXIMIZE_SPEED" = "5"
-Info (12130): Elaborated megafunction instantiation "colour_signals:inst15|pipe:P1|lpm_mult:Mult5"
-Info (12133): Instantiated megafunction "colour_signals:inst15|pipe:P1|lpm_mult:Mult5" with the following parameter:
-    Info (12134): Parameter "LPM_WIDTHA" = "2"
-    Info (12134): Parameter "LPM_WIDTHB" = "7"
-    Info (12134): Parameter "LPM_WIDTHP" = "9"
-    Info (12134): Parameter "LPM_WIDTHR" = "9"
-    Info (12134): Parameter "LPM_WIDTHS" = "1"
-    Info (12134): Parameter "LPM_REPRESENTATION" = "UNSIGNED"
-    Info (12134): Parameter "INPUT_A_IS_CONSTANT" = "YES"
-    Info (12134): Parameter "INPUT_B_IS_CONSTANT" = "NO"
-    Info (12134): Parameter "MAXIMIZE_SPEED" = "5"
 Info (12130): Elaborated megafunction instantiation "colour_signals:inst15|background_d:BD|lpm_divide:Mod2"
 Info (12133): Instantiated megafunction "colour_signals:inst15|background_d:BD|lpm_divide:Mod2" with the following parameter:
     Info (12134): Parameter "LPM_WIDTHN" = "13"
@@ -2259,21 +2219,20 @@ Info (13003): DEV_CLRn pin will set, and not reset, register with preset signal 
 Info (286030): Timing-Driven Synthesis is running
 Info (17049): 1 registers lost all their fanouts during netlist optimizations.
 Info (17016): Found the following redundant logic cells in design
-    Info (17048): Logic cell "colour_signals:inst15|pipe:P1|Add14~0"
     Info (17048): Logic cell "colour_signals:inst15|ground:G|lpm_divide:Mod5|lpm_divide_voo:auto_generated|abs_divider_0dg:divider|alt_u_div_l8f:divider|add_sub_7_result_int[2]~12"
     Info (17048): Logic cell "colour_signals:inst15|ground:G|lpm_divide:Mod5|lpm_divide_voo:auto_generated|abs_divider_0dg:divider|alt_u_div_l8f:divider|add_sub_7_result_int[1]~14"
 Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
     Info (16011): Adding 1 node(s), including 0 DDIO, 1 PLL, 0 transceiver and 0 LCELL
-Info (21057): Implemented 6571 device resources after synthesis - the final resource count might be different
+Info (21057): Implemented 6837 device resources after synthesis - the final resource count might be different
     Info (21058): Implemented 14 input pins
     Info (21059): Implemented 52 output pins
     Info (21060): Implemented 2 bidirectional pins
-    Info (21061): Implemented 6502 logic cells
+    Info (21061): Implemented 6768 logic cells
     Info (21065): Implemented 1 PLLs
 Info: Quartus II 64-Bit Analysis & Synthesis was successful. 0 errors, 10 warnings
-    Info: Peak virtual memory: 4689 megabytes
-    Info: Processing ended: Sun May 29 02:32:18 2022
-    Info: Elapsed time: 00:00:47
-    Info: Total CPU time (on all processors): 00:00:46
+    Info: Peak virtual memory: 4696 megabytes
+    Info: Processing ended: Sun May 29 02:55:37 2022
+    Info: Elapsed time: 00:00:39
+    Info: Total CPU time (on all processors): 00:00:39
 
 

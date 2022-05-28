@@ -1040,6 +1040,8 @@ signal pixel_row_int : screen_height;
 signal k : integer range 0 to 454;
 
 signal r : integer;----
+-- If mode is high then its hard mode
+signal hard_mode : integer;
 -- RANGE is 7 * dim for each
 
 begin
@@ -1052,7 +1054,10 @@ pipe_width <= to_unsigned(p_size*26 - 1, 11);
 pipe_height <= to_unsigned(480 - g_size*20 - 1, 10);
 
 -- '0' is easy mode and '1' is hard mode.
-k <= 40 - mode * 15;
+hard_mode <= 0 when mode = '0' else
+             1 when mode = '1';
+             
+k <= 40 - 15 * hard_mode;
 
 -- Row and column integer values for the pipe.
 pixel_col_int <= (to_integer(unsigned(pixel_column)) mod (p_size*26) - (to_integer(pipe_x_pos) + (pipe_no - 1)*160) mod (p_size*26)) mod (p_size*26);
@@ -1202,7 +1207,7 @@ begin
       r <= random(40, 479 - 40);
       pipe_x_motion <= to_signed(639, 11);
     else
-      pipe_x_motion <= to_signed(-1 - mode, 11);
+      pipe_x_motion <= to_signed(-1 - hard_mode, 11);
     end if;
     
     -- Calculate the position of the pipe ready for the next frame.

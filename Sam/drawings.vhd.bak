@@ -1005,8 +1005,8 @@ use work.pixel_functions.all;
 -- Pipe object entity.
 entity pipe is
   port (vert_sync : in std_logic;
-        pipe_no : in integer;
         mode : in std_logic;
+        pipe_no : in integer;
         pixel_row, pixel_column : in std_logic_vector(9 downto 0);
         colour_info : out rgb_array);
 end entity pipe;
@@ -1040,6 +1040,8 @@ signal pixel_row_int : screen_height;
 signal k : integer range 0 to 454;
 
 signal r : integer;----
+-- If mode is high then its hard mode
+signal hard_mode : integer;
 -- RANGE is 7 * dim for each
 
 begin
@@ -1052,7 +1054,10 @@ pipe_width <= to_unsigned(p_size*26 - 1, 11);
 pipe_height <= to_unsigned(480 - g_size*20 - 1, 10);
 
 -- '0' is easy mode and '1' is hard mode.
-k <= 40 - mode * 15;
+hard_mode <= 0 when mode = '0' else
+             1 when mode = '1';
+             
+k <= 40 - 15 * hard_mode;
 
 -- Row and column integer values for the pipe.
 pixel_col_int <= (to_integer(unsigned(pixel_column)) mod (p_size*26) - (to_integer(pipe_x_pos) + (pipe_no - 1)*160) mod (p_size*26)) mod (p_size*26);

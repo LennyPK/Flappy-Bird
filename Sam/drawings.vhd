@@ -1028,7 +1028,7 @@ entity pipe is
   port (vert_sync, mode : in std_logic;
         pipe_no : in integer;
 		    seed : in std_logic_vector(6 downto 0);
-		    px_motion : out signed(10 downto 0);
+		    px_motion : out integer;
         pixel_row, pixel_column : in std_logic_vector(9 downto 0);
         colour_info : out rgb_array);
 end entity pipe;
@@ -1246,7 +1246,7 @@ begin
 
 end process move_pipe;
 
-px_motion <= pipe_x_motion;
+px_motion <= to_integer(pipe_x_motion);
 
 end architecture behaviour;
 

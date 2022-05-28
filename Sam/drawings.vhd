@@ -76,6 +76,21 @@ signal background_x_motion : std_logic_vector(10 downto 0);
 signal pixel_col_int : screen_width;
 signal pixel_row_int : screen_height;
 
+-- testing ROM use
+-- signal address_c1, address_c2, address_r1, address_r2   : integer;
+-- signal data_c1, data_c2, data_r1, data_r2               : integer;
+
+-- component ROM is
+--     port (  address : in integer;
+--             data    : out integer;
+--          );
+-- end component ROM;
+
+-- rom_c1 : ROM port map (address => address_c1, data => data_c1);
+-- rom_c2 : ROM port map (address => address_c2, data => data_c2);
+-- rom_r1 : ROM port map (address => address_r1, data => data_r1);
+-- rom_r2 : ROM port map (address => address_r2, data => data_r2);
+
 begin 
   
 -- Width and height for the background details.
@@ -1225,27 +1240,27 @@ begin
 
   -- Update the pipe position once per vsync.
   if (rising_edge(vert_sync)) then
-      
+  
+      if mode = '0' then
+			count := 0;
+		elsif mode = '1' then
+			count := count + 1;
+		else 
+			count := 0;
+		end if;
+		
       -- Update the random number.
-    tmp := rand(4) XOR rand(3) XOR rand(2) XOR rand(0);
-    rand <= tmp & rand(6 downto 1);
-    
-    if hard_mode = '0' then
-      count := 0;
-    elsif hard_mode = '1' then
-      count := count + 1;
-    else 
-      count := 0;
-    end if;
+		tmp := rand(4) XOR rand(3) XOR rand(2) XOR rand(0);
+		rand <= tmp & rand(6 downto 1);
 	 
-    -- Reset the pipe position once it goes off of the screen.
-    if (std_logic_vector(pipe_x_pos + signed(pipe_width)) <= std_logic_vector(to_signed(0, 11))) then
-      r <= random;
-      pipe_x_motion <= to_signed(639, 11);
-    else
-      pipe_x_motion <= to_signed(-1 - hard_mode * (count / 1800), 11);
+		-- Reset the pipe position once it goes off of the screen.
+		if (std_logic_vector(pipe_x_pos + signed(pipe_width)) <= std_logic_vector(to_signed(0, 11))) then
+			r <= random;
+			pipe_x_motion <= to_signed(639, 11);
+		else
+			pipe_x_motion <= to_signed(-1 - hard_mode * (count / 1800), 11);
      
-    end if;
+		end if;
      -- Calculate the position of the pipe ready for the next frame.
       pipe_x_pos <= pipe_x_pos + pipe_x_motion;
   end if;

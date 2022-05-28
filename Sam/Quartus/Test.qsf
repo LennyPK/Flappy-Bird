@@ -129,6 +129,8 @@ set_location_assignment PIN_E15 -to seg2[3]
 set_location_assignment PIN_B16 -to seg2[2]
 set_location_assignment PIN_A16 -to seg2[1]
 set_location_assignment PIN_D15 -to seg2[0]
+set_global_assignment -name VHDL_FILE ../char_rom.vhd
+set_global_assignment -name VHDL_FILE ../main_menu.vhd
 set_global_assignment -name VHDL_FILE ../sevenseg.vhd
 set_global_assignment -name VHDL_FILE ../pixel_functions.vhd
 set_global_assignment -name VHDL_FILE ../mouse.vhd

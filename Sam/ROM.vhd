@@ -4,7 +4,7 @@ use IEEE.numeric_std.all;
 
 entity ROM is
     port (  address : in integer;
-            data    : out integer;
+            data    : out integer
          );
 end entity ROM;
 

@@ -865,7 +865,8 @@ background_colours <= -- Row one
                       rgbint_to_rgb4(dark_green) when pixel_region(pixel_col_int, pixel_row_int, 65, 65, 38, 39, b_size) else
                       rgbint_to_rgb4(green) when pixel_region(pixel_col_int, pixel_row_int, 66, 68, 38, 39, b_size) else
                       -- Rows forty to forty-six
-                      rgbint_to_rgb4(green) when pixel_region(pixel_col_int, pixel_row_int, 0, 68, 39, 46, b_size);
+                      rgbint_to_rgb4(green) when pixel_region(pixel_col_int, pixel_row_int, 0, 68, 39, 46, b_size) else
+                      rgbint_to_rgb4(cloud_white);
 
 -- Set output colour channel values for the current pixel.
 colour_info(0) <= background_colours(0) when background_on = '1' else
@@ -982,7 +983,8 @@ ground_colours <= -- Row one
                   -- Row seven
                   rgbint_to_rgb4(orange) when pixel_region(pixel_col_int, pixel_row_int, 0, 6, 6, 7, g_size) else
                   -- Rows eight to twenty
-                  rgbint_to_rgb4(sand) when pixel_region(pixel_col_int, pixel_row_int, 0, 6, 7, 20, g_size);
+                  rgbint_to_rgb4(sand) when pixel_region(pixel_col_int, pixel_row_int, 0, 6, 7, 20, g_size) else
+                  rgbint_to_rgb4(eggplant);
 
 -- Set output colour channel values for the current pixel.
 colour_info(0) <= ground_colours(0) when ground_on = '1' else
@@ -1068,8 +1070,9 @@ g_size <= 2;
 pipe_width <= to_unsigned(p_size*26 - 1, 11);
 pipe_height <= to_unsigned(480 - g_size*20 - 1, 10);
 
+-- '0' is easy mode and '1' is hard mode.
 hard_mode <= 0 when mode = '0' else
-             1 when mode = '1';
+             1;
              
 k <= 40 - 15 * hard_mode;
 
@@ -1190,7 +1193,8 @@ pipe_colours <= -- Upper top part of pipe.
                 rgbint_to_rgb4(dark_green) when pixel_region(pixel_col_int, pixel_row_int, 20, 20, r + k + 26, 480 / p_size, p_size) else
                 rgbint_to_rgb4(green) when pixel_region(pixel_col_int, pixel_row_int, 21, 21, r + k + 26, 480 / p_size, p_size) else
                 rgbint_to_rgb4(dark_green) when pixel_region(pixel_col_int, pixel_row_int, 22, 23, r + k + 26, 480 / p_size, p_size) else
-                rgbint_to_rgb4(eggplant) when pixel_region(pixel_col_int, pixel_row_int, 24, 24, r + k + 26, 480 / p_size, p_size);
+                rgbint_to_rgb4(eggplant) when pixel_region(pixel_col_int, pixel_row_int, 24, 24, r + k + 26, 480 / p_size, p_size) else
+                rgbint_to_rgb4(eggplant);
 
 -- Set output colour channel values for the current pixel.
 colour_info(0) <= pipe_colours(0) when pipe_on = '1' else
@@ -1474,6 +1478,9 @@ begin
           bird_velocity := -bird_velocity;
           flappy_y_pos <= std_logic_vector(unsigned(flappy_y_pos) - bird_velocity * frame_rate_time);
           --flappy_y_pos <= std_logic_vector(to_unsigned(0, 10));
+        -- else 
+        --     bird_velocity := 0;
+        --     flappy_y_pos <= std_logic_vector(unsigned(flappy_y_pos) - bird_velocity * frame_rate_time);
         end if;
 
     end if;

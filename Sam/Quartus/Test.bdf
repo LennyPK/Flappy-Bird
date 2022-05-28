@@ -55,7 +55,7 @@ applicable agreement for further details.
 )
 (pin
 	(input)
-	(rect 216 416 384 432)
+	(rect 432 864 600 880)
 	(text "INPUT" (rect 125 0 153 10)(font "Arial" (font_size 6)))
 	(text "sw0" (rect 5 0 23 12)(font "Arial" ))
 	(pt 168 8)
@@ -68,7 +68,7 @@ applicable agreement for further details.
 		(line (pt 109 12)(pt 113 8))
 	)
 	(text "VCC" (rect 128 7 148 17)(font "Arial" (font_size 6)))
-	(annotation_block (location)(rect 168 432 216 448))
+	(annotation_block (location)(rect 384 880 432 896))
 )
 (pin
 	(input)
@@ -769,7 +769,7 @@ applicable agreement for further details.
 )
 (pin
 	(output)
-	(rect 624 864 800 880)
+	(rect 648 864 824 880)
 	(text "OUTPUT" (rect 1 0 39 10)(font "Arial" (font_size 6)))
 	(text "ledg0" (rect 90 0 115 12)(font "Arial" ))
 	(pt 0 8)
@@ -782,7 +782,7 @@ applicable agreement for further details.
 		(line (pt 82 8)(pt 78 12))
 		(line (pt 78 12)(pt 82 8))
 	)
-	(annotation_block (location)(rect 800 880 848 896))
+	(annotation_block (location)(rect 824 880 872 896))
 )
 (pin
 	(output)
@@ -2180,7 +2180,21 @@ applicable agreement for further details.
 	(bus)
 )
 (connector
-	(pt 384 424)
+	(pt 600 872)
+	(pt 624 872)
+)
+(connector
+	(pt 624 872)
+	(pt 648 872)
+)
+(connector
+	(text "sw0" (rect 608 840 620 858)(font "Arial" )(vertical))
+	(pt 624 872)
+	(pt 624 848)
+)
+(connector
+	(text "sw0" (rect 460 408 478 420)(font "Arial" ))
+	(pt 448 424)
 	(pt 480 424)
 )
 (junction (pt 1232 424))
@@ -2199,6 +2213,7 @@ applicable agreement for further details.
 (junction (pt 688 1192))
 (junction (pt 688 1128))
 (junction (pt 688 1144))
+(junction (pt 624 872))
 (text "MOUSE FUNCTIONALITY" (rect 440 632 580 646)(font "Arial" (font_size 8)))
 (text "DIP SWITCH FUNCTIONALITY" (rect 424 832 589 846)(font "Arial" (font_size 8)))
 (text "PUSH BUTTON FUNCTIONALITY" (rect 416 1072 597 1086)(font "Arial" (font_size 8)))

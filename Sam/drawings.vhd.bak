@@ -1027,9 +1027,8 @@ use work.pixel_functions.all;
 entity pipe is
   port (vert_sync, mode : in std_logic;
         pipe_no : in integer;
-		    seed : in std_logic_vector(6 downto 0);
 		    px_motion : out integer;
-        pixel_row, pixel_column : in std_logic_vector(9 downto 0);
+        pr, pc : in std_logic_vector(9 downto 0);
         colour_info : out rgb_array);
 end entity pipe;
 
@@ -1081,6 +1080,9 @@ hard_mode <= 0 when mode = '0' else
              
 k <= 70 - 15 * hard_mode;
 
+pixel_col_int <= pc;
+pixel_row_int <= pr;
+
 -- Row and column integer values for the pipe.
 pixel_col_int <= (to_integer(unsigned(pixel_column)) mod (p_size*26) - to_integer(pipe_x_pos) mod (p_size*26)) mod (p_size*26);
 pixel_row_int <= (to_integer(unsigned(pixel_row)));
@@ -1095,7 +1097,7 @@ pipe_y_pos <= std_logic_vector(to_unsigned(0, 10));
   --pixel information goes here.
   
 pipe_on <= '1' when (unsigned(pixel_column) <= unsigned(pipe_x_pos + signed(pipe_width) + 260 * (pipe_no - 1))
-          and (unsigned(pixel_column) >= unsigned(pipe_x_pos))
+          and (unsigned(pixel_column) >= unsigned(pipe_x_pos) + 260 * (pipe_no - 1))
           and (unsigned(pixel_row) <= unsigned(pipe_y_pos) + pipe_height)
           and (unsigned(pixel_row) >= unsigned(pipe_y_pos))
           
@@ -1226,16 +1228,25 @@ begin
   -- Update the pipe position once per vsync.
   if (rising_edge(vert_sync)) then
       
-      -- Update the random number.
-    tmp := rand(4) XOR rand(3) XOR rand(2) XOR rand(0);
+    -- Move along the LFSR but use a different operation depending on the pipe number.
+    if pipe_no = 1 then
+      tmp := rand(4) XOR rand(3) XOR rand(2) XOR rand(0);
+    elsif pipe_no = 2 then
+      tmp := rand(5) XOR rand(3) XOR rand(1) XOR rand(0);
+    elsif pipe_no = 3 then
+      tmp := rand(4) XOR rand(2) XOR rand(1) XOR rand(0);
+    else
+      tmp := '0';
+    end if;      
+      
     rand <= tmp & rand(6 downto 1);
     
     if hard_mode = '0' then
       count := 0;
-    elsif hard_mode = '1' then
+    elsif hard_mode = '1' and count <= 18000 then
       count := count + 1;
     else 
-      count := 0;
+      count := count;
     end if;
 	 
     -- Reset the pipe position once it goes off of the screen.

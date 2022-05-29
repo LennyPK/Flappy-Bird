@@ -1042,9 +1042,8 @@ use work.pixel_functions.all;
 entity pipe is
   port (vert_sync, mode : in std_logic;
         pipe_no : in integer;
-		    seed : in std_logic_vector(6 downto 0);
 		    px_motion : out integer;
-        pixel_row, pixel_column : in std_logic_vector(9 downto 0);
+        pr, pc : in std_logic_vector(9 downto 0);
         colour_info : out rgb_array);
 end entity pipe;
 
@@ -1072,7 +1071,7 @@ signal pipe_x_motion : signed(10 downto 0);
 
 signal pixel_col_int : screen_width;
 signal pixel_row_int : screen_height;
-signal rand : std_logic_vector(6 downto 0) := seed;
+signal rand : std_logic_vector(6 downto 0) := "0000001;
 
 -- Distance between the lower top part of the pipe and the upper bottom part of the pipe.
 signal k : integer range 0 to 454;
@@ -1095,6 +1094,9 @@ hard_mode <= 0 when mode = '0' else
              1;
              
 k <= 70 - 15 * hard_mode;
+
+pixel_col_int <= pc;
+pixel_row_int <= pr;
 
 -- Row and column integer values for the pipe.
 pixel_col_int <= (to_integer(unsigned(pixel_column)) mod (p_size*26) - to_integer(pipe_x_pos) mod (p_size*26)) mod (p_size*26);
@@ -1240,6 +1242,7 @@ begin
 
   -- Update the pipe position once per vsync.
   if (rising_edge(vert_sync)) then
+<<<<<<< Updated upstream
   
       if mode = '0' then
 			count := 0;
@@ -1252,6 +1255,29 @@ begin
       -- Update the random number.
 		tmp := rand(4) XOR rand(3) XOR rand(2) XOR rand(0);
 		rand <= tmp & rand(6 downto 1);
+=======
+      
+    -- Move along the LFSR but use a different operation depending on the pipe number.
+    if pipe_no = 1 then
+      tmp := rand(4) XOR rand(3) XOR rand(2) XOR rand(0);
+    elsif pipe_no = 2 then
+      tmp := rand(5) XOR rand(3) XOR rand(1) XOR rand(0);
+    elsif pipe_no = 3 then
+      tmp := rand(4) XOR rand(2) XOR rand(1) XOR rand(0);
+    else
+      tmp := '0';
+    end if;      
+      
+    rand <= tmp & rand(6 downto 1);
+    
+    if hard_mode = '0' then
+      count := 0;
+    elsif hard_mode = '1' and count <= 18000 then
+      count := count + 1;
+    else 
+      count := count;
+    end if;
+>>>>>>> Stashed changes
 	 
 		-- Reset the pipe position once it goes off of the screen.
 		if (std_logic_vector(pipe_x_pos + signed(pipe_width)) <= std_logic_vector(to_signed(0, 11))) then

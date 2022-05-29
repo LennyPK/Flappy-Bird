@@ -4,7 +4,7 @@ K3
 cModel Technology
 Z0 dC:\Users\Samuel Mason\OneDrive\Documents\GitHub\PILK\Sam
 Ebackground_d
-Z1 w1653817602
+Z1 w1653818888
 Z2 DPx4 work 15 pixel_functions 0 22 Lf1kd`o]]TFChMJ@hbL4k0
 Z3 DPx4 work 13 rgb_functions 0 22 Fh>IPk;fB1Dz4W:eZCbUa3
 Z4 DPx4 ieee 11 numeric_std 0 22 O3PF8EB`?j9=z7KT`fn941
@@ -20,7 +20,7 @@ VhSzYo`CUAA3kDb`EUBO3P2
 Z10 OV;C;10.1d;51
 32
 !i10b 1
-Z11 !s108 1653817606.696000
+Z11 !s108 1653818892.586000
 Z12 !s90 -reportprogress|300|-work|work|C:/Users/Samuel Mason/Documents/GitHub/PILK/Sam/drawings.vhd|
 Z13 !s107 C:/Users/Samuel Mason/Documents/GitHub/PILK/Sam/drawings.vhd|
 Z14 o-work work -O0
@@ -235,9 +235,9 @@ R7
 R8
 R9
 l0
-L1302
+L1328
 VkPGRhOLZL7:BS2C[Nm=>d1
-!s100 gNN1YZc9NI2GIII2GECFQ0
+!s100 CnVXQb[oT?4m=ZE@AhkZi0
 R10
 32
 !i10b 1
@@ -253,10 +253,10 @@ R4
 R5
 R6
 Z39 DEx4 work 11 flappy_bird 0 22 kPGRhOLZL7:BS2C[Nm=>d1
-l1337
-L1309
+l1363
+L1335
 Z40 VflHWLzcKObVVGoPT1h_@]2
-Z41 !s100 U372:=zz`_]K:Lh=ElLj53
+!s100 _hM47FPiF40>N8AVf`UEo2
 R10
 32
 !i10b 1
@@ -293,11 +293,11 @@ R3
 R4
 R5
 R6
-Z42 DEx4 work 6 ground 0 22 =n5iDh=14f]0LD19_Q`C@2
+Z41 DEx4 work 6 ground 0 22 =n5iDh=14f]0LD19_Q`C@2
 l962
 L937
-Z43 VRTH>YnnOdTz3io7;]BLm?0
-Z44 !s100 lSVeJGGo2aoH^l4b=a@l91
+Z42 VRTH>YnnOdTz3io7;]BLm?0
+Z43 !s100 lSVeJGGo2aoH^l4b=a@l91
 R10
 32
 !i10b 1
@@ -334,11 +334,11 @@ R3
 R4
 R5
 R6
-Z45 DEx4 work 4 pipe 0 22 PzA@]m[f8Wb1fH42@oVhj0
+Z44 DEx4 work 4 pipe 0 22 PzA@]m[f8Wb1fH42@oVhj0
 l1085
 L1051
-VYWQKg;6e;E2`>kl>TE_C^2
-!s100 VY^z^0FfQ64S=lI_ca`m^1
+Z45 VE0Zf]UVjD3OBa;AJ7d1EE3
+Z46 !s100 O<=V@=MdbgoDkc`aTazdR2
 R10
 32
 !i10b 1
@@ -348,9 +348,9 @@ R13
 R14
 R15
 Epipe_one
-Z46 w1652696096
-Z47 DPx4 work 15 pixel_functions 0 22 f_[LX]RYEE`M;2]>29?;63
-Z48 DPx4 work 13 rgb_functions 0 22 _C4a?nz]kaLL[KmNS211>1
+Z47 w1652696096
+Z48 DPx4 work 15 pixel_functions 0 22 f_[LX]RYEE`M;2]>29?;63
+Z49 DPx4 work 13 rgb_functions 0 22 _C4a?nz]kaLL[KmNS211>1
 R4
 R5
 R6
@@ -362,7 +362,7 @@ L130
 VK=foNYTN1:GiZAVc?<7IX0
 R10
 32
-Z49 !s108 1652696110.912000
+Z50 !s108 1652696110.912000
 R12
 R21
 R14
@@ -370,8 +370,8 @@ R15
 !s100 Z?]4I0T>f0LH^FKPSD<Z`1
 !i10b 1
 Abehaviour
-R47
 R48
+R49
 R4
 R5
 R6
@@ -381,7 +381,7 @@ L137
 Vcz0aA356]Hji2eLMA0OJ`3
 R10
 32
-R49
+R50
 R12
 R21
 R14
@@ -392,19 +392,19 @@ Ppixel_functions
 R4
 R5
 R6
-Z50 w1652788403
+Z51 w1652788403
 R7
-Z51 8C:/Users/Samuel Mason/Documents/GitHub/PILK/Sam/pixel_functions.vhd
-Z52 FC:/Users/Samuel Mason/Documents/GitHub/PILK/Sam/pixel_functions.vhd
+Z52 8C:/Users/Samuel Mason/Documents/GitHub/PILK/Sam/pixel_functions.vhd
+Z53 FC:/Users/Samuel Mason/Documents/GitHub/PILK/Sam/pixel_functions.vhd
 l0
 L5
 VLf1kd`o]]TFChMJ@hbL4k0
 R10
 32
 b1
-Z53 !s108 1652788448.815000
-Z54 !s90 -reportprogress|300|-work|work|C:/Users/Samuel Mason/Documents/GitHub/PILK/Sam/pixel_functions.vhd|
-Z55 !s107 C:/Users/Samuel Mason/Documents/GitHub/PILK/Sam/pixel_functions.vhd|
+Z54 !s108 1652788448.815000
+Z55 !s90 -reportprogress|300|-work|work|C:/Users/Samuel Mason/Documents/GitHub/PILK/Sam/pixel_functions.vhd|
+Z56 !s107 C:/Users/Samuel Mason/Documents/GitHub/PILK/Sam/pixel_functions.vhd|
 R14
 R15
 !s100 [YU2Ja@]gF^ea?n32h4of3
@@ -419,31 +419,72 @@ L21
 V9cRE]2<H>l2<acOnmLQE22
 R10
 32
-R53
 R54
 R55
+R56
 R14
 R15
 nbody
 !s100 WE180N8F];oj76L<zSNXn2
 !i10b 1
+Epowerup
+R1
+R2
+R3
+R4
+R5
+R6
+R7
+R8
+R9
+l0
+L1302
+V?jHRAdV>B`QPJMN8YX3dM1
+!s100 YZYDeWIPdzLJO9BX<ILk02
+R10
+32
+!i10b 1
+R11
+R12
+R13
+R14
+R15
+Abehaviour
+R2
+R3
+R4
+R5
+R6
+DEx4 work 7 powerup 0 22 ?jHRAdV>B`QPJMN8YX3dM1
+l1309
+L1308
+V=QA=ZgGFEh?dQ_IgGJohR2
+!s100 b>Bh`7ka1lQ^DhVOIiPoM0
+R10
+32
+!i10b 1
+R11
+R12
+R13
+R14
+R15
 Prgb_functions
 R4
 R5
 R6
-Z56 w1652785017
+Z57 w1652785017
 R7
-Z57 8C:/Users/Samuel Mason/Documents/GitHub/PILK/Sam/rgb_functions.vhd
-Z58 FC:/Users/Samuel Mason/Documents/GitHub/PILK/Sam/rgb_functions.vhd
+Z58 8C:/Users/Samuel Mason/Documents/GitHub/PILK/Sam/rgb_functions.vhd
+Z59 FC:/Users/Samuel Mason/Documents/GitHub/PILK/Sam/rgb_functions.vhd
 l0
 L5
 VFh>IPk;fB1Dz4W:eZCbUa3
 R10
 32
 b1
-Z59 !s108 1652788446.771000
-Z60 !s90 -reportprogress|300|-work|work|C:/Users/Samuel Mason/Documents/GitHub/PILK/Sam/rgb_functions.vhd|
-Z61 !s107 C:/Users/Samuel Mason/Documents/GitHub/PILK/Sam/rgb_functions.vhd|
+Z60 !s108 1652788446.771000
+Z61 !s90 -reportprogress|300|-work|work|C:/Users/Samuel Mason/Documents/GitHub/PILK/Sam/rgb_functions.vhd|
+Z62 !s107 C:/Users/Samuel Mason/Documents/GitHub/PILK/Sam/rgb_functions.vhd|
 R14
 R15
 !s100 Ko9TUNLLc?em0YKi`_BH11
@@ -458,37 +499,37 @@ L18
 VA7C^`OfZ8b3=b?eOB4l5S0
 R10
 32
-R59
 R60
 R61
+R62
 R14
 R15
 nbody
 !s100 F6e[U8FWbE4AfdjNM5ia31
 !i10b 1
 Evga_sync
-Z62 w1652590738
-Z63 DPx4 ieee 18 std_logic_unsigned 0 22 RYmj;=TK`k=k>D@Cz`zoB3
+Z63 w1652590738
+Z64 DPx4 ieee 18 std_logic_unsigned 0 22 RYmj;=TK`k=k>D@Cz`zoB3
 R32
 R5
 R6
 R7
-Z64 8C:/Users/Samuel Mason/Documents/GitHub/PILK/Sam/vga_sync.vhd
-Z65 FC:/Users/Samuel Mason/Documents/GitHub/PILK/Sam/vga_sync.vhd
+Z65 8C:/Users/Samuel Mason/Documents/GitHub/PILK/Sam/vga_sync.vhd
+Z66 FC:/Users/Samuel Mason/Documents/GitHub/PILK/Sam/vga_sync.vhd
 l0
 L7
 Vj0Rmm_=GOIW_;J<mRTB<K2
 R10
 32
-Z66 !s108 1652810438.206000
-Z67 !s90 -reportprogress|300|-work|work|C:/Users/Samuel Mason/Documents/GitHub/PILK/Sam/vga_sync.vhd|
-Z68 !s107 C:/Users/Samuel Mason/Documents/GitHub/PILK/Sam/vga_sync.vhd|
+Z67 !s108 1652810438.206000
+Z68 !s90 -reportprogress|300|-work|work|C:/Users/Samuel Mason/Documents/GitHub/PILK/Sam/vga_sync.vhd|
+Z69 !s107 C:/Users/Samuel Mason/Documents/GitHub/PILK/Sam/vga_sync.vhd|
 R14
 R15
 !s100 UeX^PYQFIMEo@afb6dn@h3
 !i10b 1
 Aa
-R63
+R64
 R32
 R5
 R6
@@ -498,9 +539,9 @@ L15
 V:@49=cUGO0`?o9LzD[iUU2
 R10
 32
-R66
 R67
 R68
+R69
 R14
 R15
 !s100 LWkGR_j1kYjK^056Vj=Th2

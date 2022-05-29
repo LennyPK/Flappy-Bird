@@ -1113,8 +1113,8 @@ pipe_y_pos <= std_logic_vector(to_unsigned(0, 10));
   
   --pixel information goes here.
   
-pipe_on <= '1' when (signed(pixel_column) <= pipe_x_pos + signed(pipe_width)
-          and (signed(pixel_column) >= signed(pipe_x_pos))
+pipe_on <= '1' when (unsigned(pixel_column) <= unsigned(pipe_x_pos + signed(pipe_width))
+          and (unsigned(pixel_column) >= unsigned(pipe_x_pos))
           and (unsigned(pixel_row) <= unsigned(pipe_y_pos) + pipe_height)
           and (unsigned(pixel_row) >= unsigned(pipe_y_pos))
           
@@ -1283,6 +1283,31 @@ end process move_pipe;
 
 px_motion <= to_integer(pipe_x_motion);
 
+end architecture behaviour;
+
+------------------------------------------------------------
+-- Powerup object.
+------------------------------------------------------------
+
+-- Default libraries.
+library IEEE;
+use IEEE.std_logic_1164.all;
+use IEEE.numeric_std.all;
+
+-- Custom libraries.
+library work;
+use work.rgb_functions.all;
+use work.pixel_functions.all;
+
+entity powerup is
+  port (powerup_on : in std_logic_vector;
+        pixel_row, pixel_column : in std_logic_vector(9 downto 0);
+        colour_info : out rgb_array);
+end entity powerup;
+
+architecture behaviour of powerup is
+begin
+  
 end architecture behaviour;
 
 ------------------------------------------------------------

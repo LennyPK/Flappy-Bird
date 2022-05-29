@@ -10,7 +10,7 @@ entity main_menu is
         clk, mode_select, exit_screen       : in std_logic;
         pixel_x, pixel_y                    : in std_logic_vector(9 downto 0);
         state                               : in std_logic_vector(1 downto 0);
-        -- menu_init                           : out std_logic;
+        state_out                           : out std_logic_vector(1 downto 0);
         colour_info                         : out rgb_array
     );
 end entity main_menu;
@@ -237,7 +237,7 @@ begin
                 elsif
                     pixel_x >= std_logic_vector(to_unsigned(288,10)) and pixel_x < std_logic_vector(to_unsigned(320,10))
                         and pixel_y >= std_logic_vector(to_unsigned(448,10)) and pixel_y < std_logic_vector(to_unsigned(480,10)) then
-                    char_addr <= "110000"; --0
+                    char_addr <= "110010"; --2
                     line3 <= char_out;
                 elsif
                     pixel_x >= std_logic_vector(to_unsigned(320,10)) and pixel_x < std_logic_vector(to_unsigned(352,10))
@@ -298,9 +298,24 @@ begin
     font_row    <= pixel_y(4 downto 2);
     font_col    <= pixel_x(4 downto 2);
 
-    ------------------ maybe a latch inferred here? ------------------
-    ------------------ --------need change--------- ------------------
-    -- menu_init <= mode_select when exit_screen = '0' else null;
+    ---------------STATES---------------
+    -- "00" main menu
+    -- "01" normal
+    -- "10" training
+    -- "11" death
+    ------------------------------------
+    --------------------------mode select out-------------------------
+    mode_out : process
+    begin
+        wait until falling_edge(exit_screen);
+        if (mode_select = '1') then
+            state_out <= "01";
+        elsif (mode_select = '0') then
+            state_out <= "10";
+        else
+            state_out <= "00";
+        end if;
+    end process mode_out;
 
     colour_out <=   yellow when title = '1' else
 

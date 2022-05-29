@@ -1040,12 +1040,13 @@ use work.pixel_functions.all;
 
 -- Pipe object entity.
 entity pipe is
-  port (vert_sync, mode : in std_logic;
-        pipe_no : in integer;
-        pr, pc : in std_logic_vector(9 downto 0);
-        powerup_en : out std_logic;
-  		    px_motion : out integer;
-        colour_info : out rgb_array);
+  port (vert_sync           : in std_logic;
+        pipe_no             : in integer;
+        pr, pc              : in std_logic_vector(9 downto 0);
+        state               : in std_logic_vector(1 downto 0);
+        powerup_en          : out std_logic;
+  		px_motion           : out integer;
+        colour_info         : out rgb_array);
 end entity pipe;
 
 -- Pipe architecture.
@@ -1093,8 +1094,16 @@ pipe_width <= to_unsigned(p_size*26 - 1, 11);
 pipe_height <= to_unsigned(480 - g_size*20 - 1, 10);
 
 -- '0' is easy mode and '1' is hard mode.
-hard_mode <= 0 when mode = '0' else
-             1;
+---------------STATES---------------
+-- "00" main menu
+-- "01" normal
+-- "10" training
+-- "11" death
+------------------------------------
+
+hard_mode <= 0 when state = "10" else
+             1 when state = "01" else
+             0;
              
 k <= 70 - 15 * hard_mode;
 
@@ -1403,6 +1412,7 @@ use work.pixel_functions.all;
 entity flappy_bird is
   port (left_mouse, right_mouse, vert_sync : in std_logic;
         pixel_row, pixel_column : in std_logic_vector(9 downto 0);
+        state_out : out std_logic_vector(1 downto 0);
         colour_info : out rgb_array);
 end entity flappy_bird;
 
@@ -1622,16 +1632,18 @@ begin
 
         -- if the bird is above or below the screen, bring it in bounds, and halt all velocity
         if (flappy_y_pos >= std_logic_vector(to_unsigned(439, 10) - unsigned(flappy_bird_height))) then
-          bird_velocity := 1;
-          flappy_y_pos <= std_logic_vector(unsigned(flappy_y_pos) - bird_velocity * frame_rate_time);
-          --flappy_y_pos <= std_logic_vector(to_unsigned(479, 10));
+            bird_velocity := 1;
+            flappy_y_pos <= std_logic_vector(unsigned(flappy_y_pos) - bird_velocity * frame_rate_time);
+            --flappy_y_pos <= std_logic_vector(to_unsigned(479, 10));
+            state_out <= "11";
         elsif (flappy_y_pos <= std_logic_vector(to_unsigned(0, 10))) then
-          bird_velocity := -bird_velocity;
-          flappy_y_pos <= std_logic_vector(unsigned(flappy_y_pos) - bird_velocity * frame_rate_time);
-          --flappy_y_pos <= std_logic_vector(to_unsigned(0, 10));
-        -- else 
-        --     bird_velocity := 0;
-        --     flappy_y_pos <= std_logic_vector(unsigned(flappy_y_pos) - bird_velocity * frame_rate_time);
+            bird_velocity := -bird_velocity;
+            flappy_y_pos <= std_logic_vector(unsigned(flappy_y_pos) - bird_velocity * frame_rate_time);
+            state_out <= "11";
+            --flappy_y_pos <= std_logic_vector(to_unsigned(0, 10));
+            -- else 
+            --     bird_velocity := 0;
+            --     flappy_y_pos <= std_logic_vector(unsigned(flappy_y_pos) - bird_velocity * frame_rate_time);
         end if;
 
     end if;

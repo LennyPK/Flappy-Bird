@@ -10,6 +10,7 @@ entity death_screen is
         clk, restart                        : in std_logic;
         pixel_x, pixel_y                    : in std_logic_vector(9 downto 0);
         state                               : in std_logic_vector(1 downto 0);
+        state_out                           : out std_logic_vector(1 downto 0);
         -- death_init                          : out std_logic;
         colour_info                         : out rgb_array
     );
@@ -102,6 +103,22 @@ begin
 
     font_row    <= pixel_y(4 downto 2);
     font_col    <= pixel_x(4 downto 2);
+
+    ---------------STATES---------------
+    -- "00" main menu
+    -- "01" normal
+    -- "10" training
+    -- "11" death
+    ------------------------------------
+    --------------------------mode select out-------------------------
+    mode_out : process (restart)
+    begin
+        if (restart = '1') then
+            state_out <= "00";
+        else
+            state_out <= "11";
+        end if;
+    end process mode_out;
 
     colour_out <=   white when death_msg = '1' else
                     red;

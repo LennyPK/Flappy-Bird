@@ -1071,8 +1071,8 @@ signal pipe_x_motion : signed(10 downto 0);
 
 signal pixel_column, pixel_row : std_logic_vector(9 downto 0);
 
-signal pixel_col_int : screen_width;
-signal pixel_row_int : screen_height;
+signal pixel_col_int : integer;
+signal pixel_row_int : integer;
 signal rand : std_logic_vector(6 downto 0) := "0000001";
 
 -- Distance between the lower top part of the pipe and the upper bottom part of the pipe.
@@ -1097,7 +1097,7 @@ hard_mode <= 0 when mode = '0' else
              
 k <= 70 - 15 * hard_mode;
 
-pixel_column <= pc;
+pixel_column <= std_logic_vector(signed(pc) + to_signed(286 * (pipe_no - 1), 10));
 pixel_row <= pr;
 
 -- Row and column integer values for the pipe.
@@ -1113,8 +1113,8 @@ pipe_y_pos <= std_logic_vector(to_unsigned(0, 10));
   
   --pixel information goes here.
   
-pipe_on <= '1' when (unsigned(pixel_column) <= unsigned(pipe_x_pos + signed(pipe_width) + 260 * (pipe_no - 1))
-          and (unsigned(pixel_column) >= unsigned(pipe_x_pos) + 260 * (pipe_no - 1))
+pipe_on <= '1' when (unsigned(pixel_column) <= unsigned(pipe_x_pos + signed(pipe_width))
+          and (unsigned(pixel_column) >= unsigned(pipe_x_pos))
           and (unsigned(pixel_row) <= unsigned(pipe_y_pos) + pipe_height)
           and (unsigned(pixel_row) >= unsigned(pipe_y_pos))
           

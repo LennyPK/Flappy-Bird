@@ -136,7 +136,8 @@ begin
   green <= tmp_green;
   --blue <= tmp_blue;
 
-  blue <= tmp_green when ( (bird_y_position >= std_logic_vector(to_unsigned(439, 10) - unsigned(bird_height_out))) or (bird_y_position < std_logic_vector(to_unsigned(0, 10)) )) else tmp_blue;
+  blue <= tmp_green when ( (bird_y_position >= std_logic_vector(to_unsigned(439, 10) - unsigned(bird_height_out))) or (bird_y_position < std_logic_vector(to_unsigned(0, 10)) )) else
+          tmp_blue;
 
   
 
@@ -144,9 +145,9 @@ begin
     --blue <= tmp_green;
   --end if;
 
-  -- if ((pipe 1 match) and ((bird above 1) or (bird below 1))) then
-  --   kill
-  -- end if;
+  if ((pipe 1 match) and ((bird above 1) or (bird below 1))) then
+    kill
+  end if;
 
   -- if ((pipe 2 match) and ((bird above 2) or (bird below 2))) then
   --   kill

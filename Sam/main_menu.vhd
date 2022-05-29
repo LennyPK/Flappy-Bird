@@ -7,10 +7,10 @@ use work.rgb_functions.all;
 
 entity main_menu is
     port (
-        clk, mode_select, exit_menu         : in std_logic;
+        clk, mode_select, exit_screen       : in std_logic;
         pixel_x, pixel_y                    : in std_logic_vector(9 downto 0);
         state                               : in std_logic_vector(1 downto 0);
-        menu_init                           : out std_logic;
+        -- menu_init                           : out std_logic;
         colour_info                         : out rgb_array
     );
 end entity main_menu;
@@ -45,13 +45,6 @@ begin
 
     select_gamemode : process
     begin
-        
-        -- 17 x 12
-        -- if (clk = '1') then
-        --     flash_colour <= white;
-        -- else
-        --     flash_colour <= yellow;
-        -- end if;
         wait until (rising_edge(clk));
 
         counter <= counter + 1;
@@ -59,233 +52,247 @@ begin
             counter <= -1;
         end if;
 
-        -----------------title line------------------
-        if
-            pixel_x >= std_logic_vector(to_unsigned(128,10)) and pixel_x < std_logic_vector(to_unsigned(160,10))
-                and pixel_y >= std_logic_vector(to_unsigned(64,10)) and pixel_y < std_logic_vector(to_unsigned(96,10)) then
-            char_addr <= "100000"; --(blank)
-            title <= char_out;
-        elsif
-            pixel_x >= std_logic_vector(to_unsigned(160,10)) and pixel_x < std_logic_vector(to_unsigned(192,10))
-                and pixel_y >= std_logic_vector(to_unsigned(64,10)) and pixel_y < std_logic_vector(to_unsigned(96,10)) then
-            char_addr <= "000110"; --F
-            title <= char_out;
-        elsif 
-            pixel_x >= std_logic_vector(to_unsigned(192,10)) and pixel_x < std_logic_vector(to_unsigned(224,10))
-                and pixel_y >= std_logic_vector(to_unsigned(64,10)) and pixel_y < std_logic_vector(to_unsigned(96,10)) then
-            char_addr <= "001100"; --L
-            title <= char_out;
-        elsif
-            pixel_x >= std_logic_vector(to_unsigned(224,10)) and pixel_x < std_logic_vector(to_unsigned(256,10))
-                and pixel_y >= std_logic_vector(to_unsigned(64,10)) and pixel_y < std_logic_vector(to_unsigned(96,10)) then
-            char_addr <= "000001"; --A
-            title <= char_out;
-        elsif
-            pixel_x >= std_logic_vector(to_unsigned(256,10)) and pixel_x < std_logic_vector(to_unsigned(288,10))
-                and pixel_y >= std_logic_vector(to_unsigned(64,10)) and pixel_y < std_logic_vector(to_unsigned(96,10)) then
-            char_addr <= "010000"; --P
-            title <= char_out;
-        elsif
-            pixel_x >= std_logic_vector(to_unsigned(288,10)) and pixel_x < std_logic_vector(to_unsigned(320,10))
-                and pixel_y >= std_logic_vector(to_unsigned(64,10)) and pixel_y < std_logic_vector(to_unsigned(96,10)) then
-            char_addr <= "010000"; --P
-            title <= char_out;
-        elsif
-            pixel_x >= std_logic_vector(to_unsigned(320,10)) and pixel_x < std_logic_vector(to_unsigned(352,10))
-                and pixel_y >= std_logic_vector(to_unsigned(64,10)) and pixel_y < std_logic_vector(to_unsigned(96,10)) then
-            char_addr <= "011001"; --Y
-            title <= char_out;
-        elsif
-            pixel_x >= std_logic_vector(to_unsigned(352,10)) and pixel_x < std_logic_vector(to_unsigned(384,10))
-                and pixel_y >= std_logic_vector(to_unsigned(64,10)) and pixel_y < std_logic_vector(to_unsigned(96,10)) then
-            char_addr <= "100000"; --(blank)
-            title <= char_out;
-        elsif
-            pixel_x >= std_logic_vector(to_unsigned(384,10)) and pixel_x < std_logic_vector(to_unsigned(416,10))
-                and pixel_y >= std_logic_vector(to_unsigned(64,10)) and pixel_y < std_logic_vector(to_unsigned(96,10)) then
-            char_addr <= "000010"; --B
-            title <= char_out;
-        elsif
-            pixel_x >= std_logic_vector(to_unsigned(416,10)) and pixel_x < std_logic_vector(to_unsigned(448,10))
-                and pixel_y >= std_logic_vector(to_unsigned(64,10)) and pixel_y < std_logic_vector(to_unsigned(96,10)) then
-            char_addr <= "001001"; --I
-            title <= char_out;
-        elsif
-            pixel_x >= std_logic_vector(to_unsigned(448,10)) and pixel_x < std_logic_vector(to_unsigned(480,10))
-                and pixel_y >= std_logic_vector(to_unsigned(64,10)) and pixel_y < std_logic_vector(to_unsigned(96,10)) then
-            char_addr <= "010010"; --R
-            title <= char_out;
-        elsif
-            pixel_x >= std_logic_vector(to_unsigned(480,10)) and pixel_x < std_logic_vector(to_unsigned(512,10))
-                and pixel_y >= std_logic_vector(to_unsigned(64,10)) and pixel_y < std_logic_vector(to_unsigned(96,10)) then
-            char_addr <= "000100"; --D
-            title <= char_out;
-        -----------------first line------------------
-        elsif 
-            pixel_x >= std_logic_vector(to_unsigned(224,10)) and pixel_x < std_logic_vector(to_unsigned(256,10))
-                and pixel_y >= std_logic_vector(to_unsigned(224,10)) and pixel_y < std_logic_vector(to_unsigned(256,10)) then 
-            char_addr <= "001110"; --N
-            line1 <= char_out;
-        elsif 
-            pixel_x >= std_logic_vector(to_unsigned(256,10)) and pixel_x < std_logic_vector(to_unsigned(288,10))
-                and pixel_y >= std_logic_vector(to_unsigned(224,10)) and pixel_y < std_logic_vector(to_unsigned(256,10)) then 
-            char_addr <= "001111"; --O
-            line1 <= char_out;
-        elsif 
-            pixel_x >= std_logic_vector(to_unsigned(288,10)) and pixel_x < std_logic_vector(to_unsigned(320,10))
-                and pixel_y >= std_logic_vector(to_unsigned(224,10)) and pixel_y < std_logic_vector(to_unsigned(256,10)) then 
-            char_addr <= "010010"; --R
-            line1 <= char_out;
-        elsif 
-            pixel_x >= std_logic_vector(to_unsigned(320,10)) and pixel_x < std_logic_vector(to_unsigned(352,10))
-                and pixel_y >= std_logic_vector(to_unsigned(224,10)) and pixel_y < std_logic_vector(to_unsigned(256,10)) then 
-            char_addr <= "001101"; --M
-            line1 <= char_out;
-        elsif 
-            pixel_x >= std_logic_vector(to_unsigned(352,10)) and pixel_x < std_logic_vector(to_unsigned(384,10))
-                and pixel_y >= std_logic_vector(to_unsigned(224,10)) and pixel_y < std_logic_vector(to_unsigned(256,10)) then 
-            char_addr <= "000001"; --A
-            line1 <= char_out;
-        elsif 
-            pixel_x >= std_logic_vector(to_unsigned(384,10)) and pixel_x < std_logic_vector(to_unsigned(416,10))
-                and pixel_y >= std_logic_vector(to_unsigned(224,10)) and pixel_y < std_logic_vector(to_unsigned(256,10)) then 
-            char_addr <= "001100"; --L
-            line1 <= char_out;
-        -----------------second line------------------
-        elsif 
-            pixel_x >= std_logic_vector(to_unsigned(192,10)) and pixel_x < std_logic_vector(to_unsigned(224,10))
-                and pixel_y >= std_logic_vector(to_unsigned(288,10)) and pixel_y < std_logic_vector(to_unsigned(320,10)) then 
-            char_addr <= "010100"; --T
-            line2 <= char_out;
-        elsif 
-            pixel_x >= std_logic_vector(to_unsigned(224,10)) and pixel_x < std_logic_vector(to_unsigned(256,10))
-                and pixel_y >= std_logic_vector(to_unsigned(288,10)) and pixel_y < std_logic_vector(to_unsigned(320,10)) then 
-            char_addr <= "010010"; --R
-            line2 <= char_out;
-        elsif 
-            pixel_x >= std_logic_vector(to_unsigned(256,10)) and pixel_x < std_logic_vector(to_unsigned(288,10))
-                and pixel_y >= std_logic_vector(to_unsigned(288,10)) and pixel_y < std_logic_vector(to_unsigned(320,10)) then 
-            char_addr <= "000001"; --A
-            line2 <= char_out;
-        elsif 
-            pixel_x >= std_logic_vector(to_unsigned(288,10)) and pixel_x < std_logic_vector(to_unsigned(320,10))
-                and pixel_y >= std_logic_vector(to_unsigned(288,10)) and pixel_y < std_logic_vector(to_unsigned(320,10)) then 
-            char_addr <= "001001"; --I
-            line2 <= char_out;
-        elsif 
-            pixel_x >= std_logic_vector(to_unsigned(320,10)) and pixel_x < std_logic_vector(to_unsigned(352,10))
-                and pixel_y >= std_logic_vector(to_unsigned(288,10)) and pixel_y < std_logic_vector(to_unsigned(320,10)) then 
-            char_addr <= "001110"; --N
-            line2 <= char_out;
-        elsif 
-            pixel_x >= std_logic_vector(to_unsigned(352,10)) and pixel_x < std_logic_vector(to_unsigned(384,10))
-                and pixel_y >= std_logic_vector(to_unsigned(288,10)) and pixel_y < std_logic_vector(to_unsigned(320,10)) then 
-            char_addr <= "001001"; --I
-            line2 <= char_out;
-        elsif 
-            pixel_x >= std_logic_vector(to_unsigned(384,10)) and pixel_x < std_logic_vector(to_unsigned(416,10))
-                and pixel_y >= std_logic_vector(to_unsigned(288,10)) and pixel_y < std_logic_vector(to_unsigned(320,10)) then 
-            char_addr <= "001110"; --N
-            line2 <= char_out;
-        elsif 
-            pixel_x >= std_logic_vector(to_unsigned(416,10)) and pixel_x < std_logic_vector(to_unsigned(448,10))
-                and pixel_y >= std_logic_vector(to_unsigned(288,10)) and pixel_y < std_logic_vector(to_unsigned(320,10)) then 
-            char_addr <= "000111"; --G
-            line2 <= char_out;
-        -----------------third line------------------
-        elsif
-            pixel_x >= std_logic_vector(to_unsigned(32,10)) and pixel_x < std_logic_vector(to_unsigned(64,10))
-                and pixel_y >= std_logic_vector(to_unsigned(448,10)) and pixel_y < std_logic_vector(to_unsigned(480,10)) then
-            char_addr <= "010000"; --P
-            line3 <= char_out;
-        elsif
-            pixel_x >= std_logic_vector(to_unsigned(64,10)) and pixel_x < std_logic_vector(to_unsigned(96,10))
-                and pixel_y >= std_logic_vector(to_unsigned(448,10)) and pixel_y < std_logic_vector(to_unsigned(480,10)) then
-            char_addr <= "010010"; --R
-            line3 <= char_out;
-        elsif
-            pixel_x >= std_logic_vector(to_unsigned(96,10)) and pixel_x < std_logic_vector(to_unsigned(128,10))
-                and pixel_y >= std_logic_vector(to_unsigned(448,10)) and pixel_y < std_logic_vector(to_unsigned(480,10)) then
-            char_addr <= "000101"; --E
-            line3 <= char_out;
-        elsif
-            pixel_x >= std_logic_vector(to_unsigned(128,10)) and pixel_x < std_logic_vector(to_unsigned(160,10))
-                and pixel_y >= std_logic_vector(to_unsigned(448,10)) and pixel_y < std_logic_vector(to_unsigned(480,10)) then
-            char_addr <= "010011"; --S
-            line3 <= char_out;
-        elsif
-            pixel_x >= std_logic_vector(to_unsigned(160,10)) and pixel_x < std_logic_vector(to_unsigned(192,10))
-                and pixel_y >= std_logic_vector(to_unsigned(448,10)) and pixel_y < std_logic_vector(to_unsigned(480,10)) then
-            char_addr <= "010011"; --S
-            line3 <= char_out;
-        elsif
-            pixel_x >= std_logic_vector(to_unsigned(192,10)) and pixel_x < std_logic_vector(to_unsigned(224,10))
-                and pixel_y >= std_logic_vector(to_unsigned(448,10)) and pixel_y < std_logic_vector(to_unsigned(480,10)) then
-            char_addr <= "100000"; --(blank)
-            line3 <= char_out;
-        elsif
-            pixel_x >= std_logic_vector(to_unsigned(224,10)) and pixel_x < std_logic_vector(to_unsigned(256,10))
-                and pixel_y >= std_logic_vector(to_unsigned(448,10)) and pixel_y < std_logic_vector(to_unsigned(480,10)) then
-            char_addr <= "010000"; --P
-            line3 <= char_out;
-        elsif
-            pixel_x >= std_logic_vector(to_unsigned(256,10)) and pixel_x < std_logic_vector(to_unsigned(288,10))
-                and pixel_y >= std_logic_vector(to_unsigned(448,10)) and pixel_y < std_logic_vector(to_unsigned(480,10)) then
-            char_addr <= "000010"; --B
-            line3 <= char_out;
-        elsif
-            pixel_x >= std_logic_vector(to_unsigned(288,10)) and pixel_x < std_logic_vector(to_unsigned(320,10))
-                and pixel_y >= std_logic_vector(to_unsigned(448,10)) and pixel_y < std_logic_vector(to_unsigned(480,10)) then
-            char_addr <= "110000"; --0
-            line3 <= char_out;
-        elsif
-            pixel_x >= std_logic_vector(to_unsigned(320,10)) and pixel_x < std_logic_vector(to_unsigned(352,10))
-                and pixel_y >= std_logic_vector(to_unsigned(448,10)) and pixel_y < std_logic_vector(to_unsigned(480,10)) then
-            char_addr <= "100000"; --(blank)
-            line3 <= char_out;
-        elsif
-            pixel_x >= std_logic_vector(to_unsigned(352,10)) and pixel_x < std_logic_vector(to_unsigned(384,10))
-                and pixel_y >= std_logic_vector(to_unsigned(448,10)) and pixel_y < std_logic_vector(to_unsigned(480,10)) then
-            char_addr <= "010100"; --T
-            line3 <= char_out;
-        elsif
-            pixel_x >= std_logic_vector(to_unsigned(384,10)) and pixel_x < std_logic_vector(to_unsigned(416,10))
-                and pixel_y >= std_logic_vector(to_unsigned(448,10)) and pixel_y < std_logic_vector(to_unsigned(480,10)) then
-            char_addr <= "001111"; --O
-            line3 <= char_out;
-        elsif
-            pixel_x >= std_logic_vector(to_unsigned(416,10)) and pixel_x < std_logic_vector(to_unsigned(448,10))
-                and pixel_y >= std_logic_vector(to_unsigned(448,10)) and pixel_y < std_logic_vector(to_unsigned(480,10)) then
-            char_addr <= "100000"; --(blank)
-            line3 <= char_out;
-        elsif
-            pixel_x >= std_logic_vector(to_unsigned(448,10)) and pixel_x < std_logic_vector(to_unsigned(480,10))
-                and pixel_y >= std_logic_vector(to_unsigned(448,10)) and pixel_y < std_logic_vector(to_unsigned(480,10)) then
-            char_addr <= "010011"; --S
-            line3 <= char_out;  
-        elsif
-            pixel_x >= std_logic_vector(to_unsigned(480,10)) and pixel_x < std_logic_vector(to_unsigned(512,10))
-                and pixel_y >= std_logic_vector(to_unsigned(448,10)) and pixel_y < std_logic_vector(to_unsigned(480,10)) then
-            char_addr <= "010100"; --T
-            line3 <= char_out;
-        elsif
-            pixel_x >= std_logic_vector(to_unsigned(512,10)) and pixel_x < std_logic_vector(to_unsigned(544,10))
-                and pixel_y >= std_logic_vector(to_unsigned(448,10)) and pixel_y < std_logic_vector(to_unsigned(480,10)) then
-            char_addr <= "000001"; --A
-            line3 <= char_out;
-        elsif
-            pixel_x >= std_logic_vector(to_unsigned(544,10)) and pixel_x < std_logic_vector(to_unsigned(576,10))
-                and pixel_y >= std_logic_vector(to_unsigned(448,10)) and pixel_y < std_logic_vector(to_unsigned(480,10)) then
-            char_addr <= "010010"; --R
-            line3 <= char_out;
-        elsif
-            pixel_x >= std_logic_vector(to_unsigned(576,10)) and pixel_x < std_logic_vector(to_unsigned(608,10))
-                and pixel_y >= std_logic_vector(to_unsigned(448,10)) and pixel_y < std_logic_vector(to_unsigned(480,10)) then
-            char_addr <= "010100"; --T
-            line3 <= char_out;
-        else 
-            line3 <= '0';
-        end if;
+        ---------------STATES---------------
+        -- "00" main menu
+        -- "01" normal
+        -- "10" training
+        -- "11" death
+        ------------------------------------
+        case state is
+            when "00" =>
+                -----------------title line------------------
+                if
+                    pixel_x >= std_logic_vector(to_unsigned(128,10)) and pixel_x < std_logic_vector(to_unsigned(160,10))
+                        and pixel_y >= std_logic_vector(to_unsigned(64,10)) and pixel_y < std_logic_vector(to_unsigned(96,10)) then
+                    char_addr <= "100000"; --(blank)
+                    title <= char_out;
+                elsif
+                    pixel_x >= std_logic_vector(to_unsigned(160,10)) and pixel_x < std_logic_vector(to_unsigned(192,10))
+                        and pixel_y >= std_logic_vector(to_unsigned(64,10)) and pixel_y < std_logic_vector(to_unsigned(96,10)) then
+                    char_addr <= "000110"; --F
+                    title <= char_out;
+                elsif 
+                    pixel_x >= std_logic_vector(to_unsigned(192,10)) and pixel_x < std_logic_vector(to_unsigned(224,10))
+                        and pixel_y >= std_logic_vector(to_unsigned(64,10)) and pixel_y < std_logic_vector(to_unsigned(96,10)) then
+                    char_addr <= "001100"; --L
+                    title <= char_out;
+                elsif
+                    pixel_x >= std_logic_vector(to_unsigned(224,10)) and pixel_x < std_logic_vector(to_unsigned(256,10))
+                        and pixel_y >= std_logic_vector(to_unsigned(64,10)) and pixel_y < std_logic_vector(to_unsigned(96,10)) then
+                    char_addr <= "000001"; --A
+                    title <= char_out;
+                elsif
+                    pixel_x >= std_logic_vector(to_unsigned(256,10)) and pixel_x < std_logic_vector(to_unsigned(288,10))
+                        and pixel_y >= std_logic_vector(to_unsigned(64,10)) and pixel_y < std_logic_vector(to_unsigned(96,10)) then
+                    char_addr <= "010000"; --P
+                    title <= char_out;
+                elsif
+                    pixel_x >= std_logic_vector(to_unsigned(288,10)) and pixel_x < std_logic_vector(to_unsigned(320,10))
+                        and pixel_y >= std_logic_vector(to_unsigned(64,10)) and pixel_y < std_logic_vector(to_unsigned(96,10)) then
+                    char_addr <= "010000"; --P
+                    title <= char_out;
+                elsif
+                    pixel_x >= std_logic_vector(to_unsigned(320,10)) and pixel_x < std_logic_vector(to_unsigned(352,10))
+                        and pixel_y >= std_logic_vector(to_unsigned(64,10)) and pixel_y < std_logic_vector(to_unsigned(96,10)) then
+                    char_addr <= "011001"; --Y
+                    title <= char_out;
+                elsif
+                    pixel_x >= std_logic_vector(to_unsigned(352,10)) and pixel_x < std_logic_vector(to_unsigned(384,10))
+                        and pixel_y >= std_logic_vector(to_unsigned(64,10)) and pixel_y < std_logic_vector(to_unsigned(96,10)) then
+                    char_addr <= "100000"; --(blank)
+                    title <= char_out;
+                elsif
+                    pixel_x >= std_logic_vector(to_unsigned(384,10)) and pixel_x < std_logic_vector(to_unsigned(416,10))
+                        and pixel_y >= std_logic_vector(to_unsigned(64,10)) and pixel_y < std_logic_vector(to_unsigned(96,10)) then
+                    char_addr <= "000010"; --B
+                    title <= char_out;
+                elsif
+                    pixel_x >= std_logic_vector(to_unsigned(416,10)) and pixel_x < std_logic_vector(to_unsigned(448,10))
+                        and pixel_y >= std_logic_vector(to_unsigned(64,10)) and pixel_y < std_logic_vector(to_unsigned(96,10)) then
+                    char_addr <= "001001"; --I
+                    title <= char_out;
+                elsif
+                    pixel_x >= std_logic_vector(to_unsigned(448,10)) and pixel_x < std_logic_vector(to_unsigned(480,10))
+                        and pixel_y >= std_logic_vector(to_unsigned(64,10)) and pixel_y < std_logic_vector(to_unsigned(96,10)) then
+                    char_addr <= "010010"; --R
+                    title <= char_out;
+                elsif
+                    pixel_x >= std_logic_vector(to_unsigned(480,10)) and pixel_x < std_logic_vector(to_unsigned(512,10))
+                        and pixel_y >= std_logic_vector(to_unsigned(64,10)) and pixel_y < std_logic_vector(to_unsigned(96,10)) then
+                    char_addr <= "000100"; --D
+                    title <= char_out;
+                -----------------first line------------------
+                elsif 
+                    pixel_x >= std_logic_vector(to_unsigned(224,10)) and pixel_x < std_logic_vector(to_unsigned(256,10))
+                        and pixel_y >= std_logic_vector(to_unsigned(224,10)) and pixel_y < std_logic_vector(to_unsigned(256,10)) then 
+                    char_addr <= "001110"; --N
+                    line1 <= char_out;
+                elsif 
+                    pixel_x >= std_logic_vector(to_unsigned(256,10)) and pixel_x < std_logic_vector(to_unsigned(288,10))
+                        and pixel_y >= std_logic_vector(to_unsigned(224,10)) and pixel_y < std_logic_vector(to_unsigned(256,10)) then 
+                    char_addr <= "001111"; --O
+                    line1 <= char_out;
+                elsif 
+                    pixel_x >= std_logic_vector(to_unsigned(288,10)) and pixel_x < std_logic_vector(to_unsigned(320,10))
+                        and pixel_y >= std_logic_vector(to_unsigned(224,10)) and pixel_y < std_logic_vector(to_unsigned(256,10)) then 
+                    char_addr <= "010010"; --R
+                    line1 <= char_out;
+                elsif 
+                    pixel_x >= std_logic_vector(to_unsigned(320,10)) and pixel_x < std_logic_vector(to_unsigned(352,10))
+                        and pixel_y >= std_logic_vector(to_unsigned(224,10)) and pixel_y < std_logic_vector(to_unsigned(256,10)) then 
+                    char_addr <= "001101"; --M
+                    line1 <= char_out;
+                elsif 
+                    pixel_x >= std_logic_vector(to_unsigned(352,10)) and pixel_x < std_logic_vector(to_unsigned(384,10))
+                        and pixel_y >= std_logic_vector(to_unsigned(224,10)) and pixel_y < std_logic_vector(to_unsigned(256,10)) then 
+                    char_addr <= "000001"; --A
+                    line1 <= char_out;
+                elsif 
+                    pixel_x >= std_logic_vector(to_unsigned(384,10)) and pixel_x < std_logic_vector(to_unsigned(416,10))
+                        and pixel_y >= std_logic_vector(to_unsigned(224,10)) and pixel_y < std_logic_vector(to_unsigned(256,10)) then 
+                    char_addr <= "001100"; --L
+                    line1 <= char_out;
+                -----------------second line------------------
+                elsif 
+                    pixel_x >= std_logic_vector(to_unsigned(192,10)) and pixel_x < std_logic_vector(to_unsigned(224,10))
+                        and pixel_y >= std_logic_vector(to_unsigned(288,10)) and pixel_y < std_logic_vector(to_unsigned(320,10)) then 
+                    char_addr <= "010100"; --T
+                    line2 <= char_out;
+                elsif 
+                    pixel_x >= std_logic_vector(to_unsigned(224,10)) and pixel_x < std_logic_vector(to_unsigned(256,10))
+                        and pixel_y >= std_logic_vector(to_unsigned(288,10)) and pixel_y < std_logic_vector(to_unsigned(320,10)) then 
+                    char_addr <= "010010"; --R
+                    line2 <= char_out;
+                elsif 
+                    pixel_x >= std_logic_vector(to_unsigned(256,10)) and pixel_x < std_logic_vector(to_unsigned(288,10))
+                        and pixel_y >= std_logic_vector(to_unsigned(288,10)) and pixel_y < std_logic_vector(to_unsigned(320,10)) then 
+                    char_addr <= "000001"; --A
+                    line2 <= char_out;
+                elsif 
+                    pixel_x >= std_logic_vector(to_unsigned(288,10)) and pixel_x < std_logic_vector(to_unsigned(320,10))
+                        and pixel_y >= std_logic_vector(to_unsigned(288,10)) and pixel_y < std_logic_vector(to_unsigned(320,10)) then 
+                    char_addr <= "001001"; --I
+                    line2 <= char_out;
+                elsif 
+                    pixel_x >= std_logic_vector(to_unsigned(320,10)) and pixel_x < std_logic_vector(to_unsigned(352,10))
+                        and pixel_y >= std_logic_vector(to_unsigned(288,10)) and pixel_y < std_logic_vector(to_unsigned(320,10)) then 
+                    char_addr <= "001110"; --N
+                    line2 <= char_out;
+                elsif 
+                    pixel_x >= std_logic_vector(to_unsigned(352,10)) and pixel_x < std_logic_vector(to_unsigned(384,10))
+                        and pixel_y >= std_logic_vector(to_unsigned(288,10)) and pixel_y < std_logic_vector(to_unsigned(320,10)) then 
+                    char_addr <= "001001"; --I
+                    line2 <= char_out;
+                elsif 
+                    pixel_x >= std_logic_vector(to_unsigned(384,10)) and pixel_x < std_logic_vector(to_unsigned(416,10))
+                        and pixel_y >= std_logic_vector(to_unsigned(288,10)) and pixel_y < std_logic_vector(to_unsigned(320,10)) then 
+                    char_addr <= "001110"; --N
+                    line2 <= char_out;
+                elsif 
+                    pixel_x >= std_logic_vector(to_unsigned(416,10)) and pixel_x < std_logic_vector(to_unsigned(448,10))
+                        and pixel_y >= std_logic_vector(to_unsigned(288,10)) and pixel_y < std_logic_vector(to_unsigned(320,10)) then 
+                    char_addr <= "000111"; --G
+                    line2 <= char_out;
+                -----------------third line------------------
+                elsif
+                    pixel_x >= std_logic_vector(to_unsigned(32,10)) and pixel_x < std_logic_vector(to_unsigned(64,10))
+                        and pixel_y >= std_logic_vector(to_unsigned(448,10)) and pixel_y < std_logic_vector(to_unsigned(480,10)) then
+                    char_addr <= "010000"; --P
+                    line3 <= char_out;
+                elsif
+                    pixel_x >= std_logic_vector(to_unsigned(64,10)) and pixel_x < std_logic_vector(to_unsigned(96,10))
+                        and pixel_y >= std_logic_vector(to_unsigned(448,10)) and pixel_y < std_logic_vector(to_unsigned(480,10)) then
+                    char_addr <= "010010"; --R
+                    line3 <= char_out;
+                elsif
+                    pixel_x >= std_logic_vector(to_unsigned(96,10)) and pixel_x < std_logic_vector(to_unsigned(128,10))
+                        and pixel_y >= std_logic_vector(to_unsigned(448,10)) and pixel_y < std_logic_vector(to_unsigned(480,10)) then
+                    char_addr <= "000101"; --E
+                    line3 <= char_out;
+                elsif
+                    pixel_x >= std_logic_vector(to_unsigned(128,10)) and pixel_x < std_logic_vector(to_unsigned(160,10))
+                        and pixel_y >= std_logic_vector(to_unsigned(448,10)) and pixel_y < std_logic_vector(to_unsigned(480,10)) then
+                    char_addr <= "010011"; --S
+                    line3 <= char_out;
+                elsif
+                    pixel_x >= std_logic_vector(to_unsigned(160,10)) and pixel_x < std_logic_vector(to_unsigned(192,10))
+                        and pixel_y >= std_logic_vector(to_unsigned(448,10)) and pixel_y < std_logic_vector(to_unsigned(480,10)) then
+                    char_addr <= "010011"; --S
+                    line3 <= char_out;
+                elsif
+                    pixel_x >= std_logic_vector(to_unsigned(192,10)) and pixel_x < std_logic_vector(to_unsigned(224,10))
+                        and pixel_y >= std_logic_vector(to_unsigned(448,10)) and pixel_y < std_logic_vector(to_unsigned(480,10)) then
+                    char_addr <= "100000"; --(blank)
+                    line3 <= char_out;
+                elsif
+                    pixel_x >= std_logic_vector(to_unsigned(224,10)) and pixel_x < std_logic_vector(to_unsigned(256,10))
+                        and pixel_y >= std_logic_vector(to_unsigned(448,10)) and pixel_y < std_logic_vector(to_unsigned(480,10)) then
+                    char_addr <= "010000"; --P
+                    line3 <= char_out;
+                elsif
+                    pixel_x >= std_logic_vector(to_unsigned(256,10)) and pixel_x < std_logic_vector(to_unsigned(288,10))
+                        and pixel_y >= std_logic_vector(to_unsigned(448,10)) and pixel_y < std_logic_vector(to_unsigned(480,10)) then
+                    char_addr <= "000010"; --B
+                    line3 <= char_out;
+                elsif
+                    pixel_x >= std_logic_vector(to_unsigned(288,10)) and pixel_x < std_logic_vector(to_unsigned(320,10))
+                        and pixel_y >= std_logic_vector(to_unsigned(448,10)) and pixel_y < std_logic_vector(to_unsigned(480,10)) then
+                    char_addr <= "110000"; --0
+                    line3 <= char_out;
+                elsif
+                    pixel_x >= std_logic_vector(to_unsigned(320,10)) and pixel_x < std_logic_vector(to_unsigned(352,10))
+                        and pixel_y >= std_logic_vector(to_unsigned(448,10)) and pixel_y < std_logic_vector(to_unsigned(480,10)) then
+                    char_addr <= "100000"; --(blank)
+                    line3 <= char_out;
+                elsif
+                    pixel_x >= std_logic_vector(to_unsigned(352,10)) and pixel_x < std_logic_vector(to_unsigned(384,10))
+                        and pixel_y >= std_logic_vector(to_unsigned(448,10)) and pixel_y < std_logic_vector(to_unsigned(480,10)) then
+                    char_addr <= "010100"; --T
+                    line3 <= char_out;
+                elsif
+                    pixel_x >= std_logic_vector(to_unsigned(384,10)) and pixel_x < std_logic_vector(to_unsigned(416,10))
+                        and pixel_y >= std_logic_vector(to_unsigned(448,10)) and pixel_y < std_logic_vector(to_unsigned(480,10)) then
+                    char_addr <= "001111"; --O
+                    line3 <= char_out;
+                elsif
+                    pixel_x >= std_logic_vector(to_unsigned(416,10)) and pixel_x < std_logic_vector(to_unsigned(448,10))
+                        and pixel_y >= std_logic_vector(to_unsigned(448,10)) and pixel_y < std_logic_vector(to_unsigned(480,10)) then
+                    char_addr <= "100000"; --(blank)
+                    line3 <= char_out;
+                elsif
+                    pixel_x >= std_logic_vector(to_unsigned(448,10)) and pixel_x < std_logic_vector(to_unsigned(480,10))
+                        and pixel_y >= std_logic_vector(to_unsigned(448,10)) and pixel_y < std_logic_vector(to_unsigned(480,10)) then
+                    char_addr <= "010011"; --S
+                    line3 <= char_out;  
+                elsif
+                    pixel_x >= std_logic_vector(to_unsigned(480,10)) and pixel_x < std_logic_vector(to_unsigned(512,10))
+                        and pixel_y >= std_logic_vector(to_unsigned(448,10)) and pixel_y < std_logic_vector(to_unsigned(480,10)) then
+                    char_addr <= "010100"; --T
+                    line3 <= char_out;
+                elsif
+                    pixel_x >= std_logic_vector(to_unsigned(512,10)) and pixel_x < std_logic_vector(to_unsigned(544,10))
+                        and pixel_y >= std_logic_vector(to_unsigned(448,10)) and pixel_y < std_logic_vector(to_unsigned(480,10)) then
+                    char_addr <= "000001"; --A
+                    line3 <= char_out;
+                elsif
+                    pixel_x >= std_logic_vector(to_unsigned(544,10)) and pixel_x < std_logic_vector(to_unsigned(576,10))
+                        and pixel_y >= std_logic_vector(to_unsigned(448,10)) and pixel_y < std_logic_vector(to_unsigned(480,10)) then
+                    char_addr <= "010010"; --R
+                    line3 <= char_out;
+                elsif
+                    pixel_x >= std_logic_vector(to_unsigned(576,10)) and pixel_x < std_logic_vector(to_unsigned(608,10))
+                        and pixel_y >= std_logic_vector(to_unsigned(448,10)) and pixel_y < std_logic_vector(to_unsigned(480,10)) then
+                    char_addr <= "010100"; --T
+                    line3 <= char_out;
+                else 
+                    line3 <= '0';
+                end if;
+            when others =>
+                title <= '0';
+                line1 <= '0';
+                line2 <= '0';
+                line3 <= '0';
+        end case;
     end process select_gamemode;
 
     font_row    <= pixel_y(4 downto 2);
@@ -293,7 +300,7 @@ begin
 
     ------------------ maybe a latch inferred here? ------------------
     ------------------ --------need change--------- ------------------
-    menu_init <= mode_select when exit_menu = '0' else 'X';
+    -- menu_init <= mode_select when exit_screen = '0' else null;
 
     colour_out <=   yellow when title = '1' else
 

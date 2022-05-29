@@ -10,7 +10,7 @@ entity death_screen is
         clk, restart                        : in std_logic;
         pixel_x, pixel_y                    : in std_logic_vector(9 downto 0);
         state                               : in std_logic_vector(1 downto 0);
-        death_init                          : out std_logic;
+        -- death_init                          : out std_logic;
         colour_info                         : out rgb_array
     );
 end entity death_screen;
@@ -43,50 +43,61 @@ begin
     player_death : process
     begin
         wait until (rising_edge(clk));
-        -----------death message-----------
-        if
-            pixel_x >= std_logic_vector(to_unsigned(192,10)) and pixel_x < std_logic_vector(to_unsigned(224,10))
-                and pixel_y >= std_logic_vector(to_unsigned(224,10)) and pixel_y < std_logic_vector(to_unsigned(256,10)) then
-            char_addr <= "000111"; --G
-            death_msg <= char_out;
-        elsif
-            pixel_x >= std_logic_vector(to_unsigned(224,10)) and pixel_x < std_logic_vector(to_unsigned(256,10))
-                and pixel_y >= std_logic_vector(to_unsigned(224,10)) and pixel_y < std_logic_vector(to_unsigned(256,10)) then
-            char_addr <= "000001"; --A
-            death_msg <= char_out;
-        elsif
-            pixel_x >= std_logic_vector(to_unsigned(256,10)) and pixel_x < std_logic_vector(to_unsigned(288,10))
-                and pixel_y >= std_logic_vector(to_unsigned(224,10)) and pixel_y < std_logic_vector(to_unsigned(256,10)) then
-            char_addr <= "001101"; --M
-            death_msg <= char_out;
-        elsif
-            pixel_x >= std_logic_vector(to_unsigned(288,10)) and pixel_x < std_logic_vector(to_unsigned(320,10))
-                and pixel_y >= std_logic_vector(to_unsigned(224,10)) and pixel_y < std_logic_vector(to_unsigned(256,10)) then
-            char_addr <= "000101"; --E
-            death_msg <= char_out;
-        elsif
-            pixel_x >= std_logic_vector(to_unsigned(320,10)) and pixel_x < std_logic_vector(to_unsigned(352,10))
-                and pixel_y >= std_logic_vector(to_unsigned(224,10)) and pixel_y < std_logic_vector(to_unsigned(256,10)) then
-            char_addr <= "001111"; --O
-            death_msg <= char_out;
-        elsif
-            pixel_x >= std_logic_vector(to_unsigned(352,10)) and pixel_x < std_logic_vector(to_unsigned(384,10))
-                and pixel_y >= std_logic_vector(to_unsigned(224,10)) and pixel_y < std_logic_vector(to_unsigned(256,10)) then
-            char_addr <= "010110"; --V
-            death_msg <= char_out;
-        elsif
-            pixel_x >= std_logic_vector(to_unsigned(384,10)) and pixel_x < std_logic_vector(to_unsigned(416,10))
-                and pixel_y >= std_logic_vector(to_unsigned(224,10)) and pixel_y < std_logic_vector(to_unsigned(256,10)) then
-            char_addr <= "000101"; --E
-            death_msg <= char_out;
-        elsif
-            pixel_x >= std_logic_vector(to_unsigned(416,10)) and pixel_x < std_logic_vector(to_unsigned(448,10))
-                and pixel_y >= std_logic_vector(to_unsigned(224,10)) and pixel_y < std_logic_vector(to_unsigned(256,10)) then
-            char_addr <= "010010"; --R
-            death_msg <= char_out;
-        else
-            death_msg <= '0';
-        end if;
+        ---------------STATES---------------
+        -- "00" main menu
+        -- "01" normal
+        -- "10" training
+        -- "11" death
+        ------------------------------------
+        case state is
+            when "11" =>
+                -----------death message-----------
+                if
+                    pixel_x >= std_logic_vector(to_unsigned(192,10)) and pixel_x < std_logic_vector(to_unsigned(224,10))
+                        and pixel_y >= std_logic_vector(to_unsigned(224,10)) and pixel_y < std_logic_vector(to_unsigned(256,10)) then
+                    char_addr <= "000111"; --G
+                    death_msg <= char_out;
+                elsif
+                    pixel_x >= std_logic_vector(to_unsigned(224,10)) and pixel_x < std_logic_vector(to_unsigned(256,10))
+                        and pixel_y >= std_logic_vector(to_unsigned(224,10)) and pixel_y < std_logic_vector(to_unsigned(256,10)) then
+                    char_addr <= "000001"; --A
+                    death_msg <= char_out;
+                elsif
+                    pixel_x >= std_logic_vector(to_unsigned(256,10)) and pixel_x < std_logic_vector(to_unsigned(288,10))
+                        and pixel_y >= std_logic_vector(to_unsigned(224,10)) and pixel_y < std_logic_vector(to_unsigned(256,10)) then
+                    char_addr <= "001101"; --M
+                    death_msg <= char_out;
+                elsif
+                    pixel_x >= std_logic_vector(to_unsigned(288,10)) and pixel_x < std_logic_vector(to_unsigned(320,10))
+                        and pixel_y >= std_logic_vector(to_unsigned(224,10)) and pixel_y < std_logic_vector(to_unsigned(256,10)) then
+                    char_addr <= "000101"; --E
+                    death_msg <= char_out;
+                elsif
+                    pixel_x >= std_logic_vector(to_unsigned(320,10)) and pixel_x < std_logic_vector(to_unsigned(352,10))
+                        and pixel_y >= std_logic_vector(to_unsigned(224,10)) and pixel_y < std_logic_vector(to_unsigned(256,10)) then
+                    char_addr <= "001111"; --O
+                    death_msg <= char_out;
+                elsif
+                    pixel_x >= std_logic_vector(to_unsigned(352,10)) and pixel_x < std_logic_vector(to_unsigned(384,10))
+                        and pixel_y >= std_logic_vector(to_unsigned(224,10)) and pixel_y < std_logic_vector(to_unsigned(256,10)) then
+                    char_addr <= "010110"; --V
+                    death_msg <= char_out;
+                elsif
+                    pixel_x >= std_logic_vector(to_unsigned(384,10)) and pixel_x < std_logic_vector(to_unsigned(416,10))
+                        and pixel_y >= std_logic_vector(to_unsigned(224,10)) and pixel_y < std_logic_vector(to_unsigned(256,10)) then
+                    char_addr <= "000101"; --E
+                    death_msg <= char_out;
+                elsif
+                    pixel_x >= std_logic_vector(to_unsigned(416,10)) and pixel_x < std_logic_vector(to_unsigned(448,10))
+                        and pixel_y >= std_logic_vector(to_unsigned(224,10)) and pixel_y < std_logic_vector(to_unsigned(256,10)) then
+                    char_addr <= "010010"; --R
+                    death_msg <= char_out;
+                else
+                    death_msg <= '0';
+                end if;
+            when others =>
+                death_msg <= '0';
+        end case;
     end process player_death;
 
     font_row    <= pixel_y(4 downto 2);

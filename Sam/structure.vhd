@@ -134,11 +134,15 @@ begin
 
   red <= tmp_red;
   green <= tmp_green;
-  blue <= tmp_blue;
+  --blue <= tmp_blue;
 
-  -- if((bird_y_position > std_logic_vector(to_unsigned(439, 10) - unsigned(flappy_bird_height)) ) or (bird_y_position < 0)) then
-  --   kill
-  -- end if;
+  blue <= tmp_green when ( (bird_y_position >= std_logic_vector(to_unsigned(439, 10) - unsigned(bird_height_out))) or (bird_y_position < std_logic_vector(to_unsigned(0, 10)) )) else tmp_blue;
+
+  
+
+  --if ( (bird_y_position >= std_logic_vector(to_unsigned(439, 10) - unsigned(flappy_bird_height))) or (bird_y_position < 0) ) then
+    --blue <= tmp_green;
+  --end if;
 
   -- if ((pipe 1 match) and ((bird above 1) or (bird below 1))) then
   --   kill

@@ -38,8 +38,14 @@ architecture structure of colour_signals is
           state : in std_logic_vector(1 downto 0);
           powerup_en : out std_logic;
 			    px_motion : out integer;
-          colour_info : out rgb_array);
+          colour_info : out rgb_array;
+          
+          pipe_x_out_pos : out signed(10 downto 0);
+          pipe_height_out : out integer;
+          scale_out : out integer range 0 to 7;
+          pipe_gap_width_out : out integer range 0 to 454);
   end component pipe;
+
   
   component powerup is
     port (powerup_en : in std_logic_vector(2 downto 0);
@@ -51,7 +57,10 @@ architecture structure of colour_signals is
   port (left_mouse, right_mouse, vert_sync : in std_logic;
         pixel_row, pixel_column : in std_logic_vector(9 downto 0);
         state_out : out std_logic_vector(1 downto 0);
-        colour_info : out rgb_array);
+        colour_info : out rgb_array;
+        
+        bird_height_out : out std_logic_vector(9 downto 0);
+        bird_y_position : out std_logic_vector(9 downto 0));
   end component flappy_bird;
   
   component main_menu is
@@ -96,6 +105,14 @@ signal tmp_red, tmp_green, tmp_blue : std_logic_vector(3 downto 0);
 signal px_motion : integer;
 signal powerup_en : std_logic_vector(2 downto 0);
 
+signal pipe_height_out_3, pipe_height_out_2, pipe_height_out_1 : integer;
+signal pipe_x_out_pos_1, pipe_x_out_pos_2, pipe_x_out_pos_3 : signed(10 downto 0);
+signal scale_out : integer range 0 to 7;
+signal pipe_gap_width_out : integer range 0 to 454;
+
+signal bird_y_position : std_logic_vector(9 downto 0);
+signal bird_height_out : std_logic_vector(9 downto 0);
+
 begin
   B: background_m
     port map (colour_info => b_array);
@@ -107,19 +124,19 @@ begin
     port map (vert_sync => vert_sync, pipe_x_motion => px_motion, pixel_row => pixel_row, pixel_column => pixel_column, colour_info => g_array);
       
   P3: pipe
-    port map (vert_sync => vert_sync, pipe_no => 3, pr => pixel_row, pc => pixel_column, state => state_menu, powerup_en => powerup_en(2), px_motion => px_motion, colour_info => p3_array);
+    port map (vert_sync => vert_sync, pipe_no => 3, pr => pixel_row, pc => pixel_column, state => state_menu, powerup_en => powerup_en(2), px_motion => px_motion, colour_info => p3_array, pipe_x_out_pos => pipe_x_out_pos_3, pipe_height_out => pipe_height_out_3);
       
   P2: pipe
-    port map (vert_sync => vert_sync, pipe_no => 2, pr => pixel_row, pc => pixel_column, state => state_menu,  powerup_en => powerup_en(1), colour_info => p2_array);
+    port map (vert_sync => vert_sync, pipe_no => 2, pr => pixel_row, pc => pixel_column, state => state_menu,  powerup_en => powerup_en(1), colour_info => p2_array, pipe_x_out_pos => pipe_x_out_pos_2, pipe_height_out => pipe_height_out_2);
       
   P1: pipe
-    port map (vert_sync => vert_sync, pipe_no => 1, pr => pixel_row, pc => pixel_column, state => state_menu,  powerup_en => powerup_en(0), colour_info => p1_array);
+    port map (vert_sync => vert_sync, pipe_no => 1, pr => pixel_row, pc => pixel_column, state => state_menu,  powerup_en => powerup_en(0), colour_info => p1_array, pipe_x_out_pos => pipe_x_out_pos_1, pipe_height_out => pipe_height_out_1, scale_out => scale_out, pipe_gap_width_out => pipe_gap_width_out);
       
   PU: powerup
     port map (powerup_en => powerup_en, pixel_row => pixel_row, pixel_column => pixel_column, colour_info => pu_array);
       
   FB: flappy_bird
-    port map (left_mouse => left_mouse, right_mouse => right_mouse, vert_sync => vert_sync, pixel_row => pixel_row, pixel_column => pixel_column, state_out => state_bird, colour_info => fb_array);
+    port map (left_mouse => left_mouse, right_mouse => right_mouse, vert_sync => vert_sync, pixel_row => pixel_row, pixel_column => pixel_column, state_out => state_bird, colour_info => fb_array, bird_height_out => bird_height_out, bird_y_position => bird_y_position);
        
   MM: main_menu
     port map (clk => clk, mode_select => mode, exit_screen => pushbutton, pixel_x => pixel_column, pixel_y => pixel_row, state => present_state, state_out => state(3 downto 2), colour_info => mm_array);
@@ -165,5 +182,11 @@ begin
   red <= tmp_red;
   green <= tmp_green;
   blue <= tmp_blue;
+
+  blue <= tmp_green when ((bird_y_position >= std_logic_vector(to_unsigned(439, 10) - unsigned(bird_height_out))) or (bird_y_position < std_logic_vector(to_unsigned(0, 10)) )) else
+          tmp_red when ((pipe_x_out_pos_1 = to_signed(313, 11)) and ((bird_y_position < std_logic_vector(to_unsigned(((pipe_height_out_1 + 13) * scale_out), 10))) or (bird_y_position >  std_logic_vector(to_unsigned(((pipe_height_out_1 + pipe_gap_width_out + 13) * scale_out), 10))))) else
+          tmp_red when ((pipe_x_out_pos_2 = to_signed(313, 11)) and ((bird_y_position < std_logic_vector(to_unsigned(((pipe_height_out_2 + 13) * scale_out), 10))) or (bird_y_position >  std_logic_vector(to_unsigned(((pipe_height_out_2 + pipe_gap_width_out + 13) * scale_out), 10))))) else
+          tmp_red when ((pipe_x_out_pos_3 = to_signed(313, 11)) and ((bird_y_position < std_logic_vector(to_unsigned(((pipe_height_out_3 + 13) * scale_out), 10))) or (bird_y_position >  std_logic_vector(to_unsigned(((pipe_height_out_3 + pipe_gap_width_out + 13) * scale_out), 10))))) else
+          tmp_blue;
       
 end architecture structure;

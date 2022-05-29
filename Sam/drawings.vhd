@@ -1045,7 +1045,12 @@ entity pipe is
         pr, pc : in std_logic_vector(9 downto 0);
         powerup_en : out std_logic;
   		    px_motion : out integer;
-        colour_info : out rgb_array);
+        colour_info : out rgb_array;
+
+        pipe_x_out_pos : out signed(10 downto 0);
+        pipe_height_out : out integer;
+        scale_out : out integer range 0 to 7;
+        pipe_gap_width_out : out integer range 0 to 454);
 end entity pipe;
 
 -- Pipe architecture.
@@ -1087,6 +1092,7 @@ begin
   
 -- Width and height for the rectangle of pipe one.
 p_size <= 2;
+scale_out <= p_size;
 g_size <= 2;
 --r <= 90 / p_size;
 pipe_width <= to_unsigned(p_size*26 - 1, 11);
@@ -1097,6 +1103,7 @@ hard_mode <= 0 when mode = '0' else
              1;
              
 k <= 70 - 15 * hard_mode;
+pipe_gap_width_out <= k;
 
 pixel_column <= std_logic_vector(signed(pc) + to_signed(286 * (pipe_no - 1), 10));
 pixel_row <= pr;
@@ -1277,6 +1284,7 @@ begin
 		-- Reset the pipe position once it goes off of the screen.
 		if (std_logic_vector(pipe_x_pos + signed(pipe_width)) <= std_logic_vector(to_signed(0, 11))) then
 			r <= random;
+      pipe_height_out <= r;
 			pipe_x_motion <= to_signed(639, 11);
 		else
 			pipe_x_motion <= to_signed(-1 - hard_mode * (count / 1800), 11);
@@ -1284,6 +1292,7 @@ begin
 		end if;
      -- Calculate the position of the pipe ready for the next frame.
       pipe_x_pos <= pipe_x_pos + pipe_x_motion;
+      pipe_x_out_pos <= pipe_x_pos;
   end if;
 
 end process move_pipe;
@@ -1403,7 +1412,8 @@ use work.pixel_functions.all;
 entity flappy_bird is
   port (left_mouse, right_mouse, vert_sync : in std_logic;
         pixel_row, pixel_column : in std_logic_vector(9 downto 0);
-        colour_info : out rgb_array);
+        colour_info : out rgb_array;
+        bird_y_position : out std_logic_vector(9 downto 0));
 end entity flappy_bird;
 
 -- Flappy bird architecture.
@@ -1589,6 +1599,7 @@ move_bird : process (vert_sync)
 	variable acceleFlag : integer := 0;
     variable bird_velocity : integer := 0;
     variable frame_rate_time : integer := 1;
+	 variable start : integer := 0;
 begin
     -- Update the flappy bird position once per vsync.
     if (rising_edge(vert_sync)) then
@@ -1602,6 +1613,7 @@ begin
         if (left_flag = '1' and holding = '0') then
             -- set holding flag
             holding <= '1';
+				start := 1;
             -- set the bird on an upwards velocity
             bird_velocity := 7;
 
@@ -1609,7 +1621,7 @@ begin
             -- decelerate the bird
             -- velociy = velocity minus acceleration times framerate
 				
-				if (acceleFlag = 1) then
+				if (acceleFlag = 1 and start = 1) then
 					bird_velocity := bird_velocity - (1 * frame_rate_time);
 					acceleFlag := 0;
 				else
@@ -1633,6 +1645,8 @@ begin
         --     bird_velocity := 0;
         --     flappy_y_pos <= std_logic_vector(unsigned(flappy_y_pos) - bird_velocity * frame_rate_time);
         end if;
+
+        bird_y_position <= flappy_y_pos;
 
     end if;
 end process move_bird;

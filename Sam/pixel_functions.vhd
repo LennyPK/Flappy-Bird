@@ -5,7 +5,7 @@ use IEEE.numeric_std.all;
 package pixel_functions is
   
 -- Custom types for the screen dimensions.
-subtype screen_width is natural range 0 to 640;
+subtype screen_width is natural range 0 to 692;
 subtype screen_height is natural range 0 to 480;
 
 -- This function takes the inputs pixel location, size, and the bounds for left, right, top and bottom.

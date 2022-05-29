@@ -35,13 +35,13 @@ architecture structure of colour_signals is
           mode : in std_logic;
           pipe_no : in integer;
           pr, pc : in std_logic_vector(9 downto 0);
-          powerup_on : out std_logic;
+          powerup_en : out std_logic;
 			    px_motion : out integer;
           colour_info : out rgb_array);
   end component pipe;
   
   component powerup is
-    port (powerup_on : in std_logic_vector(2 downto 0);
+    port (powerup_en : in std_logic_vector(2 downto 0);
           pixel_row, pixel_column : in std_logic_vector(9 downto 0);
           colour_info : out rgb_array);
   end component powerup;
@@ -62,8 +62,9 @@ signal pu_array : rgb_array;
 signal fb_array : rgb_array;
 
 signal tmp_red, tmp_green, tmp_blue : std_logic_vector(3 downto 0);
+
 signal px_motion : integer;
-signal powerup_on : std_logic_vector(2 downto 0);
+signal powerup_en : std_logic_vector(2 downto 0);
 
 begin
   B: background_m
@@ -75,14 +76,14 @@ begin
   G: ground
     port map (vert_sync => vert_sync, pipe_x_motion => px_motion, pixel_row => pixel_row, pixel_column => pixel_column, colour_info => g_array);
       
-  P1: pipe
-    port map (vert_sync => vert_sync, mode => mode, pipe_no => 1, pr => pixel_row, pc => pixel_column, powerup_on => powerup_on(0), px_motion => px_motion, colour_info => p1_array);
+  P3: pipe
+    port map (vert_sync => vert_sync, mode => mode, pipe_no => 3, pr => pixel_row, pc => pixel_column, powerup_en => powerup_en(2), px_motion => px_motion, colour_info => p3_array);
       
   P2: pipe
-    port map (vert_sync => vert_sync, mode => mode, pipe_no => 2, pr => pixel_row, pc => pixel_column, powerup_on => powerup_on(1), colour_info => p2_array);
+    port map (vert_sync => vert_sync, mode => mode, pipe_no => 2, pr => pixel_row, pc => pixel_column, powerup_en => powerup_en(1), colour_info => p2_array);
       
-  P3: pipe
-    port map (vert_sync => vert_sync, mode => mode, pipe_no => 3, pr => pixel_row, pc => pixel_column, powerup_on => powerup_on(2), colour_info => p3_array);
+  P1: pipe
+    port map (vert_sync => vert_sync, mode => mode, pipe_no => 1, pr => pixel_row, pc => pixel_column, powerup_en => powerup_en(0), colour_info => p1_array);
       
   PU: powerup
     port map (powerup_on => powerup_on, pixel_row => pixel_row, pixel_column => pixel_column, colour_info => pu_array);
@@ -92,6 +93,7 @@ begin
             
   -- Assign pixels by the order in which they should appear (higher is "closer" to the user).
   tmp_red <= fb_array(0) when fb_array(0) /= "0000" else
+             pu_array(0) when pu_array(0) /= "0000" else
              p1_array(0) when p1_array(0) /= "0000" else
              p2_array(0) when p2_array(0) /= "0000" else
              p3_array(0) when p3_array(0) /= "0000" else
@@ -99,6 +101,7 @@ begin
              bd_array(0) when bd_array(0) /= "0000" else
              b_array(0);
   tmp_green <= fb_array(1) when fb_array(1) /= "0000" else
+               pu_array(1) when pu_array(1) /= "0000" else
                p1_array(1) when p1_array(1) /= "0000" else
                p2_array(1) when p2_array(1) /= "0000" else
                p3_array(1) when p3_array(1) /= "0000" else
@@ -106,6 +109,7 @@ begin
                bd_array(1) when bd_array(1) /= "0000" else
                b_array(1);
   tmp_blue <= fb_array(2) when fb_array(2) /= "0000" else
+              pu_array(2) when pu_array(2) /= "0000" else
               p1_array(2) when p1_array(2) /= "0000" else
               p2_array(2) when p2_array(2) /= "0000" else
               p3_array(2) when p3_array(2) /= "0000" else

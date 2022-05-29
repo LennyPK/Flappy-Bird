@@ -1043,7 +1043,7 @@ entity pipe is
   port (vert_sync, mode : in std_logic;
         pipe_no : in integer;
         pr, pc : in std_logic_vector(9 downto 0);
-        powerup_on : out std_logic;
+        powerup_en : out std_logic;
   		    px_motion : out integer;
         colour_info : out rgb_array);
 end entity pipe;
@@ -1072,8 +1072,8 @@ signal pipe_x_motion : signed(10 downto 0);
 
 signal pixel_column, pixel_row : std_logic_vector(9 downto 0);
 
-signal pixel_col_int : integer;
-signal pixel_row_int : integer;
+signal pixel_col_int : screen_width;
+signal pixel_row_int : screen_height;
 signal rand : std_logic_vector(6 downto 0) := "0000001";
 
 -- Distance between the lower top part of the pipe and the upper bottom part of the pipe.
@@ -1098,8 +1098,7 @@ hard_mode <= 0 when mode = '0' else
              
 k <= 70 - 15 * hard_mode;
 
-pixel_column <= std_logic_vector(signed(pc) + to_signed(286 * (pipe_no - 1), 10)) when signed(pc) + signed(pipe_width) >= to_signed(0, 10) else
-                std_logic_vector(to_signed(0, 10));
+pixel_column <= std_logic_vector(signed(pc) + to_signed(286 * (pipe_no - 1), 10));
 pixel_row <= pr;
 
 -- Row and column integer values for the pipe.
@@ -1256,7 +1255,14 @@ begin
       tmp := rand(4) XOR rand(2) XOR rand(1) XOR rand(0);
     else
       tmp := '0';
-    end if;      
+    end if;
+    
+    -- Enable powerups, but only sometimes (they should be kind of rare).
+    if to_integer(unsigned(rand)) mod 11 = 0 then
+      powerup_en <= '1';
+    else
+      powerup_en <= '0'; 
+    end if;     
       
     rand <= tmp & rand(6 downto 1);
     
@@ -1271,8 +1277,7 @@ begin
 		-- Reset the pipe position once it goes off of the screen.
 		if (std_logic_vector(pipe_x_pos + signed(pipe_width)) <= std_logic_vector(to_signed(0, 11))) then
 			r <= random;
-			pipe_x_pos <= to_signed(639, 11);
-			pipe_x_motion <= to_signed(-1 - hard_mode * (count / 1800), 11);
+			pipe_x_motion <= to_signed(639, 11);
 		else
 			pipe_x_motion <= to_signed(-1 - hard_mode * (count / 1800), 11);
      
@@ -1302,13 +1307,81 @@ use work.rgb_functions.all;
 use work.pixel_functions.all;
 
 entity powerup is
-  port (powerup_on : in std_logic_vector(2 downto 0);
+  port (powerup_en : in std_logic_vector(2 downto 0);
         pixel_row, pixel_column : in std_logic_vector(9 downto 0);
         colour_info : out rgb_array);
 end entity powerup;
 
 architecture behaviour of powerup is
+  
+-- Colour assignments.
+constant eggplant : rgb := (83, 56, 70);
+constant silver : rgb := (192, 192, 192);
+
+-- Powerup image signals.
+signal powerup_on : std_logic;
+signal powerup_colours : rgb_array;
+signal powerup_width : std_logic_vector(10 downto 0);
+signal powerup_height : std_logic_vector(9 downto 0);
+
+signal powerup_x_pos : std_logic_vector(10 downto 0);
+signal powerup_y_pos : std_logic_vector(9 downto 0) := "0011110000";
+signal powerup_x_motion : std_logic_vector(10 downto 0);
+
+signal pixel_col_int : screen_width;
+signal pixel_row_int : screen_height;
+
 begin
+  
+-- Row and column integer values for the flappy bird.
+pixel_col_int <= (to_integer(unsigned(pixel_column)) mod (7) - to_integer(unsigned(powerup_x_pos)) mod (7)) mod (7);
+pixel_row_int <= (to_integer(unsigned(pixel_row)) mod (7) - to_integer(unsigned(powerup_y_pos)) mod (7)) mod (7);
+
+powerup_on <= '1' when ((signed(pixel_column) <= signed(powerup_x_pos) + signed(powerup_width))
+              and (signed(pixel_column) >= signed(powerup_x_pos))
+              and (unsigned(pixel_row) <= unsigned(powerup_y_pos) + unsigned(powerup_height))
+              and (unsigned(pixel_row) >= unsigned(powerup_y_pos))
+          
+              -- Banned regions within rectangular area.
+              -- Row one
+              and not pixel_region(pixel_col_int, pixel_row_int, 0, 1, 0, 1, 1)
+              and not pixel_region(pixel_col_int, pixel_row_int, 5, 6, 0, 1, 1)
+              -- Row two
+              and not pixel_region(pixel_col_int, pixel_row_int, 0, 0, 0, 1, 1)
+              and not pixel_region(pixel_col_int, pixel_row_int, 6, 6, 0, 1, 1)
+              -- Row six
+              and not pixel_region(pixel_col_int, pixel_row_int, 0, 0, 0, 1, 1)
+              and not pixel_region(pixel_col_int, pixel_row_int, 6, 6, 0, 1, 1)
+              -- Row seven
+              and not pixel_region(pixel_col_int, pixel_row_int, 0, 1, 0, 1, 1)
+              and not pixel_region(pixel_col_int, pixel_row_int, 5, 6, 0, 1, 1))
+              else '0';
+
+powerup_colours <= -- Row one
+                   rgbint_to_rgb4(eggplant) when pixel_region(pixel_col_int, pixel_row_int, 2, 4, 0, 1, 1) else
+                   -- Row two
+                   rgbint_to_rgb4(eggplant) when pixel_region(pixel_col_int, pixel_row_int, 1, 1, 1, 2, 1) else
+                   rgbint_to_rgb4(silver) when pixel_region(pixel_col_int, pixel_row_int, 2, 4, 1, 2, 1) else
+                   rgbint_to_rgb4(eggplant) when pixel_region(pixel_col_int, pixel_row_int, 5, 5, 1, 2, 1) else
+                   -- Rows three to five
+                   rgbint_to_rgb4(eggplant) when pixel_region(pixel_col_int, pixel_row_int, 0, 0, 2, 5, 1) else
+                   rgbint_to_rgb4(silver) when pixel_region(pixel_col_int, pixel_row_int, 1, 5, 2, 5, 1) else
+                   rgbint_to_rgb4(eggplant) when pixel_region(pixel_col_int, pixel_row_int, 6, 6, 2, 5, 1) else
+                   -- Row six
+                   rgbint_to_rgb4(eggplant) when pixel_region(pixel_col_int, pixel_row_int, 1, 1, 5, 6, 1) else
+                   rgbint_to_rgb4(silver) when pixel_region(pixel_col_int, pixel_row_int, 2, 4, 5, 6, 1) else
+                   rgbint_to_rgb4(eggplant) when pixel_region(pixel_col_int, pixel_row_int, 5, 5, 5, 6, 1) else
+                   -- Row seven
+                   rgbint_to_rgb4(eggplant) when pixel_region(pixel_col_int, pixel_row_int, 2, 4, 6, 7, 1) else
+                   rgbint_to_rgb4(eggplant);
+
+-- Set output colour channel values for the current pixel.
+colour_info(0) <= powerup_colours(0) when powerup_on = '1' and (powerup_en(0) = '1' or powerup_en(1) = '1' or powerup_en(2) = '1') else
+                  "0000";
+colour_info(1) <= powerup_colours(1) when powerup_on = '1' and (powerup_en(0) = '1' or powerup_en(1) = '1' or powerup_en(2) = '1') else
+                  "0000";
+colour_info(2) <= powerup_colours(2) when powerup_on = '1' and (powerup_en(0) = '1' or powerup_en(1) = '1' or powerup_en(2) = '1') else
+                  "0000";
   
 end architecture behaviour;
 

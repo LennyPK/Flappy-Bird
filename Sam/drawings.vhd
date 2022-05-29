@@ -1042,8 +1042,9 @@ use work.pixel_functions.all;
 entity pipe is
   port (vert_sync, mode : in std_logic;
         pipe_no : in integer;
-		    px_motion : out integer;
         pr, pc : in std_logic_vector(9 downto 0);
+        powerup_on : out std_logic;
+  		    px_motion : out integer;
         colour_info : out rgb_array);
 end entity pipe;
 
@@ -1097,7 +1098,8 @@ hard_mode <= 0 when mode = '0' else
              
 k <= 70 - 15 * hard_mode;
 
-pixel_column <= std_logic_vector(signed(pc) + to_signed(286 * (pipe_no - 1), 10));
+pixel_column <= std_logic_vector(signed(pc) + to_signed(286 * (pipe_no - 1), 10)) when signed(pc) + signed(pipe_width) >= to_signed(0, 10) else
+                std_logic_vector(to_signed(0, 10));
 pixel_row <= pr;
 
 -- Row and column integer values for the pipe.
@@ -1300,7 +1302,7 @@ use work.rgb_functions.all;
 use work.pixel_functions.all;
 
 entity powerup is
-  port (powerup_on : in std_logic_vector;
+  port (powerup_on : in std_logic_vector(2 downto 0);
         pixel_row, pixel_column : in std_logic_vector(9 downto 0);
         colour_info : out rgb_array);
 end entity powerup;
@@ -1375,8 +1377,8 @@ pixel_row_int <= (to_integer(unsigned(pixel_row)) mod (fb_size*12) - to_integer(
 flappy_x_pos <= std_logic_vector(to_unsigned(313, 11));
 			
 -- Enable flappy bird drawing only within allowed regions.
-flappy_bird_on <= '1' when ((unsigned(pixel_column) <= unsigned(flappy_x_pos) + unsigned(flappy_bird_width))
-                      and (unsigned(pixel_column) >= unsigned(flappy_x_pos))
+flappy_bird_on <= '1' when ((signed(pixel_column) <= signed(flappy_x_pos) + signed(flappy_bird_width))
+                      and (signed(pixel_column) >= signed(flappy_x_pos))
                       and (unsigned(pixel_row) <= unsigned(flappy_y_pos) + unsigned(flappy_bird_height))
                       and (unsigned(pixel_row) >= unsigned(flappy_y_pos))
           

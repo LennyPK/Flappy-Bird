@@ -136,7 +136,10 @@ begin
   green <= tmp_green;
   --blue <= tmp_blue;
 
-  blue <= tmp_green when ( (bird_y_position >= std_logic_vector(to_unsigned(439, 10) - unsigned(bird_height_out))) or (bird_y_position < std_logic_vector(to_unsigned(0, 10)) )) else
+  blue <= tmp_green when ((bird_y_position >= std_logic_vector(to_unsigned(439, 10) - unsigned(bird_height_out))) or (bird_y_position < std_logic_vector(to_unsigned(0, 10)) )) else
+          tmp_red when ((pipe_x_out_pos_1 = to_signed(313, 11)) and ((bird_y_position < std_logic_vector(to_unsigned(((pipe_height_out_1 + 13) * scale_out), 10))) or (bird_y_position >  std_logic_vector(to_unsigned(((pipe_height_out_1 + pipe_gap_width_out + 13) * scale_out), 10))))) else
+          tmp_red when ((pipe_x_out_pos_2 = to_signed(313, 11)) and ((bird_y_position < std_logic_vector(to_unsigned(((pipe_height_out_2 + 13) * scale_out), 10))) or (bird_y_position >  std_logic_vector(to_unsigned(((pipe_height_out_2 + pipe_gap_width_out + 13) * scale_out), 10))))) else
+          tmp_red when ((pipe_x_out_pos_3 = to_signed(313, 11)) and ((bird_y_position < std_logic_vector(to_unsigned(((pipe_height_out_3 + 13) * scale_out), 10))) or (bird_y_position >  std_logic_vector(to_unsigned(((pipe_height_out_3 + pipe_gap_width_out + 13) * scale_out), 10))))) else
           tmp_blue;
 
   
@@ -144,10 +147,13 @@ begin
   --if ( (bird_y_position >= std_logic_vector(to_unsigned(439, 10) - unsigned(flappy_bird_height))) or (bird_y_position < 0) ) then
     --blue <= tmp_green;
   --end if;
-
-  if ((pipe 1 match) and ((bird above 1) or (bird below 1))) then
-    kill
-  end if;
+ --bottome ((pipe_height_out + pipe_gap_width_out + 13) scale_out)
+ --((pipe_height_out + 13) * scale_out)
+ 
+ 
+  --if ((pipe_x_out_pos_1 = std_logic_vector(to_signed(313, 10))) and ((bird_y_position < std_logic_vector(to_unsigned(((pipe_height_out + 13) * scale_out), 10))) or (bird_y_position >  std_logic_vector(to_unsigned(((pipe_height_out + pipe_gap_width_out + 13) scale_out), 10))))) then
+    --kill
+  --end if;
 
   -- if ((pipe 2 match) and ((bird above 2) or (bird below 2))) then
   --   kill

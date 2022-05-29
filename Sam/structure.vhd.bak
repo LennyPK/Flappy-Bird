@@ -4,6 +4,7 @@ use IEEE.numeric_std.all;
 
 library work;
 use work.rgb_functions.all;
+use work.pixel_functions.all;
 
 entity colour_signals is
   port (left_mouse, right_mouse, vert_sync : in std_logic;
@@ -66,13 +67,13 @@ begin
     port map (vert_sync => vert_sync, pipe_x_motion => px_motion, pixel_row => pixel_row, pixel_column => pixel_column, colour_info => g_array);
       
   P1: pipe
-    port map (vert_sync => vert_sync, mode => mode, pipe_no => 1, pixel_row => pixel_row, pixel_column => pixel_column, px_motion => px_motion, colour_info => p1_array);
+    port map (vert_sync => vert_sync, mode => mode, pipe_no => 1, pr => pixel_row, pc => pixel_column, px_motion => px_motion, colour_info => p1_array);
       
   P2: pipe
-    port map (vert_sync => vert_sync, mode => mode, pipe_no => 2, pixel_row => pixel_row, pixel_column => pixel_column, colour_info => p2_array);
+    port map (vert_sync => vert_sync, mode => mode, pipe_no => 2, pr => pixel_row, pc => pixel_column, colour_info => p2_array);
       
   P3: pipe
-    port map (vert_sync => vert_sync, mode => mode, pipe_no => 3, pixel_row => pixel_row, pixel_column => pixel_column, colour_info => p3_array);
+    port map (vert_sync => vert_sync, mode => mode, pipe_no => 3, pr => pixel_row, pc => pixel_column, colour_info => p3_array);
       
   FB: flappy_bird
     port map (left_mouse => left_mouse, right_mouse => right_mouse, vert_sync => vert_sync, pixel_row => pixel_row, pixel_column => pixel_column, colour_info => fb_array);

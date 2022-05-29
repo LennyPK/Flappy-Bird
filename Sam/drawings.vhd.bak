@@ -1097,12 +1097,12 @@ hard_mode <= 0 when mode = '0' else
              
 k <= 70 - 15 * hard_mode;
 
-pixel_column <= std_logic_vector(signed(pc) + to_signed(286 * (pipe_no - 1)));
+pixel_column <= std_logic_vector(signed(pc) + to_signed(286 * (pipe_no - 1), 10));
 pixel_row <= pr;
 
 -- Row and column integer values for the pipe.
-pixel_col_int <= (to_integer(unsigned(pixel_column)) mod (p_size*26) - to_integer(pipe_x_pos) mod (p_size*26)) mod (p_size*26);
-pixel_row_int <= (to_integer(unsigned(pixel_row)));
+pixel_col_int <= (to_integer(signed(pixel_column)) mod (p_size*26) - to_integer(pipe_x_pos) mod (p_size*26)) mod (p_size*26);
+pixel_row_int <= (to_integer(signed(pixel_row)));
 
 pipe_y_pos <= std_logic_vector(to_unsigned(0, 10));
 -- pipe_x_motion <= std_logic_vector(to_signed(-1, 11));
@@ -1113,8 +1113,8 @@ pipe_y_pos <= std_logic_vector(to_unsigned(0, 10));
   
   --pixel information goes here.
   
-pipe_on <= '1' when (unsigned(pixel_column) <= unsigned(pipe_x_pos + signed(pipe_width))
-          and (unsigned(pixel_column) >= unsigned(pipe_x_pos))
+pipe_on <= '1' when (signed(pixel_column) <= pipe_x_pos + signed(pipe_width)
+          and (signed(pixel_column) >= signed(pipe_x_pos))
           and (unsigned(pixel_row) <= unsigned(pipe_y_pos) + pipe_height)
           and (unsigned(pixel_row) >= unsigned(pipe_y_pos))
           
@@ -1269,7 +1269,7 @@ begin
 		-- Reset the pipe position once it goes off of the screen.
 		if (std_logic_vector(pipe_x_pos + signed(pipe_width)) <= std_logic_vector(to_signed(0, 11))) then
 			r <= random;
-			pipe_x_motion <= to_signed(639, 11);
+			pipe_x_pos <= to_signed(639, 11);
 		else
 			pipe_x_motion <= to_signed(-1 - hard_mode * (count / 1800), 11);
      

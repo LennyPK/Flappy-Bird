@@ -34,9 +34,10 @@ architecture structure of colour_signals is
     port (vert_sync : in std_logic;
           mode : in std_logic;
           pipe_no : in integer;
+			 start_pos : in unsigned(10 downto 0);
           pr, pc : in std_logic_vector(9 downto 0);
           powerup_en : out std_logic;
-			    px_motion : out integer;
+			 px_motion : out integer;
           colour_info : out rgb_array);
   end component pipe;
   
@@ -77,13 +78,13 @@ begin
     port map (vert_sync => vert_sync, pipe_x_motion => px_motion, pixel_row => pixel_row, pixel_column => pixel_column, colour_info => g_array);
       
   P3: pipe
-    port map (vert_sync => vert_sync, mode => mode, pipe_no => 3, pr => pixel_row, pc => pixel_column, powerup_en => powerup_en(2), px_motion => px_motion, colour_info => p3_array);
+    port map (vert_sync => vert_sync, mode => mode, pipe_no => 3, start_pos => "10010111011", pr => pixel_row, pc => pixel_column, powerup_en => powerup_en(2), px_motion => px_motion, colour_info => p3_array);
       
   P2: pipe
-    port map (vert_sync => vert_sync, mode => mode, pipe_no => 2, pr => pixel_row, pc => pixel_column, powerup_en => powerup_en(1), colour_info => p2_array);
+    port map (vert_sync => vert_sync, mode => mode, pipe_no => 2, start_pos => "01110011101", pr => pixel_row, pc => pixel_column, powerup_en => powerup_en(1), colour_info => p2_array);
       
   P1: pipe
-    port map (vert_sync => vert_sync, mode => mode, pipe_no => 1, pr => pixel_row, pc => pixel_column, powerup_en => powerup_en(0), colour_info => p1_array);
+    port map (vert_sync => vert_sync, mode => mode, pipe_no => 1, start_pos => "01001111111", pr => pixel_row, pc => pixel_column, powerup_en => powerup_en(0), colour_info => p1_array);
       
   PU: powerup
     port map (powerup_en => powerup_en, pixel_row => pixel_row, pixel_column => pixel_column, colour_info => pu_array);

@@ -1043,8 +1043,9 @@ entity pipe is
   port (vert_sync, mode : in std_logic;
         pipe_no : in integer;
         pr, pc : in std_logic_vector(9 downto 0);
+		  start_pos : in unsigned(10 downto 0);
         powerup_en : out std_logic;
-  		    px_motion : out integer;
+  		  px_motion : out integer;
         colour_info : out rgb_array);
 end entity pipe;
 
@@ -1066,13 +1067,13 @@ signal pipe_height : unsigned(9 downto 0);
 signal p_size : integer range 0 to 7;
 signal g_size : integer range 0 to 7;
 
-signal pipe_x_pos : signed(10 downto 0);
+signal pipe_x_pos : unsigned(10 downto 0) := start_pos;
 signal pipe_y_pos : std_logic_vector(9 downto 0);
 signal pipe_x_motion : signed(10 downto 0);
 
 signal pixel_column, pixel_row : std_logic_vector(9 downto 0);
 
-signal pixel_col_int : screen_width;
+signal pixel_col_int : integer;
 signal pixel_row_int : screen_height;
 signal rand : std_logic_vector(6 downto 0) := "0000001";
 
@@ -1098,12 +1099,12 @@ hard_mode <= 0 when mode = '0' else
              
 k <= 70 - 15 * hard_mode;
 
-pixel_column <= std_logic_vector(signed(pc) + to_signed(286 * (pipe_no - 1), 10));
+pixel_column <= std_logic_vector(unsigned(pc) + to_unsigned(286 * (pipe_no - 1), 10));
 pixel_row <= pr;
 
 -- Row and column integer values for the pipe.
-pixel_col_int <= (to_integer(signed(pixel_column)) mod (p_size*26) - to_integer(pipe_x_pos) mod (p_size*26)) mod (p_size*26);
-pixel_row_int <= (to_integer(signed(pixel_row)));
+pixel_col_int <= (to_integer(unsigned(pixel_column)) mod (p_size*26) - to_integer(pipe_x_pos) mod (p_size*26)) mod (p_size*26);
+pixel_row_int <= (to_integer(unsigned(pixel_row)));
 
 pipe_y_pos <= std_logic_vector(to_unsigned(0, 10));
 -- pipe_x_motion <= std_logic_vector(to_signed(-1, 11));
@@ -1114,8 +1115,8 @@ pipe_y_pos <= std_logic_vector(to_unsigned(0, 10));
   
   --pixel information goes here.
   
-pipe_on <= '1' when (unsigned(pixel_column) <= unsigned(pipe_x_pos + signed(pipe_width))
-          and (unsigned(pixel_column) >= unsigned(pipe_x_pos))
+pipe_on <= '1' when ((unsigned(pixel_column) <= pipe_x_pos + pipe_width)
+          and (unsigned(pixel_column) >= pipe_x_pos)
           and (unsigned(pixel_row) <= unsigned(pipe_y_pos) + pipe_height)
           and (unsigned(pixel_row) >= unsigned(pipe_y_pos))
           
@@ -1239,7 +1240,7 @@ move_pipe: process (vert_sync)
   begin
     output := to_integer(unsigned(rand));
     -- output := output mod max;
-    return output + 20;
+    return output;
   end function random;
 begin
 
@@ -1248,11 +1249,11 @@ begin
   		      
     -- Move along the LFSR but use a different operation depending on the pipe number.
     if pipe_no = 1 then
-      tmp := rand(4) XOR rand(3) XOR rand(2) XOR rand(0);
+      tmp := rand(4) xor rand(3) xor rand(2) xor rand(0);
     elsif pipe_no = 2 then
-      tmp := rand(5) XOR rand(3) XOR rand(1) XOR rand(0);
+      tmp := rand(5) xor rand(3) xor rand(1) xor rand(0);
     elsif pipe_no = 3 then
-      tmp := rand(4) XOR rand(2) XOR rand(1) XOR rand(0);
+      tmp := rand(4) xor rand(2) xor rand(1) xor rand(0);
     else
       tmp := '0';
     end if;
@@ -1275,15 +1276,14 @@ begin
     end if;
 	 
 		-- Reset the pipe position once it goes off of the screen.
-		if (std_logic_vector(pipe_x_pos + signed(pipe_width)) <= std_logic_vector(to_signed(0, 11))) then
-			r <= random;
+		if (std_logic_vector(pipe_x_pos + pipe_width) <= std_logic_vector(to_unsigned(0, 11))) then
+			r <= random mod 100;
 			pipe_x_motion <= to_signed(639, 11);
 		else
 			pipe_x_motion <= to_signed(-1 - hard_mode * (count / 1800), 11);
-     
 		end if;
-     -- Calculate the position of the pipe ready for the next frame.
-      pipe_x_pos <= pipe_x_pos + pipe_x_motion;
+			-- Calculate the position of the pipe ready for the next frame.
+			pipe_x_pos <= unsigned(signed(pipe_x_pos) + pipe_x_motion);
   end if;
 
 end process move_pipe;

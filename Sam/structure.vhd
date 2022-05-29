@@ -79,7 +79,7 @@ signal scale_out : integer range 0 to 7;
 signal pipe_gap_width_out : integer range 0 to 454;
 
 signal bird_y_position : std_logic_vector(9 downto 0);
-signal bird_height_out : std_logic_vector(9 downto 0)
+signal bird_height_out : std_logic_vector(9 downto 0);
 
 begin
   B: background_m

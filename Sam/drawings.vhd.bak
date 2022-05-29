@@ -76,6 +76,21 @@ signal background_x_motion : std_logic_vector(10 downto 0);
 signal pixel_col_int : screen_width;
 signal pixel_row_int : screen_height;
 
+-- testing ROM use
+-- signal address_c1, address_c2, address_r1, address_r2   : integer;
+-- signal data_c1, data_c2, data_r1, data_r2               : integer;
+
+-- component ROM is
+--     port (  address : in integer;
+--             data    : out integer;
+--          );
+-- end component ROM;
+
+-- rom_c1 : ROM port map (address => address_c1, data => data_c1);
+-- rom_c2 : ROM port map (address => address_c2, data => data_c2);
+-- rom_r1 : ROM port map (address => address_r1, data => data_r1);
+-- rom_r2 : ROM port map (address => address_r2, data => data_r2);
+
 begin 
   
 -- Width and height for the background details.
@@ -1027,9 +1042,9 @@ use work.pixel_functions.all;
 entity pipe is
   port (vert_sync, mode : in std_logic;
         pipe_no : in integer;
-		    seed : in std_logic_vector(6 downto 0);
-		    px_motion : out integer;
-        pixel_row, pixel_column : in std_logic_vector(9 downto 0);
+        pr, pc : in std_logic_vector(9 downto 0);
+        powerup_en : out std_logic;
+  		    px_motion : out integer;
         colour_info : out rgb_array);
 end entity pipe;
 
@@ -1055,9 +1070,11 @@ signal pipe_x_pos : signed(10 downto 0);
 signal pipe_y_pos : std_logic_vector(9 downto 0);
 signal pipe_x_motion : signed(10 downto 0);
 
+signal pixel_column, pixel_row : std_logic_vector(9 downto 0);
+
 signal pixel_col_int : screen_width;
 signal pixel_row_int : screen_height;
-signal rand : std_logic_vector(6 downto 0) := seed;
+signal rand : std_logic_vector(6 downto 0) := "0000001";
 
 -- Distance between the lower top part of the pipe and the upper bottom part of the pipe.
 signal k : integer range 0 to 454;
@@ -1081,9 +1098,12 @@ hard_mode <= 0 when mode = '0' else
              
 k <= 70 - 15 * hard_mode;
 
+pixel_column <= std_logic_vector(signed(pc) + to_signed(286 * (pipe_no - 1), 10));
+pixel_row <= pr;
+
 -- Row and column integer values for the pipe.
-pixel_col_int <= (to_integer(unsigned(pixel_column)) mod (p_size*26) - to_integer(pipe_x_pos) mod (p_size*26)) mod (p_size*26);
-pixel_row_int <= (to_integer(unsigned(pixel_row)));
+pixel_col_int <= (to_integer(signed(pixel_column)) mod (p_size*26) - to_integer(pipe_x_pos) mod (p_size*26)) mod (p_size*26);
+pixel_row_int <= (to_integer(signed(pixel_row)));
 
 pipe_y_pos <= std_logic_vector(to_unsigned(0, 10));
 -- pipe_x_motion <= std_logic_vector(to_signed(-1, 11));
@@ -1094,7 +1114,7 @@ pipe_y_pos <= std_logic_vector(to_unsigned(0, 10));
   
   --pixel information goes here.
   
-pipe_on <= '1' when (unsigned(pixel_column) <= unsigned(pipe_x_pos + signed(pipe_width) + 260 * (pipe_no - 1))
+pipe_on <= '1' when (unsigned(pixel_column) <= unsigned(pipe_x_pos + signed(pipe_width))
           and (unsigned(pixel_column) >= unsigned(pipe_x_pos))
           and (unsigned(pixel_row) <= unsigned(pipe_y_pos) + pipe_height)
           and (unsigned(pixel_row) >= unsigned(pipe_y_pos))
@@ -1225,27 +1245,43 @@ begin
 
   -- Update the pipe position once per vsync.
   if (rising_edge(vert_sync)) then
+  		      
+    -- Move along the LFSR but use a different operation depending on the pipe number.
+    if pipe_no = 1 then
+      tmp := rand(4) XOR rand(3) XOR rand(2) XOR rand(0);
+    elsif pipe_no = 2 then
+      tmp := rand(5) XOR rand(3) XOR rand(1) XOR rand(0);
+    elsif pipe_no = 3 then
+      tmp := rand(4) XOR rand(2) XOR rand(1) XOR rand(0);
+    else
+      tmp := '0';
+    end if;
+    
+    -- Enable powerups, but only sometimes (they should be kind of rare).
+    if to_integer(unsigned(rand)) mod 11 = 0 then
+      powerup_en <= '1';
+    else
+      powerup_en <= '0'; 
+    end if;     
       
-      -- Update the random number.
-    tmp := rand(4) XOR rand(3) XOR rand(2) XOR rand(0);
     rand <= tmp & rand(6 downto 1);
     
-    if hard_mode = '0' then
+    if hard_mode = 0 then
       count := 0;
-    elsif hard_mode = '1' then
+    elsif hard_mode = 1 and count <= 18000 then
       count := count + 1;
     else 
-      count := 0;
+      count := count;
     end if;
 	 
-    -- Reset the pipe position once it goes off of the screen.
-    if (std_logic_vector(pipe_x_pos + signed(pipe_width)) <= std_logic_vector(to_signed(0, 11))) then
-      r <= random;
-      pipe_x_motion <= to_signed(639, 11);
-    else
-      pipe_x_motion <= to_signed(-1 - hard_mode * (count / 1800), 11);
+		-- Reset the pipe position once it goes off of the screen.
+		if (std_logic_vector(pipe_x_pos + signed(pipe_width)) <= std_logic_vector(to_signed(0, 11))) then
+			r <= random;
+			pipe_x_motion <= to_signed(639, 11);
+		else
+			pipe_x_motion <= to_signed(-1 - hard_mode * (count / 1800), 11);
      
-    end if;
+		end if;
      -- Calculate the position of the pipe ready for the next frame.
       pipe_x_pos <= pipe_x_pos + pipe_x_motion;
   end if;
@@ -1254,6 +1290,99 @@ end process move_pipe;
 
 px_motion <= to_integer(pipe_x_motion);
 
+end architecture behaviour;
+
+------------------------------------------------------------
+-- Powerup object.
+------------------------------------------------------------
+
+-- Default libraries.
+library IEEE;
+use IEEE.std_logic_1164.all;
+use IEEE.numeric_std.all;
+
+-- Custom libraries.
+library work;
+use work.rgb_functions.all;
+use work.pixel_functions.all;
+
+entity powerup is
+  port (powerup_en : in std_logic_vector(2 downto 0);
+        pixel_row, pixel_column : in std_logic_vector(9 downto 0);
+        colour_info : out rgb_array);
+end entity powerup;
+
+architecture behaviour of powerup is
+  
+-- Colour assignments.
+constant eggplant : rgb := (83, 56, 70);
+constant silver : rgb := (192, 192, 192);
+
+-- Powerup image signals.
+signal powerup_on : std_logic;
+signal powerup_colours : rgb_array;
+signal powerup_width : std_logic_vector(10 downto 0);
+signal powerup_height : std_logic_vector(9 downto 0);
+
+signal powerup_x_pos : std_logic_vector(10 downto 0);
+signal powerup_y_pos : std_logic_vector(9 downto 0) := "0011110000";
+signal powerup_x_motion : std_logic_vector(10 downto 0);
+
+signal pixel_col_int : screen_width;
+signal pixel_row_int : screen_height;
+
+begin
+  
+-- Row and column integer values for the flappy bird.
+pixel_col_int <= (to_integer(unsigned(pixel_column)) mod (7) - to_integer(unsigned(powerup_x_pos)) mod (7)) mod (7);
+pixel_row_int <= (to_integer(unsigned(pixel_row)) mod (7) - to_integer(unsigned(powerup_y_pos)) mod (7)) mod (7);
+
+powerup_on <= '1' when ((signed(pixel_column) <= signed(powerup_x_pos) + signed(powerup_width))
+              and (signed(pixel_column) >= signed(powerup_x_pos))
+              and (unsigned(pixel_row) <= unsigned(powerup_y_pos) + unsigned(powerup_height))
+              and (unsigned(pixel_row) >= unsigned(powerup_y_pos))
+          
+              -- Banned regions within rectangular area.
+              -- Row one
+              and not pixel_region(pixel_col_int, pixel_row_int, 0, 1, 0, 1, 1)
+              and not pixel_region(pixel_col_int, pixel_row_int, 5, 6, 0, 1, 1)
+              -- Row two
+              and not pixel_region(pixel_col_int, pixel_row_int, 0, 0, 0, 1, 1)
+              and not pixel_region(pixel_col_int, pixel_row_int, 6, 6, 0, 1, 1)
+              -- Row six
+              and not pixel_region(pixel_col_int, pixel_row_int, 0, 0, 0, 1, 1)
+              and not pixel_region(pixel_col_int, pixel_row_int, 6, 6, 0, 1, 1)
+              -- Row seven
+              and not pixel_region(pixel_col_int, pixel_row_int, 0, 1, 0, 1, 1)
+              and not pixel_region(pixel_col_int, pixel_row_int, 5, 6, 0, 1, 1))
+              else '0';
+
+powerup_colours <= -- Row one
+                   rgbint_to_rgb4(eggplant) when pixel_region(pixel_col_int, pixel_row_int, 2, 4, 0, 1, 1) else
+                   -- Row two
+                   rgbint_to_rgb4(eggplant) when pixel_region(pixel_col_int, pixel_row_int, 1, 1, 1, 2, 1) else
+                   rgbint_to_rgb4(silver) when pixel_region(pixel_col_int, pixel_row_int, 2, 4, 1, 2, 1) else
+                   rgbint_to_rgb4(eggplant) when pixel_region(pixel_col_int, pixel_row_int, 5, 5, 1, 2, 1) else
+                   -- Rows three to five
+                   rgbint_to_rgb4(eggplant) when pixel_region(pixel_col_int, pixel_row_int, 0, 0, 2, 5, 1) else
+                   rgbint_to_rgb4(silver) when pixel_region(pixel_col_int, pixel_row_int, 1, 5, 2, 5, 1) else
+                   rgbint_to_rgb4(eggplant) when pixel_region(pixel_col_int, pixel_row_int, 6, 6, 2, 5, 1) else
+                   -- Row six
+                   rgbint_to_rgb4(eggplant) when pixel_region(pixel_col_int, pixel_row_int, 1, 1, 5, 6, 1) else
+                   rgbint_to_rgb4(silver) when pixel_region(pixel_col_int, pixel_row_int, 2, 4, 5, 6, 1) else
+                   rgbint_to_rgb4(eggplant) when pixel_region(pixel_col_int, pixel_row_int, 5, 5, 5, 6, 1) else
+                   -- Row seven
+                   rgbint_to_rgb4(eggplant) when pixel_region(pixel_col_int, pixel_row_int, 2, 4, 6, 7, 1) else
+                   rgbint_to_rgb4(eggplant);
+
+-- Set output colour channel values for the current pixel.
+colour_info(0) <= powerup_colours(0) when powerup_on = '1' and (powerup_en(0) = '1' or powerup_en(1) = '1' or powerup_en(2) = '1') else
+                  "0000";
+colour_info(1) <= powerup_colours(1) when powerup_on = '1' and (powerup_en(0) or powerup_en(1) or powerup_en(2) = '1') else
+                  "0000";
+colour_info(2) <= powerup_colours(2) when powerup_on = '1' and (powerup_en(0) or powerup_en(1) or powerup_en(2) = '1') else
+                  "0000";
+  
 end architecture behaviour;
 
 ------------------------------------------------------------
@@ -1321,8 +1450,8 @@ pixel_row_int <= (to_integer(unsigned(pixel_row)) mod (fb_size*12) - to_integer(
 flappy_x_pos <= std_logic_vector(to_unsigned(313, 11));
 			
 -- Enable flappy bird drawing only within allowed regions.
-flappy_bird_on <= '1' when ((unsigned(pixel_column) <= unsigned(flappy_x_pos) + unsigned(flappy_bird_width))
-                      and (unsigned(pixel_column) >= unsigned(flappy_x_pos))
+flappy_bird_on <= '1' when ((signed(pixel_column) <= signed(flappy_x_pos) + signed(flappy_bird_width))
+                      and (signed(pixel_column) >= signed(flappy_x_pos))
                       and (unsigned(pixel_row) <= unsigned(flappy_y_pos) + unsigned(flappy_bird_height))
                       and (unsigned(pixel_row) >= unsigned(flappy_y_pos))
           

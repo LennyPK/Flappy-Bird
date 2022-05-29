@@ -55,6 +55,7 @@ architecture structure of colour_signals is
     port (left_mouse, right_mouse, vert_sync : in std_logic;
           pixel_row, pixel_column : in std_logic_vector(9 downto 0);
           colour_info : out rgb_array;
+          bird_height_out : out std_logic_vector(9 downto 0);
         bird_y_position : out std_logic_vector(9 downto 0));
   end component flappy_bird;
   
@@ -78,6 +79,7 @@ signal scale_out : integer range 0 to 7;
 signal pipe_gap_width_out : integer range 0 to 454;
 
 signal bird_y_position : std_logic_vector(9 downto 0);
+signal bird_height_out : std_logic_vector(9 downto 0)
 
 begin
   B: background_m
@@ -102,7 +104,7 @@ begin
     port map (powerup_en => powerup_en, pixel_row => pixel_row, pixel_column => pixel_column, colour_info => pu_array);
       
   FB: flappy_bird
-    port map (left_mouse => left_mouse, right_mouse => right_mouse, vert_sync => vert_sync, pixel_row => pixel_row, pixel_column => pixel_column, colour_info => fb_array, bird_y_position => bird_y_position);
+    port map (left_mouse => left_mouse, right_mouse => right_mouse, vert_sync => vert_sync, pixel_row => pixel_row, pixel_column => pixel_column, colour_info => fb_array, bird_height_out => bird_height_out, bird_y_position => bird_y_position);
             
   -- Assign pixels by the order in which they should appear (higher is "closer" to the user).
   tmp_red <= fb_array(0) when fb_array(0) /= "0000" else
@@ -134,21 +136,21 @@ begin
   green <= tmp_green;
   blue <= tmp_blue;
 
-  if((bird touch gorund) or bird touch top) then
-    kill
-  end if;
+  -- if((bird_y_position > std_logic_vector(to_unsigned(439, 10) - unsigned(flappy_bird_height)) ) or (bird_y_position < 0)) then
+  --   kill
+  -- end if;
 
-  if ((pipe 1 match) and ((bird above 1) or (bird below 1))) then
-    kill
-  end if;
+  -- if ((pipe 1 match) and ((bird above 1) or (bird below 1))) then
+  --   kill
+  -- end if;
 
-  if ((pipe 2 match) and ((bird above 2) or (bird below 2))) then
-    kill
-  end if;
+  -- if ((pipe 2 match) and ((bird above 2) or (bird below 2))) then
+  --   kill
+  -- end if;
 
-  if ((pipe 3 match) and ((bird above 3) or (bird below 3))) then
-    kill
-  end if;
+  -- if ((pipe 3 match) and ((bird above 3) or (bird below 3))) then
+  --   kill
+  -- end if;
       
       
 end architecture structure;

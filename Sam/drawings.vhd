@@ -1413,6 +1413,7 @@ entity flappy_bird is
   port (left_mouse, right_mouse, vert_sync : in std_logic;
         pixel_row, pixel_column : in std_logic_vector(9 downto 0);
         colour_info : out rgb_array;
+        bird_height_out : out std_logic_vector(9 downto 0);
         bird_y_position : out std_logic_vector(9 downto 0));
 end entity flappy_bird;
 
@@ -1451,6 +1452,7 @@ begin
 fb_size <= 2;
 flappy_bird_width <= std_logic_vector(to_unsigned(fb_size*17 - 1, 11));
 flappy_bird_height <= std_logic_vector(to_unsigned(fb_size*12 - 1, 10));
+bird_height_out <= flappy_bird_height;
 
 -- Row and column integer values for the flappy bird.
 pixel_col_int <= (to_integer(unsigned(pixel_column)) mod (fb_size*17) - to_integer(unsigned(flappy_x_pos)) mod (fb_size*17)) mod (fb_size*17);

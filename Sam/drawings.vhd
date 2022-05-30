@@ -1072,7 +1072,7 @@ signal pipe_height : unsigned(9 downto 0);
 signal p_size : integer range 0 to 7;
 signal g_size : integer range 0 to 7;
 
-signal pipe_x_pos : signed(10 downto 0);
+signal pipe_x_pos : unsigned(10 downto 0);
 signal pipe_y_pos : std_logic_vector(9 downto 0);
 signal pipe_x_motion : signed(10 downto 0);
 
@@ -1114,12 +1114,12 @@ hard_mode <= 0 when state = "10" else
 k <= 70 - 15 * hard_mode;
 pipe_gap_width_out <= k;
 
-pixel_column <= std_logic_vector(signed(pc) + to_signed(286 * (pipe_no - 1), 10));
+pixel_column <= pc;--std_logic_vector(unsigned(pc) + to_signed(286 * (pipe_no - 1), 10));
 pixel_row <= pr;
 
 -- Row and column integer values for the pipe.
-pixel_col_int <= (to_integer(signed(pixel_column)) mod (p_size*26) - to_integer(pipe_x_pos) mod (p_size*26)) mod (p_size*26);
-pixel_row_int <= (to_integer(signed(pixel_row)));
+pixel_col_int <= (to_integer(unsigned(pixel_column)) mod (p_size*26) - to_integer(pipe_x_pos) mod (p_size*26)) mod (p_size*26);
+pixel_row_int <= (to_integer(unsigned(pixel_row)));
 
 pipe_y_pos <= std_logic_vector(to_unsigned(0, 10));
 -- pipe_x_motion <= std_logic_vector(to_signed(-1, 11));
@@ -1130,8 +1130,8 @@ pipe_y_pos <= std_logic_vector(to_unsigned(0, 10));
   
   --pixel information goes here.
   
-pipe_on <= '1' when (unsigned(pixel_column) <= unsigned(pipe_x_pos + signed(pipe_width))
-          and (unsigned(pixel_column) >= unsigned(pipe_x_pos))
+  pipe_on <= '1' when ((unsigned(pixel_column) <= pipe_x_pos + pipe_width)
+  and (unsigned(pixel_column) >= pipe_x_pos)
           and (unsigned(pixel_row) <= unsigned(pipe_y_pos) + pipe_height)
           and (unsigned(pixel_row) >= unsigned(pipe_y_pos))
           
@@ -1291,7 +1291,7 @@ begin
     end if;
 	 
 		-- Reset the pipe position once it goes off of the screen.
-		if (std_logic_vector(pipe_x_pos + signed(pipe_width)) <= std_logic_vector(to_signed(0, 11))) then
+		if (std_logic_vector(signed(pipe_x_pos) + signed(pipe_width)) <= std_logic_vector(to_signed(0, 11))) then
 			r <= random;
       pipe_height_out <= r;
 			pipe_x_motion <= to_signed(639, 11);
@@ -1300,8 +1300,8 @@ begin
      
 		end if;
      -- Calculate the position of the pipe ready for the next frame.
-      pipe_x_pos <= pipe_x_pos + pipe_x_motion;
-      pipe_x_out_pos <= pipe_x_pos;
+      pipe_x_pos <= unsigned(signed(pipe_x_pos) + pipe_x_motion);
+      pipe_x_out_pos <= signed(pipe_x_pos);
   end if;
 
 end process move_pipe;
@@ -1421,9 +1421,7 @@ use work.pixel_functions.all;
 entity flappy_bird is
   port (left_mouse, right_mouse, vert_sync : in std_logic;
         pixel_row, pixel_column : in std_logic_vector(9 downto 0);
-        state_out : out std_logic_vector(1 downto 0);
         colour_info : out rgb_array;
-
         bird_height_out : out std_logic_vector(9 downto 0);
         bird_y_position : out std_logic_vector(9 downto 0));
 end entity flappy_bird;
@@ -1649,12 +1647,10 @@ begin
         if (flappy_y_pos >= std_logic_vector(to_unsigned(439, 10) - unsigned(flappy_bird_height))) then
           bird_velocity := 1;
           flappy_y_pos <= std_logic_vector(unsigned(flappy_y_pos) - bird_velocity * frame_rate_time);
-          state_out <= "11";
           --flappy_y_pos <= std_logic_vector(to_unsigned(479, 10));
         elsif (flappy_y_pos <= std_logic_vector(to_unsigned(0, 10))) then
           bird_velocity := -bird_velocity;
           flappy_y_pos <= std_logic_vector(unsigned(flappy_y_pos) - bird_velocity * frame_rate_time);
-          state_out <= "11";
           --flappy_y_pos <= std_logic_vector(to_unsigned(0, 10));
         -- else 
         --     bird_velocity := 0;

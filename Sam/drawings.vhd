@@ -1421,6 +1421,7 @@ use work.pixel_functions.all;
 entity flappy_bird is
   port (left_mouse, right_mouse, vert_sync : in std_logic;
         pixel_row, pixel_column : in std_logic_vector(9 downto 0);
+        death, reset : in std_logic;
         colour_info : out rgb_array;
         bird_height_out : out std_logic_vector(9 downto 0);
         bird_y_position : out std_logic_vector(9 downto 0));
@@ -1620,6 +1621,8 @@ begin
             holding <= '0';
         end if;
 
+        
+
         -- if clicking and not holding
         if (left_flag = '1' and holding = '0') then
             -- set holding flag
@@ -1645,12 +1648,14 @@ begin
 
         -- if the bird is above or below the screen, bring it in bounds, and halt all velocity
         if (flappy_y_pos >= std_logic_vector(to_unsigned(439, 10) - unsigned(flappy_bird_height))) then
-          bird_velocity := 1;
-          flappy_y_pos <= std_logic_vector(unsigned(flappy_y_pos) - bird_velocity * frame_rate_time);
+          --bird_velocity := 1;
+          --flappy_y_pos <= std_logic_vector(unsigned(flappy_y_pos) - bird_velocity * frame_rate_time);
+          flappy_y_pos <= std_logic_vector(to_signed(-1, 10));
           --flappy_y_pos <= std_logic_vector(to_unsigned(479, 10));
         elsif (flappy_y_pos <= std_logic_vector(to_unsigned(0, 10))) then
-          bird_velocity := -bird_velocity;
-          flappy_y_pos <= std_logic_vector(unsigned(flappy_y_pos) - bird_velocity * frame_rate_time);
+          --bird_velocity := -bird_velocity;
+          --flappy_y_pos <= std_logic_vector(unsigned(flappy_y_pos) - bird_velocity * frame_rate_time);
+          flappy_y_pos <= std_logic_vector(to_signed(-1, 10));
           --flappy_y_pos <= std_logic_vector(to_unsigned(0, 10));
         -- else 
         --     bird_velocity := 0;

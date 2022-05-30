@@ -1664,9 +1664,9 @@ applicable agreement for further details.
 	)
 )
 (symbol
-	(rect 480 344 696 520)
+	(rect 480 344 696 552)
 	(text "colour_signals" (rect 5 0 74 12)(font "Arial" ))
-	(text "inst2" (rect 8 160 31 172)(font "Arial" ))
+	(text "inst15" (rect 8 192 37 204)(font "Arial" ))
 	(port
 		(pt 0 32)
 		(input)
@@ -1712,16 +1712,23 @@ applicable agreement for further details.
 	(port
 		(pt 0 128)
 		(input)
-		(text "pixel_row[9..0]" (rect 0 0 70 12)(font "Arial" ))
-		(text "pixel_row[9..0]" (rect 21 123 91 135)(font "Arial" ))
-		(line (pt 0 128)(pt 16 128)(line_width 3))
+		(text "push_reset" (rect 0 0 54 12)(font "Arial" ))
+		(text "push_reset" (rect 21 123 75 135)(font "Arial" ))
+		(line (pt 0 128)(pt 16 128))
 	)
 	(port
 		(pt 0 144)
 		(input)
-		(text "pixel_column[9..0]" (rect 0 0 89 12)(font "Arial" ))
-		(text "pixel_column[9..0]" (rect 21 139 110 151)(font "Arial" ))
+		(text "pixel_row[9..0]" (rect 0 0 70 12)(font "Arial" ))
+		(text "pixel_row[9..0]" (rect 21 139 91 151)(font "Arial" ))
 		(line (pt 0 144)(pt 16 144)(line_width 3))
+	)
+	(port
+		(pt 0 160)
+		(input)
+		(text "pixel_column[9..0]" (rect 0 0 89 12)(font "Arial" ))
+		(text "pixel_column[9..0]" (rect 21 155 110 167)(font "Arial" ))
+		(line (pt 0 160)(pt 16 160)(line_width 3))
 	)
 	(port
 		(pt 216 32)
@@ -1745,7 +1752,7 @@ applicable agreement for further details.
 		(line (pt 216 64)(pt 200 64)(line_width 3))
 	)
 	(drawing
-		(rectangle (rect 16 16 200 160))
+		(rectangle (rect 16 16 200 192))
 	)
 )
 (connector
@@ -2090,10 +2097,6 @@ applicable agreement for further details.
 	(pt 688 1128)
 )
 (connector
-	(pt 688 1112)
-	(pt 688 1128)
-)
-(connector
 	(pt 704 1144)
 	(pt 688 1144)
 )
@@ -2139,11 +2142,6 @@ applicable agreement for further details.
 	(bus)
 )
 (connector
-	(pt 448 552)
-	(pt 1216 552)
-	(bus)
-)
-(connector
 	(pt 1216 440)
 	(pt 1216 552)
 	(bus)
@@ -2152,10 +2150,6 @@ applicable agreement for further details.
 	(pt 1184 440)
 	(pt 1216 440)
 	(bus)
-)
-(connector
-	(pt 432 568)
-	(pt 1232 568)
 )
 (connector
 	(pt 1232 424)
@@ -2170,23 +2164,13 @@ applicable agreement for further details.
 	(pt 1248 424)
 )
 (connector
-	(pt 464 536)
-	(pt 464 488)
-	(bus)
-)
-(connector
-	(pt 448 552)
-	(pt 448 472)
-	(bus)
-)
-(connector
-	(pt 480 472)
-	(pt 448 472)
-	(bus)
-)
-(connector
-	(pt 464 488)
 	(pt 480 488)
+	(pt 448 488)
+	(bus)
+)
+(connector
+	(pt 464 504)
+	(pt 480 504)
 	(bus)
 )
 (connector
@@ -2230,6 +2214,43 @@ applicable agreement for further details.
 	(pt 480 376)
 	(pt 448 376)
 )
+(connector
+	(pt 464 504)
+	(pt 464 536)
+	(bus)
+)
+(connector
+	(pt 448 488)
+	(pt 448 552)
+	(bus)
+)
+(connector
+	(pt 448 552)
+	(pt 1216 552)
+	(bus)
+)
+(connector
+	(pt 432 568)
+	(pt 1232 568)
+)
+(connector
+	(text "pb0" (rect 456 456 473 468)(font "Arial" ))
+	(pt 480 472)
+	(pt 448 472)
+)
+(connector
+	(pt 688 1096)
+	(pt 688 1112)
+)
+(connector
+	(pt 688 1112)
+	(pt 688 1128)
+)
+(connector
+	(text "pb0" (rect 718 1080 735 1092)(font "Arial" ))
+	(pt 688 1096)
+	(pt 752 1096)
+)
 (junction (pt 1232 424))
 (junction (pt 688 1368))
 (junction (pt 688 1384))
@@ -2248,6 +2269,7 @@ applicable agreement for further details.
 (junction (pt 688 1144))
 (junction (pt 624 872))
 (junction (pt 688 1448))
+(junction (pt 688 1112))
 (text "MOUSE FUNCTIONALITY" (rect 440 632 580 646)(font "Arial" (font_size 8)))
 (text "DIP SWITCH FUNCTIONALITY" (rect 424 832 589 846)(font "Arial" (font_size 8)))
 (text "PUSH BUTTON FUNCTIONALITY" (rect 416 1072 597 1086)(font "Arial" (font_size 8)))

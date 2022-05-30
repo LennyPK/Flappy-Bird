@@ -114,7 +114,7 @@ begin
     mode_out : process (restart)
     begin
         if (restart = '1') then
-            state_out <= "11";
+            state_out <= "00";
         else
             state_out <= "11";
         end if;

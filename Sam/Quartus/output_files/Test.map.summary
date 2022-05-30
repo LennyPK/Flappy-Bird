@@ -1,12 +1,12 @@
-Analysis & Synthesis Status : Successful - Mon May 30 20:56:19 2022
+Analysis & Synthesis Status : Successful - Mon May 30 23:49:13 2022
 Quartus II 64-Bit Version : 13.0.1 Build 232 06/12/2013 SP 1 SJ Web Edition
 Revision Name : Test
 Top-level Entity Name : Test
 Family : Cyclone III
-Total logic elements : 5,557
-    Total combinational functions : 5,483
-    Dedicated logic registers : 340
-Total registers : 340
+Total logic elements : 6,167
+    Total combinational functions : 6,094
+    Dedicated logic registers : 376
+Total registers : 376
 Total pins : 68
 Total virtual pins : 0
 Total memory bits : 6,144

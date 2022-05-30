@@ -103,8 +103,8 @@ background_width <= std_logic_vector(to_unsigned(640 - 1, 11));
 background_height <= std_logic_vector(to_unsigned(b_size*46 - 1, 10));
 
 -- Row and column integer values for the background details.
-pixel_col_int <= (to_integer(unsigned(pixel_column)) - to_integer(unsigned(background_x_pos))) mod (b_size*69);
-pixel_row_int <= (to_integer(unsigned(pixel_row)) - to_integer(unsigned(background_y_pos))) mod (b_size*46);
+pixel_col_int <= (to_integer(unsigned(pixel_column)) mod (b_size*69) - to_integer(unsigned(background_x_pos)) mod (b_size*69)) mod (b_size*69);
+pixel_row_int <= (to_integer(unsigned(pixel_row)) mod (b_size*46) - to_integer(unsigned(background_y_pos)) mod (b_size*46)) mod (b_size*46);
 
 -- y position for the background details.
 background_x_motion <= std_logic_vector(to_signed(-1, 11));
@@ -982,8 +982,8 @@ ground_width <= std_logic_vector(to_unsigned(640 - 1, 11));
 ground_height <= std_logic_vector(to_unsigned(g_size*20 - 1, 10));
 
 -- Row and column integer values for the ground.
-pixel_col_int <= (to_integer(unsigned(pixel_column)) - to_integer(unsigned(ground_x_pos))) mod (14);
-pixel_row_int <= (to_integer(unsigned(pixel_row)) - to_integer(unsigned(ground_y_pos))) mod (40);
+pixel_col_int <= (to_integer(unsigned(pixel_column)) mod (14) - to_integer(unsigned(ground_x_pos)) mod (14)) mod (14);
+pixel_row_int <= (to_integer(unsigned(pixel_row)) mod (40) - to_integer(unsigned(ground_y_pos)) mod (40)) mod (40);
 
 -- y position for the ground and setting x motion.
 ground_y_pos <= std_logic_vector(to_unsigned(480 - g_size*20, 10));
@@ -1242,21 +1242,21 @@ p2_colours <=   -- Upper bottom part of pipe.
                 -- Row thirteen
                 rgbint_to_rgb4(eggplant) when pixel_region(pixel_col_int, pixel_row_int, 0, 25, r + k + 25, r + k + 26, p_size) else
                 -- Lower bottom part of pipe.
-                rgbint_to_rgb4(eggplant) when pixel_region(pixel_col_int, pixel_row_int, 1, 1, r + k + 26, 480 / p_size, p_size) else
-                rgbint_to_rgb4(light_green) when pixel_region(pixel_col_int, pixel_row_int, 2, 2, r + k + 26, 480 / p_size, p_size) else
-                rgbint_to_rgb4(yellow_green) when pixel_region(pixel_col_int, pixel_row_int, 3, 3, r + k + 26, 480 / p_size, p_size) else
-                rgbint_to_rgb4(light_green) when pixel_region(pixel_col_int, pixel_row_int, 4, 6, r + k + 26, 480 / p_size, p_size) else
-                rgbint_to_rgb4(green) when pixel_region(pixel_col_int, pixel_row_int, 7, 7, r + k + 26, 480 / p_size, p_size) else
-                rgbint_to_rgb4(light_green) when pixel_region(pixel_col_int, pixel_row_int, 8, 8, r + k + 26, 480 / p_size, p_size) else
-                rgbint_to_rgb4(green) when pixel_region(pixel_col_int, pixel_row_int, 9, 19, r + k + 26, 480 / p_size, p_size) else
-                rgbint_to_rgb4(dark_green) when pixel_region(pixel_col_int, pixel_row_int, 20, 20, r + k + 26, 480 / p_size, p_size) else
-                rgbint_to_rgb4(green) when pixel_region(pixel_col_int, pixel_row_int, 21, 21, r + k + 26, 480 / p_size, p_size) else
-                rgbint_to_rgb4(dark_green) when pixel_region(pixel_col_int, pixel_row_int, 22, 23, r + k + 26, 480 / p_size, p_size) else
-                rgbint_to_rgb4(eggplant) when pixel_region(pixel_col_int, pixel_row_int, 24, 24, r + k + 26, 480 / p_size, p_size) else
+                rgbint_to_rgb4(eggplant) when pixel_region(pixel_col_int, pixel_row_int, 1, 1, r + k + 26, 240, p_size) else
+                rgbint_to_rgb4(light_green) when pixel_region(pixel_col_int, pixel_row_int, 2, 2, r + k + 26, 240, p_size) else
+                rgbint_to_rgb4(yellow_green) when pixel_region(pixel_col_int, pixel_row_int, 3, 3, r + k + 26, 240, p_size) else
+                rgbint_to_rgb4(light_green) when pixel_region(pixel_col_int, pixel_row_int, 4, 6, r + k + 26, 240, p_size) else
+                rgbint_to_rgb4(green) when pixel_region(pixel_col_int, pixel_row_int, 7, 7, r + k + 26, 240, p_size) else
+                rgbint_to_rgb4(light_green) when pixel_region(pixel_col_int, pixel_row_int, 8, 8, r + k + 26, 240, p_size) else
+                rgbint_to_rgb4(green) when pixel_region(pixel_col_int, pixel_row_int, 9, 19, r + k + 26, 240, p_size) else
+                rgbint_to_rgb4(dark_green) when pixel_region(pixel_col_int, pixel_row_int, 20, 20, r + k + 26, 240, p_size) else
+                rgbint_to_rgb4(green) when pixel_region(pixel_col_int, pixel_row_int, 21, 21, r + k + 26, 240, p_size) else
+                rgbint_to_rgb4(dark_green) when pixel_region(pixel_col_int, pixel_row_int, 22, 23, r + k + 26, 240, p_size) else
+                rgbint_to_rgb4(eggplant) when pixel_region(pixel_col_int, pixel_row_int, 24, 24, r + k + 26, 240, p_size) else
                 rgbint_to_rgb4(eggplant);
 					 
 pipe_colours <= p1_colours when pixel_region(pixel_col_int, pixel_row_int, 0, 25, 0, r + 13, p_size) else
-					 p2_colours when pixel_region(pixel_col_int, pixel_row_int, 0, 25, r + k + 13, 480 / p_size, p_size) else
+					 p2_colours when pixel_region(pixel_col_int, pixel_row_int, 0, 25, r + k + 13, 240, p_size) else
 					 rgbint_to_rgb4(eggplant);										  
 
 -- Set output colour channel values for the current pixel.

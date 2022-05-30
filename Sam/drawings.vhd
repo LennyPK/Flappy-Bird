@@ -64,6 +64,9 @@ constant light_green : rgb := (219, 241, 202);
 -- Background details image signals.
 signal background_on : std_logic;
 signal background_colours : rgb_array;
+
+signal bg1_colours, bg2_colours, bg3_colours, bg4_colours : rgb_array;
+
 signal background_width : std_logic_vector(10 downto 0);
 signal background_height : std_logic_vector(9 downto 0);
 signal b_size : integer range 0 to 7;
@@ -100,8 +103,8 @@ background_width <= std_logic_vector(to_unsigned(640 - 1, 11));
 background_height <= std_logic_vector(to_unsigned(b_size*46 - 1, 10));
 
 -- Row and column integer values for the background details.
-pixel_col_int <= (to_integer(unsigned(pixel_column)) mod (b_size*69) - to_integer(unsigned(background_x_pos)) mod (b_size*69)) mod (b_size*69);
-pixel_row_int <= (to_integer(unsigned(pixel_row)) mod (b_size*46) - to_integer(unsigned(background_y_pos)) mod (b_size*46)) mod (b_size*46);
+pixel_col_int <= (to_integer(unsigned(pixel_column)) - to_integer(unsigned(background_x_pos))) mod (b_size*69);
+pixel_row_int <= (to_integer(unsigned(pixel_row)) - to_integer(unsigned(background_y_pos))) mod (b_size*46);
 
 -- y position for the background details.
 background_x_motion <= std_logic_vector(to_signed(-1, 11));
@@ -145,7 +148,7 @@ background_on <= '1' when ((unsigned(pixel_row) <= unsigned(background_y_pos) + 
           else '0';
             
             --------------------------
-background_colours <= -- Row one
+bg1_colours <=        -- Row one
                       rgbint_to_rgb4(cloud_white) when pixel_region(pixel_col_int, pixel_row_int, 54, 59, 0, 1, b_size) else
                       -- Row two
                       rgbint_to_rgb4(cloud_white) when pixel_region(pixel_col_int, pixel_row_int, 52, 61, 1, 2, b_size) else
@@ -358,7 +361,9 @@ background_colours <= -- Row one
                       rgbint_to_rgb4(light_blue) when pixel_region(pixel_col_int, pixel_row_int, 62, 62, 22, 23, b_size) else
                       rgbint_to_rgb4(light_green) when pixel_region(pixel_col_int, pixel_row_int, 63, 67, 22, 23, b_size) else
                       rgbint_to_rgb4(blue) when pixel_region(pixel_col_int, pixel_row_int, 68, 68, 22, 23, b_size) else
-                      -- Row twenty-four
+                      rgbint_to_rgb4(cloud_white);
+                      
+bg2_colours <=        -- Row twenty-four
                       rgbint_to_rgb4(grey) when pixel_region(pixel_col_int, pixel_row_int, 0, 1, 23, 24, b_size) else
                       rgbint_to_rgb4(cloud_white) when pixel_region(pixel_col_int, pixel_row_int, 2, 2, 23, 24, b_size) else
                       rgbint_to_rgb4(grey) when pixel_region(pixel_col_int, pixel_row_int, 3, 6, 23, 24, b_size) else
@@ -585,7 +590,9 @@ background_colours <= -- Row one
                       rgbint_to_rgb4(light_blue) when pixel_region(pixel_col_int, pixel_row_int, 66, 66, 27, 28, b_size) else
                       rgbint_to_rgb4(light_green) when pixel_region(pixel_col_int, pixel_row_int, 67, 67, 27, 28, b_size) else
                       rgbint_to_rgb4(blue) when pixel_region(pixel_col_int, pixel_row_int, 68, 68, 27, 28, b_size) else
-                      -- Row twenty-nine
+                      rgbint_to_rgb4(cloud_white);
+                      
+bg3_colours <=        -- Row twenty-nine
                       rgbint_to_rgb4(grey) when pixel_region(pixel_col_int, pixel_row_int, 0, 6, 28, 29, b_size) else
                       rgbint_to_rgb4(blue) when pixel_region(pixel_col_int, pixel_row_int, 7, 7, 28, 29, b_size) else
                       rgbint_to_rgb4(light_blue) when pixel_region(pixel_col_int, pixel_row_int, 8, 8, 28, 29, b_size) else
@@ -794,7 +801,9 @@ background_colours <= -- Row one
                       rgbint_to_rgb4(green) when pixel_region(pixel_col_int, pixel_row_int, 60, 62, 33, 34, b_size) else
                       rgbint_to_rgb4(dark_green) when pixel_region(pixel_col_int, pixel_row_int, 63, 66, 33, 34, b_size) else
                       rgbint_to_rgb4(green) when pixel_region(pixel_col_int, pixel_row_int, 67, 68, 33, 34, b_size) else
-                      -- Row thirty-five
+                      rgbint_to_rgb4(cloud_white);
+                      
+bg4_colours <=        -- Row thirty-five
                       rgbint_to_rgb4(green) when pixel_region(pixel_col_int, pixel_row_int, 0, 7, 34, 35, b_size) else
                       rgbint_to_rgb4(dark_green) when pixel_region(pixel_col_int, pixel_row_int, 8, 9, 34, 35, b_size) else
                       rgbint_to_rgb4(green) when pixel_region(pixel_col_int, pixel_row_int, 10, 14, 34, 35, b_size) else
@@ -882,6 +891,12 @@ background_colours <= -- Row one
                       -- Rows forty to forty-six
                       rgbint_to_rgb4(green) when pixel_region(pixel_col_int, pixel_row_int, 0, 68, 39, 46, b_size) else
                       rgbint_to_rgb4(cloud_white);
+                      
+background_colours <= bg1_colours when pixel_region(pixel_col_int, pixel_row_int, 0, 68, 0, 23, b_size) else
+                      bg2_colours when pixel_region(pixel_col_int, pixel_row_int, 0, 68, 23, 28, b_size) else
+                      bg3_colours when pixel_region(pixel_col_int, pixel_row_int, 0, 68, 28, 34, b_size) else
+                      bg4_colours when pixel_region(pixel_col_int, pixel_row_int, 0, 68, 34, 46, b_size) else
+                      rgbint_to_rgb4(cloud_white);
 
 -- Set output colour channel values for the current pixel.
 colour_info(0) <= background_colours(0) when background_on = '1' else
@@ -891,7 +906,7 @@ colour_info(1) <= background_colours(1) when background_on = '1' else
 colour_info(2) <= background_colours(2) when background_on = '1' else
                   "0000";
                    
--- Move the background                     
+-- Move the background
 move_background: process (vert_sync)
   variable vsync_count : natural range 0 to 4 := 0;
 begin
@@ -907,7 +922,7 @@ begin
     end if;
   end if;
 
-end process move_background;
+end process move_background;                     
 
 end architecture behaviour;
                   
@@ -967,8 +982,8 @@ ground_width <= std_logic_vector(to_unsigned(640 - 1, 11));
 ground_height <= std_logic_vector(to_unsigned(g_size*20 - 1, 10));
 
 -- Row and column integer values for the ground.
-pixel_col_int <= (to_integer(unsigned(pixel_column)) mod (g_size*7) - to_integer(unsigned(ground_x_pos)) mod (g_size*7)) mod (g_size*7);
-pixel_row_int <= (to_integer(unsigned(pixel_row)) mod (g_size*20) - to_integer(unsigned(ground_y_pos)) mod (g_size*20)) mod (g_size*20);
+pixel_col_int <= (to_integer(unsigned(pixel_column)) - to_integer(unsigned(ground_x_pos))) mod (14);
+pixel_row_int <= (to_integer(unsigned(pixel_row)) - to_integer(unsigned(ground_y_pos))) mod (40);
 
 -- y position for the ground and setting x motion.
 ground_y_pos <= std_logic_vector(to_unsigned(480 - g_size*20, 10));
@@ -1067,6 +1082,8 @@ constant dark_green : rgb := (85, 128, 34);
 -- Pipe image signals.
 signal pipe_on : std_logic;
 signal pipe_colours : rgb_array;
+signal p1_colours, p2_colours : rgb_array;
+
 signal pipe_width : unsigned(10 downto 0);
 signal pipe_height : unsigned(9 downto 0);
 signal p_size : integer range 0 to 7;
@@ -1118,7 +1135,7 @@ pixel_column <= pc;--std_logic_vector(unsigned(pc) + to_signed(286 * (pipe_no - 
 pixel_row <= pr;
 
 -- Row and column integer values for the pipe.
-pixel_col_int <= (to_integer(unsigned(pixel_column)) mod (p_size*26) - to_integer(pipe_x_pos) mod (p_size*26)) mod (p_size*26);
+pixel_col_int <= (to_integer(unsigned(pixel_column)) - to_integer(pipe_x_pos)) mod (p_size*26);
 pixel_row_int <= (to_integer(unsigned(pixel_row)));
 
 pipe_y_pos <= std_logic_vector(to_unsigned(0, 10));
@@ -1146,7 +1163,7 @@ pipe_y_pos <= std_logic_vector(to_unsigned(0, 10));
           and not pixel_region(pixel_col_int, pixel_row_int, 0, 25, r + 13, r + k + 13, p_size))  
           else '0';
   
-pipe_colours <= -- Upper top part of pipe.
+p1_colours <=   -- Upper top part of pipe.
                 rgbint_to_rgb4(eggplant) when pixel_region(pixel_col_int, pixel_row_int, 1, 1, 0, r, p_size) else
                 rgbint_to_rgb4(light_green) when pixel_region(pixel_col_int, pixel_row_int, 2, 2, 0, r, p_size) else
                 rgbint_to_rgb4(yellow_green) when pixel_region(pixel_col_int, pixel_row_int, 3, 3, 0, r, p_size) else
@@ -1190,8 +1207,9 @@ pipe_colours <= -- Upper top part of pipe.
                 rgbint_to_rgb4(eggplant) when pixel_region(pixel_col_int, pixel_row_int, 25, 25, r + 11, r + 12, p_size) else
                 -- Row thirteen 
                 rgbint_to_rgb4(eggplant) when pixel_region(pixel_col_int, pixel_row_int, 0, 25, r + 12, r + 13, p_size) else
+					 rgbint_to_rgb4(eggplant);
                 
-                -- Upper bottom part of pipe.
+p2_colours <=   -- Upper bottom part of pipe.
                 -- Row one
                 rgbint_to_rgb4(eggplant) when pixel_region(pixel_col_int, pixel_row_int, 0, 25, r + k + 13, r + k + 14, p_size) else
                 -- Row two
@@ -1236,6 +1254,10 @@ pipe_colours <= -- Upper top part of pipe.
                 rgbint_to_rgb4(dark_green) when pixel_region(pixel_col_int, pixel_row_int, 22, 23, r + k + 26, 480 / p_size, p_size) else
                 rgbint_to_rgb4(eggplant) when pixel_region(pixel_col_int, pixel_row_int, 24, 24, r + k + 26, 480 / p_size, p_size) else
                 rgbint_to_rgb4(eggplant);
+					 
+pipe_colours <= p1_colours when pixel_region(pixel_col_int, pixel_row_int, 0, 25, 0, r + 13, p_size) else
+					 p2_colours when pixel_region(pixel_col_int, pixel_row_int, 0, 25, r + k + 13, 480 / p_size, p_size) else
+					 rgbint_to_rgb4(eggplant);										  
 
 -- Set output colour channel values for the current pixel.
 colour_info(0) <= pipe_colours(0) when pipe_on = '1' else
@@ -1249,6 +1271,7 @@ colour_info(2) <= pipe_colours(2) when pipe_on = '1' else
 move_pipe: process (vert_sync)
   variable tmp : std_logic := '0';
   variable count : integer := 0;
+  variable multiplier : integer := 1;
   
   impure function random return integer is
     variable output : integer;
@@ -1265,30 +1288,27 @@ begin
     -- Move along the LFSR but use a different operation depending on the pipe number.
     if pipe_no = 1 then
       tmp := rand(4) XOR rand(3) XOR rand(2) XOR rand(0);
-    elsif pipe_no = 2 then
-      tmp := rand(5) XOR rand(3) XOR rand(1) XOR rand(0);
-    elsif pipe_no = 3 then
-      tmp := rand(4) XOR rand(2) XOR rand(1) XOR rand(0);
     else
       tmp := '0';
     end if;
     
     -- Enable powerups, but only sometimes (they should be kind of rare).
-    if to_integer(unsigned(rand)) mod 11 = 0 then
-      powerup_en <= '1';
-    else
-      powerup_en <= '0'; 
-    end if;     
+    --if to_integer(unsigned(rand)) mod 11 = 0 then
+      --powerup_en <= '1';
+    --else
+      --powerup_en <= '0'; 
+    --end if;     
       
     rand <= tmp & rand(6 downto 1);
-    
-    if hard_mode = 0 then
-      count := 0;
-    elsif hard_mode = 1 and count <= 18000 then
-      count := count + 1;
-    else 
-      count := count;
-    end if;
+    	 
+	if count = 1800 then
+		count := 0;
+		if multiplier < 10 then
+			multiplier := multiplier + 1;
+		end if;
+	else
+		count := count + 1;
+	end if;
 	 
 		-- Reset the pipe position once it goes off of the screen.
 		if (std_logic_vector(signed(pipe_x_pos) + signed(pipe_width)) <= std_logic_vector(to_signed(0, 11))) then
@@ -1296,7 +1316,11 @@ begin
       pipe_height_out <= r;
 			pipe_x_motion <= to_signed(639, 11);
 		else
-			pipe_x_motion <= to_signed(-1 - hard_mode * (count / 1800), 11);
+			if hard_mode = 0 then
+				pipe_x_motion <= to_signed(-1, 11);
+			else
+				pipe_x_motion <= to_signed(-multiplier, 11);
+			end if;
      
 		end if;
      -- Calculate the position of the pipe ready for the next frame.
@@ -1351,9 +1375,9 @@ signal pixel_row_int : screen_height;
 
 begin
   
--- Row and column integer values for the flappy bird.
-pixel_col_int <= (to_integer(unsigned(pixel_column)) mod (7) - to_integer(unsigned(powerup_x_pos)) mod (7)) mod (7);
-pixel_row_int <= (to_integer(unsigned(pixel_row)) mod (7) - to_integer(unsigned(powerup_y_pos)) mod (7)) mod (7);
+-- Row and column integer values for the powerup bird.
+pixel_col_int <= (to_integer(unsigned(pixel_column)) - to_integer(unsigned(powerup_x_pos))) mod (7);
+pixel_row_int <= (to_integer(unsigned(pixel_row)) - to_integer(unsigned(powerup_y_pos))) mod (7);
 
 powerup_on <= '1' when ((signed(pixel_column) <= signed(powerup_x_pos) + signed(powerup_width))
               and (signed(pixel_column) >= signed(powerup_x_pos))
@@ -1465,8 +1489,8 @@ flappy_bird_height <= std_logic_vector(to_unsigned(fb_size*12 - 1, 10));
 bird_height_out <= flappy_bird_height;
 
 -- Row and column integer values for the flappy bird.
-pixel_col_int <= (to_integer(unsigned(pixel_column)) mod (fb_size*17) - to_integer(unsigned(flappy_x_pos)) mod (fb_size*17)) mod (fb_size*17);
-pixel_row_int <= (to_integer(unsigned(pixel_row)) mod (fb_size*12) - to_integer(unsigned(flappy_y_pos)) mod (fb_size*12)) mod (fb_size*12);
+pixel_col_int <= (to_integer(unsigned(pixel_column)) - to_integer(unsigned(flappy_x_pos))) mod (fb_size*17);
+pixel_row_int <= (to_integer(unsigned(pixel_row)) - to_integer(unsigned(flappy_y_pos))) mod (fb_size*12);
 
 -- x position for flappy bird.
 flappy_x_pos <= std_logic_vector(to_unsigned(313, 11));
@@ -1605,8 +1629,6 @@ left_flag <= '1' when left_mouse = '1' else '0';
 right_flag <= '1' when right_mouse = '1' else '0';
 
 --Flappy bird movement.
--- bird_velocity is positive means up and nagative means down
---frame_rate = 0.001
 move_bird : process (vert_sync)
 	variable acceleFlag : integer := 0;
     variable bird_velocity : integer := 0;
@@ -1666,6 +1688,9 @@ begin
 
     end if;
 end process move_bird;
+-- bird_velocity is positive means up and nagative means down
+--frame_rate = 0.001
+
 
 end architecture behaviour;
 

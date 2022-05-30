@@ -64,6 +64,9 @@ constant light_green : rgb := (219, 241, 202);
 -- Background details image signals.
 signal background_on : std_logic;
 signal background_colours : rgb_array;
+
+signal bg1_colours, bg2_colours, bg3_colours, bg4_colours : rgb_array;
+
 signal background_width : std_logic_vector(10 downto 0);
 signal background_height : std_logic_vector(9 downto 0);
 signal b_size : integer range 0 to 7;
@@ -145,7 +148,7 @@ background_on <= '1' when ((unsigned(pixel_row) <= unsigned(background_y_pos) + 
           else '0';
             
             --------------------------
-background_colours <= -- Row one
+bg1_colours <=        -- Row one
                       rgbint_to_rgb4(cloud_white) when pixel_region(pixel_col_int, pixel_row_int, 54, 59, 0, 1, b_size) else
                       -- Row two
                       rgbint_to_rgb4(cloud_white) when pixel_region(pixel_col_int, pixel_row_int, 52, 61, 1, 2, b_size) else
@@ -358,7 +361,9 @@ background_colours <= -- Row one
                       rgbint_to_rgb4(light_blue) when pixel_region(pixel_col_int, pixel_row_int, 62, 62, 22, 23, b_size) else
                       rgbint_to_rgb4(light_green) when pixel_region(pixel_col_int, pixel_row_int, 63, 67, 22, 23, b_size) else
                       rgbint_to_rgb4(blue) when pixel_region(pixel_col_int, pixel_row_int, 68, 68, 22, 23, b_size) else
-                      -- Row twenty-four
+                      rgbint_to_rgb4(cloud_white);
+                      
+bg2_colours <=        -- Row twenty-four
                       rgbint_to_rgb4(grey) when pixel_region(pixel_col_int, pixel_row_int, 0, 1, 23, 24, b_size) else
                       rgbint_to_rgb4(cloud_white) when pixel_region(pixel_col_int, pixel_row_int, 2, 2, 23, 24, b_size) else
                       rgbint_to_rgb4(grey) when pixel_region(pixel_col_int, pixel_row_int, 3, 6, 23, 24, b_size) else
@@ -585,7 +590,9 @@ background_colours <= -- Row one
                       rgbint_to_rgb4(light_blue) when pixel_region(pixel_col_int, pixel_row_int, 66, 66, 27, 28, b_size) else
                       rgbint_to_rgb4(light_green) when pixel_region(pixel_col_int, pixel_row_int, 67, 67, 27, 28, b_size) else
                       rgbint_to_rgb4(blue) when pixel_region(pixel_col_int, pixel_row_int, 68, 68, 27, 28, b_size) else
-                      -- Row twenty-nine
+                      rgbint_to_rgb4(cloud_white);
+                      
+bg3_colours <=        -- Row twenty-nine
                       rgbint_to_rgb4(grey) when pixel_region(pixel_col_int, pixel_row_int, 0, 6, 28, 29, b_size) else
                       rgbint_to_rgb4(blue) when pixel_region(pixel_col_int, pixel_row_int, 7, 7, 28, 29, b_size) else
                       rgbint_to_rgb4(light_blue) when pixel_region(pixel_col_int, pixel_row_int, 8, 8, 28, 29, b_size) else
@@ -794,7 +801,9 @@ background_colours <= -- Row one
                       rgbint_to_rgb4(green) when pixel_region(pixel_col_int, pixel_row_int, 60, 62, 33, 34, b_size) else
                       rgbint_to_rgb4(dark_green) when pixel_region(pixel_col_int, pixel_row_int, 63, 66, 33, 34, b_size) else
                       rgbint_to_rgb4(green) when pixel_region(pixel_col_int, pixel_row_int, 67, 68, 33, 34, b_size) else
-                      -- Row thirty-five
+                      rgbint_to_rgb4(cloud_white);
+                      
+bg4_colours <=        -- Row thirty-five
                       rgbint_to_rgb4(green) when pixel_region(pixel_col_int, pixel_row_int, 0, 7, 34, 35, b_size) else
                       rgbint_to_rgb4(dark_green) when pixel_region(pixel_col_int, pixel_row_int, 8, 9, 34, 35, b_size) else
                       rgbint_to_rgb4(green) when pixel_region(pixel_col_int, pixel_row_int, 10, 14, 34, 35, b_size) else
@@ -881,6 +890,12 @@ background_colours <= -- Row one
                       rgbint_to_rgb4(green) when pixel_region(pixel_col_int, pixel_row_int, 66, 68, 38, 39, b_size) else
                       -- Rows forty to forty-six
                       rgbint_to_rgb4(green) when pixel_region(pixel_col_int, pixel_row_int, 0, 68, 39, 46, b_size) else
+                      rgbint_to_rgb4(cloud_white);
+                      
+background_colours <= bg1_colours when pixel_region(pixel_col_int, pixel_row_int, 0, 68, 0, 23, b_size) else
+                      bg2_colours when pixel_region(pixel_col_int, pixel_row_int, 0, 68, 0, 23, b_size) else
+                      bg3_colours when pixel_region(pixel_col_int, pixel_row_int, 0, 68, 0, 34, b_size) else
+                      bg4_colours when pixel_region(pixel_col_int, pixel_row_int, 0, 68, 34, 46, b_size) else
                       rgbint_to_rgb4(cloud_white);
 
 -- Set output colour channel values for the current pixel.
@@ -1040,12 +1055,18 @@ use work.pixel_functions.all;
 
 -- Pipe object entity.
 entity pipe is
-  port (vert_sync, mode : in std_logic;
-        pipe_no : in integer;
-        pr, pc : in std_logic_vector(9 downto 0);
-        powerup_en : out std_logic;
-  		    px_motion : out integer;
-        colour_info : out rgb_array);
+  port (vert_sync           : in std_logic;
+        pipe_no             : in integer;
+        pr, pc              : in std_logic_vector(9 downto 0);
+        state               : in std_logic_vector(1 downto 0);
+        powerup_en          : out std_logic;
+  		px_motion           : out integer;
+        colour_info         : out rgb_array;
+
+        pipe_x_out_pos : out signed(10 downto 0);
+        pipe_height_out : out integer;
+        scale_out : out integer range 0 to 7;
+        pipe_gap_width_out : out integer range 0 to 454);
 end entity pipe;
 
 -- Pipe architecture.
@@ -1066,7 +1087,7 @@ signal pipe_height : unsigned(9 downto 0);
 signal p_size : integer range 0 to 7;
 signal g_size : integer range 0 to 7;
 
-signal pipe_x_pos : signed(10 downto 0);
+signal pipe_x_pos : unsigned(10 downto 0);
 signal pipe_y_pos : std_logic_vector(9 downto 0);
 signal pipe_x_motion : signed(10 downto 0);
 
@@ -1087,23 +1108,33 @@ begin
   
 -- Width and height for the rectangle of pipe one.
 p_size <= 2;
+scale_out <= p_size;
 g_size <= 2;
 --r <= 90 / p_size;
 pipe_width <= to_unsigned(p_size*26 - 1, 11);
 pipe_height <= to_unsigned(480 - g_size*20 - 1, 10);
 
 -- '0' is easy mode and '1' is hard mode.
-hard_mode <= 0 when mode = '0' else
-             1;
+---------------STATES---------------
+-- "00" main menu
+-- "01" normal
+-- "10" training
+-- "11" death
+------------------------------------
+
+hard_mode <= 0 when state = "10" else
+             1 when state = "01" else
+             0;
              
 k <= 70 - 15 * hard_mode;
+pipe_gap_width_out <= k;
 
-pixel_column <= std_logic_vector(signed(pc) + to_signed(286 * (pipe_no - 1), 10));
+pixel_column <= pc;--std_logic_vector(unsigned(pc) + to_signed(286 * (pipe_no - 1), 10));
 pixel_row <= pr;
 
 -- Row and column integer values for the pipe.
-pixel_col_int <= (to_integer(signed(pixel_column)) mod (p_size*26) - to_integer(pipe_x_pos) mod (p_size*26)) mod (p_size*26);
-pixel_row_int <= (to_integer(signed(pixel_row)));
+pixel_col_int <= (to_integer(unsigned(pixel_column)) mod (p_size*26) - to_integer(pipe_x_pos) mod (p_size*26)) mod (p_size*26);
+pixel_row_int <= (to_integer(unsigned(pixel_row)));
 
 pipe_y_pos <= std_logic_vector(to_unsigned(0, 10));
 -- pipe_x_motion <= std_logic_vector(to_signed(-1, 11));
@@ -1114,8 +1145,8 @@ pipe_y_pos <= std_logic_vector(to_unsigned(0, 10));
   
   --pixel information goes here.
   
-pipe_on <= '1' when (unsigned(pixel_column) <= unsigned(pipe_x_pos + signed(pipe_width))
-          and (unsigned(pixel_column) >= unsigned(pipe_x_pos))
+  pipe_on <= '1' when ((unsigned(pixel_column) <= pipe_x_pos + pipe_width)
+  and (unsigned(pixel_column) >= pipe_x_pos)
           and (unsigned(pixel_row) <= unsigned(pipe_y_pos) + pipe_height)
           and (unsigned(pixel_row) >= unsigned(pipe_y_pos))
           
@@ -1275,15 +1306,17 @@ begin
     end if;
 	 
 		-- Reset the pipe position once it goes off of the screen.
-		if (std_logic_vector(pipe_x_pos + signed(pipe_width)) <= std_logic_vector(to_signed(0, 11))) then
+		if (std_logic_vector(signed(pipe_x_pos) + signed(pipe_width)) <= std_logic_vector(to_signed(0, 11))) then
 			r <= random;
+      pipe_height_out <= r;
 			pipe_x_motion <= to_signed(639, 11);
 		else
 			pipe_x_motion <= to_signed(-1 - hard_mode * (count / 1800), 11);
      
 		end if;
      -- Calculate the position of the pipe ready for the next frame.
-      pipe_x_pos <= pipe_x_pos + pipe_x_motion;
+      pipe_x_pos <= unsigned(signed(pipe_x_pos) + pipe_x_motion);
+      pipe_x_out_pos <= signed(pipe_x_pos);
   end if;
 
 end process move_pipe;
@@ -1378,9 +1411,9 @@ powerup_colours <= -- Row one
 -- Set output colour channel values for the current pixel.
 colour_info(0) <= powerup_colours(0) when powerup_on = '1' and (powerup_en(0) = '1' or powerup_en(1) = '1' or powerup_en(2) = '1') else
                   "0000";
-colour_info(1) <= powerup_colours(1) when powerup_on = '1' and (powerup_en(0) or powerup_en(1) or powerup_en(2) = '1') else
+colour_info(1) <= powerup_colours(1) when powerup_on = '1' and (powerup_en(0) = '1' or powerup_en(1) = '1' or powerup_en(2) = '1') else
                   "0000";
-colour_info(2) <= powerup_colours(2) when powerup_on = '1' and (powerup_en(0) or powerup_en(1) or powerup_en(2) = '1') else
+colour_info(2) <= powerup_colours(2) when powerup_on = '1' and (powerup_en(0) = '1' or powerup_en(1) = '1' or powerup_en(2) = '1') else
                   "0000";
   
 end architecture behaviour;
@@ -1403,7 +1436,10 @@ use work.pixel_functions.all;
 entity flappy_bird is
   port (left_mouse, right_mouse, vert_sync : in std_logic;
         pixel_row, pixel_column : in std_logic_vector(9 downto 0);
-        colour_info : out rgb_array);
+        death, reset : in std_logic;
+        colour_info : out rgb_array;
+        bird_height_out : out std_logic_vector(9 downto 0);
+        bird_y_position : out std_logic_vector(9 downto 0));
 end entity flappy_bird;
 
 -- Flappy bird architecture.
@@ -1441,6 +1477,7 @@ begin
 fb_size <= 2;
 flappy_bird_width <= std_logic_vector(to_unsigned(fb_size*17 - 1, 11));
 flappy_bird_height <= std_logic_vector(to_unsigned(fb_size*12 - 1, 10));
+bird_height_out <= flappy_bird_height;
 
 -- Row and column integer values for the flappy bird.
 pixel_col_int <= (to_integer(unsigned(pixel_column)) mod (fb_size*17) - to_integer(unsigned(flappy_x_pos)) mod (fb_size*17)) mod (fb_size*17);
@@ -1589,6 +1626,7 @@ move_bird : process (vert_sync)
 	variable acceleFlag : integer := 0;
     variable bird_velocity : integer := 0;
     variable frame_rate_time : integer := 1;
+	 variable start : integer := 0;
 begin
     -- Update the flappy bird position once per vsync.
     if (rising_edge(vert_sync)) then
@@ -1598,10 +1636,13 @@ begin
             holding <= '0';
         end if;
 
+        
+
         -- if clicking and not holding
         if (left_flag = '1' and holding = '0') then
             -- set holding flag
             holding <= '1';
+				start := 1;
             -- set the bird on an upwards velocity
             bird_velocity := 7;
 
@@ -1609,7 +1650,7 @@ begin
             -- decelerate the bird
             -- velociy = velocity minus acceleration times framerate
 				
-				if (acceleFlag = 1) then
+				if (acceleFlag = 1 and start = 1) then
 					bird_velocity := bird_velocity - (1 * frame_rate_time);
 					acceleFlag := 0;
 				else
@@ -1622,17 +1663,21 @@ begin
 
         -- if the bird is above or below the screen, bring it in bounds, and halt all velocity
         if (flappy_y_pos >= std_logic_vector(to_unsigned(439, 10) - unsigned(flappy_bird_height))) then
-          bird_velocity := 1;
-          flappy_y_pos <= std_logic_vector(unsigned(flappy_y_pos) - bird_velocity * frame_rate_time);
+          --bird_velocity := 1;
+          --flappy_y_pos <= std_logic_vector(unsigned(flappy_y_pos) - bird_velocity * frame_rate_time);
+          flappy_y_pos <= std_logic_vector(to_signed(-1, 10));
           --flappy_y_pos <= std_logic_vector(to_unsigned(479, 10));
         elsif (flappy_y_pos <= std_logic_vector(to_unsigned(0, 10))) then
-          bird_velocity := -bird_velocity;
-          flappy_y_pos <= std_logic_vector(unsigned(flappy_y_pos) - bird_velocity * frame_rate_time);
+          --bird_velocity := -bird_velocity;
+          --flappy_y_pos <= std_logic_vector(unsigned(flappy_y_pos) - bird_velocity * frame_rate_time);
+          flappy_y_pos <= std_logic_vector(to_signed(-1, 10));
           --flappy_y_pos <= std_logic_vector(to_unsigned(0, 10));
         -- else 
         --     bird_velocity := 0;
         --     flappy_y_pos <= std_logic_vector(unsigned(flappy_y_pos) - bird_velocity * frame_rate_time);
         end if;
+
+        bird_y_position <= flappy_y_pos;
 
     end if;
 end process move_bird;

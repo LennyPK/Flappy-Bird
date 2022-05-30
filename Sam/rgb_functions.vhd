@@ -24,8 +24,11 @@ function rgbint_to_rgb4(colour_in : rgb)
   -- Variables to store calculated values.
   variable colour_out : rgb_array;
 	variable	tmp_red	:	integer;
+	variable tmp_redslv : std_logic_vector(7 downto 0);
 	variable tmp_blue	:	integer;
+	variable tmp_blueslv : std_logic_vector(7 downto 0);
 	variable tmp_green	:	integer;
+	variable tmp_greenslv : std_logic_vector(7 downto 0);
 begin
   
   -- Red channel.
@@ -34,8 +37,8 @@ begin
   else tmp_red := 0;
   end if;
     
-  tmp_red := tmp_red / 16;
-  colour_out(0) := std_logic_vector(to_unsigned(tmp_red, 4));
+  tmp_redslv := std_logic_vector(shift_right(to_unsigned(tmp_red, 8), 4));
+  colour_out(0) := tmp_redslv(3 downto 0);
   
   -- Green channel.
   if colour_in(1) >= 15 then
@@ -43,8 +46,8 @@ begin
   else tmp_green := 0;
   end if;
     
-  tmp_green := tmp_green / 16;
-  colour_out(1) := std_logic_vector(to_unsigned(tmp_green, 4));
+  tmp_greenslv := std_logic_vector(shift_right(to_unsigned(tmp_green, 8), 4));
+  colour_out(1) := tmp_greenslv(3 downto 0);
   
   -- Blue channel.
   if colour_in(2) >= 15 then
@@ -52,8 +55,8 @@ begin
   else tmp_blue := 0;
   end if;
     
-  tmp_blue := tmp_blue / 16;
-  colour_out(2) := std_logic_vector(to_unsigned(tmp_blue, 4));
+  tmp_blueslv := std_logic_vector(shift_right(to_unsigned(tmp_blue, 8), 4));
+  colour_out(2) := tmp_blueslv(3 downto 0);
   
   return colour_out;
   
